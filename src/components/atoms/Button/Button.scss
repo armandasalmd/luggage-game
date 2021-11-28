@@ -9,11 +9,12 @@
   user-select: none;
   background: $shade5;
   font-size: 15px;
+  cursor: pointer;
 
   height: 36px;
   padding: 0 1rem;
 
-  i {
+  svg {
     margin-right: 0.5rem;
   }
 
@@ -21,12 +22,12 @@
     outline: none;
   }
 
-  &:hover {
+  &:hover:not(&--ghost) {
     background: $shade10;
     cursor: pointer;
   }
 
-  &:active:not(&--disabled):not(&--accent):not(&--danger) {
+  &:active:not(&--disabled):not(&--accent):not(&--danger):not(&--ghost) {
     background-color: $shade20;
   }
 
@@ -53,6 +54,20 @@
     &:hover {
       border-color: $colorPrimary;
       color: $colorPrimary;
+    }
+  }
+
+  &--ghost {
+    background: none;
+    border: 1px solid $colorPrimary;
+    color: $colorPrimary;
+
+    &:hover {
+      background: rgba($colorPrimary, .1);
+    }
+
+    &:active {
+      background: rgba($colorPrimary, .2);
     }
   }
 
