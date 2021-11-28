@@ -1,0 +1,54 @@
+/**
+ * ====== SIZES ======
+ */
+$unit: 16px;
+$defaultBorderRadius: $unit * .5;
+$defaultMargin: $unit;
+
+/**
+ * ====== SHADOWS ======
+ */
+$shadowDefault: 0 0 12px 0 rgba(0, 0, 0, 0.09);
+$shadowDefaultDark: 0 0 18px 0 rgba(0, 0, 0, 0.2);
+$shadowCard: $shadowDefault;
+$shadowCardHover: $shadowDefaultDark;
+
+/**
+ * ====== FONTS ======
+ */
+$defaultFont: 'Source Sans Pro', sans-serif;
+
+/**
+ * ====== COLORS ======
+ */
+
+$shade100: #000;
+$shade80: #333;
+$shade70: #444;
+$shade60: #666;
+$shade50: #888;
+$shade40: #999;
+$shade30: #b2b2b2;
+$shade20: #cbcbcb;
+$shade15: #DDD;
+$shade10: #EEE;
+$shade5: #f5f5f5;
+$shade0: #fff;
+
+$colorPrimary: #1E88E5;
+$colorSecondary: #FF504D;
+
+$colorError: #f85f60;
+$colorWarning: #f8be4a;
+$colorInformation: #609acf;
+$colorSuccess: #6daf4c;
+
+$colorTextLight: #f5f3ea;
+$colorTextDark: #4f4d4d;
+
+/**
+ * ====== MEDIA QUERIES ======
+ */
+$sm: 47.5em;
+$md: 62em;
+$lg: 75em;

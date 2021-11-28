@@ -1,0 +1,15 @@
+@import "./Variables.scss";
+
+%cardBase {
+  background: #fff;
+  border: 1px solid rgba($colorPrimary, .2);
+  border-radius: $defaultBorderRadius;
+  box-shadow: $shadowCard;
+  min-height: 2em;
+}
+
+%ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
