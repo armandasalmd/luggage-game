@@ -1,0 +1,90 @@
+@import "@styles/Variables.scss";
+
+.input {
+    $base: &;
+    $iconSize: 24px;
+    $iconPaddingX: 6px;
+
+    display: flex;
+    flex-flow: column;
+    position: relative;
+
+    input {
+        outline: none;
+        padding: 0.3em 0.7em;
+        border: 1px solid #E0E1E4;
+        border-radius: $defaultBorderRadius;
+        height: 36px;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+    }
+
+    input::placeholder {
+        color: $shade30;
+    }
+
+    input:focus {
+        border: 1px solid $colorPrimary;
+    }
+    // <start> __ELEMENTS </start>
+    &__description {
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+    }
+
+    &__icon {
+        color: $shade60;
+        position: absolute;
+        left: $iconPaddingX;
+        // top: 50%;
+        margin-top: 3px;
+    }
+
+    &__icon + input, &__icon + &__title + input {
+        padding-left: $iconSize + 2 * $iconPaddingX !important;
+    }
+
+    &__title + &__icon {
+        margin-top: 25px;
+    }
+
+    &__title, &__description {
+        color: $colorTextDark;
+        margin-left: 2px;
+    }
+
+    &__title {
+        margin-bottom: 2px;
+        color: black;
+    }
+    // <end> __ELEMENTS </end>
+    // <start>--modifiers</start>
+    &--warning {
+        input {
+            border: 1px solid $colorWarning;
+
+            &:focus {
+                border-color: darken($colorWarning, 15%);
+            }
+        }
+
+        #{$base}__title, i {
+            color: $colorWarning;
+        }
+    }
+
+    &--error {
+        input {
+            border: 1px solid $colorError;
+
+            &:focus {
+                border-color: darken($colorError, 15%);
+            }
+        }
+
+        #{$base}__title, i {
+            color: $colorError;
+        }
+    }
+    // <end>--modifiers</end>
+}
