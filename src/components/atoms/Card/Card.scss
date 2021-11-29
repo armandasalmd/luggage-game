@@ -1,7 +1,7 @@
 @import "@styles/Variables.scss";
 @import "@styles/Placeholders.scss";
 
-$separatorColor: $shade30;
+$separatorColor: #F7F7FA;
 
 @mixin dashedBorder($color: $separatorColor) {
   background-image: linear-gradient(
@@ -46,7 +46,7 @@ $separatorColor: $shade30;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid $separatorColor;
+    border-bottom: 3px solid $separatorColor;
     padding: ($defaultMargin * 0.666) $defaultMargin;
 
     &--separatorNone {
@@ -61,7 +61,8 @@ $separatorColor: $shade30;
 
   &__title,
   &__titleActions {
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: 600;
     display: inline-block;
 
     &--small {

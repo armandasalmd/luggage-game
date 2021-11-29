@@ -12,11 +12,13 @@ interface InputProps {
   description?: string;
   placeholder?: string;
   style?: object;
+  tall?: boolean;
 }
 
 const Input: FC<InputProps> = (props) => {
   const classes = classNames("input", {
     [`input--${props.type}`]: props.type,
+    "input--tall": props.tall
   });
 
   let [value, setValue] = useState(props.value || "");

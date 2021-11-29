@@ -54,7 +54,7 @@
     }
 
     &__title {
-        margin-bottom: 2px;
+        margin-bottom: $unit * .4;
         color: black;
     }
     // <end> __ELEMENTS </end>
@@ -85,6 +85,10 @@
         #{$base}__title, i {
             color: $colorError;
         }
+    }
+
+    &--tall input {
+        height: 42px;
     }
     // <end>--modifiers</end>
 }

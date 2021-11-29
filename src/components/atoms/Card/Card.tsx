@@ -10,6 +10,7 @@ interface CardProps {
   style?: object;
   type?: CardType;
   wrap?: boolean;
+  title?: string;
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -21,7 +22,13 @@ const Card: FC<CardProps> = (props) => {
   });
 
   return <div className={classes} style={props.style}>
-    {props.children}
+    {props.title && 
+    <div className="card__header">
+      <h1 className="card__title">{props.title}</h1>
+    </div>}
+    <div className="card__content">
+      {props.children}
+    </div>
   </div>;
 }
 

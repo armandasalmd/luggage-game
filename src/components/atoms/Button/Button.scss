@@ -23,11 +23,11 @@
   }
 
   &:hover:not(&--ghost) {
-    background: $shade10;
+    background: $shade5;
     cursor: pointer;
   }
 
-  &:active:not(&--disabled):not(&--accent):not(&--danger):not(&--ghost) {
+  &:active:not(&--disabled):not(&--accent):not(&--danger):not(&--ghost):not(&--link) {
     background-color: $shade20;
   }
 
@@ -46,6 +46,14 @@
     &:active {
       background-color: saturate($hoverColor, 25%) !important;
     }
+  }
+
+  &--tall {
+    height: 42px;
+  }
+
+  &--centerText {
+    justify-content: center;
   }
 
   &--minimal {

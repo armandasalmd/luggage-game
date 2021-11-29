@@ -13,15 +13,20 @@ type ButtonType =
 interface ButtonProps {
   icon?: any;
   type?: ButtonType;
+  centerText?: boolean;
+  tall?: boolean;
+  style?: object;
 }
 
 const Button: FC<ButtonProps> = (props) => {
   const classes = classNames("button", {
     [`button--${props.type}`]: props.type,
+    "button--centerText": props.centerText,
+    "button--tall": props.tall
   });
 
   return (
-    <div className={classes}>
+    <div className={classes} style={props.style}>
       {props.icon}
       <p>{props.children}</p>
     </div>
