@@ -1,75 +1,102 @@
-import {
-  Button,
-  Input,
-  Select,
-} from "@components/atoms";
+import { useState } from "react";
+import { Button, Card, Checkbox, Select, Input } from "@components/atoms";
+import "./DashboardCreateJoinTab.scss";
 
-import { DashboardMenuNavigator } from "@components/organisms";
-import MenuIcon from "@material-ui/icons/Menu";
-
-const menuItems = [
-  {
-    key: 1,
-    value: "Create or join game",
-  },
-  {
-    key: 2,
-    value: "Game rules",
-  },
-  {
-    key: 3,
-    value: "Games history",
-  },
-  {
-    key: 4,
-    value: "Friends",
-  },
-];
+import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import * as DValues from "./dropdownValues";
 
 const DashboardCreateJoinTab = () => {
-  function onMenuIdChange(id: string | number, item: any) {
-    console.log(id, item);
+  const [gameIsPrivate, setGameIsPrivate] = useState(false);
+
+  function onPlayersCountChange(id: string | number, item: any) {
+    console.log("Players count changed", id, item);
   }
-  
+
+  function onGamePriceChange(id: string | number, item: any) {
+    console.log("Game price changed", id, item);
+  }
+
+  function onRulesChange(id: string | number, item: any) {
+    console.log("Game rules changed", id, item);
+  }
+
+  function onFindPublicGame() {
+    console.log("Find public game");
+  }
+
   return (
-    <>
-      <Button type="ghost">This is my button</Button>
-      <Button icon={<MenuIcon />} type="accent">
-        This is my button
+    <div className="createJoinTab">
+      <Button
+        className="createJoinTab__mainButton"
+        onClick={onFindPublicGame}
+        icon={<PlayCircleOutline />}
+        type="accent"
+      >
+        Find public game
       </Button>
-      <Button icon={<MenuIcon />} type="danger">
-        This is my button
-      </Button>
-      <Button icon={<MenuIcon />}>This is my button</Button>
-      <Button type="link">This is my button</Button>
-      <Input
-        value="ssss"
-        description="MY description"
-        title="My title"
-        placeholder="No placeholder"
-        style={{ marginTop: 16 }}
-      />
-      <br />
-      <DashboardMenuNavigator
-        title="Luggage game dashboard"
-        colorType="secondary"
-        items={menuItems}
-        idKey="key"
-        textKey="value"
-        defaultSelectedId={1}
-        onSelectChange={onMenuIdChange}
-      />
-      <br />
-      <Select
-        title="Luggage game dashboard"
-        items={menuItems}
-        idKey="key"
-        textKey="value"
-        placeholder="Select one value"
-        defaultSelectedId={2}
-        onSelectChange={onMenuIdChange}
-      />
-    </>
+      <div className="createJoinTab__cards">
+        <Card noShadow padded title="Create game">
+          <div className="createJoinTab__container">
+            <div className="createJoinTab__flexRow">
+              <Select
+                title="Players count"
+                items={DValues.playersDropdown}
+                idKey="key"
+                textKey="value"
+                placeholder="Select count"
+                defaultSelectedId={2}
+                onSelectChange={onPlayersCountChange}
+                maxWidth="15rem"
+              />
+              <Select
+                title="Game price"
+                items={DValues.priceDropdown}
+                idKey="key"
+                textKey="value"
+                placeholder="Select one value"
+                defaultSelectedId={2}
+                onSelectChange={onGamePriceChange}
+                maxWidth="15rem"
+              />
+              <Checkbox
+                title="Game is private"
+                value={gameIsPrivate}
+                onCheck={setGameIsPrivate}
+              />
+            </div>
+            <div className="createJoinTab__flexRow">
+              <Select
+                title="Game rules mode"
+                items={DValues.gameRulesDropdown}
+                idKey="key"
+                textKey="value"
+                defaultSelectedId={1}
+                onSelectChange={onRulesChange}
+              />
+            </div>
+            <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
+              <Button icon={<PlayCircleOutline />} type="ghost">
+                Start game
+              </Button>
+            </div>
+          </div>
+        </Card>
+        <Card noShadow padded title="Join existing game">
+          <div className="createJoinTab__container">
+            <Input
+              placeholder="Room code"
+              title="Existing room code"
+              maxWidth="15rem"
+            />
+            <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
+              <Button icon={<PlayCircleOutline />} type="ghost">
+                Join game
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
   );
 };
 

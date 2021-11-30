@@ -1,0 +1,32 @@
+@import "@styles/Variables.scss";
+
+.createJoinTab {
+  &__mainButton {
+    margin-bottom: $unit;
+  }
+
+  &__flexRow {
+    display: flex;
+    gap: $unit;
+    flex-wrap: wrap;
+  }
+
+  &__container {
+    display: flex;
+    flex-flow: column;
+    gap: $unit * 0.5;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $unit;
+  }
+}
+
+@media (max-width: $sm) {
+  .createJoinTab__cards {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}

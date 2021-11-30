@@ -13,6 +13,7 @@ interface InputProps {
   placeholder?: string;
   style?: object;
   tall?: boolean;
+  maxWidth?: string | number;
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -33,6 +34,7 @@ const Input: FC<InputProps> = (props) => {
         value={value}
         onChange={({ target }) => setValue(target.value)}
         placeholder={props.placeholder || "Enter value"}
+        style={{maxWidth: props.maxWidth}}
       />
     </div>
   );

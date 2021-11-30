@@ -7,12 +7,14 @@ type CardType = "error" | "information" | "success" | "warning";
 interface CardProps {
   hoverable?: boolean;
   padded?: boolean;
+  halfWidth?: boolean;
   style?: object;
   type?: CardType;
   wrap?: boolean;
   title?: string;
   noContentPaddingX?: boolean;
   noContentPaddingY?: boolean;
+  noShadow?: boolean;
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -20,9 +22,11 @@ const Card: FC<CardProps> = (props) => {
     [`card--${props.type}`]: props.type,
     "card--hoverable": props.hoverable,
     "card--padded": props.padded,
+    "card--halfWidth": props.halfWidth,
     "card--wrap": props.wrap,
     "card--noContentPaddingX": props.noContentPaddingX,
     "card--noContentPaddingY": props.noContentPaddingY,
+    "card--noShadow": props.noShadow,
   });
 
   return <div className={classes} style={props.style}>

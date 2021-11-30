@@ -3,12 +3,6 @@ import classNames from "classnames";
 import { createRipples } from "react-ripples";
 import "./Button.scss";
 
-const Ripple = createRipples({
-  during: 600,
-  color: "rgba(0, 0, 0, .2)",
-  className: "defaultBorderRadius"
-});
-
 type ButtonType =
   | "accent"
   | "minimal"
@@ -23,6 +17,8 @@ interface ButtonProps {
   centerText?: boolean;
   tall?: boolean;
   style?: object;
+  className?: string;
+  onClick?(): void;
 }
 
 const Button: FC<ButtonProps> = (props) => {
@@ -32,8 +28,20 @@ const Button: FC<ButtonProps> = (props) => {
     "button--tall": props.tall,
   });
 
+  const Ripple = createRipples({
+    during: 600,
+    color: "rgba(0, 0, 0, .2)",
+    className: props.className
+  });
+
+  function onClick() {
+    if (typeof props.onClick === "function") {
+      props.onClick();
+    }
+  }
+
   return (
-    <Ripple>
+    <Ripple onClick={onClick}>
       <div className={classes} style={props.style}>
         {props.icon}
         <p>{props.children}</p>

@@ -117,7 +117,7 @@ $separatorColor: #F7F7FA;
     }
   }
 
-  &--padded {
+  &--padded > &__content {
     padding: $defaultMargin;
   }
 
@@ -149,6 +149,14 @@ $separatorColor: #F7F7FA;
 
   &--wrap {
     display: inline-block;
+  }
+
+  &--halfWidth {
+    width: 50%;
+  }
+  
+  &--noShadow {
+    box-shadow: none;
   }
   // <end> --MODIFIERS </end>
 }

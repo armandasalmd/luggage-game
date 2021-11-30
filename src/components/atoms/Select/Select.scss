@@ -3,7 +3,7 @@
 .select {
   $base: &;
 
-  display: flex;
+  display: inline-flex;
   flex-flow: column;
 
   select {
@@ -14,6 +14,7 @@
     white-space: pre;
     text-overflow: ellipsis;
     height: 36px;
+    font-size: 0.9rem;
 
     option {
       color: $colorTextDark;
@@ -45,4 +46,8 @@
     color: black;
   }
   // <end> __ELEMENTS </end>
+
+  &--fullWidth {
+    width: 100%;
+  }
 }

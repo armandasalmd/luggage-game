@@ -1,0 +1,28 @@
+@import "@styles/Variables.scss";
+
+.checkbox {
+  display: inline-flex;
+  flex-flow: column;
+  margin: 0;
+
+  &__checkTrue, &__checkFalse {
+    font-size: 1.7rem !important;
+    cursor: pointer;
+  }
+
+  &__checkTrue {
+    fill: $colorPrimary !important;
+  }
+  
+  &__checkFalse {
+    fill: $shade30 !important;
+  }
+
+  // <start> __ELEMENTS  </start>
+  &__text {
+    margin-bottom: $unit * .25;
+    margin-left: 3px;
+    cursor: text;
+    white-space: nowrap;
+  }
+}

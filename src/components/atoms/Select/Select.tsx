@@ -11,13 +11,17 @@ interface SelectProps {
   items: any[];
   defaultSelectedId?: string | number;
   onSelectChange?(id: number | string, item: object): void;
+  maxWidth?: string | number;
+  fullWidth?: boolean;
 }
 
 const NOT_SELECTED = "not_selected";
 
 const Select: FC<SelectProps> = (props) => {
   const [ selectedItemId, setSelectedItemId ] = useState(props.defaultSelectedId || NOT_SELECTED);
-  const classes = classNames("select");
+  const classes = classNames("select", {
+    "select--fullWidth": props.fullWidth
+  });
   let menuItems: ReactElement[] = [];
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -45,7 +49,7 @@ const Select: FC<SelectProps> = (props) => {
     <div className={classes}>
       { props.title && <p className="select__title">{props.title}</p> }
       { props.description && <p className="select__description">{props.description}</p> }
-      <select onChange={onChange} value={selectedItemId}>
+      <select onChange={onChange} value={selectedItemId} style={{maxWidth: props.maxWidth}}>
         {menuItems}
       </select>
     </div>

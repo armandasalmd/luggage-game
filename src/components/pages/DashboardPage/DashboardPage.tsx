@@ -1,12 +1,12 @@
 import { FC } from "react";
-import {
-  Card,
-  PillButton,
-  TabItem
-} from "@components/atoms";
+import { Card, PillButton, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
 import { Navbar } from "@components/organisms";
-import { DashboardCreateJoinTab, GameRulesTab } from "@components/templates";
+import {
+  DashboardCreateJoinTab,
+  GameRulesTab,
+  GamesHistoryTab,
+} from "@components/templates";
 
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
@@ -32,7 +32,12 @@ const DashboardPage: FC = () => {
           dragonslayer12
         </PillButton>
       </Navbar>
-      <Card noContentPaddingX noContentPaddingY style={{ margin: 16 }} title="Luggage game dashboard">
+      <Card
+        noContentPaddingX
+        noContentPaddingY
+        style={{ margin: 16 }}
+        title="Luggage game dashboard"
+      >
         <Tabs defaultActiveTab={1}>
           <TabItem text="Create or join game" id={1}>
             <DashboardCreateJoinTab />
@@ -41,10 +46,7 @@ const DashboardPage: FC = () => {
             <GameRulesTab />
           </TabItem>
           <TabItem text="Games history" id={3}>
-            Tab item 3
-          </TabItem>
-          <TabItem text="Friends" id={4}>
-            Tab item 4
+            <GamesHistoryTab />
           </TabItem>
         </Tabs>
       </Card>
