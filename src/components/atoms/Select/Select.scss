@@ -1,0 +1,48 @@
+@import "@styles/Variables.scss";
+
+.select {
+  $base: &;
+
+  display: flex;
+  flex-flow: column;
+
+  select {
+    outline: none;
+    padding: 0.3em 0.7em;
+    border: 1px solid #E0E1E4;
+    border-radius: $defaultBorderRadius;
+    white-space: pre;
+    text-overflow: ellipsis;
+    height: 36px;
+
+    option {
+      color: $colorTextDark;
+    }
+  }
+
+  select:hover {
+    cursor: pointer;
+  }
+
+  select:focus {
+    border: 1px solid $colorPrimary;
+  }
+
+  // <start> __ELEMENTS </start>
+  &__description {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+  }
+
+  &__title,
+  &__description {
+    color: $colorTextDark;
+    margin-left: 2px;
+  }
+
+  &__title {
+    margin-bottom: $unit * 0.4;
+    color: black;
+  }
+  // <end> __ELEMENTS </end>
+}
