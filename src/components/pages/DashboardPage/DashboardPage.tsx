@@ -1,7 +1,9 @@
 import { FC } from "react";
-import { Button, Card, Input, Select } from "@components/atoms";
+import { Button, Card, Input, Select, PillButton } from "@components/atoms";
 import { DashboardMenuNavigator } from "@components/organisms";
 import MenuIcon from "@material-ui/icons/Menu";
+import MicSharpIcon from "@material-ui/icons/MicSharp";
+import MobileOffIcon from "@material-ui/icons/MobileOff";
 
 const menuItems = [
   {
@@ -65,6 +67,8 @@ const DashboardPage: FC = () => {
           placeholder="Select one value"
           defaultSelectedId={2}
           onSelectChange={onMenuIdChange} />
+        <br />
+        <PillButton prefix={<MicSharpIcon />} suffix={<MobileOffIcon />} colorType="primary">1235 coins</PillButton>
       </Card>
     </div>
   );

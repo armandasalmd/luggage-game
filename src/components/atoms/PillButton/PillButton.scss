@@ -1,0 +1,67 @@
+@import "@styles/Variables.scss";
+
+.pillButton {
+  $base: &;
+
+  border-radius: $defaultBorderRadius;
+  height: $unit * 2.4;
+  background: rgba($colorPrimary, 0.1);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  svg {
+    color: $colorPrimary;
+  }
+
+  p {
+    color: $colorTextDark;
+    font-size: 1rem;
+    margin: 0 $unit * 0.3;
+  }
+
+  &__suffix {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 $unit * 0.5;
+    border-radius: $defaultBorderRadius;
+
+    &:hover {
+      background: rgba($colorPrimary, 0.15);
+    }
+  }
+
+  &__divider {
+    color: $shade40;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 $unit * .5;
+    border-radius: $defaultBorderRadius;
+
+    &:hover {
+      background: rgba($colorPrimary, 0.15);
+    }
+  }
+
+  &--secondary {
+    background: rgba($colorSecondary, 0.1);
+
+    svg {
+      color: $colorSecondary;
+    }
+
+    #{$base}__suffix:hover {
+      background: rgba($colorSecondary, 0.15);
+    }
+
+    #{$base}__main:hover {
+      background: rgba($colorSecondary, 0.15);
+    }
+  }
+}
