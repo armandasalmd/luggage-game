@@ -1,0 +1,14 @@
+@import "@styles/Variables.scss";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: $unit * .35 $unit;
+  background: white;
+  box-shadow: $shadowDefault;
+  
+  &__actions {
+    display: flex;
+    gap: $unit * .25;
+  }
+}

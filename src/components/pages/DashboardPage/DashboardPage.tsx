@@ -1,6 +1,12 @@
 import { FC } from "react";
-import { Button, Card, Input, Select, PillButton, Logo } from "@components/atoms";
-import { DashboardMenuNavigator } from "@components/organisms";
+import {
+  Button,
+  Card,
+  Input,
+  Select,
+  PillButton,
+} from "@components/atoms";
+import { DashboardMenuNavigator, Navbar } from "@components/organisms";
 import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
@@ -33,6 +39,23 @@ const DashboardPage: FC = () => {
 
   return (
     <div className="dashboard">
+      <Navbar>
+        <PillButton
+          prefix={<TollIcon />}
+          suffix={<AddIcon />}
+          colorType="primary"
+        >
+          1235 coins
+        </PillButton>
+        <span> </span>
+        <PillButton
+          prefix={<PersonIcon />}
+          suffix={<LogoutIcon />}
+          colorType="secondary"
+        >
+          dragonslayer12
+        </PillButton>
+      </Navbar>
       <Card style={{ margin: 16 }} title="Luggage game dashboard">
         <Button type="ghost">This is my button</Button>
         <Button icon={<MenuIcon />} type="accent">
@@ -61,19 +84,15 @@ const DashboardPage: FC = () => {
           onSelectChange={onMenuIdChange}
         />
         <br />
-        <Select           
+        <Select
           title="Luggage game dashboard"
           items={menuItems}
           idKey="key"
           textKey="value"
           placeholder="Select one value"
           defaultSelectedId={2}
-          onSelectChange={onMenuIdChange} />
-        <br />
-        <PillButton prefix={<TollIcon />} suffix={<AddIcon />} colorType="primary">1235 coins</PillButton>
-        <span>  </span>
-        <PillButton prefix={<PersonIcon />} suffix={<LogoutIcon />} colorType="secondary">dragonslayer12</PillButton>
-        <Logo size="M" />
+          onSelectChange={onMenuIdChange}
+        />
       </Card>
     </div>
   );

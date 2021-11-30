@@ -1,0 +1,23 @@
+@import "@styles/Variables.scss";
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    margin-left: $unit * .5;
+    font-weight: 600;
+    color: $colorTextDark;
+  }
+
+  &--noText > p {
+    display: none;
+  }
+
+}
+
+@media (max-width: $sm) {
+  .logo--noTextSmallScreen > p {
+    display: none;
+  }
+}
