@@ -1,0 +1,28 @@
+@import "@styles/Variables.scss";
+
+.gameRules {
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: $unit * .5;
+    margin-bottom: $unit * .7;
+  }
+
+  &__sectionLabel {
+    text-decoration: underline;
+    font-size: 1.1rem;
+    margin-bottom: $unit;
+  }
+  
+  &__text {
+    margin-bottom: $unit;
+    
+  }
+
+  &__list {
+    margin: 0;
+    margin-top: $unit * .25;
+    padding-left: $unit * 1.5;
+  }
+}

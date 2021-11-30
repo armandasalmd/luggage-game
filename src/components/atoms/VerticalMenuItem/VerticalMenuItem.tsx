@@ -29,12 +29,12 @@ const VerticalMenuItem: FC<VerticalMenuItemProps> = (props) => {
   });
   
   return (
-    <Ripple>
-      <div className={classes} onClick={() => {
-        if (typeof props.onClick === "function") {
-          props.onClick(props.id);
-        } 
-      }}>
+    <Ripple onClick={() => {
+      if (typeof props.onClick === "function") {
+        props.onClick(props.id);
+      } 
+    }}>
+      <div className={classes}>
         {props.text}
       </div>
     </Ripple>

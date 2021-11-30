@@ -5,3 +5,4 @@ export { default as Logo } from "./Logo/Logo";
 export { default as PillButton } from "./PillButton/PillButton";
 export { default as Select } from "./Select/Select";
 export { default as VerticalMenuItem } from "./VerticalMenuItem/VerticalMenuItem";
+export { default as TabItem } from "./TabItem/TabItem";

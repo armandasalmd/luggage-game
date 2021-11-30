@@ -4,11 +4,12 @@
   $base: &;
 
   border-radius: $defaultBorderRadius;
-  height: $unit * 2.4;
+  height: $unit * 2;
   background: rgba($colorPrimary, 0.1);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  padding: $unit * 0.2;
   user-select: none;
 
   svg {
@@ -40,7 +41,7 @@
   &__main {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: auto;
     padding: 0 $unit * .5;
     border-radius: $defaultBorderRadius;
 

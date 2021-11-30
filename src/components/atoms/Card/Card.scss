@@ -109,6 +109,13 @@ $separatorColor: #F7F7FA;
       padding-right: 0;
     }
   }
+  
+  &--noContentPaddingY {
+    #{$base}__content {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 
   &--padded {
     padding: $defaultMargin;

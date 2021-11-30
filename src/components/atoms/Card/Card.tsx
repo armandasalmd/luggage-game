@@ -12,6 +12,7 @@ interface CardProps {
   wrap?: boolean;
   title?: string;
   noContentPaddingX?: boolean;
+  noContentPaddingY?: boolean;
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -20,7 +21,8 @@ const Card: FC<CardProps> = (props) => {
     "card--hoverable": props.hoverable,
     "card--padded": props.padded,
     "card--wrap": props.wrap,
-    "card--noContentPaddingX": props.noContentPaddingX
+    "card--noContentPaddingX": props.noContentPaddingX,
+    "card--noContentPaddingY": props.noContentPaddingY,
   });
 
   return <div className={classes} style={props.style}>

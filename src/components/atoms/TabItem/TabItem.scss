@@ -1,0 +1,28 @@
+@import "@styles/Variables.scss";
+
+.tabItem {
+  color: $shade50;
+  font-size: 1rem;
+  user-select: none;
+  cursor: pointer;
+  transform: translateY(2px);
+
+  &--active {
+    color: $colorPrimary;
+    
+    &::after {
+      content: "";
+      background-color: $colorPrimary;
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 3;
+    }
+  }
+
+  &__text {
+    padding: $unit * 0.8  $unit * 0.6;
+  }
+}
