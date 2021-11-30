@@ -1,6 +1,5 @@
 import "../LoginPage/LoginPage.scss";
-import { LoginIcon } from "@components/molecules";
-import { Button, Input } from "@components/atoms";
+import { Button, Input, Logo } from "@components/atoms";
 
 function RegisterPage() {
   return (
@@ -12,7 +11,7 @@ function RegisterPage() {
       />
       <div className="login__container">
         <div className="login__logo">
-          <LoginIcon />
+          <Logo size="L" />
         </div>
         <div className="login__main">
           <div className="login__card">

@@ -1,7 +1,14 @@
 import { FC } from "react";
 import classNames from "classnames";
+import { createRipples } from "react-ripples";
 import "./PillButton.scss";
 import { ColorType } from "@utils/Types";
+
+const Ripple = createRipples({
+  during: 600,
+  color: "rgba(0, 0, 0, .1)",
+  className: "defaultBorderRadius fullHeigth",
+});
 
 interface PillButtonProps {
   prefix?: any;
@@ -30,12 +37,20 @@ const PillButton: FC<PillButtonProps> = (props) => {
 
   return (
     <div className={classes}>
-      <span className="pillButton__main" onClick={onClick}>
-        { props.prefix }
-        <p>{props.children}</p>
-      </span>
-      { props.suffix && <span className="pillButton__divider">|</span> }
-      { props.suffix && <span className="pillButton__suffix" onClick={onSuffixClick}>{props.suffix}</span> }
+      <Ripple>
+        <span className="pillButton__main" onClick={onClick}>
+          {props.prefix}
+          <p>{props.children}</p>
+        </span>
+      </Ripple>
+      {props.suffix && <span className="pillButton__divider">|</span>}
+      {props.suffix && (
+        <Ripple>
+          <span className="pillButton__suffix" onClick={onSuffixClick}>
+            {props.suffix}
+          </span>
+        </Ripple>
+      )}
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import { FC } from "react";
-import { Button, Card, Input, Select, PillButton } from "@components/atoms";
+import { Button, Card, Input, Select, PillButton, Logo } from "@components/atoms";
 import { DashboardMenuNavigator } from "@components/organisms";
 import MenuIcon from "@material-ui/icons/Menu";
-import MicSharpIcon from "@material-ui/icons/MicSharp";
-import MobileOffIcon from "@material-ui/icons/MobileOff";
+import PersonIcon from "@material-ui/icons/Person";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+import TollIcon from "@material-ui/icons/Toll";
+import AddIcon from "@material-ui/icons/Add";
 
 const menuItems = [
   {
@@ -68,7 +70,10 @@ const DashboardPage: FC = () => {
           defaultSelectedId={2}
           onSelectChange={onMenuIdChange} />
         <br />
-        <PillButton prefix={<MicSharpIcon />} suffix={<MobileOffIcon />} colorType="primary">1235 coins</PillButton>
+        <PillButton prefix={<TollIcon />} suffix={<AddIcon />} colorType="primary">1235 coins</PillButton>
+        <span>  </span>
+        <PillButton prefix={<PersonIcon />} suffix={<LogoutIcon />} colorType="secondary">dragonslayer12</PillButton>
+        <Logo size="M" />
       </Card>
     </div>
   );
