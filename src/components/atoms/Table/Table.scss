@@ -1,0 +1,94 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.table {
+  $base: &;
+  $borderColor: $shade0;
+  $headColor: rgba($colorPrimary, 0.3);
+  $oddRowColor: $shade0;
+  $evenRowColor: rgba($colorPrimary, 0.1);
+
+  table {
+    border-collapse: collapse;
+    border: 1px solid $borderColor;
+  }
+
+  // <start> __ELEMENTS </start>
+  &__body {
+    #{$base}__row {
+      border: 1px solid $borderColor;
+
+      &:nth-child(even) {
+        background: $evenRowColor;
+      }
+    }
+  }
+
+  &__cell {
+    padding: 4px 8px;
+    text-align: left;
+    @extend %ellipsis;
+  }
+
+  &__head {
+    #{$base}__row {
+      background: $headColor;
+      height: 2.5rem;
+
+      #{$base}__cell {
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+  // <end> __ELEMENTS </end>
+
+  // <start> --MODIFIERS </start>
+  &--columnsSeparated {
+    #{$base}__body {
+      #{$base}__cell {
+        border-left: 1px solid $borderColor;
+        border-right: 1px solid $borderColor;
+      }
+    }
+  }
+
+  &--fullWidth table {
+    width: 100%;
+  }
+
+  &--spaced {
+    #{$base}__body {
+      #{$base}__cell {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+  }
+
+  &--wrapLines {
+    #{$base}__body {
+      #{$base}__cell {
+        white-space: normal;
+      }
+    }
+  }
+
+  &--secondary {
+    #{$base}__head {
+      #{$base}__row {
+        background: rgba($colorSecondary, 0.2);
+      }
+    }
+
+    #{$base}__row {
+      &:nth-child(even) {
+        background: rgba($colorSecondary, 0.1);
+      }
+    }
+  }
+  // <end> --MODIFIERS </end>
+}

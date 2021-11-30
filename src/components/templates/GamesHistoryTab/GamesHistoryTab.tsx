@@ -1,9 +1,12 @@
 import { FC } from "react";
+import { Table } from "@components/atoms";
+
+import { tableData } from "./tableData";
 
 const GamesHistoryTab: FC = () => {
   return (
     <div>
-      Games history tab
+      <Table scrollX spaced data={tableData} />
     </div>
   );
 };
