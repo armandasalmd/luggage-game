@@ -11,7 +11,7 @@ import {
 const DashboardPage: FC = () => {
   return (
     <div className="dashboard">
-      <DashboardNavbar name="dragonslayer12" coins="1 350 coins" />
+      <DashboardNavbar name="dragonslayer12" coins="1 350" />
       <Card
         noContentPaddingX
         noContentPaddingY

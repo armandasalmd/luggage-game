@@ -16,11 +16,15 @@ interface PillButtonProps {
   colorType?: ColorType;
   onClick?(): void;
   onSuffixClick?(): void;
+  hideSuffixSmallScreen?: boolean;
+  textEllipsis?: boolean;
 }
 
 const PillButton: FC<PillButtonProps> = (props) => {
   const classes = classNames("pillButton", {
     "pillButton--secondary": props.colorType === "secondary",
+    "pillButton--hideSuffixSmallScreen": props.hideSuffixSmallScreen,
+    "pillButton--ellipsis": props.textEllipsis
   });
 
   function onClick() {

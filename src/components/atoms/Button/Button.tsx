@@ -30,8 +30,8 @@ const Button: FC<ButtonProps> = (props) => {
 
   const Ripple = createRipples({
     during: 600,
-    color: "rgba(0, 0, 0, .2)",
-    className: props.className
+    color: "rgba(0, 0, 0, .15)",
+    className: props.className + " defaultBorderRadius"
   });
 
   function onClick() {

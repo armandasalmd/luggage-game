@@ -28,6 +28,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         prefix={<TollIcon />}
         suffix={<AddIcon />}
         colorType="secondary"
+        hideSuffixSmallScreen
       >
         {props.coins}
       </PillButton>
@@ -36,6 +37,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         prefix={<PersonIcon />}
         suffix={<LogoutIcon />}
         colorType="secondary"
+        textEllipsis
       >
         {props.name}
       </PillButton>

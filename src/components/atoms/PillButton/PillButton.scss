@@ -1,4 +1,5 @@
 @import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
 
 .pillButton {
   $base: &;
@@ -20,6 +21,7 @@
     color: $colorTextDark;
     font-size: 1rem;
     margin: 0 $unit * 0.3;
+    white-space: nowrap;
   }
 
   &__suffix {
@@ -63,6 +65,18 @@
 
     #{$base}__main:hover {
       background: rgba($colorSecondary, 0.15);
+    }
+  }
+
+  &--ellipsis p {
+    @extend %ellipsis;
+  }
+}
+
+@media (max-width: $sm) {
+  .pillButton--hideSuffixSmallScreen  {
+    .pillButton__suffix, .pillButton__divider {
+      display: none;
     }
   }
 }
