@@ -31,4 +31,8 @@
       background: rgba($colorSecondary, .1);
     }
   }
+
+  &--showLeftOutline#{$base}--selected {
+      border-left: 3px solid $colorPrimary;
+  }
 }

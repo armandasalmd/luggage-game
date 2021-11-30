@@ -2,18 +2,37 @@
 
 .tabs {
   $paddingX: $unit;
+  $borderStyle: 3px solid $shade5;
 
   display: flex;
   flex-flow: column;
 
   &__heading {
     padding: 0 $paddingX;
-    border-bottom: 3px solid $shade5;
-    margin-top: $unit * .1;
+    border-bottom: $borderStyle;
+    margin-top: $unit * 0.1;
     display: flex;
   }
 
   &__content {
     padding: $unit $paddingX;
+  }
+
+  &__headingMobile {
+    display: none;
+    border-bottom: $borderStyle;
+    padding: $unit * 0.5 0;
+  }
+}
+
+@media (max-width: $sm) {
+  .tabs--mobileFriendly {
+    .tabs__heading {
+      display: none;
+    }
+  }
+
+  .tabs__headingMobile {
+    display: block;
   }
 }

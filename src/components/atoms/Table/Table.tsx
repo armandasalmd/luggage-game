@@ -26,8 +26,8 @@ const Table: FC<TableProps> = (props) => {
   });
 
   function createRowCells(columnDefs: ITableColumnDefinition[], row: any) {
-    return columnDefs.map(function (column) {
-      return <td className="table__cell">{row[column.key]}</td>
+    return columnDefs.map(function (column, index) {
+      return <td className="table__cell" key={column.key + index.toString()}>{row[column.key]}</td>
     });
   }
 
@@ -35,8 +35,8 @@ const Table: FC<TableProps> = (props) => {
     return <td className="table__cell" key={column.key}>{column.title}</td>
   });
 
-  const tableRows = props.data.rows.map(function (row) {
-    return <tr className="table__row">
+  const tableRows = props.data.rows.map(function (row, index) {
+    return <tr className="table__row" key={index}>
       {createRowCells(props.data.columnDefinitions, row)}
     </tr>;
   });

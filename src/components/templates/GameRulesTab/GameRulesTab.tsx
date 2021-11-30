@@ -13,12 +13,12 @@ const GameRulesTab = () => {
     <p className="gameRules__sectionLabel">Special cards:</p>
     <p className="gameRules__text">
       In classical game special cards are 2, 5 and 10.
-      <ul className="gameRules__list">
-        <li>2 means that you can put it anytime and it’s next player’s turn</li>
-        <li>5 means that you can put it anytime and then put any other card</li>
-        <li>10 means that you can put it anytime and the current pile is eliminated from the game (put aside) </li>
-      </ul>
     </p>
+    <ul className="gameRules__list">
+      <li>2 means that you can put it anytime and it’s next player’s turn</li>
+      <li>5 means that you can put it anytime and then put any other card</li>
+      <li>10 means that you can put it anytime and the current pile is eliminated from the game (put aside) </li>
+    </ul>
   </div>;
 };
 

@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useState, useEffect } from "react";
 import { ColorType } from "@utils/Types";
 import { VerticalMenuItem } from "@components/atoms";
 
@@ -9,6 +9,9 @@ export interface VerticalMenuProps {
   textKey: string;
   items: any[];
   defaultSelectedId?: string | number;
+  showLeftOutline?: boolean;
+  forceSelectedId?: string | number;
+  forceUpdateSelectedId?: boolean;
 }
 
 const VerticalMenu: FC<VerticalMenuProps> = (props) => {
@@ -27,6 +30,12 @@ const VerticalMenu: FC<VerticalMenuProps> = (props) => {
     }
   }
 
+  useEffect(function () {
+    if (props.forceUpdateSelectedId) {
+      setSelectedItemId(props.forceSelectedId);
+    }
+  }, [props.forceUpdateSelectedId, props.forceSelectedId]);
+
   for (const item of props.items) {
     menuItems.push(
       <VerticalMenuItem
@@ -36,6 +45,7 @@ const VerticalMenu: FC<VerticalMenuProps> = (props) => {
         colorType={props.colorType}
         selected={selectedItemId === item[props.idKey]}
         onClick={onItemClick}
+        showLeftOutline={props.showLeftOutline}
       />
     );
   }

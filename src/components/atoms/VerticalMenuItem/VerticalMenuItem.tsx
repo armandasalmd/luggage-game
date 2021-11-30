@@ -11,12 +11,14 @@ interface VerticalMenuItemProps {
   text: string;
   id: string | number;
   onClick?(id: string | number): void;
+  showLeftOutline?: boolean;
 }
 
 const VerticalMenuItem: FC<VerticalMenuItemProps> = (props) => {
   const classes = classNames("verticalMenuItem", {
     "verticalMenuItem--secondary": props.colorType === "secondary",
-    "verticalMenuItem--selected": props.selected
+    "verticalMenuItem--selected": props.selected,
+    "verticalMenuItem--showLeftOutline": props.showLeftOutline
   });
 
   const color = props.colorType == null || props.colorType === "primary" ?
