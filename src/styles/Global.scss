@@ -22,3 +22,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.fullWidth {
+  width: 100%;
+}
+
+.noSelect {
+  user-select: none;
+}
+
+.defaultBorderRadius {
+  border-radius: $defaultBorderRadius;
+}

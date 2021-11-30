@@ -1,6 +1,13 @@
 import { FC } from "react";
 import classNames from "classnames";
+import { createRipples } from "react-ripples";
 import "./Button.scss";
+
+const Ripple = createRipples({
+  during: 600,
+  color: "rgba(0, 0, 0, .2)",
+  className: "defaultBorderRadius"
+});
 
 type ButtonType =
   | "accent"
@@ -22,14 +29,16 @@ const Button: FC<ButtonProps> = (props) => {
   const classes = classNames("button", {
     [`button--${props.type}`]: props.type,
     "button--centerText": props.centerText,
-    "button--tall": props.tall
+    "button--tall": props.tall,
   });
 
   return (
-    <div className={classes} style={props.style}>
-      {props.icon}
-      <p>{props.children}</p>
-    </div>
+    <Ripple>
+      <div className={classes} style={props.style}>
+        {props.icon}
+        <p>{props.children}</p>
+      </div>
+    </Ripple>
   );
 };
 

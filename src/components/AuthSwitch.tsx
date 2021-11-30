@@ -7,7 +7,7 @@ import AppPrivate from "./AppPrivate";
 const AuthSwitch = (props: any) => {
   // const auth = useSelector(state => state.auth);
   const auth = {
-    isAuthenticated: false
+    isAuthenticated: true
   };
 
   return (

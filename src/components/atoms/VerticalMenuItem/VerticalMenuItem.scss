@@ -1,0 +1,34 @@
+@import "@styles/Variables.scss";
+
+.verticalMenuItem {
+  $base: &;
+
+  background: white;
+  height: $unit * 3;
+  user-select: none;
+  cursor: pointer;
+  display: grid;
+  align-content: center;
+  padding-left: $unit;
+  width: 100%;
+
+  &:hover {
+    background: rgba($colorPrimary, .1);
+  }
+
+  &--selected {
+    color: $colorPrimary;
+    background: rgba($colorPrimary, .1);
+    
+    &#{$base}--secondary {
+      color: $colorSecondary;
+      background: rgba($colorSecondary, .1);
+    }
+  }
+
+  &--secondary {
+    &:hover {
+      background: rgba($colorSecondary, .1);
+    }
+  }
+}
