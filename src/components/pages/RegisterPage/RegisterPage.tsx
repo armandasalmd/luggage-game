@@ -1,7 +1,12 @@
 import "../LoginPage/LoginPage.scss";
+import { useHistory } from "react-router-dom";
 import { Button, Input, Logo } from "@components/atoms";
 
 function RegisterPage() {
+  const history = useHistory();
+
+  const goToLogin = () => history.push("/auth/login");
+
   return (
     <div className="login">
       <img
@@ -20,11 +25,11 @@ function RegisterPage() {
               <Input placeholder="Enter username" title="Display name" tall />
               <Input placeholder="Enter e-mail" title="E-mail" tall />
               <Input placeholder="Enter password" title="Password" tall />
-              <Input placeholder="Repeat password" title="Repeat password" tall />
-              <Button type="accent" centerText tall style={{marginTop: 16}}>Register</Button>
+              <Input placeholder="Repeat password" title="Repeat password" tall style={{marginBottom: 16}} />
+              <Button type="accent" centerText tall>Register</Button>
             </div>
             <div className="login__cardFooter">
-              <Button type="link">Already have an account? Login</Button>
+              <Button type="link" onClick={goToLogin}>Already have an account? Login</Button>
             </div>
           </div>
           <div className="login__mainFooter">Luggage card game &copy; Armandas Barkauskas</div>

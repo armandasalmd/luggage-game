@@ -1,37 +1,17 @@
 import { FC } from "react";
-import { Card, PillButton, TabItem } from "@components/atoms";
+import { Card, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
-import { Navbar } from "@components/organisms";
+import { DashboardNavbar } from "@components/organisms";
 import {
   DashboardCreateJoinTab,
   GameRulesTab,
   GamesHistoryTab,
 } from "@components/templates";
 
-import PersonIcon from "@material-ui/icons/Person";
-import LogoutIcon from "@material-ui/icons/ExitToApp";
-import TollIcon from "@material-ui/icons/Toll";
-import AddIcon from "@material-ui/icons/Add";
-
 const DashboardPage: FC = () => {
   return (
     <div className="dashboard">
-      <Navbar>
-        <PillButton
-          prefix={<TollIcon />}
-          suffix={<AddIcon />}
-          colorType="secondary"
-        >
-          1235 coins
-        </PillButton>
-        <PillButton
-          prefix={<PersonIcon />}
-          suffix={<LogoutIcon />}
-          colorType="secondary"
-        >
-          dragonslayer12
-        </PillButton>
-      </Navbar>
+      <DashboardNavbar name="dragonslayer12" coins="1 350 coins" />
       <Card
         noContentPaddingX
         noContentPaddingY
