@@ -1,0 +1,9 @@
+@import "@styles/Variables.scss";
+
+.gameLayout {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  background: #FFFCF7;
+}

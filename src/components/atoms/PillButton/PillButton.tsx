@@ -18,13 +18,16 @@ interface PillButtonProps {
   onSuffixClick?(): void;
   hideSuffixSmallScreen?: boolean;
   textEllipsis?: boolean;
+  clickable?: boolean;
 }
 
 const PillButton: FC<PillButtonProps> = (props) => {
+  const clickable = props.clickable || props.clickable == null
   const classes = classNames("pillButton", {
     "pillButton--secondary": props.colorType === "secondary",
     "pillButton--hideSuffixSmallScreen": props.hideSuffixSmallScreen,
-    "pillButton--ellipsis": props.textEllipsis
+    "pillButton--ellipsis": props.textEllipsis,
+    "pillButton--clickable": clickable,
   });
 
   function onClick() {
@@ -39,22 +42,32 @@ const PillButton: FC<PillButtonProps> = (props) => {
     }
   }
 
+  const main = (
+    <span className="pillButton__main" onClick={onClick}>
+      {props.prefix}
+      <p>{props.children}</p>
+    </span>
+  );
+
+  const suffix = (
+    <span className="pillButton__suffix" onClick={onSuffixClick}>
+      {props.suffix}
+    </span>
+  );
+
   return (
     <div className={classes}>
-      <Ripple>
-        <span className="pillButton__main" onClick={onClick}>
-          {props.prefix}
-          <p>{props.children}</p>
-        </span>
-      </Ripple>
+      {clickable && <Ripple>{main}</Ripple>}
+      {!clickable && main}
+
       {props.suffix && <span className="pillButton__divider">|</span>}
-      {props.suffix && (
+
+      {props.suffix && clickable && (
         <Ripple>
-          <span className="pillButton__suffix" onClick={onSuffixClick}>
-            {props.suffix}
-          </span>
+          {suffix}
         </Ripple>
       )}
+      {props.suffix && !clickable && suffix}
     </div>
   );
 };

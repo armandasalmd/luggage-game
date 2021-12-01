@@ -1,0 +1,41 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.playerCard {
+  @extend %cardBase;
+
+  display: inline-flex;
+  gap: $unit * .5;
+  min-width: 235px;
+  padding: $unit * 0.6;
+  border: none;
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: $defaultBorderRadius;
+    overflow: hidden;
+  }
+
+  &__name {
+    margin-top: $unit * 0.25;
+  }
+
+  &__label {
+    grid-row: 2;
+    grid-column: 2;
+    font-size: 17px;
+    color: $colorPrimary;
+  }
+
+  &__textGroup {
+    display: flex;
+    flex-flow: column;
+  }
+
+  &--secondary {
+    &__label {
+      color: $colorSecondary;
+    }
+  }
+}

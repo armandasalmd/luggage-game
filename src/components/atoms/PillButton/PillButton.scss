@@ -71,6 +71,16 @@
   &--ellipsis p {
     @extend %ellipsis;
   }
+
+  &:not(&--clickable) {
+    #{$base}__main {
+      cursor: text;
+    }
+
+    #{$base}__suffix:hover, #{$base}__main:hover {
+      background: none;
+    }
+  }
 }
 
 @media (max-width: $sm) {

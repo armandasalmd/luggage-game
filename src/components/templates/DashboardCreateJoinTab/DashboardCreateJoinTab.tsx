@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Card, Checkbox, Select, Input } from "@components/atoms";
 import "./DashboardCreateJoinTab.scss";
 
@@ -6,6 +7,7 @@ import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import * as DValues from "./dropdownValues";
 
 const DashboardCreateJoinTab = () => {
+  const history = useHistory();
   const [gameIsPrivate, setGameIsPrivate] = useState(false);
 
   function onPlayersCountChange(id: string | number, item: any) {
@@ -21,7 +23,9 @@ const DashboardCreateJoinTab = () => {
   }
 
   function onFindPublicGame() {
-    console.log("Find public game");
+    const ROOM_ID = "hh6t3a56";
+    
+    history.push("/play/" + ROOM_ID);
   }
 
   return (

@@ -1,0 +1,24 @@
+@import "@styles/Variables.scss";
+
+.miniGameCard {
+  width: 62px;
+  height: 44px;
+  border-radius: $defaultBorderRadius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid $colorPrimary;
+  background: rgba($colorPrimary, .3);
+
+  &__value {
+    font-size: 20px;
+    color: $colorTextDark;
+    margin-left: $unit * .25;
+  }
+
+  &--secondary {
+    background: #FFF3EB;
+    border: 1px solid #FFA05F;
+  }
+}

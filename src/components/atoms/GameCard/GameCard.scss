@@ -1,0 +1,54 @@
+@import "@styles/Variables.scss";
+
+.gameCard {
+  $cardSmallWidth: 0;
+  $cardSmallHeight: 0;
+  $cardMediumWidth: 133px;
+  $cardMediumHeight: 202px;
+  $cardLargeWidth: 0;
+  $cardLargeHeight: 0;
+
+  user-select: none;
+  pointer-events: none;
+
+  &--small * {
+    width: $cardSmallWidth;
+    height: $cardSmallHeight;
+  }
+
+  &--medium * {
+    width: $cardMediumWidth;
+    height: $cardMediumHeight;
+  }
+
+  &--large * {
+    width: $cardLargeWidth;
+    height: $cardLargeHeight;
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  .gameCard {
+    $cardSmallWidth: 0px;
+    $cardSmallHeight: 0px;
+    $cardMediumWidth: 102px;
+    $cardMediumHeight: 156px;
+    $cardLargeWidth: 0;
+    $cardLargeHeight: 0;
+
+    &--mobileSmall * {
+      width: $cardSmallWidth;
+      height: $cardSmallHeight;
+    }
+
+    &--mobileMedium * {
+      width: $cardMediumWidth;
+      height: $cardMediumHeight;
+    }
+
+    &--mobileLarge * {
+      width: $cardLargeWidth;
+      height: $cardLargeHeight;
+    }
+  }
+}
