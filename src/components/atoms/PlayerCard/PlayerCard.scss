@@ -50,6 +50,7 @@
     cursor: pointer;
     padding: $unit * 0.5;
     color: $shade40;
+    display: none !important;
   }
 
   &--secondary {
@@ -76,6 +77,10 @@
     &__avatar, img {
       width: $imageSize;
       height: $imageSize;
+    }
+
+    &__luggage {
+      display: inline-flex !important;
     }
   }
 }

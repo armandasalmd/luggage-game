@@ -20,6 +20,7 @@
     cursor: pointer;
     color: $color;
     background: white;
+    display: none !important;
   }
 
   &--active > &__button {
@@ -34,6 +35,6 @@
   }
 
   .luggageController__button {
-    display: grid;
+    display: grid !important;
   }
 }
