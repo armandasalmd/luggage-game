@@ -1,0 +1,86 @@
+@import "@styles/Variables.scss";
+
+.modal {
+  $base: &;
+
+  position: absolute;
+  z-index: 6;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba($shade100, 0.3);
+
+  &__window {
+    z-index: 7;
+    width: 60%;
+    background: white;
+    border-radius: $defaultBorderRadius;
+
+    @media screen and (max-width: $lg) {
+      width: 80%;
+    }
+
+    @media screen and (max-width: $md) {
+      width: 90%;
+    }
+
+    &--flyInBottom {
+      animation-name: flyInBottom, fadeIn;
+      animation-timing-function: ease, ease-in;
+      animation-duration: 350ms, 200ms;
+
+      @keyframes flyInBottom {
+        from {
+          transform: translateY(50px);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__body {
+    padding: $unit;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $unit * 0.5 $unit;
+    border-bottom: 1px solid $shade10;
+
+    #{$base}__title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $colorTextDark;
+    }
+
+    #{$base}__close {
+      height: $unit * 1.8;
+      width: $unit * 1.8;
+      cursor: pointer;
+      border-radius: $defaultBorderRadius;
+
+      &:hover {
+        background: rgba($colorSecondary, 0.1);
+        color: $colorSecondary;
+      }
+    }
+  }
+}

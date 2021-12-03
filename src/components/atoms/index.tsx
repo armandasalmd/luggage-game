@@ -5,6 +5,7 @@ export { default as GameCard } from "./GameCard/GameCard";
 export { default as Input } from "./Input/Input";
 export { default as Logo } from "./Logo/Logo";
 export { default as MiniGameCard } from "./MiniGameCard/MiniGameCard";
+export { default as Modal } from "./Modal/Modal";
 export { default as PillButton } from "./PillButton/PillButton";
 export { default as PlayerCard } from "./PlayerCard/PlayerCard";
 export { default as Select } from "./Select/Select";

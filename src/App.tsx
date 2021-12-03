@@ -10,6 +10,7 @@ function App() {
       <Router>
         <AuthSwitch />
       </Router>
+      <div id="modal-container"></div>
     </Provider>
   );
 }

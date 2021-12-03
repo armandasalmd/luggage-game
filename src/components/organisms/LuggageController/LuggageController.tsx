@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import classNames from "classnames";
 import { createRipples } from "react-ripples";
 import "./LuggageController.scss";
-import { MiniCardLuggage } from "@components/molecules";
+import { MiniCardLuggage, LuggageModal } from "@components/molecules";
 import { randomCard } from "@utils/game/Card";
 import { ILuggage } from "@utils/game/Player";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
@@ -14,6 +14,8 @@ const Ripple = createRipples({
 });
 
 const LuggageController: FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const classes = classNames("luggageController", {
     "luggageController--active": false
   });
@@ -27,7 +29,7 @@ const LuggageController: FC = () => {
   };
 
   function openModal() {
-    console.log("Open luggage modal");
+    setModalOpen(!modalOpen);
   }
 
   return (
@@ -39,6 +41,7 @@ const LuggageController: FC = () => {
       <Ripple onClick={openModal}>
         <CardTravelIcon />
       </Ripple>
+      <LuggageModal isOpen={modalOpen} onClose={setModalOpen} username="armandelis" luggage={luggage}  />
     </div>
   );
 };
