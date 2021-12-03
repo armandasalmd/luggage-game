@@ -11,6 +11,7 @@ interface GameCardProps {
   mobileSize?: CardSize;
   onClick?(card: ACard): void;
   className?: string | string[];
+  draggable?: boolean;
 }
 
 const GameCard: FC<GameCardProps> = (props) => {
@@ -27,10 +28,10 @@ const GameCard: FC<GameCardProps> = (props) => {
   const classes = classNames("gameCard", [
     getSizeClass(size, false),
     getSizeClass(mobileSize, true),
-    props.className
+    props.className,
   ]);
 
-return <div className={classes}>
+return <div className={classes} draggable={props.draggable ? "true" : "false"}>
     <img alt={cardToString(props.card)} src={cardPath(props.card)} />
   </div>;
 };

@@ -6,6 +6,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import TollIcon from "@material-ui/icons/Toll";
 import FlagIcon from "@material-ui/icons/Flag";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import GlobalUtils from "@utils/Global";
 
 export interface GameNavbarProps {
   onSurrender?(): void;
@@ -18,6 +19,10 @@ const GameNavbar: FC<GameNavbarProps> = (props) => {
 
   function toggleMore() {
     setMoreOpen(!moreOpen);
+  }
+
+  function onSurrender() {
+    GlobalUtils.callIfFunction(props.onSurrender);
   }
 
   const menuItems = [
@@ -33,7 +38,7 @@ const GameNavbar: FC<GameNavbarProps> = (props) => {
 
   return (
     <Navbar>
-      <PillButton prefix={<FlagIcon />} colorType="secondary">
+      <PillButton prefix={<FlagIcon />} colorType="secondary" onClick={onSurrender}>
         Surrender
       </PillButton>
       <PillButton

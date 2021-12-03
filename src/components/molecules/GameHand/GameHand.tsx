@@ -15,14 +15,14 @@ const GameHand: FC<GameHandProps> = (props) => {
 
   return (
     <div className={classes}>
-      <div className="gameHand__cardStack">
-        <GameCard className="gameHand__card" card={randomCard()} />
-        <GameCard className="gameHand__card" card={randomCard()} />
-        <GameCard className="gameHand__card" card={randomCard()} />
+      <div className="gameHand__cardStack draggable">
+        <GameCard draggable className="gameHand__card" card={randomCard()} />
+        <GameCard draggable className="gameHand__card" card={randomCard()} />
+        <GameCard draggable className="gameHand__card" card={randomCard()} />
       </div>
-      <GameCard className="gameHand__card" card={randomCard()} />
-      <GameCard className="gameHand__card" card={randomCard()} />
-      <GameCard className="gameHand__card" card={randomCard()} />
+      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
+      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
+      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
     </div>
   );
 };
