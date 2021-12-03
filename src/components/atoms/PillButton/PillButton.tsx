@@ -17,6 +17,8 @@ interface PillButtonProps {
   onClick?(): void;
   onSuffixClick?(): void;
   hideSuffixSmallScreen?: boolean;
+  hideOnSmall?: boolean;
+  showOnSmall?: boolean;
   textEllipsis?: boolean;
   clickable?: boolean;
 }
@@ -28,6 +30,8 @@ const PillButton: FC<PillButtonProps> = (props) => {
     "pillButton--hideSuffixSmallScreen": props.hideSuffixSmallScreen,
     "pillButton--ellipsis": props.textEllipsis,
     "pillButton--clickable": clickable,
+    "pillButton--hideOnSmall": props.hideOnSmall,
+    "pillButton--showOnSmall": props.showOnSmall
   });
 
   function onClick() {
@@ -45,7 +49,7 @@ const PillButton: FC<PillButtonProps> = (props) => {
   const main = (
     <span className="pillButton__main" onClick={onClick}>
       {props.prefix}
-      <p>{props.children}</p>
+      {props.children && <p>{props.children}</p>}
     </span>
   );
 

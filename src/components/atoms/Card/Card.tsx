@@ -15,6 +15,7 @@ interface CardProps {
   noContentPaddingX?: boolean;
   noContentPaddingY?: boolean;
   noShadow?: boolean;
+  className?: string | string[];
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -27,7 +28,7 @@ const Card: FC<CardProps> = (props) => {
     "card--noContentPaddingX": props.noContentPaddingX,
     "card--noContentPaddingY": props.noContentPaddingY,
     "card--noShadow": props.noShadow,
-  });
+  }, props.className);
 
   return <div className={classes} style={props.style}>
     {props.title && 

@@ -1,0 +1,15 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.popMenu {
+  @extend %cardBase;
+
+  position: absolute;
+  top: $unit * 3;
+  right: $unit;
+  background: white;
+  border-radius: $defaultBorderRadius;
+  display: flex;
+  padding: $unit * .5 0;
+  border: none;
+}

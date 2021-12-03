@@ -12,6 +12,7 @@ export interface VerticalMenuProps {
   showLeftOutline?: boolean;
   forceSelectedId?: string | number;
   forceUpdateSelectedId?: boolean;
+  disabled?: boolean;
 }
 
 const VerticalMenu: FC<VerticalMenuProps> = (props) => {
@@ -19,7 +20,7 @@ const VerticalMenu: FC<VerticalMenuProps> = (props) => {
   let menuItems: ReactElement[] = [];
 
   function onItemClick(id: number) {
-    if (selectedItemId !== id) {
+    if (selectedItemId !== id && !props.disabled) {
       setSelectedItemId(id);
       
       if (typeof props.onSelectChange === "function") {

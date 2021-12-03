@@ -81,9 +81,21 @@
       background: none;
     }
   }
+
+  &--showOnSmall {
+    display: none;
+  }
 }
 
 @media (max-width: $sm) {
+  .pillButton--hideOnSmall {
+    display: none;
+  }
+
+  .pillButton--showOnSmall {
+    display: inline-flex;
+  }
+
   .pillButton--hideSuffixSmallScreen  {
     .pillButton__suffix, .pillButton__divider {
       display: none;
