@@ -7,11 +7,13 @@ import { ColorType } from "@utils/Types";
 interface MiniGameCardProps {
   card?: ACard;
   colorType?: ColorType;
+  invisible?: boolean;
 }
 
 const MiniGameCard: FC<MiniGameCardProps> = (props) => {
   const classes = classNames("miniGameCard", {
     "miniGameCard--secondary": props.colorType === "secondary",
+    "miniGameCard--invisible": props.invisible
   });
 
   const isDisplayed = props.card && props.card.face === CardFace.UpFace;

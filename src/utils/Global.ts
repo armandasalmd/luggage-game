@@ -23,6 +23,9 @@ const GlobalUtils = {
   },
   randomInt: (from: number, to: number): number => {
     return Math.round(from + Math.random() * (to - from));
+  },
+  pluralize: (text: string, n: number): string => {
+    return n === 1 ? text : text + "s";
   }
 };
 

@@ -1,15 +1,7 @@
 @import "@styles/Variables.scss";
 
 .gameCard {
-  $cardSmallWidth: 0;
-  $cardSmallHeight: 0;
-  $cardMediumWidth: 133px;
-  $cardMediumHeight: 202px;
-  $cardLargeWidth: 0;
-  $cardLargeHeight: 0;
-
   user-select: none;
-  pointer-events: none;
 
   &--small * {
     width: $cardSmallWidth;
@@ -29,26 +21,19 @@
 
 @media only screen and (max-width: $sm) {
   .gameCard {
-    $cardSmallWidth: 0px;
-    $cardSmallHeight: 0px;
-    $cardMediumWidth: 102px;
-    $cardMediumHeight: 156px;
-    $cardLargeWidth: 0;
-    $cardLargeHeight: 0;
-
     &--mobileSmall * {
-      width: $cardSmallWidth;
-      height: $cardSmallHeight;
+      width: $cardSmallWidthMob;
+      height: $cardSmallHeightMob;
     }
 
     &--mobileMedium * {
-      width: $cardMediumWidth;
-      height: $cardMediumHeight;
+      width: $cardMediumWidthMob;
+      height: $cardMediumHeightMob;
     }
 
     &--mobileLarge * {
-      width: $cardLargeWidth;
-      height: $cardLargeHeight;
+      width: $cardLargeWidthMob;
+      height: $cardLargeHeightMob;
     }
   }
 }

@@ -2,3 +2,4 @@ export { default as DashboardCreateJoinTab } from "./DashboardCreateJoinTab/Dash
 export { default as GameLayout } from "./GameLayout/GameLayout";
 export { default as GameRulesTab } from "./GameRulesTab/GameRulesTab";
 export { default as GamesHistoryTab } from "./GamesHistoryTab/GamesHistoryTab";
+export { default as Playground } from "./Playground/Playground";

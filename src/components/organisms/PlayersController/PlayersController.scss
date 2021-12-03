@@ -1,0 +1,50 @@
+@import "@styles/Variables.scss";
+
+.players {
+  display: grid;
+  grid-template-rows: auto 30% auto;
+  grid-template-columns: auto 1fr auto;
+  width: 100%;
+
+  $marginY: calc(10% + $unit * 4);
+  margin-top: $unit * -8;
+  margin-left: $marginY;
+  margin-right: $marginY;
+
+  .player1 {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  
+  .player2 {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  
+  .player3 {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  
+  .player4 {
+    grid-row: 3;
+    grid-column: 3;
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .players {
+    margin-left: $unit * 4;
+    margin-right: $unit * 4;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .players {
+    display: flex;
+    justify-content: center;
+    gap: $unit;
+    margin-top: $unit;
+  }
+}

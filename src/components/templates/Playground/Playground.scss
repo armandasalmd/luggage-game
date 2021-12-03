@@ -1,0 +1,47 @@
+@import "@styles/Variables.scss";
+
+.playground {
+  display: flex;
+  align-items: center;
+
+  &__finished {
+    position: absolute;
+    top: -$unit * 1.5;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  &__gamePile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__gameHand {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: $actionBarHeight - $unit * 4;
+    display: inline-flex;
+    align-items: flex-end;
+    overflow-y: hidden;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: $md), screen and (max-height: 600px) {
+  .playground__finished {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .playground {
+    align-items: flex-start;
+  }
+}

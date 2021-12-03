@@ -21,4 +21,8 @@
     background: #FFF3EB;
     border: 1px solid #FFA05F;
   }
+
+  &--invisible {
+    visibility: hidden;
+  }
 }

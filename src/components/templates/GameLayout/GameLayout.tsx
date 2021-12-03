@@ -1,9 +1,9 @@
 import { FC } from "react";
 import "./GameLayout.scss";
 
-import { PlayerCard } from "@components/atoms";
 import { GameNavbar, GameActionBar } from "@components/organisms";
 import { GameNavbarProps } from "@components/organisms/GameNavbar/GameNavbar";
+import { Playground } from "@components/templates";
 
 interface GameLayoutProps extends GameNavbarProps {
   gameId: string;
@@ -15,9 +15,7 @@ const GameLayout: FC<GameLayoutProps> = (props) => {
   return (
     <div className="gameLayout">
       <GameNavbar {...rest} />
-      <div>
-        <PlayerCard username="klaidonsas" label="Luggage" />
-      </div>
+      <Playground />
       <GameActionBar />
     </div>
   );

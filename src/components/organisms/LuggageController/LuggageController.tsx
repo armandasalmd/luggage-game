@@ -1,18 +1,44 @@
 import { FC } from "react";
+import classNames from "classnames";
+import { createRipples } from "react-ripples";
+import "./LuggageController.scss";
 import { MiniCardLuggage } from "@components/molecules";
 import { randomCard } from "@utils/game/Card";
+import { ILuggage } from "@utils/game/Player";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+
+const Ripple = createRipples({
+  during: 600,
+  color: "rgba(0, 0, 0, .15)",
+  className: "defaultBorderRadius luggageController__button"
+});
 
 const LuggageController: FC = () => {
-  const faceUpCards = [randomCard(), randomCard()];
-  const faceDownCards = [randomCard(), randomCard(), randomCard()];
+  const classes = classNames("luggageController", {
+    "luggageController--active": false
+  });
+
+  const luggage: ILuggage = {
+    downOne: randomCard(),
+    downTwo: randomCard(),
+    downThree: randomCard(),
+    upTwo: randomCard(),
+    upThree: randomCard(),
+  };
+
+  function openModal() {
+    console.log("Open luggage modal");
+  }
 
   return (
-    <div className="luggageController" style={{display: "flex", alignItems: "center", gap: 12}}>
-      <p>Luggage |</p>
-      <MiniCardLuggage
-        faceUpCards={faceUpCards}
-        faceDownCards={faceDownCards}
-      />
+    <div className={classes}>
+      <div className="luggageController__mini">
+        <p>Luggage |</p>
+        <MiniCardLuggage luggage={luggage} />
+      </div>
+      <Ripple onClick={openModal}>
+        <CardTravelIcon />
+      </Ripple>
     </div>
   );
 };

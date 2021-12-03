@@ -10,6 +10,7 @@ interface GameCardProps {
   size?: CardSize;
   mobileSize?: CardSize;
   onClick?(card: ACard): void;
+  className?: string | string[];
 }
 
 const GameCard: FC<GameCardProps> = (props) => {
@@ -25,7 +26,8 @@ const GameCard: FC<GameCardProps> = (props) => {
 
   const classes = classNames("gameCard", [
     getSizeClass(size, false),
-    getSizeClass(mobileSize, true)
+    getSizeClass(mobileSize, true),
+    props.className
   ]);
 
 return <div className={classes}>

@@ -6,15 +6,21 @@
 
   display: inline-flex;
   gap: $unit * .5;
-  min-width: 235px;
   padding: $unit * 0.6;
+  width: 100%;
   border: none;
 
   &__avatar {
-    width: 50px;
-    height: 50px;
     border-radius: $defaultBorderRadius;
     overflow: hidden;
+    width: 50px;
+    height: 50px;
+    
+    img {
+      
+      width: 50px;
+      height: 50px;
+    }
   }
 
   &__name {
@@ -31,11 +37,45 @@
   &__textGroup {
     display: flex;
     flex-flow: column;
+
+    @extend %ellipsis;
+  }
+
+  &__luggage {
+    margin-top: $unit * 0.5;
+    border-radius: $defaultBorderRadius;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $shade40;
+    cursor: pointer;
+    padding: $unit * 0.5;
+    color: $shade40;
   }
 
   &--secondary {
     &__label {
       color: $colorSecondary;
+    }
+  }
+
+  &--active {
+    border: 1px solid $colorPrimary;
+    box-shadow: 0 0 12px 0 rgba($colorPrimary, 0.4);
+  }
+}
+
+@media screen and (max-width: $md) {
+  .playerCard {
+    $imageSize: 64px;
+
+    flex-flow: column;
+    padding: $unit * 0.3;
+    gap: 0;
+    width: $imageSize;
+
+    &__avatar, img {
+      width: $imageSize;
+      height: $imageSize;
     }
   }
 }

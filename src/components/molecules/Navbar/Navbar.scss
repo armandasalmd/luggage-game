@@ -6,6 +6,7 @@
   padding: $unit * .35 $unit;
   background: white;
   box-shadow: $shadowDefault;
+  z-index: 3;
   
   &__actions {
     display: flex;
