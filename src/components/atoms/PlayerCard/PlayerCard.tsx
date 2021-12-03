@@ -18,6 +18,7 @@ export interface PlayerCardProps {
   username: string;
   label: string;
   active?: boolean;
+  onLuggageClick?(): void;
 }
 
 const PlayerCard: FC<PlayerCardProps> = (props) => {
@@ -35,7 +36,7 @@ const PlayerCard: FC<PlayerCardProps> = (props) => {
         <p className="playerCard__name">{props.username}</p>
         <span className="playerCard__label">{props.label}</span>
       </div>
-      <Ripple>
+      <Ripple onClick={props.onLuggageClick}>
         <CardTravelIcon />
       </Ripple>
     </div>

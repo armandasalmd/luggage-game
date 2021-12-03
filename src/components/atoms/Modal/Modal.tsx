@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, SyntheticEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 import "./Modal.scss";
@@ -31,9 +31,13 @@ const Modal: FC<ModalProps> = (props) => {
       "modal__window--flyInBottom": props.flyInAnimation,
     });
 
+    function preventBubble(e: SyntheticEvent) {
+      e.stopPropagation();
+    }
+
     const modal = (
-      <div className="modal">
-        <div className={classes}>
+      <div className="modal" onClick={onClose}>
+        <div className={classes} onClick={preventBubble}>
           <div className="modal__header">
             <h1 className="modal__title">{props.title}</h1>
             <CloseIcon className="modal__close" onClick={onClose} />

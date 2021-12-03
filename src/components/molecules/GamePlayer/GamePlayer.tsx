@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import classNames from "classnames";
 import "./GamePlayer.scss";
 import PlayerCard, {
   PlayerCardProps,
 } from "@components/atoms/PlayerCard/PlayerCard";
-import MiniCardLuggage from "@components/molecules/MiniCardLuggage/MiniCardLuggage";
+import { MiniCardLuggage, LuggageModal } from "@components/molecules";
 import { ILuggage } from "@utils/game/Player";
 
 interface GamePlayerProps {
@@ -14,13 +14,29 @@ interface GamePlayerProps {
 }
 
 const GamePlayer: FC<GamePlayerProps> = (props) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const classes = classNames("gamePlayer", props.className);
+
+  function onLuggageClick() {
+    setModalOpen(!modalOpen);
+  }
+
+  const playerProps = {
+    ...props.playerProps,
+    onLuggageClick: onLuggageClick,
+  };
 
   return (
     <div className={classes}>
-      <PlayerCard {...props.playerProps} />
+      <PlayerCard {...playerProps} />
       <MiniCardLuggage
         className="gamePlayer__luggage"
+        luggage={props.luggageProps}
+      />
+      <LuggageModal
+        isOpen={modalOpen}
+        onClose={setModalOpen}
+        username={props.playerProps.username}
         luggage={props.luggageProps}
       />
     </div>

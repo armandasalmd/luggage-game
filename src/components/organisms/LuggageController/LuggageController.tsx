@@ -10,14 +10,14 @@ import CardTravelIcon from "@material-ui/icons/CardTravel";
 const Ripple = createRipples({
   during: 600,
   color: "rgba(0, 0, 0, .15)",
-  className: "defaultBorderRadius luggageController__button"
+  className: "defaultBorderRadius luggageController__button",
 });
 
 const LuggageController: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const classes = classNames("luggageController", {
-    "luggageController--active": false
+    "luggageController--active": false,
   });
 
   const luggage: ILuggage = {
@@ -41,7 +41,12 @@ const LuggageController: FC = () => {
       <Ripple onClick={openModal}>
         <CardTravelIcon />
       </Ripple>
-      <LuggageModal isOpen={modalOpen} onClose={setModalOpen} username="armandelis" luggage={luggage}  />
+      <LuggageModal
+        isOpen={modalOpen}
+        onClose={setModalOpen}
+        username="armandelis"
+        luggage={luggage}
+      />
     </div>
   );
 };
