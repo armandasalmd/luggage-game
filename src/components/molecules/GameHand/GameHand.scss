@@ -4,7 +4,7 @@
   $base: &;
 
   display: flex;
-  cursor: pointer;
+  cursor: move;
 
   &__card--dragging, &__cardStack--dragging {
     transform: translateY($unit * -2) !important;
