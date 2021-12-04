@@ -1,0 +1,49 @@
+@import "@styles/Variables.scss";
+
+.lobby {
+  display: grid;
+  grid-template-columns: 1fr 35%;
+  grid-template-rows: auto auto;
+  gap: $unit * 1.5;
+  margin: $unit 20%;
+
+  &__card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  &__divider {
+    display: none;
+  }
+
+  &__players {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: $unit;
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .lobby {
+    margin: $unit 5%;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .lobby {
+    display: flex;
+    flex-flow: column;
+    margin: $unit;
+
+    &__divider {
+      display: block;
+      height: 2px;
+      background: $shade30;
+      width: 50%;
+      transform: translate(50%);
+    }
+  }
+}

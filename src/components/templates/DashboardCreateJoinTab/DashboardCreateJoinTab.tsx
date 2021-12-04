@@ -25,7 +25,7 @@ const DashboardCreateJoinTab = () => {
   function onFindPublicGame() {
     const ROOM_ID = "hh6t3a56";
     
-    history.push("/play/" + ROOM_ID);
+    history.push("/lobby/" + ROOM_ID);
   }
 
   return (
@@ -39,7 +39,7 @@ const DashboardCreateJoinTab = () => {
         Find public game
       </Button>
       <div className="createJoinTab__cards">
-        <Card noShadow padded title="Create game">
+        <Card padded title="Create game">
           <div className="createJoinTab__container">
             <div className="createJoinTab__flexRow">
               <Select
@@ -85,7 +85,7 @@ const DashboardCreateJoinTab = () => {
             </div>
           </div>
         </Card>
-        <Card noShadow padded title="Join existing game">
+        <Card padded title="Join existing game">
           <div className="createJoinTab__container">
             <Input
               placeholder="Room code"

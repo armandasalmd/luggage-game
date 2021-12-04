@@ -1,0 +1,47 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.lobbyPlayer {
+  @extend %cardBase;
+
+  display: flex;
+  padding: $unit * 0.8;
+  align-items: center;
+
+  &__avatar, img {
+    $size: 40px;
+    width: $size;
+    height: $size;
+    border-radius: $defaultBorderRadius;
+  }
+
+  &__name {
+    width: 100%;
+    font-size: 1.05rem;
+  }
+  
+  &__avatar {
+    margin-right: $unit * .5;
+  }
+
+  &__check {
+    color: $colorPrimary;
+    font-size: 1.8rem !important;
+  }
+
+  &__textCenter {
+    width: 100%;
+    text-align: center;
+  }
+
+  &--ready {
+    border: 1px solid $colorPrimary;
+  }
+
+  &--empty {
+    height: $unit * 2.2;
+    border: 2px dashed $shade30;
+    background: none;
+    box-shadow: none;
+  }
+}

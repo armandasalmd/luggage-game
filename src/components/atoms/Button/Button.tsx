@@ -35,7 +35,7 @@ const Button: FC<ButtonProps> = (props) => {
   });
 
   function onClick() {
-    if (typeof props.onClick === "function") {
+    if (typeof props.onClick === "function" && props.type !== "disabled") {
       props.onClick();
     }
   }
