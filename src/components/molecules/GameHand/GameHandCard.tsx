@@ -7,6 +7,7 @@ import { GameCard } from "@components/atoms";
 
 interface GameHandCardProps {
   card: ACard;
+  rotate?: number;
 }
 
 const GameHandCard: FC<GameHandCardProps> = (props) => {
@@ -30,8 +31,10 @@ const GameHandCard: FC<GameHandCardProps> = (props) => {
     "gameHand__card--dragging": isDragging,
   });
 
+  const rotate = props.rotate ? `rotate(${props.rotate}deg)` : undefined;
+
   return (
-    <div className={classes}>
+    <div className={classes} style={{transform: rotate}}>
       <GameCard card={props.card} ref={drag} />
     </div>
   );

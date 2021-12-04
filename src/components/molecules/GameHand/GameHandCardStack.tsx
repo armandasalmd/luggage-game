@@ -7,6 +7,7 @@ import { GameCard } from "@components/atoms";
 
 interface GameHandCardStackProps {
   cards: ACard[];
+  rotate?: number;
 }
 
 const GameHandCardStack: FC<GameHandCardStackProps> = (props) => {
@@ -31,8 +32,10 @@ const GameHandCardStack: FC<GameHandCardStackProps> = (props) => {
     "gameHand__cardStack--dragging": isDragging
   });
 
+  const rotate = props.rotate ? `rotate(${props.rotate}deg)` : undefined;
+
   return (
-    <div className={classes} >
+    <div className={classes} style={{transform: rotate}}>
       <div ref={drag} className="gameCard gameCard--medium gameCard--mobileMedium">
         {props.cards.map(function (card, index) {
           return <GameCard key={index} className="gameHand__card" card={card} />

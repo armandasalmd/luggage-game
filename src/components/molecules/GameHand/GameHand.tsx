@@ -16,10 +16,10 @@ const GameHand: FC<GameHandProps> = (props) => {
 
   return (
     <div className={classes}>
-      <GameHandCardStack cards={[randomCard(), randomCard()]} />
-      <GameHandCard card={randomCard()} />
-      <GameHandCard card={randomCard()} />
-      <GameHandCard card={randomCard()} />
+      <GameHandCardStack cards={[randomCard(), randomCard()]} rotate={-5} />
+      <GameHandCard card={randomCard()} rotate={-2} />
+      <GameHandCard card={randomCard()} rotate={2} />
+      <GameHandCard card={randomCard()} rotate={5} />
     </div>
   );
 };
