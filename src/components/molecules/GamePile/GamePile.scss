@@ -40,6 +40,10 @@
       border-radius: $defaultBorderRadius;
       box-sizing: border-box;
     }
+
+    &--active {
+      transform: scale(0.9);
+    }
   }
 }
 

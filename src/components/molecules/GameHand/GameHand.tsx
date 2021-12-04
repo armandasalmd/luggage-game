@@ -2,7 +2,8 @@ import { FC } from "react";
 import classNames from "classnames";
 import "./GameHand.scss";
 import { ACard, randomCard } from "@utils/game/Card";
-import { GameCard } from "@components/atoms";
+import GameHandCard from "./GameHandCard";
+import GameHandCardStack from "./GameHandCardStack";
 
 interface GameHandProps {
   cards: ACard[];
@@ -10,19 +11,15 @@ interface GameHandProps {
 
 const GameHand: FC<GameHandProps> = (props) => {
   const classes = classNames("gameHand", {
-    "gameHand--dense": props.cards.length > 8
+    "gameHand--dense": props.cards.length > 8,
   });
 
   return (
     <div className={classes}>
-      <div className="gameHand__cardStack draggable">
-        <GameCard draggable className="gameHand__card" card={randomCard()} />
-        <GameCard draggable className="gameHand__card" card={randomCard()} />
-        <GameCard draggable className="gameHand__card" card={randomCard()} />
-      </div>
-      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
-      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
-      <GameCard draggable className="gameHand__card draggable" card={randomCard()} />
+      <GameHandCardStack cards={[randomCard(), randomCard()]} />
+      <GameHandCard card={randomCard()} />
+      <GameHandCard card={randomCard()} />
+      <GameHandCard card={randomCard()} />
     </div>
   );
 };

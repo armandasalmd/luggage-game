@@ -6,6 +6,11 @@
   display: flex;
   cursor: pointer;
 
+  &__card--dragging, &__cardStack--dragging {
+    transform: translateY($unit * -2) !important;
+    z-index: 5;
+  }
+
   &__cardStack {
 
     #{$base}__card {
@@ -15,27 +20,22 @@
   
   & > * {
     transform: translateY(0);
+    user-select: none;
 
     &:not(:last-child) {
-      width: $unit * 3;
+      width: $unit * 3.5;
     }
-
-    &:hover, &:active {
-      z-index: 0;
-      transform: translateY($unit * -2);
-    }
-
   }
   
   &--dense {
     & > *:not(:last-child) {
-      width: $unit * 2;
+      width: $unit * 2.8;
     }
   }
 
   &--veryDense {
     & > *:not(:last-child) {
-      width: $unit * 1.35;
+      width: $unit * 2;
     }
   }
 }

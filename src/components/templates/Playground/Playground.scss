@@ -25,11 +25,9 @@
   &__gameHand {
     position: absolute;
     width: 100%;
-    height: 100%;
     bottom: $actionBarHeight - $unit * 4;
     display: inline-flex;
     align-items: flex-end;
-    overflow-y: hidden;
     justify-content: center;
   }
 }

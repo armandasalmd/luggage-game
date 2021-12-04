@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { forwardRef, PropsWithChildren } from "react";
 import classNames from "classnames";
 import "./GameCard.scss";
 
@@ -11,29 +11,48 @@ interface GameCardProps {
   mobileSize?: CardSize;
   onClick?(card: ACard): void;
   className?: string | string[];
-  draggable?: boolean;
 }
 
-const GameCard: FC<GameCardProps> = (props) => {
-  const size = props.size == null ? CardSize.Medium : props.size;
-  const mobileSize =
-    props.mobileSize == null ? CardSize.Medium : props.mobileSize;
+const GameCard = forwardRef<HTMLDivElement, PropsWithChildren<GameCardProps>>(
+  (props, ref) => {
+    const size = props.size == null ? CardSize.Medium : props.size;
+    const mobileSize =
+      props.mobileSize == null ? CardSize.Medium : props.mobileSize;
 
-  function getSizeClass(size: CardSize, isMobile: boolean): string {
-    let sizeClass = isMobile ? GlobalUtils.capitalise(size.toString()) : size.toString();
+    function getSizeClass(size: CardSize, isMobile: boolean): string {
+      let sizeClass = isMobile
+        ? GlobalUtils.capitalise(size.toString())
+        : size.toString();
 
-    return "gameCard--" + (isMobile ? "mobile" : "") + sizeClass;
+      return "gameCard--" + (isMobile ? "mobile" : "") + sizeClass;
+    }
+
+    const classes = classNames(
+      "gameCard",
+      [
+        getSizeClass(size, false),
+        getSizeClass(mobileSize, true),
+        props.className,
+      ]
+    );
+
+    const cardId = cardToString(props.card);
+
+    return (
+      <div
+        ref={ref}
+        className={classes}
+        data-card={cardId}
+        id={cardId}
+      >
+        <img
+          alt={cardId}
+          src={cardPath(props.card)}
+          style={{ pointerEvents: "none" }}
+        />
+      </div>
+    );
   }
-
-  const classes = classNames("gameCard", [
-    getSizeClass(size, false),
-    getSizeClass(mobileSize, true),
-    props.className,
-  ]);
-
-return <div className={classes} draggable={props.draggable ? "true" : "false"}>
-    <img alt={cardToString(props.card)} src={cardPath(props.card)} />
-  </div>;
-};
+);
 
 export default GameCard;

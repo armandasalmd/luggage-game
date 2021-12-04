@@ -3,17 +3,17 @@
 .gameCard {
   user-select: none;
 
-  &--small * {
+  &--small, &--small * {
     width: $cardSmallWidth;
     height: $cardSmallHeight;
   }
 
-  &--medium * {
+  &--medium, &--medium * {
     width: $cardMediumWidth;
     height: $cardMediumHeight;
   }
 
-  &--large * {
+  &--large, &--large * {
     width: $cardLargeWidth;
     height: $cardLargeHeight;
   }
@@ -21,17 +21,17 @@
 
 @media only screen and (max-width: $sm) {
   .gameCard {
-    &--mobileSmall * {
+    &--mobileSmall, &--mobileSmall * {
       width: $cardSmallWidthMob;
       height: $cardSmallHeightMob;
     }
 
-    &--mobileMedium * {
+    &--mobileMedium, &--mobileMedium * {
       width: $cardMediumWidthMob;
       height: $cardMediumHeightMob;
     }
 
-    &--mobileLarge * {
+    &--mobileLarge, &--mobileLarge * {
       width: $cardLargeWidthMob;
       height: $cardLargeHeightMob;
     }
