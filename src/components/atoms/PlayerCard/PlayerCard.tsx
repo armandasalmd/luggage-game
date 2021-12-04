@@ -2,6 +2,7 @@ import { FC } from "react";
 import { createRipples } from "react-ripples";
 import classNames from "classnames";
 import "./PlayerCard.scss";
+import { TimedAvatar } from "@components/atoms";
 import { ColorType } from "@utils/Types";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 
@@ -27,11 +28,13 @@ const PlayerCard: FC<PlayerCardProps> = (props) => {
     "playerCard--active": props.active,
   });
 
+  function timerIsUp() {
+    console.log("Timer is up");
+  }
+
   return (
     <div className={classes}>
-      <div className="playerCard__avatar">
-        <img alt="avatar" src={props.avatarUrl || "/images/avatar.png"} />
-      </div>
+      <TimedAvatar running={!!props.active} onFinish={timerIsUp} avatarUrl={props.avatarUrl} />
       <div className="playerCard__textGroup">
         <p className="playerCard__name">{props.username}</p>
         <span className="playerCard__label">{props.label}</span>

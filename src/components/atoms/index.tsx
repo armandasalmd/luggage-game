@@ -12,3 +12,4 @@ export { default as Select } from "./Select/Select";
 export { default as VerticalMenuItem } from "./VerticalMenuItem/VerticalMenuItem";
 export { default as TabItem } from "./TabItem/TabItem";
 export { default as Table } from "./Table/Table";
+export { default as TimedAvatar } from "./TimedAvatar/TimedAvatar";

@@ -1,27 +1,16 @@
 @import "@styles/Variables.scss";
 @import "@styles/Placeholders.scss";
 
+$imgSize: 64px;
+
 .playerCard {
   @extend %cardBase;
 
   display: inline-flex;
   gap: $unit * .5;
-  padding: $unit * 0.6;
+  padding: $unit * 0.4;
   width: 100%;
   border: none;
-
-  &__avatar {
-    border-radius: $defaultBorderRadius;
-    overflow: hidden;
-    width: 50px;
-    height: 50px;
-    
-    img {
-      
-      width: 50px;
-      height: 50px;
-    }
-  }
 
   &__name {
     margin-top: $unit * 0.25;
@@ -37,6 +26,7 @@
   &__textGroup {
     display: flex;
     flex-flow: column;
+    justify-content: center;
 
     @extend %ellipsis;
   }
@@ -60,24 +50,16 @@
   }
 
   &--active {
-    border: 1px solid $colorPrimary;
     box-shadow: 0 0 12px 0 rgba($colorPrimary, 0.4);
   }
 }
 
 @media screen and (max-width: $md) {
   .playerCard {
-    $imageSize: 64px;
-
     flex-flow: column;
     padding: $unit * 0.3;
     gap: 0;
-    width: $imageSize;
-
-    &__avatar, img {
-      width: $imageSize;
-      height: $imageSize;
-    }
+    width: $imgSize;
 
     &__luggage {
       display: inline-flex !important;
