@@ -9,6 +9,7 @@ export { default as MiniGameCard } from "./MiniGameCard/MiniGameCard";
 export { default as Modal } from "./Modal/Modal";
 export { default as PillButton } from "./PillButton/PillButton";
 export { default as PlayerCard } from "./PlayerCard/PlayerCard";
+export { default as RewardAnimation } from "./RewardAnimation/RewardAnimation";
 export { default as Select } from "./Select/Select";
 export { default as VerticalMenuItem } from "./VerticalMenuItem/VerticalMenuItem";
 export { default as TabItem } from "./TabItem/TabItem";

@@ -1,3 +1,5 @@
+import Confetti from "canvas-confetti";
+
 export interface IGameDetails {
   isPrivate: boolean;
   reward: number;
@@ -9,4 +11,12 @@ export interface IPlayer {
   avatar?: string;
   username: string;
   ready: boolean;
+}
+
+export function fireConfetti() {
+  Confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
 }
