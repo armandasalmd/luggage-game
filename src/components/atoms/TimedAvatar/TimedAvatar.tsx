@@ -19,7 +19,7 @@ const TimedAvatar: FC<TimedAvatarProps> = (props) => {
       console.log("Timer set");
       setTimeout(() => {
         GlobalUtils.callIfFunction(props.onFinish);
-      }, 15000);
+      }, 30000);
     }
   }, [props]);
 

@@ -1,12 +1,23 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import classNames from "classnames";
 import "./GameActionBar.scss";
 import { LuggageController } from "..";
+import { Button } from "@components/atoms";
 
 const GameActionBar: FC = () => {
+  const [active, setActive] = useState(false);
+
   const classes = classNames("actionBar", {
-    "actionBar--active": false
+    "actionBar--active": active
   });
+
+  useEffect(() => {
+    if (active === true) {
+      setTimeout(() => {
+        setActive(!active);
+      }, 30000);
+    }
+  }, [active]);
 
   return (
     <div className={classes}>
@@ -14,8 +25,9 @@ const GameActionBar: FC = () => {
         <LuggageController />
       </div>
       <div className="actionBar__action">
-        <p>Action controller component</p>
+        <Button onClick={() => setActive(!active)}>Toggle active</Button>
       </div>
+      {active && <div className="actionBar__overlay"></div>}
     </div>
   );
 };
