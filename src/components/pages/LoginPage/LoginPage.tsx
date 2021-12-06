@@ -1,18 +1,27 @@
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, resetErrors } from "@redux/actions";
+import type { RootState } from "@redux/store";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import "./LoginPage.scss";
 import { Button, Input, Logo } from "@components/atoms";
-import { loginUser } from "@redux/actions";
 
 function LoginPage() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const errorState = useSelector((state: RootState) => state.error);
 
   const goToRegister = () => history.push("/auth/register");
 
   function onLogin() {
-    dispatch(loginUser());
+    dispatch(loginUser(email, password));
   }
+
+  useEffect(() => {
+    dispatch(resetErrors());
+  }, [dispatch]);
 
   return (
     <div className="login">
@@ -29,15 +38,39 @@ function LoginPage() {
           <div className="login__card">
             <h1 className="login__cardTitle">Login</h1>
             <div className="login__cardBody">
-              <Input placeholder="Enter e-mail" title="E-mail" tall />
-              <Input placeholder="Enter password" title="Password" tall style={{marginBottom: 16}} />
-              <Button type="accent" centerText tall onClick={onLogin}>Login</Button>
+              <Input
+                placeholder="Enter e-mail"
+                title="E-mail"
+                tall
+                value={email}
+                error={errorState.errorFields?.email}
+                setValue={setEmail}
+              />
+              <Input
+                placeholder="Enter password"
+                title="Password"
+                password
+                tall
+                error={errorState.errorFields?.password}
+                value={password}
+                setValue={setPassword}
+              />
+              {errorState.errorMessage && (
+                <p className="login__error">{errorState.errorMessage}</p>
+              )}
+              <Button type="accent" centerText tall onClick={onLogin}>
+                Login
+              </Button>
             </div>
             <div className="login__cardFooter">
-              <Button type="link" onClick={goToRegister}>Create an account</Button>
+              <Button type="link" onClick={goToRegister}>
+                Create an account
+              </Button>
             </div>
           </div>
-          <div className="login__mainFooter">Luggage card game &copy; Armandas Barkauskas</div>
+          <div className="login__mainFooter">
+            Luggage card game &copy; Armandas Barkauskas
+          </div>
         </div>
       </div>
     </div>

@@ -33,6 +33,10 @@
     }
   }
 
+  &__error {
+    color: $colorError;
+  }
+
   &__card {
     border-radius: $unit * .5;
     background: white;

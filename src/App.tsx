@@ -3,6 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import store from "@redux/store";
 import AuthSwitch from "@components/AuthSwitch";
+import AuthUtils from "@utils/Auth";
+
+(function initApp() {
+  AuthUtils.resetAuthTokenFromStorage();
+})();
 
 function App() {
   return (

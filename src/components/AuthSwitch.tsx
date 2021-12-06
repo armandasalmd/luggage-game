@@ -6,13 +6,13 @@ import AppPublic from "./AppPublic";
 import AppPrivate from "./AppPrivate";
 
 const AuthSwitch = (props: any) => {
-  const auth = useSelector((state: RootState) => state.auth);
+  const userState = useSelector((state: RootState) => state.user);
 
   return (
     <Route
       {...props}
       render={function (props: any) {
-        if (auth?.isAuthenticated === true) {
+        if (userState?.isAuthenticated === true) {
           return <AppPrivate {...props} />;
         } else {
           return <AppPublic {...props} />;

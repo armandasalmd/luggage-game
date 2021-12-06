@@ -6,7 +6,11 @@ export interface IAction extends AnyAction {
 
 export enum ActionTypes {
   Login,
-  Logout
+  Logout,
+  SetErrorMessage,
+  SetErrorFields,
+  ResetErrors
 };
 
-export * from "./authActions";
+export * from "./userActions";
+export * from "./errorActions";

@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@redux/store";
 import { Navbar } from "@components/molecules";
 import { PillButton } from "@components/atoms";
 
@@ -17,6 +18,7 @@ interface DashboardNavbarProps {
 
 const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
   const dispatch = useDispatch();
+  const { user, coins } = useSelector((state: RootState) => state.user);
 
   function onLogout() {
     dispatch(logoutUser());
@@ -30,7 +32,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         colorType="secondary"
         hideSuffixSmallScreen
       >
-        {props.coins}
+        {coins}
       </PillButton>
       <PillButton
         onSuffixClick={onLogout}
@@ -39,7 +41,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         colorType="secondary"
         textEllipsis
       >
-        {props.name}
+        {user.username}
       </PillButton>
     </Navbar>
   );
