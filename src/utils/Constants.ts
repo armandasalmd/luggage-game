@@ -4,7 +4,7 @@ const constants = {
   env: process.env.NODE_ENV,
   servers: {
     devApi: "http://localhost:3001",
-    prodApi: "https://luggage-game.herokuapp.com"
+    prodApi: "https://luggage-api.herokuapp.com"
   },
   preferDevApi: true
 };
