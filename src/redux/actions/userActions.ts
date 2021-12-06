@@ -54,7 +54,7 @@ export const loginUser = (email: string, password: string) => {
       })
       .catch((err) => {
         const { data } = err.response;
-        if (data.errors) {
+        if (data && data.errors) {
           setErrorFields(data.errors)(dispatch);
         } else if (data.message) {
           setErrorMessage(data.message)(dispatch);
