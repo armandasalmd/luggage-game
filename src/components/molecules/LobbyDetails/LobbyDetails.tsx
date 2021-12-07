@@ -24,7 +24,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   function onCopyRoomCode() {
     copy(lobbyState.roomCode);
-    message.success("Copied to clipboard");
+    message.message("Copied to clipboard", "success", "right");
   }
 
   function onLeave() {
