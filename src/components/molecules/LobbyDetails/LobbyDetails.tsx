@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import copy from "copy-to-clipboard";
 import "./LobbyDetails.scss";
-import { Button, Card } from "@components/atoms";
+import { Button, Card, message } from "@components/atoms";
 import { IGameDetails } from "@utils/game/Game";
 import CheckIcon from "@material-ui/icons/Check";
 import RouteUtils from "@utils/Route";
@@ -19,6 +19,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   function onCopyRoomCode() {
     copy(props.gameId);
+    message.success("Copied to clipboard");
   }
 
   function onLeave() {
