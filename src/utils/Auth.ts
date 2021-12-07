@@ -32,6 +32,7 @@ function resetAuthTokenFromStorage() {
       if (decoded && (decoded.exp || 0) > currentTime) {
         setAuthHeaderToken(token);
         
+        setUser(decoded, 0)(store.dispatch);
         RouteUtils.sendApiRequest(RouteUtils.routes.api.user.coins).then((res) => {
           setUser(decoded, res.data)(store.dispatch);
         });

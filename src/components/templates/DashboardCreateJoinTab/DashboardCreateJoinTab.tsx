@@ -1,31 +1,64 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Card, Checkbox, Select, Input, message } from "@components/atoms";
+import {
+  Button,
+  Card,
+  Checkbox,
+  Select,
+  Input,
+  message,
+} from "@components/atoms";
+import { useDispatch } from "react-redux";
 import "./DashboardCreateJoinTab.scss";
 
+import RouteUtils from "@utils/Route";
+import { setLobbyState } from "@redux/actions";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import * as DValues from "./dropdownValues";
 
 const DashboardCreateJoinTab = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [playerCount, setPlayerCount] = useState("2");
+  const [gamePrice, setGamePrice] = useState("0");
+  const [gameRules, setGameRules] = useState("classic");
   const [gameIsPrivate, setGameIsPrivate] = useState(false);
 
-  function onPlayersCountChange(id: string | number, item: any) {
-    console.log("Players count changed", id, item);
+  function onPlayersCountChange(id: string, item: any) {
+    setPlayerCount(id);
   }
 
-  function onGamePriceChange(id: string | number, item: any) {
-    console.log("Game price changed", id, item);
+  function onGamePriceChange(id: string, item: any) {
+    setGamePrice(id);
   }
 
-  function onRulesChange(id: string | number, item: any) {
-    console.log("Game rules changed", id, item);
+  function onRulesChange(id: string, item: any) {
+    setGameRules(id);
   }
 
-  function onCreateGame() {
-    const ROOM_ID = "hh6t3a56";
-    
-    history.push("/lobby/" + ROOM_ID);
+  async function onCreateGame() {
+    const route = RouteUtils.routes.api.lobby.create;
+    const options = {
+      playerCount: parseInt(playerCount),
+      gamePrice: parseInt(gamePrice),
+      isPrivate: gameIsPrivate,
+      gameRules,
+    };
+
+    try {
+      const { data } = await RouteUtils.sendApiRequest(route, options);
+      const { errorMessage, ...rest } = data;
+
+      if (errorMessage) {
+        message.error(data.errorMessage);
+      } else {
+        dispatch(setLobbyState({...rest, ...options}));
+        history.push("/lobby/" + data.roomCode);
+      }
+    } catch {
+      message.error("Cannot create room");
+    }
   }
 
   function onJoinGame() {
@@ -44,8 +77,8 @@ const DashboardCreateJoinTab = () => {
                 idKey="key"
                 textKey="value"
                 placeholder="Select count"
-                defaultSelectedId={2}
-                onSelectChange={onPlayersCountChange}
+                defaultSelectedId={playerCount}
+                onChange={onPlayersCountChange}
                 maxWidth="15rem"
               />
               <Select
@@ -54,8 +87,8 @@ const DashboardCreateJoinTab = () => {
                 idKey="key"
                 textKey="value"
                 placeholder="Select one value"
-                defaultSelectedId={2}
-                onSelectChange={onGamePriceChange}
+                defaultSelectedId={gamePrice}
+                onChange={onGamePriceChange}
                 maxWidth="15rem"
               />
               <Checkbox
@@ -70,12 +103,16 @@ const DashboardCreateJoinTab = () => {
                 items={DValues.gameRulesDropdown}
                 idKey="key"
                 textKey="value"
-                defaultSelectedId={1}
-                onSelectChange={onRulesChange}
+                defaultSelectedId={gameRules}
+                onChange={onRulesChange}
               />
             </div>
             <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
-              <Button onClick={onCreateGame} icon={<PlayCircleOutline />} type="ghost">
+              <Button
+                onClick={onCreateGame}
+                icon={<PlayCircleOutline />}
+                type="ghost"
+              >
                 Start game
               </Button>
             </div>
@@ -89,7 +126,11 @@ const DashboardCreateJoinTab = () => {
               maxWidth="15rem"
             />
             <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
-              <Button icon={<PlayCircleOutline />} type="ghost" onClick={onJoinGame}>
+              <Button
+                icon={<PlayCircleOutline />}
+                type="ghost"
+                onClick={onJoinGame}
+              >
                 Join game
               </Button>
             </div>

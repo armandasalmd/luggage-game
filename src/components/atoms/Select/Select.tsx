@@ -10,7 +10,7 @@ interface SelectProps {
   textKey: string;
   items: any[];
   defaultSelectedId?: string | number;
-  onSelectChange?(id: number | string, item: object): void;
+  onChange?(id: number | string, item: object): void;
   maxWidth?: string | number;
   fullWidth?: boolean;
 }
@@ -27,8 +27,8 @@ const Select: FC<SelectProps> = (props) => {
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedItemId(e.target.value);
       
-    if (typeof props.onSelectChange === "function") {
-      props.onSelectChange(e.target.value, props.items.find(function (item) {
+    if (typeof props.onChange === "function") {
+      props.onChange(e.target.value, props.items.find(function (item) {
         return item[props.idKey].toString() === e.target.value;
       }));
     }

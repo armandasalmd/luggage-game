@@ -9,8 +9,12 @@ export enum ActionTypes {
   Logout,
   SetErrorMessage,
   SetErrorFields,
-  ResetErrors
+  ResetErrors,
+  SetLobbyState,
+  ClearLobbyState,
+  LobbyPlayerReady
 };
 
+export * from "./lobbyActions";
 export * from "./userActions";
 export * from "./errorActions";

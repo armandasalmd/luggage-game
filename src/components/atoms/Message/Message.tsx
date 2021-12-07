@@ -55,7 +55,6 @@ function messageImpl(message: string, type: MessageType, align?: AlignType) {
 
   setTimeout(() => {
     if (elem) {
-      console.log("Unmounting");
       ReactDOM.unmountComponentAtNode(elem);
     }
   }, MESSAGE_TIME);

@@ -54,7 +54,7 @@ export const priceDropdown = [
 
 export const gameRulesDropdown = [
   {
-    key: 1,
+    key: "classic",
     value: "Classical (2, 5, 10 powercards)",
   }
 ];

@@ -35,6 +35,12 @@ const Variables: IRouteVariables = {
         path: "/api/users/coins",
         method: "GET"
       }
+    },
+    lobby: {
+      create: {
+        path: "/api/lobby",
+        method: "POST"
+      }
     }
   },
   app: {
@@ -53,6 +59,5 @@ const Variables: IRouteVariables = {
     },
   }
 };
-
 
 export default Variables;

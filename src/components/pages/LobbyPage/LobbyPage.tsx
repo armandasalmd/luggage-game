@@ -1,37 +1,21 @@
 import { FC } from "react";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@redux/store";
 import "./LobbyPage.scss";
 import { DashboardNavbar } from "@components/organisms";
 import { LobbyDetails, LobbyPlayers } from "@components/molecules";
-import { IGameDetails, IPlayer } from "@utils/game/Game";
-
-const gameDetails: IGameDetails = {
-  isPrivate: true,
-  playerCount: 5,
-  reward: 500,
-  rules: "classical",
-};
-
-const player1: IPlayer = {
-  ready: false,
-  username: "armandelis",
-  seatId: 2
-};
 
 const LobbyPage: FC = () => {
-  const { gameId }: any = useParams();
+  const lobbyState = useSelector((state: RootState) => state.lobby);
+  const { user } = useSelector((state: RootState) => state.user);
 
   return (
     <div>
-      <DashboardNavbar name="armandelis" coins="1235" />
+      <DashboardNavbar name={user.username} coins={user.coins} />
       <div className="lobby">
-        <LobbyDetails
-          className="lobby__card"
-          gameId={gameId}
-          {...gameDetails}
-        />
+        <LobbyDetails className="lobby__card" />
         <div className="lobby__divider"></div>
-        <LobbyPlayers players={[player1]} playersCount={gameDetails.playerCount} />
+        <LobbyPlayers players={lobbyState.players} playersCount={lobbyState.playerCount} />
       </div>
     </div>
   );
