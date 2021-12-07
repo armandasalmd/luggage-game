@@ -3,6 +3,7 @@ export { default as GameHand } from "./GameHand/GameHand";
 export { default as GamePile } from "./GamePile/GamePile";
 export { default as GamePlayer } from "./GamePlayer/GamePlayer";
 export { default as LobbyDetails } from "./LobbyDetails/LobbyDetails";
+export { default as LobbyPlayers } from "./LobbyPlayers/LobbyPlayers";
 export { default as LuggageModal } from "./LuggageModal/LuggageModal";
 export { default as MiniCardLuggage } from "./MiniCardLuggage/MiniCardLuggage";
 export { default as Navbar } from "./Navbar/Navbar";

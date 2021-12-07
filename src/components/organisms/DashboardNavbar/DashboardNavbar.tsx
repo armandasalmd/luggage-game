@@ -7,7 +7,6 @@ import { PillButton } from "@components/atoms";
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 import TollIcon from "@material-ui/icons/Toll";
-import AddIcon from "@material-ui/icons/Add";
 
 import { logoutUser } from "@redux/actions";
 
@@ -28,7 +27,6 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
     <Navbar>
       <PillButton
         prefix={<TollIcon />}
-        suffix={<AddIcon />}
         colorType="secondary"
         hideSuffixSmallScreen
       >

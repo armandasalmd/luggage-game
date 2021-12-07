@@ -19,6 +19,10 @@ export const playersDropdown = [
 
 export const priceDropdown = [
   {
+    key: 0,
+    value: "No cost",
+  },
+  {
     key: 100,
     value: "100 coins",
   },

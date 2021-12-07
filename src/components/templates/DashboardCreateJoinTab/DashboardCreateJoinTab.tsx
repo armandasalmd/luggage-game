@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Card, Checkbox, Select, Input } from "@components/atoms";
+import { Button, Card, Checkbox, Select, Input, message } from "@components/atoms";
 import "./DashboardCreateJoinTab.scss";
 
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
@@ -22,22 +22,18 @@ const DashboardCreateJoinTab = () => {
     console.log("Game rules changed", id, item);
   }
 
-  function onFindPublicGame() {
+  function onCreateGame() {
     const ROOM_ID = "hh6t3a56";
     
     history.push("/lobby/" + ROOM_ID);
   }
 
+  function onJoinGame() {
+    message.information("This feature is not implemented yet");
+  }
+
   return (
     <div className="createJoinTab">
-      <Button
-        className="createJoinTab__mainButton"
-        onClick={onFindPublicGame}
-        icon={<PlayCircleOutline />}
-        type="accent"
-      >
-        Find public game
-      </Button>
       <div className="createJoinTab__cards">
         <Card padded title="Create game">
           <div className="createJoinTab__container">
@@ -79,7 +75,7 @@ const DashboardCreateJoinTab = () => {
               />
             </div>
             <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
-              <Button icon={<PlayCircleOutline />} type="ghost">
+              <Button onClick={onCreateGame} icon={<PlayCircleOutline />} type="ghost">
                 Start game
               </Button>
             </div>
@@ -93,7 +89,7 @@ const DashboardCreateJoinTab = () => {
               maxWidth="15rem"
             />
             <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>
-              <Button icon={<PlayCircleOutline />} type="ghost">
+              <Button icon={<PlayCircleOutline />} type="ghost" onClick={onJoinGame}>
                 Join game
               </Button>
             </div>

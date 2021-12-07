@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { useHistory } from "react-router-dom";
 import classNames from "classnames";
+import copy from "copy-to-clipboard";
 import "./LobbyDetails.scss";
 import { Button, Card } from "@components/atoms";
 import { IGameDetails } from "@utils/game/Game";
 import CheckIcon from "@material-ui/icons/Check";
+import RouteUtils from "@utils/Route";
 
 interface LobbyDetailsProps extends IGameDetails {
   gameId: string;
@@ -16,15 +18,15 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   const classes = classNames("lobbyDetails", props.className);
 
   function onCopyRoomCode() {
-    console.log("Copy room code");
+    copy(props.gameId);
   }
 
   function onLeave() {
-    console.log("Leave");
+    history.push(RouteUtils.routes.app.main.dashboard.path);
   }
 
   function onReady() {
-    history.push("/play/" + props.gameId);
+    history.push(RouteUtils.routes.app.main.game.path + "/" + props.gameId);
   }
 
   return (

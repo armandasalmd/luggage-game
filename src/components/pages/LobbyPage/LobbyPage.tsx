@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import "./LobbyPage.scss";
-import { LobbyPlayer } from "@components/atoms";
 import { DashboardNavbar } from "@components/organisms";
-import { LobbyDetails } from "@components/molecules";
+import { LobbyDetails, LobbyPlayers } from "@components/molecules";
 import { IGameDetails, IPlayer } from "@utils/game/Game";
 
 const gameDetails: IGameDetails = {
@@ -14,8 +13,9 @@ const gameDetails: IGameDetails = {
 };
 
 const player1: IPlayer = {
-  ready: true,
-  username: "armandelis"
+  ready: false,
+  username: "armandelis",
+  seatId: 2
 };
 
 const LobbyPage: FC = () => {
@@ -31,13 +31,7 @@ const LobbyPage: FC = () => {
           {...gameDetails}
         />
         <div className="lobby__divider"></div>
-        <div className="lobby__players">
-          <LobbyPlayer player={player1} />
-          <LobbyPlayer emptyLabel="Player 2" />
-          <LobbyPlayer emptyLabel="Player 3" />
-          <LobbyPlayer emptyLabel="Player 4" />
-          <LobbyPlayer emptyLabel="Player 5" />
-        </div>
+        <LobbyPlayers players={[player1]} playersCount={gameDetails.playerCount} />
       </div>
     </div>
   );

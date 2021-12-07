@@ -42,7 +42,15 @@ const Variables: IRouteVariables = {
       login: {
         path: "/auth/login"
       }
-    }
+    },
+    main: {
+      dashboard: {
+        path:  "/"
+      },
+      game: {
+        path: "/play"
+      }
+    },
   }
 };
 

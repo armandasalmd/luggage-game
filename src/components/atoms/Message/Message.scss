@@ -1,0 +1,79 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.message {
+  $base: &;
+
+  position: fixed;
+  top: 58px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    @extend %cardBase;
+    padding: $unit * 0.8;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    animation: comeIn 0.2s linear 1 forwards;
+
+    #{$base}__icon {
+      margin-right: $unit * 0.5;
+    }
+
+    @keyframes comeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-$unit * 3);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &--left {
+    justify-content: flex-start;
+    left: $unit;
+  }
+
+  &--right {
+    justify-content: flex-end;
+    right: $unit;
+  }
+
+  &--error {
+    color: $colorError;
+
+    #{$base}__container {
+      border: 1px solid rgba($colorError, 0.5);
+    }
+  }
+
+  &--warning {
+    color: $colorWarning;
+
+    #{$base}__container {
+      border: 1px solid rgba($colorWarning, 0.5);
+    }
+  }
+
+  &--information {
+    color: $colorInformation;
+
+    #{$base}__container {
+      border: 1px solid rgba($colorInformation, 0.5);
+    }
+  }
+
+  &--success {
+    color: $colorSuccess;
+
+    #{$base}__container {
+      border: 1px solid rgba($colorSuccess, 0.5);
+    }
+  }
+}
