@@ -37,6 +37,11 @@ const reducer = (state = {...initialState}, { type, payload }: IAction) => {
 
       return {...state};
     }
+    case ActionTypes.LobbyPlayerJoined:
+      if (payload) {
+        state.players.push(payload);
+      }
+      return {...state};
     default:
       return state;
   }

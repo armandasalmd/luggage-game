@@ -15,6 +15,7 @@ import RouteUtils from "@utils/Route";
 import { setLobbyState } from "@redux/actions";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import * as DValues from "./dropdownValues";
+import { joinLobbyAsync } from "@socket/lobby";
 
 const DashboardCreateJoinTab = () => {
   const history = useHistory();
@@ -24,16 +25,18 @@ const DashboardCreateJoinTab = () => {
   const [gamePrice, setGamePrice] = useState("0");
   const [gameRules, setGameRules] = useState("classic");
   const [gameIsPrivate, setGameIsPrivate] = useState(false);
+  const [joinIdError, setJoinIdError] = useState("");
+  const [joinId, setJoinId] = useState("");
 
-  function onPlayersCountChange(id: string, item: any) {
+  function onPlayersCountChange(id: string) {
     setPlayerCount(id);
   }
 
-  function onGamePriceChange(id: string, item: any) {
+  function onGamePriceChange(id: string) {
     setGamePrice(id);
   }
 
-  function onRulesChange(id: string, item: any) {
+  function onRulesChange(id: string) {
     setGameRules(id);
   }
 
@@ -53,8 +56,12 @@ const DashboardCreateJoinTab = () => {
       if (errorMessage) {
         message.error(data.errorMessage);
       } else {
-        dispatch(setLobbyState({...rest, ...options}));
-        history.push("/lobby/" + data.roomCode);
+        joinLobbyAsync(data.roomCode).then((data) => {
+          if (data.success) {
+            dispatch(setLobbyState({...rest, ...options}));
+            history.push("/lobby/" + data.lobbyState.roomCode);
+          }
+        });
       }
     } catch {
       message.error("Cannot create room");
@@ -62,7 +69,16 @@ const DashboardCreateJoinTab = () => {
   }
 
   function onJoinGame() {
-    message.information("This feature is not implemented yet");
+    if (joinId) {
+      joinLobbyAsync(joinId).then((data) => {
+        if (data.success) {
+          dispatch(setLobbyState(data.lobbyState));
+          history.push("/lobby/" + data.lobbyState.roomCode);
+        } else {
+          setJoinIdError(data.errorMessage);
+        }
+      });
+    }
   }
 
   return (
@@ -123,6 +139,9 @@ const DashboardCreateJoinTab = () => {
             <Input
               placeholder="Room code"
               title="Existing room code"
+              value={joinId}
+              setValue={setJoinId}
+              error={joinIdError}
               maxWidth="15rem"
             />
             <div className="createJoinTab__flexRow" style={{ marginTop: 16 }}>

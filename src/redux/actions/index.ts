@@ -12,7 +12,8 @@ export enum ActionTypes {
   ResetErrors,
   SetLobbyState,
   ClearLobbyState,
-  LobbyPlayerReady
+  LobbyPlayerReady,
+  LobbyPlayerJoined
 };
 
 export * from "./lobbyActions";

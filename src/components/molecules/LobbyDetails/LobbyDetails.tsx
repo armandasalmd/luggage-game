@@ -39,6 +39,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   const youReady = lobbyState.players.find(function (player: ILobbyPlayer) {
     return player.username === user.username;
   }).ready;
+  const readyDisabled = youReady || lobbyState.players.length !== lobbyState.playerCount;
 
   return (
     <Card
@@ -54,7 +55,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
       <div className="lobbyDetails__actions">
         <Button onClick={onCopyRoomCode} type="ghost">Copy room code</Button>
         <Button onClick={onLeave} type="ghost">Leave</Button>
-        <Button icon={<CheckIcon />} onClick={onReady} type={youReady ? "disabled" : "accent"}>Ready</Button>
+        <Button icon={<CheckIcon />} onClick={onReady} type={readyDisabled ? "disabled" : "accent"}>Ready</Button>
       </div>
     </Card>
   );

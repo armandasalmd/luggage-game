@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { IAction, ActionTypes } from "@redux/actions";
-import { ILobbyState } from "@redux/reducers/lobbyReducer";
+import { ILobbyPlayer, ILobbyState } from "@redux/reducers/lobbyReducer";
 
 export const setLobbyState = (state: ILobbyState) => {
   return function (dispatch: Dispatch) {
@@ -16,16 +16,25 @@ export const setLobbyState = (state: ILobbyState) => {
 export const clearLobbyState = () => {
   return function (dispatch: Dispatch) {
     dispatch({
-      type: ActionTypes.ClearLobbyState
+      type: ActionTypes.ClearLobbyState,
     });
-  }
+  };
 };
 
 export const setPlayerReady = (username: string) => {
   return function (dispatch: Dispatch) {
     dispatch({
       type: ActionTypes.LobbyPlayerReady,
-      payload: username
+      payload: username,
     });
-  }
-}
+  };
+};
+
+export const playerJoined = (player: ILobbyPlayer) => {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: ActionTypes.LobbyPlayerJoined,
+      payload: player,
+    });
+  };
+};

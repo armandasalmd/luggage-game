@@ -45,6 +45,7 @@ export const loginUser = (email: string, password: string) => {
       .then((response) => {
         if (typeof response.data.token === "string") {
           AuthUtils.setJwtToken(response.data.token);
+          AuthUtils.setAuthHeaderToken(response.data.token);
           setUser(
             jwtDecode(response.data.token),
             response.data.coins

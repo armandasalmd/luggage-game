@@ -1,13 +1,31 @@
-import { FC } from "react";
-import { useSelector } from "react-redux";
+import { FC, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@redux/store";
 import "./LobbyPage.scss";
 import { DashboardNavbar } from "@components/organisms";
 import { LobbyDetails, LobbyPlayers } from "@components/molecules";
+import { playerJoinedListener } from "@socket/lobby";
+import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
+import { playerJoined } from "@redux/actions";
+import SocketManager from "@socket/SocketManager";
 
 const LobbyPage: FC = () => {
+  const dispatch = useDispatch();
   const lobbyState = useSelector((state: RootState) => state.lobby);
   const { user } = useSelector((state: RootState) => state.user);
+
+  function onPlayerJoin(player: ILobbyPlayer) {
+    dispatch(playerJoined(player));
+  }
+
+  useEffect(() => {
+    playerJoinedListener(onPlayerJoin);
+    
+    return () => {
+      SocketManager.getInstance().removeAllListeners();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>

@@ -45,8 +45,12 @@ function resetAuthTokenFromStorage() {
   }
 }
 
-function getJwtToken() {
+function getJwtToken(): string {
   return localStorage.jwtToken;
+}
+
+function getPlainJwtToken() {
+  return getJwtToken().replace(Constants.authTokenType + " ", "");
 }
 
 function setJwtToken(token: string) {
@@ -59,6 +63,7 @@ function removeJwtToken() {
 
 const items = {
   getJwtToken,
+  getPlainJwtToken,
   setJwtToken,
   removeJwtToken,
   resetAuthTokenFromStorage,

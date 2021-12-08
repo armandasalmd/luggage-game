@@ -5,6 +5,7 @@
       "@/*": ["/*"],
       "@redux/*": ["redux/*"],
       "@components/*": ["components/*"],
+      "@socket/*": ["socket/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     }
