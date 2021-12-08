@@ -36,7 +36,7 @@ const LobbyPage: FC = () => {
   }
   
   function onGameStart() {
-    message.information("Game can start now. Working...");
+    history.push(RouteUtils.routes.app.main.game.path + "/" + lobbyState.roomCode);
   }
   
   function onPlayerReady(username: string) {
