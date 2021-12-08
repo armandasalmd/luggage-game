@@ -46,6 +46,9 @@ const reducer = (state = {...initialState}, { type, payload }: IAction) => {
       state.players = state.players.filter(function (player) {
         return player.username !== payload;
       });
+      for (const player of state.players) {
+        player.ready = false;
+      }
       return {...state};
     default:
       return state;

@@ -25,7 +25,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   function onCopyRoomCode() {
     copy(lobbyState.roomCode);
-    message.message("Copied to clipboard", "success", "right");
+    message.success("Copied to clipboard");
   }
 
   function onLeave() {
@@ -47,7 +47,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   const youReady = lobbyState.players.find(function (player: ILobbyPlayer) {
     return player.username === user.username;
-  }).ready;
+  })?.ready ?? false;
   const readyDisabled = youReady || lobbyState.players.length !== lobbyState.playerCount;
 
   return (

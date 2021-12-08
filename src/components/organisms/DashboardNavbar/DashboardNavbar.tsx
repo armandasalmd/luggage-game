@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@redux/store";
 import { Navbar } from "@components/molecules";
 import { PillButton } from "@components/atoms";
+import GlobalUtils from "@utils/Global";
 
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
@@ -13,6 +14,7 @@ import { logoutUser } from "@redux/actions";
 interface DashboardNavbarProps {
   name: string;
   coins: string;
+  onLogout?(): void;
 }
 
 const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
@@ -21,6 +23,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
 
   function onLogout() {
     dispatch(logoutUser());
+    GlobalUtils.callIfFunction(props.onLogout);
   }
 
   return (
