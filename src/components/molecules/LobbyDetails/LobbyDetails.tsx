@@ -10,10 +10,12 @@ import CheckIcon from "@material-ui/icons/Check";
 import RouteUtils from "@utils/Route";
 import { clearLobbyState, setPlayerReady } from "@redux/actions";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
-import { leaveLobbyAsync } from "@socket/lobby";
+import { leaveLobbyAsync, playerReadyAsync } from "@socket/lobby";
+import GlobalUtils from "@utils/Global";
 
 interface LobbyDetailsProps {
   className: string;
+  startGame?(): void;
 }
 
 const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
@@ -42,7 +44,17 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   }
 
   function onReady() {
-    dispatch(setPlayerReady(user.username));
+    playerReadyAsync().then(function (result) {
+      if (result.success === true) {
+        dispatch(setPlayerReady(user.username));
+
+        if (result.gameCanStart === true) {
+          GlobalUtils.callIfFunction(props.startGame);
+        }
+      } else {
+        message.error("Unexpected error");
+      }
+    })
   }
 
   const youReady = lobbyState.players.find(function (player: ILobbyPlayer) {

@@ -10,9 +10,11 @@ import {
   playerLeftListener,
   leaveLobbyAsync,
   joinLobbyAsync,
+  gameStartListener,
+  playerReadyListener
 } from "@socket/lobby";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
-import { playerJoined, playerLeft, setLobbyState } from "@redux/actions";
+import { playerJoined, playerLeft, setLobbyState, setPlayerReady } from "@redux/actions";
 import SocketManager from "@socket/SocketManager";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
@@ -31,6 +33,14 @@ const LobbyPage: FC = () => {
 
   function onPlayerLeft(username: string) {
     dispatch(playerLeft(username));
+  }
+  
+  function onGameStart() {
+    message.information("Game can start now. Working...");
+  }
+  
+  function onPlayerReady(username: string) {
+    dispatch(setPlayerReady(username));
   }
 
   function attemptRoomJoin(roomId: string) {
@@ -52,6 +62,8 @@ const LobbyPage: FC = () => {
 
     playerJoinedListener(onPlayerJoin);
     playerLeftListener(onPlayerLeft);
+    playerReadyListener(onPlayerReady);
+    gameStartListener(onGameStart);
 
     return () => {
       SocketManager.getInstance().removeAllListeners();
@@ -67,7 +79,7 @@ const LobbyPage: FC = () => {
         onLogout={leaveLobbyAsync.bind(this, user.username)}
       />
       <div className="lobby">
-        <LobbyDetails className="lobby__card" />
+        <LobbyDetails className="lobby__card" startGame={onGameStart} />
         <div className="lobby__divider"></div>
         <LobbyPlayers
           players={lobbyState.players}

@@ -9,4 +9,17 @@ const playerLeftListener = (callback: (username: string) => void) => {
   SocketManager.getInstance().listenToEvent("lobby player left", callback);
 };
 
-export { playerJoinedListener, playerLeftListener };
+const gameStartListener = (callback: () => void) => {
+  SocketManager.getInstance().listenToEvent("game can start", callback);
+};
+
+const playerReadyListener = (callback: (username: string) => void) => {
+  SocketManager.getInstance().listenToEvent("lobby player ready", callback);
+};
+
+export {
+  playerJoinedListener,
+  playerLeftListener,
+  gameStartListener,
+  playerReadyListener,
+};

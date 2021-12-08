@@ -8,4 +8,8 @@ const leaveLobbyAsync = async () => {
   return SocketManager.getInstance().emitEventAsync("lobby leave", {});
 };
 
-export { joinLobbyAsync, leaveLobbyAsync };
+const playerReadyAsync = async () => {
+  return SocketManager.getInstance().emitEventAsync("lobby ready", {});
+};
+
+export { joinLobbyAsync, leaveLobbyAsync, playerReadyAsync };
