@@ -75,7 +75,7 @@ const DashboardCreateJoinTab = () => {
           dispatch(setLobbyState(data.lobbyState));
           history.push("/lobby/" + data.lobbyState.roomCode);
         } else {
-          setJoinIdError(data.errorMessage);
+          setJoinIdError(data.errorMessage.message);
         }
       });
     }
