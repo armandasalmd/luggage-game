@@ -5,4 +5,8 @@ const playerJoinedListener = (callback: (player: ILobbyPlayer) => void) => {
   SocketManager.getInstance().listenToEvent("lobby player joined", callback);
 };
 
-export { playerJoinedListener };
+const playerLeftListener = (callback: (username: string) => void) => {
+  SocketManager.getInstance().listenToEvent("lobby player left", callback);
+};
+
+export { playerJoinedListener, playerLeftListener };

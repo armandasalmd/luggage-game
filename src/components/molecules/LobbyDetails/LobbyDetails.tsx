@@ -10,6 +10,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import RouteUtils from "@utils/Route";
 import { clearLobbyState, setPlayerReady } from "@redux/actions";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
+import { leaveLobbyAsync } from "@socket/lobby";
 
 interface LobbyDetailsProps {
   className: string;
@@ -28,8 +29,16 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   }
 
   function onLeave() {
-    dispatch(clearLobbyState());
-    history.push(RouteUtils.routes.app.main.dashboard.path);
+    leaveLobbyAsync().then(result => {
+      if (result.success === true) {
+        history.push(RouteUtils.routes.app.main.dashboard.path);
+        dispatch(clearLobbyState());
+      } else {
+        message.warning("Warning. Cannot leave lobby");
+      }
+    }).catch(() => {
+      message.error("Unexpected error");
+    });
   }
 
   function onReady() {

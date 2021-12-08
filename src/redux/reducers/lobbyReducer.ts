@@ -42,6 +42,11 @@ const reducer = (state = {...initialState}, { type, payload }: IAction) => {
         state.players.push(payload);
       }
       return {...state};
+    case ActionTypes.LobbyPlayerLeft:
+      state.players = state.players.filter(function (player) {
+        return player.username !== payload;
+      });
+      return {...state};
     default:
       return state;
   }

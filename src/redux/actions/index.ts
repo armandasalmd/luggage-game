@@ -13,7 +13,8 @@ export enum ActionTypes {
   SetLobbyState,
   ClearLobbyState,
   LobbyPlayerReady,
-  LobbyPlayerJoined
+  LobbyPlayerJoined,
+  LobbyPlayerLeft
 };
 
 export * from "./lobbyActions";

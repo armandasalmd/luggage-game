@@ -38,3 +38,12 @@ export const playerJoined = (player: ILobbyPlayer) => {
     });
   };
 };
+
+export const playerLeft = (username: string) => {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: ActionTypes.LobbyPlayerLeft,
+      payload: username,
+    });
+  };
+};

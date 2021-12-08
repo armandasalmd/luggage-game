@@ -4,9 +4,9 @@ import { RootState } from "@redux/store";
 import "./LobbyPage.scss";
 import { DashboardNavbar } from "@components/organisms";
 import { LobbyDetails, LobbyPlayers } from "@components/molecules";
-import { playerJoinedListener } from "@socket/lobby";
+import { playerJoinedListener, playerLeftListener } from "@socket/lobby";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
-import { playerJoined } from "@redux/actions";
+import { playerJoined, playerLeft } from "@redux/actions";
 import SocketManager from "@socket/SocketManager";
 
 const LobbyPage: FC = () => {
@@ -17,9 +17,14 @@ const LobbyPage: FC = () => {
   function onPlayerJoin(player: ILobbyPlayer) {
     dispatch(playerJoined(player));
   }
+  
+  function onPlayerLeft(username: string) {
+    dispatch(playerLeft(username));
+  }
 
   useEffect(() => {
     playerJoinedListener(onPlayerJoin);
+    playerLeftListener(onPlayerLeft);
     
     return () => {
       SocketManager.getInstance().removeAllListeners();
