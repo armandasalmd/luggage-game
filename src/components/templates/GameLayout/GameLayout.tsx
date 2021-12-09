@@ -12,7 +12,7 @@ interface GameLayoutProps extends GameNavbarProps {
 
 const GameLayout: FC<GameLayoutProps> = (props) => {
   const { gameId, ...rest } = props;
-  const [reward, setReward] = useState(500);
+  const [reward, setReward] = useState(0);
 
   return (
     <div className="gameLayout">

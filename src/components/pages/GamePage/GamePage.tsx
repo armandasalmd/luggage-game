@@ -11,6 +11,7 @@ import { GameLayout } from "@components/templates";
 import { dndOptions } from "@utils/game/Drag";
 import { initialiazeGameState } from "@redux/actions/gameActions";
 import { RootState } from "@redux/store";
+import RouteUtils from "@utils/Route";
 
 const GamePage: FC = () => {
   const dispatch = useDispatch();
@@ -34,12 +35,16 @@ const GamePage: FC = () => {
 
   useEffect(() => {
     if (gameId) {
-      dispatch(initialiazeGameState(gameId));
+      initialiazeGameState(gameId)(dispatch).then(success => {
+        if (success === false) {
+          message.error("Error. Cannot join game");
+          history.push(RouteUtils.routes.app.main.dashboard.path);
+        }
+      });
     } else {
       message.error("Incorrect room id");
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [gameId, dispatch, history]);
 
   return (
     <div>
