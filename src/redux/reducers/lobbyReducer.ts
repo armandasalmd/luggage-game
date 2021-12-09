@@ -8,12 +8,12 @@ export interface ILobbyPlayer {
 }
 
 export interface ILobbyState {
-  players: ILobbyPlayer[];
-  roomCode?: string;
   playerCount?: number;
   gamePrice?: number;
   isPrivate?: boolean;
   gameRules?: string;
+  players: ILobbyPlayer[];
+  roomCode?: string;
 }
 
 const initialState: ILobbyState = {

@@ -5,10 +5,12 @@ import { GameCard } from "@components/atoms";
 import { ACard, CardFace, CardKind } from "@utils/game/Card";
 import { useDrop } from "react-dnd";
 import { ItemTypes, DropPayload } from "@utils/game/Drag";
+import GlobalUtils from "@utils/Global";
+import { stringToCard } from "@utils/game/Card";
 
 interface GamePileProps {
   cardsLeft: number;
-  visibleCard?: ACard;
+  visibleCard?: string;
 }
 
 const GamePile: FC<GamePileProps> = (props) => {
@@ -40,14 +42,17 @@ const GamePile: FC<GamePileProps> = (props) => {
     face: CardFace.DownFace,
   };
 
+  const label = `${props.cardsLeft} ${GlobalUtils.pluralize("card", props.cardsLeft)} left`;
+  const card: ACard = stringToCard(props.visibleCard || "2C");
+
   return (
     <div className="gamePile">
       <div className={classesLeft}>
         <GameCard card={cardDown} />
-        <p className="gamePile__label">5 cards left</p>
+        <p className="gamePile__label">{label}</p>
       </div>
       <div className={classesRight} id="gamePile__right" ref={drop}>
-        {props.visibleCard && <GameCard card={props.visibleCard} />}
+        {props.visibleCard && <GameCard card={card} />}
         {!props.visibleCard && <p>Stack empty</p>}
       </div>
     </div>

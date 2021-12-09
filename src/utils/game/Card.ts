@@ -48,6 +48,16 @@ export function cardToString(card: ACard): string {
   return card.value + card.kind.toString();
 }
 
+export function stringToCard(card: string): ACard {
+  const value = card.length === 3 ? card.substr(0, 2) : card.substr(0, 1);
+  const kind = card.length === 3 ? card.substr(2, 1) : card.substr(1, 1);
+
+  return {
+    kind: kind as CardKind,
+    value,
+  };
+}
+
 export function cardPath(card: ACard): string {
   if (card.face === CardFace.DownFace) {
     return "/assets/blue_back.png";

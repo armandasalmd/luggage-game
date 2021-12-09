@@ -1,10 +1,16 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
+
+import "./Playground.scss";
+import { RootState } from "@redux/store";
 import { FinishedPile, GamePile, GameHand } from "@components/molecules";
 import { PlayersController } from "@components/organisms";
-import "./Playground.scss";
 import { randomCard, ACard } from "@utils/game/Card";
+import { IGameState } from "@utils/game/IGameState";
 
 const Playground: FC = () => {
+  const gameState: IGameState = useSelector((state: RootState) => state.game);
+
   // TODO: This component will connect to redux store and manage the state
   const cards: ACard[] = [
     randomCard(),
@@ -21,10 +27,13 @@ const Playground: FC = () => {
   return (
     <div className="playground">
       <div className="playground__finished">
-        <FinishedPile cardCount={32} />
+        <FinishedPile cardCount={gameState.gameDetails.deadCardsCount} />
       </div>
       <div className="playground__gamePile">
-        <GamePile cardsLeft={12} visibleCard={randomCard()} />
+        <GamePile
+          cardsLeft={gameState.gameDetails.sourceCardsCount}
+          visibleCard={gameState.gameDetails.topPlayCard}
+        />
       </div>
       <div className="playground__gameHand">
         <GameHand cards={cards} />

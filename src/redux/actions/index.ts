@@ -15,6 +15,7 @@ export enum ActionTypes {
   LobbyPlayerReady,
   LobbyPlayerJoined,
   LobbyPlayerLeft,
+  SetGameState
 };
 
 export * from "./lobbyActions";
