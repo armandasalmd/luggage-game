@@ -15,10 +15,16 @@ const TimedAvatar: FC<TimedAvatarProps> = (props) => {
   });
 
   useEffect(() => {
+    var timer: any;
+    
     if (props.running === true) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         GlobalUtils.callIfFunction(props.onFinish);
       }, 30000);
+    }
+
+    return () => {
+      clearTimeout(timer);
     }
   }, [props]);
 

@@ -47,7 +47,7 @@ const GameNavbar: FC<GameNavbarProps> = (props) => {
         clickable={false}
         hideOnSmall
       >
-        {props.gamePrice}
+        {`Price ${props.gamePrice}`}
       </PillButton>
       <PillButton
         prefix={<PersonIcon />}

@@ -44,7 +44,8 @@ const GamePage: FC = () => {
     } else {
       message.error("Incorrect room id");
     }
-  }, [gameId, dispatch, history]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

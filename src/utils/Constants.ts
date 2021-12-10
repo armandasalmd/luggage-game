@@ -6,7 +6,7 @@ const constants = {
     devApi: "http://localhost:3001",
     prodApi: "https://luggage-api.herokuapp.com"
   },
-  preferDevApi: false
+  preferDevApi: true
 };
 
 export default constants;

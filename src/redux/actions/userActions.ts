@@ -53,14 +53,7 @@ export const loginUser = (email: string, password: string) => {
           resetErrors()(dispatch);
         }
       })
-      .catch((err) => {
-        const { data } = err.response;
-        if (data && data.errors) {
-          setErrorFields(data.errors)(dispatch);
-        } else if (data.message) {
-          setErrorMessage(data.message)(dispatch);
-        }
-      });
+      .catch(handleLoginRegisterErrors(dispatch));
   };
 };
 
@@ -75,13 +68,22 @@ export const registerUser = (data: any) => {
           window.location.href = RouteUtils.routes.app.auth.login.path;
         }
       })
-      .catch((err) => {
-        const { data } = err.response;
-        if (data.errors) {
-          setErrorFields(data.errors)(dispatch);
-        } else if (data.message) {
-          setErrorMessage(data.message)(dispatch);
-        }
-      });
+      .catch(handleLoginRegisterErrors(dispatch));
   };
 };
+
+function handleLoginRegisterErrors(dispatch: Dispatch) {
+  return (err: any) => {
+    if (!err.response) {
+      setErrorMessage("Unexpected error")(dispatch);
+      return;
+    }
+
+    const { data } = err.response;
+    if (data.errors) {
+      setErrorFields(data.errors)(dispatch);
+    } else if (data.message) {
+      setErrorMessage(data.message)(dispatch);
+    }
+  }
+}
