@@ -55,6 +55,7 @@ function RegisterPage() {
                 error={errorState.errorFields?.username}
                 value={username}
                 setValue={setUsername}
+                onSubmit={onRegister}
               />
               <Input
                 placeholder="Enter e-mail"
@@ -63,6 +64,7 @@ function RegisterPage() {
                 error={errorState.errorFields?.email}
                 value={email}
                 setValue={setEmail}
+                onSubmit={onRegister}
               />
               <Input
                 password
@@ -72,6 +74,7 @@ function RegisterPage() {
                 error={errorState.errorFields?.password}
                 value={password}
                 setValue={setPassword}
+                onSubmit={onRegister}
               />
               <Input
                 password
@@ -81,6 +84,7 @@ function RegisterPage() {
                 error={errorState.errorFields?.password2}
                 value={password2}
                 setValue={setPassword2}
+                onSubmit={onRegister}
               />
               {errorState.errorMessage && (
                 <p className="login__error">{errorState.errorMessage}</p>

@@ -17,6 +17,7 @@ interface InputProps {
   tall?: boolean;
   maxWidth?: string | number;
   password?: boolean;
+  onSubmit?(): void;
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -27,6 +28,14 @@ const Input: FC<InputProps> = (props) => {
 
   function setValue(value: string) {
     GlobalUtils.callIfFunction(props.setValue, value);
+  }
+
+  function onKeyUp(event: any) {
+    // Enter key capture
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      GlobalUtils.callIfFunction(props.onSubmit);
+    }
   }
 
   return (
@@ -41,6 +50,7 @@ const Input: FC<InputProps> = (props) => {
         onChange={({ target }) => setValue(target.value)}
         placeholder={props.placeholder || "Enter value"}
         style={{maxWidth: props.maxWidth}}
+        onKeyUp={props.onSubmit === undefined ? undefined : onKeyUp}
       />
     </div>
   );

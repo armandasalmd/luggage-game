@@ -45,6 +45,7 @@ function LoginPage() {
                 value={email}
                 error={errorState.errorFields?.email}
                 setValue={setEmail}
+                onSubmit={onLogin}
               />
               <Input
                 placeholder="Enter password"
@@ -54,6 +55,7 @@ function LoginPage() {
                 error={errorState.errorFields?.password}
                 value={password}
                 setValue={setPassword}
+                onSubmit={onLogin}
               />
               {errorState.errorMessage && (
                 <p className="login__error">{errorState.errorMessage}</p>
