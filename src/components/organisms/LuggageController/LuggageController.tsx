@@ -1,10 +1,12 @@
 import { FC, useState } from "react";
+import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { createRipples } from "react-ripples";
+
 import "./LuggageController.scss";
+import { RootState } from "@redux/store";
 import { MiniCardLuggage, LuggageModal } from "@components/molecules";
-import { randomCard } from "@utils/game/Card";
-import { ILuggage } from "@utils/game/Player";
+import { toLuggageModel } from "@utils/game/Player";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 
 const Ripple = createRipples({
@@ -15,21 +17,22 @@ const Ripple = createRipples({
 
 const LuggageController: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const luggageCards = useSelector(
+    (state: RootState) => state.game.myState.luggageCards
+  );
 
   const classes = classNames("luggageController", {
     "luggageController--active": false,
   });
 
-  const luggage: ILuggage = {
-    downOne: randomCard(),
-    downTwo: randomCard(),
-    downThree: randomCard(),
-    upTwo: randomCard(),
-    upThree: randomCard(),
-  };
+  const luggage = toLuggageModel(luggageCards);
 
   function openModal() {
     setModalOpen(!modalOpen);
+  }
+
+  if (!luggage) {
+    return <div className={classes}>Luggage loading...</div>;
   }
 
   return (

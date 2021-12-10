@@ -19,6 +19,8 @@ interface ButtonProps {
   style?: object;
   className?: string;
   onClick?(): void;
+  tightX?: boolean;
+  bigText?: boolean;
 }
 
 const Button: FC<ButtonProps> = (props) => {
@@ -26,6 +28,8 @@ const Button: FC<ButtonProps> = (props) => {
     [`button--${props.type}`]: props.type,
     "button--centerText": props.centerText,
     "button--tall": props.tall,
+    "button--tightX": props.tightX,
+    "button--bigText": props.bigText
   });
 
   const Ripple = createRipples({

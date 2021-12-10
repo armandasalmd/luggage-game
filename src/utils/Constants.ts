@@ -6,7 +6,11 @@ const constants = {
     devApi: "http://localhost:3001",
     prodApi: "https://luggage-api.herokuapp.com"
   },
-  preferDevApi: true
+  preferDevApi: true,
+  cardRotation: {
+    from: -6,
+    to: 6
+  }
 };
 
 export default constants;

@@ -1,9 +1,13 @@
 import { FC } from "react";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+
 import "./PlayersController.scss";
-import { randomCard } from "@utils/game/Card";
-import { ILuggage } from "@utils/game/Player";
+import { RootState } from "@redux/store";
+import { PlayerCardProps } from "@components/atoms/PlayerCard/PlayerCard";
 import { GamePlayer } from "@components/molecules";
+import { toLuggageModel } from "@utils/game/Player";
+import GlobalUtils from "@utils/Global";
 
 interface PlayersControllerProps {
   className?: string | string[];
@@ -11,43 +15,32 @@ interface PlayersControllerProps {
 
 const PlayersController: FC<PlayersControllerProps> = (props) => {
   const classes = classNames("players", props.className);
+  const players = useSelector((state: RootState) => state.game.playersState);
+  const { activeSeatId } = useSelector((state: RootState) => state.game.gameDetails);
 
-  // TODO: This component will connect to redux store and manage the state
-  const playerProps = {
-    label: "Luggage",
-    username: "klaidonsas"
-  };
+  if (!Array.isArray(players)) {
+    return null;
+  }
 
-  const playerProps2 = {
-    ...playerProps,
-    active: true
-  };
+  const playerComponents = players.map(function (player, index) {
+    const pProps: PlayerCardProps = {
+      label: player.handCardCount + " " + GlobalUtils.pluralize("card", player.handCardCount) + " left",
+      username: player.username,
+      active: activeSeatId === player.seatId
+    };
+    const lProps = toLuggageModel(player.luggageCards);
 
-  const luggageProps: ILuggage = {
-    downOne: randomCard(),
-    downTwo: randomCard(),
-    downThree: randomCard(),
-    upOne: randomCard(),
-    upThree: randomCard(),
-  };
+    return <GamePlayer
+      key={player.username}
+      className={"player" + (index + 1).toString()}
+      playerProps={pProps}
+      luggageProps={lProps}
+      />
+  });
 
   return (
     <div className={classes}>
-      <GamePlayer
-        className="player1"
-        playerProps={playerProps}
-        luggageProps={luggageProps}
-      />
-      <GamePlayer
-        className="player2"
-        playerProps={playerProps2}
-        luggageProps={luggageProps}
-      />
-      <GamePlayer
-        className="player3"
-        playerProps={playerProps}
-        luggageProps={luggageProps}
-      />
+      {playerComponents}
     </div>
   );
 };

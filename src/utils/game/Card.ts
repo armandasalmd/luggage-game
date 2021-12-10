@@ -1,3 +1,4 @@
+import Constants from "@utils/Constants";
 import GlobalUtils from "@utils/Global";
 
 type NumberObject = {
@@ -96,4 +97,41 @@ export function getCardWeight(value: string | ACard): number {
   let realValue = typeof value === "string" ? value : value.value;
 
   return CARD_VALUE_PAIRS[realValue] || -1;
+}
+
+export function sortCards(cards: ACard[]): ACard[] {
+  const sortedValues = Object.keys(CARD_VALUE_PAIRS);
+  const sortedKinds = ["C", "D", "H", "S"];
+
+  return cards.sort((a, b) => {
+    if (a.value === b.value) {
+      return sortedKinds.indexOf(a.kind) > sortedKinds.indexOf(b.kind) ? 1 : -1;
+    }
+
+    return sortedValues.indexOf(a.value) > sortedValues.indexOf(b.value) ? 1 : -1;
+  });
+}
+
+export function getRotationAngles(cardCount: number): number[] {
+  if (!cardCount || cardCount < 2) {
+    return [0];
+  }
+
+  const { from, to } = Constants.cardRotation;
+  const step = (to - from) / (cardCount - 1);
+  const angles = [from];
+
+  for (let i = 1; i < cardCount - 1; i++) {
+    const value = angles[i - 1] + step;
+
+    if (value === 0) {
+      angles.push(0);
+    } else {
+      angles.push(Math.round(value * 100) / 100);
+    }
+  }
+
+  angles.push(to);
+
+  return angles;
 }

@@ -8,7 +8,6 @@
   white-space: nowrap;
   user-select: none;
   background: $shade5;
-  font-size: 15px;
   cursor: pointer;
   width: 100%;
 
@@ -49,6 +48,12 @@
     }
   }
 
+  &--bigText {
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
   &--tall {
     height: 42px;
   }
@@ -67,16 +72,16 @@
   }
 
   &--ghost {
-    background: none;
+    background: mix($colorPrimary, #ffffff, 3%);
     border: 1px solid $colorPrimary;
     color: $colorPrimary;
 
     &:hover {
-      background: rgba($colorPrimary, .1);
+      background: mix($colorPrimary, #ffffff, 10%);
     }
 
     &:active {
-      background: rgba($colorPrimary, .2);
+      background: mix($colorPrimary, #ffffff, 15%);
     }
   }
 
@@ -86,11 +91,7 @@
     background: white;
 
     &:hover {
-      background: rgba($colorError, .1) !important;
-    }
-
-    &:active {
-      background: rgba($colorError, .2) !important;
+      background: #feefef !important;
     }
   }
 
@@ -112,6 +113,15 @@
     &:hover {
       box-shadow: none;
       text-decoration: underline;
+    }
+  }
+
+  &--tightX {
+    padding-left: $unit * 0.4;
+    padding-right: $unit * 0.6;
+
+    svg {
+      margin-right: $unit * 0.25;
     }
   }
   // <end> --MODIFIERS </end>

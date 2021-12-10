@@ -14,6 +14,7 @@ $imgSize: 64px;
 
   &__name {
     margin-top: $unit * 0.25;
+    font-size: 1.15rem;
   }
 
   &__label {
@@ -21,6 +22,7 @@ $imgSize: 64px;
     grid-column: 2;
     font-size: 17px;
     color: $colorPrimary;
+    margin-bottom: 2px;
   }
 
   &__textGroup {
@@ -63,6 +65,14 @@ $imgSize: 64px;
 
     &__luggage {
       display: inline-flex !important;
+    }
+
+    &__name {
+      font-size: 1rem;
+    }
+
+    &__label {
+      font-size: 0.9rem;
     }
   }
 }

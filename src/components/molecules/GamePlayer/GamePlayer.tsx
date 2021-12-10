@@ -9,7 +9,7 @@ import { ILuggage } from "@utils/game/Player";
 
 interface GamePlayerProps {
   playerProps: PlayerCardProps;
-  luggageProps: ILuggage;
+  luggageProps: ILuggage | undefined;
   className: string | string[];
 }
 
@@ -29,16 +29,20 @@ const GamePlayer: FC<GamePlayerProps> = (props) => {
   return (
     <div className={classes}>
       <PlayerCard {...playerProps} />
-      <MiniCardLuggage
-        className="gamePlayer__luggage"
-        luggage={props.luggageProps}
-      />
-      <LuggageModal
-        isOpen={modalOpen}
-        onClose={setModalOpen}
-        username={props.playerProps.username}
-        luggage={props.luggageProps}
-      />
+      {props.luggageProps && (
+        <MiniCardLuggage
+          className="gamePlayer__luggage"
+          luggage={props.luggageProps}
+        />
+      )}
+      {props.luggageProps && (
+        <LuggageModal
+          isOpen={modalOpen}
+          onClose={setModalOpen}
+          username={props.playerProps.username}
+          luggage={props.luggageProps}
+        />
+      )}
     </div>
   );
 };

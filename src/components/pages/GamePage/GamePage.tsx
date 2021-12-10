@@ -12,6 +12,7 @@ import { dndOptions } from "@utils/game/Drag";
 import { initialiazeGameState } from "@redux/actions/gameActions";
 import { RootState } from "@redux/store";
 import RouteUtils from "@utils/Route";
+import SocketManager from "@socket/SocketManager";
 
 const GamePage: FC = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,14 @@ const GamePage: FC = () => {
       message.error("Incorrect room id");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    
+
+    return () => {
+      SocketManager.getInstance().removeAllListeners();
+    };
   }, []);
 
   return (

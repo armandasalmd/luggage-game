@@ -13,20 +13,26 @@ export interface MiniCardLuggageProps {
 const MiniCardLuggage: FC<MiniCardLuggageProps> = ({ luggage, className }) => {
   const classes = classNames("miniLuggage", className);
 
-  function toDownFace(card: ACard | undefined): ACard | undefined {
-    if (card == null || card.face === CardFace.DownFace) {
+  function toSomeFace(card: ACard | undefined, face: CardFace): ACard | undefined {
+    if (card == null || card.face === face) {
       return card;
     } else {
       return {
         ...(card as ACard),
-        face: CardFace.DownFace,
+        face,
       };
     }
   }
 
+  const toDownFace = (card: ACard | undefined) => toSomeFace(card, CardFace.DownFace);
+  const toUpFace = (card: ACard | undefined) => toSomeFace(card, CardFace.UpFace);
+
   luggage.downOne = toDownFace(luggage.downOne);
   luggage.downTwo = toDownFace(luggage.downTwo);
   luggage.downThree = toDownFace(luggage.downThree);
+  luggage.upOne = toUpFace(luggage.upOne);
+  luggage.upTwo = toUpFace(luggage.upTwo);
+  luggage.upThree = toUpFace(luggage.upThree);
 
   return (
     <div className={classes}>
