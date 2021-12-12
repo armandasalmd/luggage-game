@@ -1,15 +1,17 @@
 import { combineReducers } from "redux";
 
-import userReducer from "./userReducer";
+import actionBarReducer from "./actionBarReducer";
 import errorReducer from "./errorReducer";
-import lobbyReducer from "./lobbyReducer";
 import gameReducer from "./gameReducer";
+import lobbyReducer from "./lobbyReducer";
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  actionBar: actionBarReducer,
   error: errorReducer,
+  game: gameReducer,
   lobby: lobbyReducer,
-  game: gameReducer
+  user: userReducer, 
 });
 
 export default rootReducer;

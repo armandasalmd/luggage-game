@@ -11,6 +11,7 @@ interface PickCountActionProps {
 const PickCountAction: FC<PickCountActionProps> = (props) => {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <p style={{fontSize: 18}}>Choose count</p>
       {props.pickOptions.map(function (pick) {
         return (
           <Button
@@ -20,6 +21,7 @@ const PickCountAction: FC<PickCountActionProps> = (props) => {
             type="ghost"
             icon={<AddIcon />}
             bigText
+            key={pick}
           >
             {pick}
           </Button>

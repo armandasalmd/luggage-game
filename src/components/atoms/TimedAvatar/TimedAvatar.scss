@@ -26,18 +26,20 @@ $imgSize: 64px;
       stroke-dashoffset: 0px;
       stroke-linecap: round;
       stroke-width: 4px;
-      stroke: $colorPrimary;
+      stroke: $colorWarning;
       fill: transparent;
-      animation: countdown 30s linear infinite forwards;
+      animation: countdown 30s linear 1 none;
     }
   }
 
   @keyframes countdown {
     from {
       stroke-dashoffset: 0;
+      stroke: $colorPrimary;
     }
     to {
       stroke-dashoffset: 240px;
+      stroke: $colorPrimary;
     }
   }
 }

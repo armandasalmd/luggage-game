@@ -22,7 +22,7 @@ const DashboardCreateJoinTab = () => {
   const dispatch = useDispatch();
 
   const [playerCount, setPlayerCount] = useState("2");
-  const [gamePrice, setGamePrice] = useState("0");
+  const [gamePrice, setGamePrice] = useState("250");
   const [gameRules, setGameRules] = useState("classic");
   const [gameIsPrivate, setGameIsPrivate] = useState(false);
   const [joinIdError, setJoinIdError] = useState("");
@@ -54,7 +54,7 @@ const DashboardCreateJoinTab = () => {
       const { errorMessage, ...rest } = data;
 
       if (errorMessage) {
-        message.error(data.errorMessage);
+        message.warning(data.errorMessage);
       } else {
         joinLobbyAsync(data.roomCode).then((data) => {
           if (data.success) {
@@ -70,7 +70,7 @@ const DashboardCreateJoinTab = () => {
 
   function onJoinGame() {
     if (joinId) {
-      joinLobbyAsync(joinId).then((data) => {
+      joinLobbyAsync(joinId.toLowerCase()).then((data) => {
         if (data.success) {
           dispatch(setLobbyState(data.lobbyState));
           history.push("/lobby/" + data.lobbyState.roomCode);

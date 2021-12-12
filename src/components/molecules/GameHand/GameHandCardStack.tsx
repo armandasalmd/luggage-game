@@ -1,9 +1,13 @@
 import { FC } from "react";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 import { useDrag, DragSourceMonitor } from "react-dnd";
+
+import { GameCard } from "@components/atoms";
 import { ItemTypes, DropPayload } from "@utils/game/Drag";
 import { ACard } from "@utils/game/Card";
-import { GameCard } from "@components/atoms";
+import ClassicEngine from "@utils/game/ClassicEngine";
+import { RootState } from "@redux/store";
 
 interface GameHandCardStackProps {
   cards: ACard[];
@@ -11,18 +15,19 @@ interface GameHandCardStackProps {
 }
 
 const GameHandCardStack: FC<GameHandCardStackProps> = (props) => {
+  const { topPlayCard } = useSelector((state: RootState) => state.game.gameDetails);
   const cardValue = props.cards[0].value;
 
   function canDrag(monitor: DragSourceMonitor<DropPayload>): boolean {
-    // TODO: check if card on the table is lower then the one being dragged
-    console.log("Can drag", cardValue);
-    return true;
+    // TODO: outdate state is being picked bypassing validation
+    // TODO: for some reason I can put 8 on 9
+    return ClassicEngine.instance.canPlayCard(cardValue + "H", topPlayCard);
   }
 
   const [{ isDragging }, drag] = useDrag(() => ({
     canDrag: canDrag,
     type: ItemTypes.Card,
-    item: { cardId: cardValue },
+    item: { cardId: cardValue, isStack: true },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

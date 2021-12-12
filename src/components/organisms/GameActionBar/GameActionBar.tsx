@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import classNames from "classnames";
 
 import "./GameActionBar.scss";
@@ -7,14 +8,21 @@ import { RootState } from "@redux/store";
 import { LuggageController } from "..";
 import { message } from "@components/atoms";
 import PickCountAction from "./PickCountAction";
+import PlayOrTakeAction from "./PlayOrTakeAction";
+import PlayOrFinishAction from "./PlayOrFinishAction";
+import { finishTurnAsync } from "@socket/game";
 
 const GameActionBar: FC = () => {
+  const { gameId }: any = useParams();
   const { activeSeatId } = useSelector(
     (state: RootState) => state.game.gameDetails
   );
   const { seatId } = useSelector((state: RootState) => state.game.myState);
-  const active = activeSeatId === seatId;
-
+  const { pickPlayCountItems } = useSelector(
+    (state: RootState) => state.actionBar
+  );
+  const { lastMoves } = useSelector((state: RootState) => state.game.myState);
+  const active = activeSeatId ? activeSeatId === seatId : false;
   const classes = classNames("actionBar", {
     "actionBar--active": active,
   });
@@ -24,7 +32,7 @@ const GameActionBar: FC = () => {
 
     if (active === true) {
       timeout = setTimeout(() => {
-        message.information("Your turn finished");
+        onFinishTurn();
       }, 30000);
     }
 
@@ -32,11 +40,22 @@ const GameActionBar: FC = () => {
       if (timeout) {
         clearTimeout(timeout);
       }
-    }
+    };
+    // eslint-disable-next-line
   }, [active]);
 
   function onPickCount(count: number) {
     message.information(count.toString());
+  }
+
+  function onFinishTurn() {
+    finishTurnAsync(gameId)
+      .then((result) => {
+        if (!result.success) message.error(result.message);
+      })
+      .catch(() => {
+        message.error("Unexpected error");
+      });
   }
 
   return (
@@ -45,7 +64,19 @@ const GameActionBar: FC = () => {
         <LuggageController />
       </div>
       <div className="actionBar__action">
-        <PickCountAction pickOptions={[1, 3]} onSelect={onPickCount} />
+        {active && pickPlayCountItems.length > 1 && (
+          <PickCountAction
+            pickOptions={pickPlayCountItems}
+            onSelect={onPickCount}
+          />
+        )}
+        {active && lastMoves.length <= 0 && pickPlayCountItems.length <= 1 && (
+          <PlayOrTakeAction onTake={onFinishTurn} />
+        )}
+        {active && lastMoves.length > 0 && pickPlayCountItems.length <= 1 && (
+          <PlayOrFinishAction onFinish={onFinishTurn} />
+        )}
+        {!active && <p>Wait for your turn</p>}
       </div>
       {active && <div className="actionBar__overlay"></div>}
     </div>

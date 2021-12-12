@@ -1,5 +1,8 @@
 import { FC } from "react";
 import classNames from "classnames";
+
+import store from "@redux/store";
+import ClassicEngine from "@utils/game/ClassicEngine";
 import { ACard, cardToString } from "@utils/game/Card";
 import { useDrag, DragSourceMonitor } from "react-dnd";
 import { ItemTypes, DropPayload } from "@utils/game/Drag";
@@ -11,17 +14,18 @@ interface GameHandCardProps {
 }
 
 const GameHandCard: FC<GameHandCardProps> = (props) => {
-  
+
   function canDrag(monitor: DragSourceMonitor<DropPayload>): boolean {
-    // TODO: check if card on the table is lower then the one being dragged
-    console.log("Can drag", cardToString(props.card));
-    return true;
+    return ClassicEngine.instance.canPlayCard(
+      cardToString(props.card),
+      store.getState().game.gameDetails.topPlayCard
+    );
   }
 
   const [{ isDragging }, drag] = useDrag(() => ({
     canDrag: canDrag,
     type: ItemTypes.Card,
-    item: { cardId: cardToString(props.card) },
+    item: { cardId: cardToString(props.card), isStack: false },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -34,7 +38,7 @@ const GameHandCard: FC<GameHandCardProps> = (props) => {
   const rotate = props.rotate ? `rotate(${props.rotate}deg)` : undefined;
 
   return (
-    <div className={classes} style={{transform: rotate}}>
+    <div className={classes} style={{ transform: rotate }}>
       <GameCard card={props.card} ref={drag} />
     </div>
   );

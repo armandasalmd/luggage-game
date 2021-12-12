@@ -1,6 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import AuthUtils from "@utils/Auth";
 import RouteUtils from "@utils/Route";
+import Constants from "@utils/Constants";
 
 class SocketManager {
   private static instance: SocketManager;
@@ -32,12 +33,16 @@ class SocketManager {
 
   public emitEventAsync(eventName: string, payload: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        reject();
-      }, 5000);
+      let timer: any;
+
+      if (Constants.env === "production") {
+        timer = setTimeout(() => {
+          reject();
+        }, 8000);
+      }
 
       this.socket.emit(eventName, payload, (result: any) => {
-        clearTimeout(timer);
+        if (timer) clearTimeout(timer);
         resolve(result);
       });
     });

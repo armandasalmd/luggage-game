@@ -15,9 +15,15 @@ export enum ActionTypes {
   LobbyPlayerReady,
   LobbyPlayerJoined,
   LobbyPlayerLeft,
-  SetGameState
+  SetGameState,
+  SetPickCardCountItems,
+  UpdateGameDetails,
+  UpdateMyPlayer,
+  UpdatePublicPlayer
 };
 
+export * from "./actionBarActions";
+export * from "./errorActions";
+export * from "./gameActions";
 export * from "./lobbyActions";
 export * from "./userActions";
-export * from "./errorActions";

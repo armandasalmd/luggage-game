@@ -11,6 +11,7 @@ export interface IMyPlayerState {
   luggageCards: string;
   handCards: string[];
   playerState: string;
+  lastMoves: string[];
 }
 
 export interface IGameDetails {

@@ -1,25 +1,7 @@
 import Constants from "@utils/Constants";
 import GlobalUtils from "@utils/Global";
 
-type NumberObject = {
-  [key: string]: number;
-};
-
-const CARD_VALUE_PAIRS: NumberObject = {
-  "2": 1000,
-  "3": 3,
-  "4": 4,
-  "5": 1000,
-  "6": 6,
-  "7": 7,
-  "8": 8,
-  "9": 9,
-  "10": 1000,
-  J: 11,
-  Q: 12,
-  K: 13,
-  A: 14,
-};
+const CARD_VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
 export enum CardKind {
   Clubs = "C",
@@ -67,20 +49,6 @@ export function cardPath(card: ACard): string {
   }
 }
 
-export function randomCard(): ACard {
-  let kind = Object.values(CardKind)[GlobalUtils.randomInt(0, 3)];
-  let value =
-    Object.keys(CARD_VALUE_PAIRS)[
-      GlobalUtils.randomInt(0, Object.keys(CARD_VALUE_PAIRS).length - 1)
-    ];
-
-  return {
-    kind,
-    value,
-    face: CardFace.UpFace,
-  };
-}
-
 export function kindsPath(kind: CardKind): string {
   if (kind === CardKind.Clubs) {
     return "/assets/kinds/clubs.svg";
@@ -93,14 +61,8 @@ export function kindsPath(kind: CardKind): string {
   }
 }
 
-export function getCardWeight(value: string | ACard): number {
-  let realValue = typeof value === "string" ? value : value.value;
-
-  return CARD_VALUE_PAIRS[realValue] || -1;
-}
-
 export function sortCards(cards: ACard[]): ACard[] {
-  const sortedValues = Object.keys(CARD_VALUE_PAIRS);
+  const sortedValues = CARD_VALUES;
   const sortedKinds = ["C", "D", "H", "S"];
 
   return cards.sort((a, b) => {

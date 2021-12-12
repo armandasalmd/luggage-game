@@ -10,4 +10,5 @@ export const dndOptions: Partial<TouchBackendOptions> = {
 
 export interface DropPayload {
   cardId: string;
+  isStack: boolean;
 }

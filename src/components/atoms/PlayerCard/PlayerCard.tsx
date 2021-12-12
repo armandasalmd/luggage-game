@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { createRipples } from "react-ripples";
 import classNames from "classnames";
+
 import "./PlayerCard.scss";
 import { TimedAvatar } from "@components/atoms";
 import { ColorType } from "@utils/Types";
@@ -28,13 +29,9 @@ const PlayerCard: FC<PlayerCardProps> = (props) => {
     "playerCard--active": props.active,
   });
 
-  function timerIsUp() {
-    console.log("Timer is up");
-  }
-
   return (
     <div className={classes}>
-      <TimedAvatar running={!!props.active} onFinish={timerIsUp} avatarUrl={props.avatarUrl} />
+      <TimedAvatar running={!!props.active} avatarUrl={props.avatarUrl} />
       <div className="playerCard__textGroup">
         <p className="playerCard__name">{props.username}</p>
         <span className="playerCard__label">{props.label}</span>
