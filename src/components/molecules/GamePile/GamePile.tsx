@@ -48,8 +48,6 @@ const GamePile: FC<GamePileProps> = (props) => {
         ? EngineBase.getCardsByValue(gameState.myState.handCards, cardValue)[0]
         : payload.cardId;
 
-      console.log(card);
-
       playCardAsync(gameId, [card])
         .then((result) => {
           if (!result.success && result.message) {

@@ -54,14 +54,14 @@ const GameActionBar: FC = () => {
         if (!result.success && result.message) {
           message.error(result.message);
         }
+
+        if (!ClassicEngine.instance.canPutMoreAfterMove(pickedCards[0], count)) {
+          onFinishTurn();
+        }
       })
       .catch(() => {
         message.error("Unexpected error");
       });
-
-    if (!ClassicEngine.instance.canPutMoreAfterMove(pickedCards[0], count)) {
-      onFinishTurn();
-    }
   }
 
   function onFinishTurn() {

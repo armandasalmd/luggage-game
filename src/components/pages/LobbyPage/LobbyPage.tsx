@@ -18,6 +18,7 @@ import { playerJoined, playerLeft, setLobbyState, setPlayerReady } from "@redux/
 import SocketManager from "@socket/SocketManager";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
+import { fetchAndCacheCards } from "@utils/game/Card";
 
 const LobbyPage: FC = () => {
   const { gameId }: any = useParams();
@@ -64,6 +65,8 @@ const LobbyPage: FC = () => {
     playerLeftListener(onPlayerLeft);
     playerReadyListener(onPlayerReady);
     gameStartListener(onGameStart);
+
+    setTimeout(fetchAndCacheCards);
 
     return () => {
       SocketManager.getInstance().removeAllListeners();

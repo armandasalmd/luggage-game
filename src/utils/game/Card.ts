@@ -1,6 +1,7 @@
 import Constants from "@utils/Constants";
 
 const CARD_VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+const CARD_KINDS = ["C", "D", "H", "S"];
 
 export enum CardKind {
   Clubs = "C",
@@ -42,9 +43,9 @@ export function stringToCard(card: string): ACard {
 
 export function cardPath(card: ACard): string {
   if (card.face === CardFace.DownFace) {
-    return "/assets/blue_back.png";
+    return Constants.servers.assets + "/blue_back.png";
   } else {
-    return "/assets/" + cardToString(card) + ".png";
+    return Constants.servers.assets + "/" + cardToString(card) + ".png";
   }
 }
 
@@ -62,7 +63,7 @@ export function kindsPath(kind: CardKind): string {
 
 export function sortCards(cards: ACard[]): ACard[] {
   const sortedValues = CARD_VALUES;
-  const sortedKinds = ["C", "D", "H", "S"];
+  const sortedKinds = CARD_KINDS;
 
   return cards.sort((a, b) => {
     if (a.value === b.value) {
@@ -95,4 +96,23 @@ export function getRotationAngles(cardCount: number): number[] {
   angles.push(to);
 
   return angles;
+}
+
+export function fetchAndCacheCards() {
+  for (const value of CARD_VALUES) {
+    for (const kind of CARD_KINDS) {
+      _load(cardPath({
+        kind: kind as CardKind,
+        value,
+        face: CardFace.UpFace
+      }));
+    }
+  }
+
+  function _load(src: string) {
+    const image = new Image();
+    image.src = src;
+
+    return image.complete; // returns isCached
+  }
 }

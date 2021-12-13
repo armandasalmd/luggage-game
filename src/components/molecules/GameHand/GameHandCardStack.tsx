@@ -19,8 +19,6 @@ const GameHandCardStack: FC<GameHandCardStackProps> = (props) => {
   const cardValue = props.cards[0].value;
 
   function canDrag(monitor: DragSourceMonitor<DropPayload>): boolean {
-    // TODO: outdate state is being picked bypassing validation
-    // TODO: for some reason I can put 8 on 9
     return ClassicEngine.instance.canPlayCard(cardValue + "H", topPlayCard);
   }
 
@@ -31,7 +29,7 @@ const GameHandCardStack: FC<GameHandCardStackProps> = (props) => {
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }));
+  }), [topPlayCard]);
 
   const classes = classNames("gameHand__cardStack", {
     "gameHand__cardStack--dragging": isDragging
