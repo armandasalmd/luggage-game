@@ -13,7 +13,8 @@ interface GameHandProps {
 
 const GameHand: FC<GameHandProps> = (props) => {
   const classes = classNames("gameHand", {
-    "gameHand--dense": props.cards.length > 8,
+    "gameHand--dense": props.cards.length > 8 && props.cards.length <= 16,
+    "gameHand--veryDense": props.cards.length > 16
   });
 
   const model = toSortedHandCardsModel(props.cards);

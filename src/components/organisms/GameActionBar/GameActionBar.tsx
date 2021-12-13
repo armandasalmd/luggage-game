@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
 
@@ -7,21 +7,22 @@ import "./GameActionBar.scss";
 import { RootState } from "@redux/store";
 import { LuggageController } from "..";
 import { message } from "@components/atoms";
-import PickCountAction from "./PickCountAction";
-import PlayOrTakeAction from "./PlayOrTakeAction";
-import PlayOrFinishAction from "./PlayOrFinishAction";
-import { finishTurnAsync } from "@socket/game";
+import { finishTurnAsync, playCardAsync } from "@socket/game";
+import ActionBarAction, { ActionBarActionProps } from "./ActionBarAction";
+import { clearPickCardCount } from "@redux/actions";
+import EngineBase from "@utils/game/EngineBase";
+import ClassicEngine from "@utils/game/ClassicEngine";
 
 const GameActionBar: FC = () => {
+  const dispatch = useDispatch();
   const { gameId }: any = useParams();
   const { activeSeatId } = useSelector(
     (state: RootState) => state.game.gameDetails
   );
-  const { seatId } = useSelector((state: RootState) => state.game.myState);
-  const { pickPlayCountItems } = useSelector(
+  const { seatId, lastMoves, handCards } = useSelector((state: RootState) => state.game.myState);
+  const { pickPlayCountItems, cardValue } = useSelector(
     (state: RootState) => state.actionBar
   );
-  const { lastMoves } = useSelector((state: RootState) => state.game.myState);
   const active = activeSeatId ? activeSeatId === seatId : false;
   const classes = classNames("actionBar", {
     "actionBar--active": active,
@@ -45,7 +46,22 @@ const GameActionBar: FC = () => {
   }, [active]);
 
   function onPickCount(count: number) {
-    message.information(count.toString());
+    dispatch(clearPickCardCount());
+    const pickedCards = EngineBase.pickCardsByValue(handCards, cardValue, count);
+
+    playCardAsync(gameId, pickedCards)
+      .then((result) => {
+        if (!result.success && result.message) {
+          message.error(result.message);
+        }
+      })
+      .catch(() => {
+        message.error("Unexpected error");
+      });
+
+    if (!ClassicEngine.instance.canPutMoreAfterMove(pickedCards[0], count)) {
+      onFinishTurn();
+    }
   }
 
   function onFinishTurn() {
@@ -58,25 +74,21 @@ const GameActionBar: FC = () => {
       });
   }
 
+  const actionBarProps: ActionBarActionProps = {
+    active,
+    hasLastMove: lastMoves.length > 0,
+    onFinishTurn,
+    onPickCount,
+    pickPlayCountItems
+  };
+
   return (
     <div className={classes}>
       <div className="actionBar__luggage">
         <LuggageController />
       </div>
       <div className="actionBar__action">
-        {active && pickPlayCountItems.length > 1 && (
-          <PickCountAction
-            pickOptions={pickPlayCountItems}
-            onSelect={onPickCount}
-          />
-        )}
-        {active && lastMoves.length <= 0 && pickPlayCountItems.length <= 1 && (
-          <PlayOrTakeAction onTake={onFinishTurn} />
-        )}
-        {active && lastMoves.length > 0 && pickPlayCountItems.length <= 1 && (
-          <PlayOrFinishAction onFinish={onFinishTurn} />
-        )}
-        {!active && <p>Wait for your turn</p>}
+        <ActionBarAction {...actionBarProps} />
       </div>
       {active && <div className="actionBar__overlay"></div>}
     </div>

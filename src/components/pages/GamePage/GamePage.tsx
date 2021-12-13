@@ -42,17 +42,14 @@ const GamePage: FC = () => {
   }
 
   function onGameDetailsChange(state: IGameDetails) {
-    console.log("onGameDetailsChange", state);
     dispatch(updateGameDetails(state));
   }
 
   function onMyPlayerChange(state: IMyPlayerState) {
-    console.log("onMyPlayerChange", state);
     dispatch(updateMyPlayer(state));
   }
 
   function onPublicPlayerChange(state: IPublicPlayerState) {
-    console.log("onPublicPlayerChange", state);
     dispatch(updatePublicPlayer(state));
   }
 

@@ -27,15 +27,15 @@
     }
   }
   
-  &--dense {
-    & > *:not(:last-child) {
+  &--dense > *:not(:last-child) {
       width: $unit * 2.8;
-    }
+  }
+
+  &--veryDense > *:not(:last-child) {
+      width: $unit * 1.8;
   }
 
   &--veryDense {
-    & > *:not(:last-child) {
-      width: $unit * 2;
-    }
+    transform: translateX($unit * 1.5);
   }
 }

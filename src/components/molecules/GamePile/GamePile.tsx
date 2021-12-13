@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import classNames from "classnames";
 
@@ -11,9 +11,10 @@ import { ItemTypes, DropPayload } from "@utils/game/Drag";
 import GlobalUtils from "@utils/Global";
 import { stringToCard } from "@utils/game/Card";
 import ClassicEngine from "@utils/game/ClassicEngine";
-import { setPickCardCountItems } from "@redux/actions";
-import store from "@redux/store";
-import { playCardAsync } from "@socket/game";
+import { setPickCardCountItems, clearPickCardCount } from "@redux/actions";
+import { RootState } from "@redux/store";
+import { finishTurnAsync, playCardAsync } from "@socket/game";
+import EngineBase from "@utils/game/EngineBase";
 
 interface GamePileProps {
   cardsLeft: number;
@@ -23,10 +24,13 @@ interface GamePileProps {
 const GamePile: FC<GamePileProps> = (props) => {
   const dispatch = useDispatch();
   const { gameId }: any = useParams();
+  const gameState = useSelector((state: RootState) => state.game);
+
+  const handleDrop = useCallback(onDrop, [dispatch, gameId, gameState]);
 
   function onDrop(payload: DropPayload) {
-    const gameState = store.getState().game;
-    const isMyTurn = gameState.gameDetails.activeSeatId === gameState.myState.seatId;
+    const isMyTurn =
+      gameState.gameDetails.activeSeatId === gameState.myState.seatId;
 
     if (!isMyTurn) {
       return;
@@ -39,31 +43,48 @@ const GamePile: FC<GamePileProps> = (props) => {
     const puts = ClassicEngine.instance.getPutCount(cardValue, gameState);
 
     if (puts.length < 2) {
-      playCardAsync(gameId, [payload.cardId])
+      dispatch(clearPickCardCount());
+      const card = payload.isStack
+        ? EngineBase.getCardsByValue(gameState.myState.handCards, cardValue)[0]
+        : payload.cardId;
+
+      console.log(card);
+
+      playCardAsync(gameId, [card])
         .then((result) => {
           if (!result.success && result.message) {
             message.error(result.message);
+          } else if (!ClassicEngine.instance.canPutMoreAfterMove(card, 1)) {
+            onFinish();
           }
         })
         .catch(() => {
           message.error("Unexpected error");
         });
     } else {
-      // TODO: finish this part
-      console.log("PICK COUNT", puts);
-      dispatch(setPickCardCountItems(puts));
+      dispatch(setPickCardCountItems(puts, cardValue));
+    }
+
+    function onFinish() {
+      finishTurnAsync(gameId)
+        .then((result) => {
+          if (!result.success) message.error(result.message);
+        })
+        .catch(() => {
+          message.error("Unexpected error");
+        });
     }
   }
 
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.Card,
-      drop: onDrop,
+      drop: handleDrop,
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
     }),
-    []
+    [gameState]
   );
 
   const classesLeft = classNames("gamePile__left", {

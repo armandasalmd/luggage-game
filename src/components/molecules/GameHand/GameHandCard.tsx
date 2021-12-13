@@ -14,10 +14,11 @@ interface GameHandCardProps {
 }
 
 const GameHandCard: FC<GameHandCardProps> = (props) => {
+  const stringCard = cardToString(props.card);
 
   function canDrag(monitor: DragSourceMonitor<DropPayload>): boolean {
     return ClassicEngine.instance.canPlayCard(
-      cardToString(props.card),
+      stringCard,
       store.getState().game.gameDetails.topPlayCard
     );
   }
@@ -25,11 +26,11 @@ const GameHandCard: FC<GameHandCardProps> = (props) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     canDrag: canDrag,
     type: ItemTypes.Card,
-    item: { cardId: cardToString(props.card), isStack: false },
+    item: { cardId: stringCard, isStack: false },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }));
+  }), [props.card]);
 
   const classes = classNames("gameHand__card", {
     "gameHand__card--dragging": isDragging,
