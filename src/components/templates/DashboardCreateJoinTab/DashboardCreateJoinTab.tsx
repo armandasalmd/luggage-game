@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Button,
@@ -9,18 +9,20 @@ import {
   message,
 } from "@components/atoms";
 import { useDispatch } from "react-redux";
-import "./DashboardCreateJoinTab.scss";
 
+import "./DashboardCreateJoinTab.scss";
 import RouteUtils from "@utils/Route";
 import { setLobbyState } from "@redux/actions";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import FlagIcon from "@material-ui/icons/Flag";
 import * as DValues from "./dropdownValues";
 import { joinLobbyAsync } from "@socket/lobby";
 
 const DashboardCreateJoinTab = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  
+  const [activeGameId, setActiveGameId] = useState("");
   const [playerCount, setPlayerCount] = useState("2");
   const [gamePrice, setGamePrice] = useState("250");
   const [gameRules, setGameRules] = useState("classic");
@@ -79,6 +81,57 @@ const DashboardCreateJoinTab = () => {
         }
       });
     }
+  }
+
+  function onReconnect() {
+    history.push("/play/" + activeGameId);
+  }
+
+  function onSurrender() {
+    message.information("You want to surrender");
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const route = RouteUtils.routes.api.game.getActiveGameId;
+  
+      try {
+        const { data } = await RouteUtils.sendApiRequest(route);
+  
+        if (data && data.success) setActiveGameId(data.roomId);
+      } catch {
+        console.warn("Cannot retrieve active game id");
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (activeGameId) {
+    return (
+      <div className="createJoinTab">
+        <div className="createJoinTab__cards">
+          <Card padded title={`Game ${activeGameId} is in progress`}>
+          <div className="createJoinTab__flexRow">
+            <Button
+              icon={<FlagIcon />}
+              type="danger"
+              onClick={onSurrender}
+            >
+              Surrender
+            </Button>
+            <Button
+              icon={<PlayCircleOutline />}
+              type="accent"
+              onClick={onReconnect}
+              >
+              Join running game
+            </Button>
+              </div>
+          </Card>
+        </div>
+      </div>
+    )
   }
 
   return (
