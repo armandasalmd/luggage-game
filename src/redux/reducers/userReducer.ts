@@ -23,6 +23,11 @@ const reducer = (state = {...initialState}, { type, payload }: IAction) => {
       };
     case ActionTypes.Logout:
       return {...initialState};
+    case ActionTypes.AddCoins:
+      return {
+        ...state,
+        coins: state.coins + (payload || 0)
+      }
     default:
       return state;
   }

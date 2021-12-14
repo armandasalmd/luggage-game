@@ -12,16 +12,19 @@ import { useDispatch } from "react-redux";
 
 import "./DashboardCreateJoinTab.scss";
 import RouteUtils from "@utils/Route";
-import { setLobbyState } from "@redux/actions";
+import GlobalUtils from "@utils/Global";
+import { setLobbyState, addCoins } from "@redux/actions";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import FlagIcon from "@material-ui/icons/Flag";
 import * as DValues from "./dropdownValues";
 import { joinLobbyAsync } from "@socket/lobby";
+import { useSurrender } from "@hooks/useSurrender";
 
 const DashboardCreateJoinTab = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  
+
+  const [loss, surrender] = useSurrender();
   const [activeGameId, setActiveGameId] = useState("");
   const [playerCount, setPlayerCount] = useState("2");
   const [gamePrice, setGamePrice] = useState("250");
@@ -88,7 +91,9 @@ const DashboardCreateJoinTab = () => {
   }
 
   function onSurrender() {
-    message.information("You want to surrender");
+    GlobalUtils.callIfFunction(surrender);
+    setActiveGameId("");
+    dispatch(addCoins(-loss));
   }
 
   useEffect(() => {
@@ -106,6 +111,14 @@ const DashboardCreateJoinTab = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (loss > 0) {
+      message.information("You lost " + loss + " coins");
+    } else if (loss === 0) {
+      message.success("Game finished with no rewards");
+    }
+  }, [loss]);
 
   if (activeGameId) {
     return (

@@ -6,6 +6,7 @@
       "@redux/*": ["redux/*"],
       "@components/*": ["components/*"],
       "@socket/*": ["socket/*"],
+      "@hooks/*": ["hooks/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     }

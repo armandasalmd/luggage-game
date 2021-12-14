@@ -19,7 +19,8 @@ export enum ActionTypes {
   SetPickCardCountItems,
   UpdateGameDetails,
   UpdateMyPlayer,
-  UpdatePublicPlayer
+  UpdatePublicPlayer,
+  AddCoins
 };
 
 export * from "./actionBarActions";

@@ -13,4 +13,8 @@ const finishTurnAsync = async (roomId: string) => {
   });
 };
 
-export { playCardAsync, finishTurnAsync };
+const surrenderAsync = async () => {
+  return SocketManager.getInstance().emitEventAsync("game surrender", {});
+};
+
+export { playCardAsync, finishTurnAsync, surrenderAsync };

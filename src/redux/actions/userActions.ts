@@ -72,6 +72,15 @@ export const registerUser = (data: any) => {
   };
 };
 
+export const addCoins = (amount: number) => {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: ActionTypes.AddCoins,
+      payload: amount,
+    });
+  };
+};
+
 function handleLoginRegisterErrors(dispatch: Dispatch) {
   return (err: any) => {
     if (!err.response) {
@@ -85,5 +94,5 @@ function handleLoginRegisterErrors(dispatch: Dispatch) {
     } else if (data.message) {
       setErrorMessage(data.message)(dispatch);
     }
-  }
+  };
 }

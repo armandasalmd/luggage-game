@@ -37,10 +37,6 @@ const GamePage: FC = () => {
   const gamePrice = useSelector((state: RootState) => state.lobby.gamePrice);
   const username = useSelector((state: RootState) => state.user.user.username);
 
-  function onSurrender() {
-    history.push("/auth/login");
-  }
-
   function onGameDetailsChange(state: IGameDetails) {
     dispatch(updateGameDetails(state));
   }
@@ -94,7 +90,6 @@ const GamePage: FC = () => {
       >
         <GameLayout
           gameId={gameId}
-          onSurrender={onSurrender}
           gamePrice={gamePrice}
           name={username}
         />

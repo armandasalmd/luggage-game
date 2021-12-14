@@ -10,6 +10,7 @@ module.exports = {
       "@socket": path.resolve(__dirname, "src/socket"),
       "@styles": path.resolve(__dirname, "src/styles"),
       "@utils": path.resolve(__dirname, "src/utils"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
     },
   },
 };
