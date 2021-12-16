@@ -20,7 +20,10 @@ export enum ActionTypes {
   UpdateGameDetails,
   UpdateMyPlayer,
   UpdatePublicPlayer,
-  AddCoins
+  AddCoins,
+  SetLuggageUsed,
+  ClearGameState,
+  SetGameReward
 };
 
 export * from "./actionBarActions";

@@ -26,6 +26,8 @@ export interface IGameState {
   gameDetails: IGameDetails;
   myState: IMyPlayerState;
   playersState: IPublicPlayerState[];
+  luggageUsed?: boolean;
+  reward?: number;
 }
 
 export default IGameState;

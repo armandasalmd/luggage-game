@@ -2,12 +2,14 @@ import { FC } from "react";
 import { Modal } from "@components/atoms";
 import { MiniCardLuggage } from "..";
 import { ILuggage } from "@utils/game/Player";
+import { ACard } from "@utils/game/Card";
 
 interface LuggageModalProps {
   username: string;
   luggage: ILuggage;
   isOpen: boolean;
   onClose?(state: boolean): void;
+  onClick?(card: ACard): void;
 }
 
 const LuggageModal: FC<LuggageModalProps> = (props) => {
@@ -18,7 +20,7 @@ const LuggageModal: FC<LuggageModalProps> = (props) => {
       flyInAnimation
       title={`${props.username}'s luggage`}
     >
-      <MiniCardLuggage luggage={props.luggage} />
+      <MiniCardLuggage luggage={props.luggage} onClick={props.onClick} />
     </Modal>
   );
 };

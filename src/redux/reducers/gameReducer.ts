@@ -13,15 +13,28 @@ const initialState: IGameState = {
     luggageCards: "",
     playerState: "",
     seatId: 0,
-    lastMoves: []
+    lastMoves: [],
   },
   playersState: [],
+  luggageUsed: false,
+  reward: -1,
 };
 
 const reducer = (state = { ...initialState }, { type, payload }: IAction) => {
   switch (type) {
+    case ActionTypes.ClearGameState:
+      return { ...initialState };
+    case ActionTypes.SetGameReward:
+      return {
+        ...state,
+        reward: payload,
+      };
     case ActionTypes.SetGameState:
-      return { ...payload };
+      return {
+        ...payload,
+        luggageUsed: state.luggageUsed,
+        reward: state.reward,
+      };
     case ActionTypes.UpdateGameDetails:
       return {
         ...state,
@@ -45,6 +58,8 @@ const reducer = (state = { ...initialState }, { type, payload }: IAction) => {
 
       return { ...state };
     }
+    case ActionTypes.SetLuggageUsed:
+      return { ...state, luggageUsed: payload };
     default:
       return state;
   }

@@ -14,7 +14,9 @@ import {
   updateGameDetails,
   updateMyPlayer,
   updatePublicPlayer,
-  initialiazeGameState
+  initialiazeGameState,
+  addCoins,
+  setReward
 } from "@redux/actions";
 import RouteUtils from "@utils/Route";
 import SocketManager from "@socket/SocketManager";
@@ -22,12 +24,14 @@ import {
   gameDetailsListener,
   myPlayerListener,
   publicPlayerListener,
+  looserListener,
 } from "@socket/game";
 import {
   IGameDetails,
   IMyPlayerState,
   IPublicPlayerState,
 } from "@utils/game/IGameState";
+import { ILooser } from "@utils/game/ILooser";
 
 const GamePage: FC = () => {
   const dispatch = useDispatch();
@@ -47,6 +51,14 @@ const GamePage: FC = () => {
 
   function onPublicPlayerChange(state: IPublicPlayerState) {
     dispatch(updatePublicPlayer(state));
+  }
+
+  function onLooser(looser: ILooser) {
+    if (username === looser.username) {
+      message.information("You lost the game and " + looser.price + " coins");
+      dispatch(addCoins(-looser.price));
+      dispatch(setReward(-looser.price));
+    }
   }
 
   useEffect(() => {
@@ -75,7 +87,8 @@ const GamePage: FC = () => {
     gameDetailsListener(onGameDetailsChange);
     myPlayerListener(onMyPlayerChange);
     publicPlayerListener(onPublicPlayerChange);
-    
+    looserListener(onLooser);
+
     return () => {
       SocketManager.getInstance().removeAllListeners();
     };

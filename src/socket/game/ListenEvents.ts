@@ -1,5 +1,6 @@
 import SocketManager from "@socket/SocketManager";
 import { IGameDetails, IMyPlayerState, IPublicPlayerState } from "@utils/game/IGameState";
+import { ILooser } from "@utils/game/ILooser";
 import { IPlayerReward } from "@utils/game/IPlayerReward";
 
 const gameDetailsListener = (callback: (gameDetails: IGameDetails) => void) => {
@@ -14,13 +15,23 @@ const publicPlayerListener = (callback: (myPlayer: IPublicPlayerState) => void) 
   SocketManager.getInstance().listenToEvent("game player state change", callback);
 };
 
-const onGameFinishedListener = (callback: (rewards: IPlayerReward[]) => void) => {
+const gameFinishedListener = (callback: (rewards: IPlayerReward[]) => void) => {
   SocketManager.getInstance().listenToEvent("game finished", callback);
+};
+
+const gameRewardListener = (callback: (reward: number) => void) => {
+  SocketManager.getInstance().listenToEvent("game reward", callback);
+};
+
+const looserListener = (callback: (looser: ILooser) => void) => {
+  SocketManager.getInstance().listenToEvent("game looser", callback);
 };
 
 export {
   gameDetailsListener,
   myPlayerListener,
   publicPlayerListener,
-  onGameFinishedListener
+  gameFinishedListener,
+  gameRewardListener,
+  looserListener
 };

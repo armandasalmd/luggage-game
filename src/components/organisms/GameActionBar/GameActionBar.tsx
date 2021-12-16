@@ -9,17 +9,19 @@ import { LuggageController } from "..";
 import { message } from "@components/atoms";
 import { finishTurnAsync, playCardAsync } from "@socket/game";
 import ActionBarAction, { ActionBarActionProps } from "./ActionBarAction";
-import { clearPickCardCount } from "@redux/actions";
+import { clearPickCardCount, setLuggageUsed } from "@redux/actions";
 import EngineBase from "@utils/game/EngineBase";
 import ClassicEngine from "@utils/game/ClassicEngine";
+import FinishedGameAction from "./FinishedGameAction";
 
 const GameActionBar: FC = () => {
   const dispatch = useDispatch();
   const { gameId }: any = useParams();
-  const { activeSeatId } = useSelector(
+  const { activeSeatId, sourceCardsCount } = useSelector(
     (state: RootState) => state.game.gameDetails
   );
-  const { seatId, lastMoves, handCards } = useSelector((state: RootState) => state.game.myState);
+  const { seatId, lastMoves, handCards, playerState } = useSelector((state: RootState) => state.game.myState);
+  const { reward } = useSelector((state: RootState) => state.game);
   const { pickPlayCountItems, cardValue } = useSelector(
     (state: RootState) => state.actionBar
   );
@@ -28,6 +30,8 @@ const GameActionBar: FC = () => {
     "actionBar--active": active,
   });
 
+  const luggageTime = active && handCards.length === 0 && sourceCardsCount === 0;
+
   useEffect(() => {
     let timeout: any;
 
@@ -35,6 +39,7 @@ const GameActionBar: FC = () => {
       timeout = setTimeout(() => {
         onFinishTurn();
       }, 30000);
+      dispatch(setLuggageUsed(false));
     }
 
     return () => {
@@ -79,13 +84,19 @@ const GameActionBar: FC = () => {
     hasLastMove: lastMoves.length > 0,
     onFinishTurn,
     onPickCount,
-    pickPlayCountItems
+    pickPlayCountItems,
   };
+
+  if (reward >= 0) {
+    return <div className={classes}>
+      <FinishedGameAction reward={reward} playerState={playerState} />
+    </div>
+  }
 
   return (
     <div className={classes}>
       <div className="actionBar__luggage">
-        <LuggageController />
+        <LuggageController gameId={gameId} luggageTime={luggageTime} />
       </div>
       <div className="actionBar__action">
         <ActionBarAction {...actionBarProps} />

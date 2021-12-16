@@ -8,6 +8,15 @@ import { PlayerCardProps } from "@components/atoms/PlayerCard/PlayerCard";
 import { GamePlayer } from "@components/molecules";
 import { toLuggageModel } from "@utils/game/Player";
 import GlobalUtils from "@utils/Global";
+import { IPublicPlayerState } from "@utils/game/IGameState";
+
+function getPlayerLabel(player: IPublicPlayerState) {
+  if (player.playerState === "playing") {
+    return player.handCardCount + " " + GlobalUtils.pluralize("card", player.handCardCount) + " left";
+  } else {
+    return player.playerState + " place";
+  }
+}
 
 interface PlayersControllerProps {
   className?: string | string[];
@@ -24,7 +33,7 @@ const PlayersController: FC<PlayersControllerProps> = (props) => {
 
   const playerComponents = players.map(function (player, index) {
     const pProps: PlayerCardProps = {
-      label: player.handCardCount + " " + GlobalUtils.pluralize("card", player.handCardCount) + " left",
+      label: getPlayerLabel(player),
       username: player.username,
       active: activeSeatId === player.seatId
     };

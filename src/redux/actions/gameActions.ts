@@ -39,14 +39,19 @@ const instantDispatch = (type: ActionTypes, payload: any) => {
   };
 };
 
-export const updateGameDetails = (details: IGameDetails) => {
-  return instantDispatch(ActionTypes.UpdateGameDetails, details);
-};
+export const updateGameDetails = (details: IGameDetails) =>
+  instantDispatch(ActionTypes.UpdateGameDetails, details);
 
-export const updateMyPlayer = (details: IMyPlayerState) => {
-  return instantDispatch(ActionTypes.UpdateMyPlayer, details);
-};
+export const updateMyPlayer = (details: IMyPlayerState) =>
+  instantDispatch(ActionTypes.UpdateMyPlayer, details);
+export const updatePublicPlayer = (details: IPublicPlayerState) =>
+  instantDispatch(ActionTypes.UpdatePublicPlayer, details);
 
-export const updatePublicPlayer = (details: IPublicPlayerState) => {
-  return instantDispatch(ActionTypes.UpdatePublicPlayer, details);
-};
+export const setLuggageUsed = (luggageUsed: boolean) =>
+  instantDispatch(ActionTypes.SetLuggageUsed, luggageUsed);
+
+export const clearGameState = () =>
+  instantDispatch(ActionTypes.ClearGameState, null);
+
+export const setReward = (reward: number) =>
+  instantDispatch(ActionTypes.SetGameReward, reward);

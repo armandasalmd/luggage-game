@@ -7,11 +7,15 @@ import { RewardAnimation, message } from "@components/atoms";
 import { GameNavbar, GameActionBar } from "@components/organisms";
 import { GameNavbarProps } from "@components/organisms/GameNavbar/GameNavbar";
 import { Playground } from "@components/templates";
-import { onGameFinishedListener } from "@socket/game";
+import { gameFinishedListener, gameRewardListener } from "@socket/game";
 import { IPlayerReward } from "@utils/game/IPlayerReward";
 import { RootState } from "@redux/store";
 import RouteUtils from "@utils/Route";
-import { addCoins } from "@redux/actions";
+import {
+  addCoins,
+  setReward as setReduxReward,
+  clearGameState,
+} from "@redux/actions";
 import SocketManager from "@socket/SocketManager";
 
 interface GameLayoutProps extends GameNavbarProps {
@@ -26,7 +30,7 @@ const GameLayout: FC<GameLayoutProps> = (props) => {
   const [reward, setReward] = useState(0);
 
   useEffect(() => {
-    onGameFinishedListener(function (rewards: IPlayerReward[]) {
+    gameFinishedListener(function (rewards: IPlayerReward[]) {
       const reward = rewards.find((item) => item.username === username);
 
       if (reward && reward.reward > 0) {
@@ -38,6 +42,14 @@ const GameLayout: FC<GameLayoutProps> = (props) => {
       }
     });
 
+    gameRewardListener(function (reward: number) {
+      if (reward > 0) {
+        setReward(reward);
+        dispatch(addCoins(reward));
+        dispatch(setReduxReward(reward));
+      }
+    });
+
     return () => {
       SocketManager.getInstance().removeAllListeners();
     };
@@ -45,7 +57,8 @@ const GameLayout: FC<GameLayoutProps> = (props) => {
   }, [username]);
 
   function exitGame() {
-    history.push(RouteUtils.routes.app.main.dashboard.path);
+    history.replace(RouteUtils.routes.app.main.dashboard.path);
+    dispatch(clearGameState());
   }
 
   return (
@@ -53,7 +66,7 @@ const GameLayout: FC<GameLayoutProps> = (props) => {
       <GameNavbar {...rest} />
       <Playground />
       <GameActionBar />
-      <RewardAnimation reward={reward} afterAnimation={exitGame} />
+      <RewardAnimation reward={reward} afterAnimation={() => setReward(0)} />
     </div>
   );
 };
