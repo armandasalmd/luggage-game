@@ -30,10 +30,10 @@ const Variables: IRouteVariables = {
         method: "POST",
       },
       googleLogin: {
-        path: "/api/users/google"
+        path: "/api/google"
       },
       facebookLogin: {
-        path: "/api/users/facebook"
+        path: "/api/facebook"
       }
     },
     user: {

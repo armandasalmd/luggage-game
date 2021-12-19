@@ -9,6 +9,7 @@ import {
 } from "@redux/actions";
 import RouteUtils from "@utils/Route";
 import AuthUtils from "@utils/Auth";
+import Constants from "@utils/Constants";
 
 export const setUser = (user: any, coins: number) => {
   return function (dispatch: Dispatch) {
@@ -78,6 +79,27 @@ export const addCoins = (amount: number) => {
       type: ActionTypes.AddCoins,
       payload: amount,
     });
+  };
+};
+
+export const setToken = (token: string) => {
+  if (!token.startsWith(Constants.authTokenType)) {
+    token = Constants.authTokenType + " " + token;
+  }
+
+  return function (dispatch: Dispatch) {
+    AuthUtils.setJwtToken(token);
+    AuthUtils.setAuthHeaderToken(token);
+
+    const route = RouteUtils.routes.api.user.coins;
+
+    RouteUtils.sendApiRequest(route)
+      .then((res) => {
+        if (res.data) {
+          setUser(jwtDecode(token), res.data)(dispatch);
+        }
+      })
+      .catch(() => {});
   };
 };
 
