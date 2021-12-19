@@ -11,6 +11,7 @@ export { default as PillButton } from "./PillButton/PillButton";
 export { default as PlayerCard } from "./PlayerCard/PlayerCard";
 export { default as RewardAnimation } from "./RewardAnimation/RewardAnimation";
 export { default as Select } from "./Select/Select";
+export { default as SocialButton } from "./SocialButton/SocialButton";
 export { default as VerticalMenuItem } from "./VerticalMenuItem/VerticalMenuItem";
 export { default as TabItem } from "./TabItem/TabItem";
 export { default as Table } from "./Table/Table";

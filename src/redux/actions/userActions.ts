@@ -34,12 +34,12 @@ export const logoutUser = () => {
   };
 };
 
-export const loginUser = (email: string, password: string) => {
+export const loginUser = (username: string, password: string) => {
   return function (dispatch: Dispatch) {
     const route = RouteUtils.routes.api.auth.login;
 
     RouteUtils.sendApiRequest(route, {
-      email,
+      username,
       password,
     })
       .then((response) => {

@@ -30,12 +30,12 @@ const Button: FC<ButtonProps> = (props) => {
     "button--tall": props.tall,
     "button--tightX": props.tightX,
     "button--bigText": props.bigText
-  });
+  }, props.className);
 
   const Ripple = createRipples({
     during: 600,
     color: "rgba(0, 0, 0, .15)",
-    className: props.className + " defaultBorderRadius"
+    className: "defaultBorderRadius"
   });
 
   function onClick() {

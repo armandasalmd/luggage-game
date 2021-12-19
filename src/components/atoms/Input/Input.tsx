@@ -6,18 +6,19 @@ import "./Input.scss";
 type InputType = "warning" | "error";
 
 interface InputProps {
+  error?: string;
   icon?: any;
+  placeholder?: string;
+  setValue?(value: string): void;
+  style?: object;
+  maxWidth?: string | number;
+  name?: string;
+  onSubmit?(): void;
+  password?: boolean;
+  tall?: boolean;
+  title?: string;
   type?: InputType;
   value?: string;
-  setValue?(value: string): void;
-  title?: string;
-  error?: string;
-  placeholder?: string;
-  style?: object;
-  tall?: boolean;
-  maxWidth?: string | number;
-  password?: boolean;
-  onSubmit?(): void;
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -44,6 +45,7 @@ const Input: FC<InputProps> = (props) => {
       {props.title && <p className="input__title">{props.title}</p>}
       {props.error && <p className="input__error">{props.error}</p>}
       <input
+        name={props.name}
         type={props.password ? "password" : "text"}
         className={classes}
         value={props.value || ""}

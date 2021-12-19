@@ -29,6 +29,12 @@ const Variables: IRouteVariables = {
         path: "/api/users/register",
         method: "POST",
       },
+      googleLogin: {
+        path: "/api/users/google"
+      },
+      facebookLogin: {
+        path: "/api/users/facebook"
+      }
     },
     user: {
       coins: {
@@ -57,7 +63,10 @@ const Variables: IRouteVariables = {
     auth: {
       login: {
         path: "/auth/login"
-      }
+      },
+      register: {
+        path: "/auth/register"
+      },
     },
     main: {
       dashboard: {

@@ -38,6 +38,7 @@ function sendApiRequest(apiRoute: IRoute, bodyData?: any, queryParams?: any) {
 
 const items = {
   sendApiRequest,
+  resolveUrl,
   resolveHostName,
   routes: RouteVariables
 };

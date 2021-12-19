@@ -1,6 +1,6 @@
 @import "@styles/Variables.scss";
 
-.login {
+.auth {
   $base: &;
   position: relative;
   min-height: 100vh;
@@ -13,6 +13,36 @@
     height: 100%;
     z-index: -1;
     user-select: none;
+  }
+
+  &__social {
+    display: flex;
+    flex-flow: column;
+    gap: $unit * .5;
+    margin-bottom: $unit;
+  }
+
+  &__or {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $unit * .5;
+    
+    :first-child, :last-child {
+      height: 1px;
+      width: 30%;
+      background: $shade10;
+    }
+
+    p {
+      border-radius: $defaultBorderRadius;
+      text-transform: uppercase;
+      border: 1px solid $shade10;
+      padding: $unit * .25 $unit * .5;
+      user-select: none;
+      margin: 0 $unit;
+      color: $colorTextDark;
+    }
   }
   
   &__container {
