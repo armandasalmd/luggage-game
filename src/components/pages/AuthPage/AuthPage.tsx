@@ -1,11 +1,12 @@
 import { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import "./AuthPage.scss";
-import type { RootState } from "@redux/store";
 import { Button, Input, Logo, SocialButton } from "@components/atoms";
+import type { RootState } from "@redux/store";
 import { resetErrors } from "@redux/actions";
+import RouteVariables from "@utils/RouteVariables";
 
 export interface FormItem {
   name: string;
@@ -26,6 +27,7 @@ interface AuthPageProps {
   onSubmit(state: any): void;
   submitText: string;
   title: string;
+  termsWarning?: boolean;
 }
 
 const AuthPage: FC<AuthPageProps> = (props) => {
@@ -83,6 +85,12 @@ const AuthPage: FC<AuthPageProps> = (props) => {
     dispatch(resetErrors());
   }, [dispatch]);
 
+  const termsLink = (
+    <Link target="_blank" to={RouteVariables.app.legal.terms.path}>
+      Terms and Conditions
+    </Link>
+  );
+
   return (
     <div className="auth">
       <img
@@ -111,6 +119,12 @@ const AuthPage: FC<AuthPageProps> = (props) => {
               {errorState.errorMessage && (
                 <p className="auth__error">{errorState.errorMessage}</p>
               )}
+              {props.termsWarning && (
+                <p className="auth__termsWarning">
+                  By creating an account you agree with{" "}
+                  {termsLink}
+                </p>
+              )}
               <Button type="accent" centerText tall onClick={handleSubmit}>
                 {props.submitText}
               </Button>
@@ -124,6 +138,7 @@ const AuthPage: FC<AuthPageProps> = (props) => {
           <div className="auth__mainFooter">
             Luggage card game &copy; Armandas Barkauskas
           </div>
+          <div className="auth__actions">{termsLink}</div>
         </div>
       </div>
     </div>

@@ -96,8 +96,37 @@
   }
 
   &__mainFooter {
-    margin-top: $unit;
     text-align: center;
     color: $shade60;
+    margin-top: $unit;
+  }
+
+  &__termsWarning {
+    color: $shade40;
+    font-size: 0.9rem;
+
+    a {
+      text-decoration: none;
+      color: $colorPrimary;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: $unit * .25;
+    
+    a {
+      text-decoration: none;
+      color: $colorPrimary;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 } 

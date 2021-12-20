@@ -76,6 +76,11 @@ const Variables: IRouteVariables = {
         path: "/play"
       }
     },
+    legal: {
+      terms: {
+        path: "/terms"
+      }
+    }
   }
 };
 

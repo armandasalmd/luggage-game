@@ -44,6 +44,7 @@ function RegisterPage() {
       onSubmit={onSubmit}
       submitText="Register"
       title="Create an account"
+      termsWarning
     />
   );
 }

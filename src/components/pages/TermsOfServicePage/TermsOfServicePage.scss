@@ -1,0 +1,58 @@
+@import "@styles/Variables.scss";
+
+.terms {
+  margin: $unit * 2 0;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $unit * 2.5;
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+  }
+
+  &__description {
+    color: $shade50;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: $unit * 2 0;
+  }
+
+  &__title {
+    display: flex;
+  }
+
+  &__card {
+    margin: 0 25%;
+  }
+
+  &__body {
+    div {
+      margin-top: $unit;
+    }
+  }
+
+  &__links {
+    margin-top: $unit;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .terms__card {
+    margin: 0 18%;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .terms__card {
+    margin: 0 $unit;
+  }
+}
