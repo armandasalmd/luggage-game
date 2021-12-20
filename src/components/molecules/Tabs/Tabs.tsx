@@ -4,6 +4,7 @@ import "./Tabs.scss";
 import { TabItemProps } from "@components/atoms/TabItem/TabItem";
 import { VerticalMenu } from "@components/molecules";
 import { ID } from "@utils/Types";
+import GlobalUtils from "@utils/Global";
 
 interface TabContainerProps {
   id: ID;
@@ -19,11 +20,15 @@ interface TabsProps {
   defaultActiveTab: ID;
   mobileFriendlyMenu?: boolean;
   mobileMenuItems?: any[];
+  noDivider?: boolean;
+  externalRender?: boolean;
+  onTabChange?(id: ID): void;
 }
 
 const Tabs: FC<TabsProps> = (props) => {
   const classes = classNames("tabs", {
     "tabs--mobileFriendly": props.mobileFriendlyMenu,
+    "tabs--noDivider": props.noDivider,
   });
   const tabContainers: TabContainerProps[] = [];
 
@@ -31,6 +36,7 @@ const Tabs: FC<TabsProps> = (props) => {
 
   function onTabItemClick(id: ID) {
     setActiveTabId(id);
+    GlobalUtils.callIfFunction(props.onTabChange, id);
   }
 
   const tabItemsWithClick: ReactElement[] = [];
@@ -55,9 +61,13 @@ const Tabs: FC<TabsProps> = (props) => {
     );
   });
 
-  const activeContainer = tabContainers.find(function (tab: TabContainerProps) {
-    return tab.id === activeTabId;
-  })?.container;
+  let activeContainer;
+
+  if (!props.externalRender) {
+    activeContainer = tabContainers.find(function (tab: TabContainerProps) {
+      return tab.id === activeTabId;
+    })?.container;
+  }
 
   return (
     <div className={classes}>
@@ -76,7 +86,9 @@ const Tabs: FC<TabsProps> = (props) => {
           />
         </div>
       )}
-      <div className="tabs__content">{activeContainer}</div>
+      {!props.externalRender && (
+        <div className="tabs__content">{activeContainer}</div>
+      )}
     </div>
   );
 };

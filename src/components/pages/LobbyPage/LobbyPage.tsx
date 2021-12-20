@@ -77,8 +77,6 @@ const LobbyPage: FC = () => {
   return (
     <div>
       <DashboardNavbar
-        name={user.username}
-        coins={user.coins}
         onLogout={leaveLobbyAsync.bind(this, user.username)}
       />
       <div className="lobby">

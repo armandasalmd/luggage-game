@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Table } from "@components/atoms";
+import { Card, Table } from "@components/atoms";
 
 import { tableData } from "./tableData";
 
 const GamesHistoryTab: FC = () => {
   return (
-    <div>
+    <Card>
       <Table scrollX spaced data={tableData} />
-    </div>
+    </Card>
   );
 };
 

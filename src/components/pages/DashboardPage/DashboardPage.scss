@@ -1,0 +1,45 @@
+@import "@styles/Variables.scss";
+
+.dashboard {
+  margin-bottom: $unit;
+
+  &__nav {
+    margin: $unit;
+    padding-bottom: $unit * 0.25;
+  }
+
+  &__main {
+    margin: $unit;
+  }
+
+  &__mobileDivider {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .dashboard__mobileDivider {
+    $color: $shade20;
+
+    width: 100%;
+    height: 0;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    padding: $unit * 0.25;
+
+    .line {
+      height: 2px;
+      width: 50%;
+      background: $color;
+    }
+
+    .ball {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: $color;
+      transform: translate(-25vw, -4px);
+    }
+  }
+}

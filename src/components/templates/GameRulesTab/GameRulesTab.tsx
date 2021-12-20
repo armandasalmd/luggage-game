@@ -1,7 +1,8 @@
 import "./GameRulesTab.scss";
+import { Card } from "@components/atoms";
 
 const GameRulesTab = () => {
-  return <div className="gameRules">
+  return <Card className="gameRules">
     <h3 className="gameRules__title">The rules for luggage game</h3>
     <p className="gameRules__sectionLabel">Game preparation state:</p>
     <p className="gameRules__text">The card deck must be first shuffled. Card shuffler hands out 3 face down cards in front of every player. Next step, card shuffler puts 3 face up cards on every face down card. Lastly, each player gets 3 cards to take to their hands. Game is ready  to start.</p>
@@ -19,7 +20,7 @@ const GameRulesTab = () => {
       <li>5 means that you can put it anytime and then put any other card</li>
       <li>10 means that you can put it anytime and the current pile is eliminated from the game (put aside) </li>
     </ul>
-  </div>;
+  </Card>;
 };
 
 export default GameRulesTab;

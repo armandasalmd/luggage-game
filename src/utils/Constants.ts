@@ -7,7 +7,7 @@ const constants = {
     prodApi: "https://luggage-api.herokuapp.com",
     assets: "https://luggage-cards.s3.eu-central-1.amazonaws.com"
   },
-  preferDevApi: true,
+  preferDevApi: false,
   cardRotation: {
     from: -6,
     to: 6

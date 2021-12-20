@@ -61,7 +61,7 @@ $separatorColor: #F7F7FA;
 
   &__title,
   &__titleActions {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     display: inline-block;
 
@@ -157,6 +157,11 @@ $separatorColor: #F7F7FA;
   
   &--noShadow {
     box-shadow: none;
+  }
+
+  &--smallHeaderY > &__header {
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
   // <end> --MODIFIERS </end>
 }
