@@ -12,6 +12,7 @@ interface CardProps {
   type?: CardType;
   wrap?: boolean;
   title?: string;
+  titleBig?: boolean;
   noContentPaddingX?: boolean;
   noContentPaddingY?: boolean;
   smallHeaderY?: boolean;
@@ -25,6 +26,7 @@ const Card: FC<CardProps> = (props) => {
     "card",
     {
       [`card--${props.type}`]: props.type,
+      "card--titleBig": props.titleBig,
       "card--hoverable": props.hoverable,
       "card--padded": props.padded,
       "card--halfWidth": props.halfWidth,

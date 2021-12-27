@@ -1,6 +1,10 @@
 @import "@styles/Variables.scss";
 
-.createJoinTab {
+.playGame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $unit;
+
   &__mainButton {
     margin-bottom: $unit;
   }
@@ -17,15 +21,15 @@
     gap: $unit * 0.5;
   }
 
-  &__cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  &__cardsLeft, &__cardsRight {
+    display: flex;
+    flex-flow: column;
     gap: $unit;
   }
 }
 
 @media (max-width: $sm) {
-  .createJoinTab__cards {
+  .playGame {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }

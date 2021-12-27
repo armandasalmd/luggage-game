@@ -3,7 +3,18 @@ import jwtDecode, { JwtPayload } from "jwt-decode";
 import store from "@redux/store";
 import Constants from "@utils/Constants";
 import RouteUtils from "@utils/Route";
-import { setUser, logoutUser } from "@redux/actions";
+import { setToken, logoutUser } from "@redux/actions";
+
+function applyUnauthorisedMiddleware() {
+  axios.interceptors.response.use((response: any) => response, (error) => {
+    if (error.response.status === 401) {
+      removeJwtToken();
+      window.location.reload();
+    }
+
+    return Promise.reject(error);
+  });
+}
 
 function setAuthHeaderToken(token: string) {
   if (token) {
@@ -31,11 +42,8 @@ function resetAuthTokenFromStorage() {
 
       if (decoded && (decoded.exp || 0) > currentTime) {
         setAuthHeaderToken(token);
+        setToken(token)(store.dispatch);
         
-        setUser(decoded, 0)(store.dispatch);
-        RouteUtils.sendApiRequest(RouteUtils.routes.api.user.coins).then((res) => {
-          setUser(decoded, res.data)(store.dispatch);
-        });
         return;
       }
     }
@@ -62,6 +70,7 @@ function removeJwtToken() {
 }
 
 const items = {
+  applyUnauthorisedMiddleware,
   getJwtToken,
   getPlainJwtToken,
   setJwtToken,

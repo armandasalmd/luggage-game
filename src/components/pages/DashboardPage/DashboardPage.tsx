@@ -5,7 +5,7 @@ import { Card, message, PillButton, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
 import { DashboardNavbar } from "@components/organisms";
 import {
-  DashboardCreateJoinTab,
+  PlayGameTab,
   GameRulesTab,
   GamesHistoryTab,
 } from "@components/templates";
@@ -21,8 +21,8 @@ const DEFAULT_ACTIVE_TAB = 1;
 const TABS = [
   {
     id: 1,
-    text: "Create or join game",
-    component: DashboardCreateJoinTab,
+    text: "Play game",
+    component: PlayGameTab,
   },
   {
     id: 2,
@@ -82,6 +82,7 @@ const DashboardPage: FC = () => {
         title={PAGE_TITLE}
         headerActions={headerActions}
         smallHeaderY
+        titleBig
       >
         <Tabs
           defaultActiveTab={DEFAULT_ACTIVE_TAB}

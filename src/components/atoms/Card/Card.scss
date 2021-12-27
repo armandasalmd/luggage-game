@@ -18,6 +18,7 @@ $separatorColor: #F7F7FA;
   $base: &;
 
   @extend %cardBase;
+  color: $colorTextDark;
 
   // <start>__ELEMENTS</start>
   &__content {
@@ -61,7 +62,7 @@ $separatorColor: #F7F7FA;
 
   &__title,
   &__titleActions {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     display: inline-block;
 
@@ -162,6 +163,12 @@ $separatorColor: #F7F7FA;
   &--smallHeaderY > &__header {
     padding-top: 6px;
     padding-bottom: 6px;
+  }
+
+  &--titleBig {
+    #{$base}__title {
+      font-size: 1.25rem;
+    }
   }
   // <end> --MODIFIERS </end>
 }

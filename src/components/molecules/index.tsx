@@ -1,3 +1,4 @@
+export { default as DailyRewardController } from "./DailyRewardController/DailyRewardController";
 export { default as FinishedPile } from "./FinishedPile/FinishedPile";
 export { default as GameHand } from "./GameHand/GameHand";
 export { default as GamePile } from "./GamePile/GamePile";
