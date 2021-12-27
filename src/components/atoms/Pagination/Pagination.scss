@@ -1,0 +1,39 @@
+@import "@styles/Variables.scss";
+
+.pagination {
+  display: flex;
+  gap: $unit * 0.25;
+
+  &__button {
+    $size: 36px;
+
+    height: $size;
+    width: $size;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: $defaultBorderRadius;
+    border: 1px solid #e0e1e4;
+    color: $shade30;
+    box-sizing: border-box;
+    cursor: pointer;
+    
+    &:active, &:hover {
+      border: 1px solid $colorPrimary;
+      background: rgba($colorPrimary, 0.05);
+      color: $colorPrimary;
+    }
+
+    &--disabled {
+      pointer-events: none;
+      background: $shade10;
+    }
+  }
+
+  &__input {
+    input::placeholder {
+      color: $shade60;
+    }
+  }
+}

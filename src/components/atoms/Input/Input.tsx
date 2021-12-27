@@ -6,6 +6,7 @@ import "./Input.scss";
 type InputType = "warning" | "error";
 
 interface InputProps {
+  className?: string;
   error?: string;
   icon?: any;
   placeholder?: string;
@@ -25,7 +26,7 @@ const Input: FC<InputProps> = (props) => {
   const classes = classNames("input", {
     [`input--${props.type}`]: props.type,
     "input--tall": props.tall
-  });
+  }, props.className);
 
   function setValue(value: string) {
     GlobalUtils.callIfFunction(props.setValue, value);
@@ -47,7 +48,6 @@ const Input: FC<InputProps> = (props) => {
       <input
         name={props.name}
         type={props.password ? "password" : "text"}
-        className={classes}
         value={props.value || ""}
         onChange={({ target }) => setValue(target.value)}
         placeholder={props.placeholder || "Enter value"}

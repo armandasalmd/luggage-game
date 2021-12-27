@@ -8,6 +8,7 @@ export { default as Logo } from "./Logo/Logo";
 export { default as LobbyPlayer } from "./LobbyPlayer/LobbyPlayer";
 export { default as MiniGameCard } from "./MiniGameCard/MiniGameCard";
 export { default as Modal } from "./Modal/Modal";
+export { default as Pagination } from "./Pagination/Pagination";
 export { default as PillButton } from "./PillButton/PillButton";
 export { default as PlayerCard } from "./PlayerCard/PlayerCard";
 export { default as RewardAnimation } from "./RewardAnimation/RewardAnimation";
