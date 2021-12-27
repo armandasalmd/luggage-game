@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { batch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import {
   IAction,
@@ -10,14 +11,14 @@ import {
 import RouteUtils from "@utils/Route";
 import AuthUtils from "@utils/Auth";
 import Constants from "@utils/Constants";
+import { RewardItem } from "@utils/game/Reward";
 
-export const setUser = (user: any, coins: number) => {
+export const setUser = (user: any) => {
   return function (dispatch: Dispatch) {
     const action: IAction = {
       type: ActionTypes.Login,
       payload: {
         user,
-        coins,
       },
     };
 
@@ -45,16 +46,31 @@ export const loginUser = (username: string, password: string) => {
     })
       .then((response) => {
         if (typeof response.data.token === "string") {
-          AuthUtils.setJwtToken(response.data.token);
-          AuthUtils.setAuthHeaderToken(response.data.token);
-          setUser(
-            jwtDecode(response.data.token),
-            response.data.coins
-          )(dispatch);
-          resetErrors()(dispatch);
+          const { token, ...rest } = response.data;
+
+          AuthUtils.setJwtToken(token);
+          AuthUtils.setAuthHeaderToken(token);
+
+          batch(() => {
+            setUser(jwtDecode(token))(dispatch);
+            setCoinsAndRewards(rest)(dispatch);
+            resetErrors()(dispatch);
+          });
         }
       })
       .catch(handleLoginRegisterErrors(dispatch));
+  };
+};
+
+export const setCoinsAndRewards = (data: {
+  coins?: number;
+  rewards?: any[];
+}) => {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: ActionTypes.SetCoinsAndRewards,
+      payload: data,
+    });
   };
 };
 
@@ -91,15 +107,30 @@ export const setToken = (token: string) => {
     AuthUtils.setJwtToken(token);
     AuthUtils.setAuthHeaderToken(token);
 
-    const route = RouteUtils.routes.api.user.coins;
+    const route = RouteUtils.routes.api.user.coinsAndRewards;
 
     RouteUtils.sendApiRequest(route)
       .then((res) => {
         if (res.data) {
-          setUser(jwtDecode(token), res.data)(dispatch);
+          batch(() => {
+            setUser(jwtDecode(token))(dispatch);
+            setCoinsAndRewards(res.data)(dispatch);
+          });
         }
       })
       .catch(() => {});
+  };
+};
+
+export const updateReward = (reward: RewardItem) => {
+  return function (dispatch: Dispatch) {
+    batch(() => {
+      dispatch({
+        type: ActionTypes.UpdateReward,
+        payload: reward,
+      });
+      addCoins(reward.reward)(dispatch);
+    });
   };
 };
 

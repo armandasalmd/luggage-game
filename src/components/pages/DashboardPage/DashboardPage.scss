@@ -2,6 +2,7 @@
 
 .dashboard {
   margin-bottom: $unit;
+  overflow-x: hidden;
 
   &__nav {
     margin: $unit;

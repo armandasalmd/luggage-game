@@ -1,0 +1,59 @@
+@import "@styles/Variables.scss";
+
+.dailyReward {
+  $base: &;
+  $size: $unit * 5;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: $size;
+  height: $size;
+  border-radius: $defaultBorderRadius * 2;
+  border: 2px solid $shade10;
+  gap: $unit * 0.25;
+  color: $shade30;
+  user-select: none;
+  overflow: hidden;
+
+  &__main {
+    display: flex;
+    align-items: center;
+    gap: $unit * 0.25;
+  }
+
+  &--primary {
+    border: 2px solid $colorPrimary;
+    background: rgba($colorPrimary, 0.05);
+    color: $colorTextDark;
+    font-weight: 600;
+
+    #{$base}__main {
+      color: $colorPrimary;
+      font-weight: 600;
+    }
+
+    svg {
+      color: $colorPrimary;
+    }
+  }
+
+  &--gold {
+    border: 2px solid $colorGold;
+    background: rgba($colorGold, 0.05);
+    color: $shade50;
+    
+    #{$base}__main {
+      color: $colorTextDark;
+    }
+
+    svg {
+      color: $colorGold;
+    }
+  }
+
+  &--select {
+    cursor: pointer;
+  }
+}

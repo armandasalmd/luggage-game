@@ -7,6 +7,7 @@ import AuthUtils from "@utils/Auth";
 
 (function initApp() {
   AuthUtils.resetAuthTokenFromStorage();
+  AuthUtils.applyUnauthorisedMiddleware();
 })();
 
 function App() {

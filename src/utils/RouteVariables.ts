@@ -37,9 +37,13 @@ const Variables: IRouteVariables = {
       }
     },
     user: {
-      coins: {
-        path: "/api/users/coins",
+      coinsAndRewards: {
+        path: "/api/users/coinsAndRewards",
         method: "GET"
+      },
+      claimReward: {
+        path: "/api/users/claimReward",
+        method: "POST"
       }
     },
     lobby: {

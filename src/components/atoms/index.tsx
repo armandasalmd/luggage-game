@@ -1,6 +1,7 @@
 export { default as Button } from "./Button/Button";
 export { default as Card } from "./Card/Card";
 export { default as Checkbox } from "./Checkbox/Checkbox";
+export { default as DailyReward } from "./DailyReward/DailyReward";
 export { default as GameCard } from "./GameCard/GameCard";
 export { default as Input } from "./Input/Input";
 export { default as Logo } from "./Logo/Logo";

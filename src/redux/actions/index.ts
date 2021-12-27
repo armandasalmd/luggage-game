@@ -23,7 +23,9 @@ export enum ActionTypes {
   AddCoins,
   SetLuggageUsed,
   ClearGameState,
-  SetGameReward
+  SetGameReward,
+  SetCoinsAndRewards,
+  UpdateReward
 };
 
 export * from "./actionBarActions";
