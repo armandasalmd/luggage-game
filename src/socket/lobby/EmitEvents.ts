@@ -12,4 +12,16 @@ const playerReadyAsync = async () => {
   return SocketManager.getInstance().emitEventAsync("lobby ready", {});
 };
 
-export { joinLobbyAsync, leaveLobbyAsync, playerReadyAsync };
+const subscribeToPublicLobbiesAsync = async (subscribeState: boolean) => {
+  return SocketManager.getInstance().emitEventAsync(
+    "lobby public subscribe",
+    subscribeState
+  );
+};
+
+export {
+  joinLobbyAsync,
+  leaveLobbyAsync,
+  playerReadyAsync,
+  subscribeToPublicLobbiesAsync,
+};

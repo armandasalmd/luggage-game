@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import "./PlayGameTab.scss";
 import { message } from "@components/atoms";
+import { PublicGames } from "@components/organisms";
 import ActiveGameCard from "./ActiveGameCard";
 import RouteUtils from "@utils/Route";
 import GlobalUtils from "@utils/Global";
@@ -104,6 +105,7 @@ const DashboardCreateJoinTab = () => {
     <div className="playGame">
       <div className="playGame__cardsLeft">
         <RewardsCard />
+        <PublicGames />
       </div>
       <div className="playGame__cardsRight">
         <JoinGameCard onJoinGame={onJoinGame} />

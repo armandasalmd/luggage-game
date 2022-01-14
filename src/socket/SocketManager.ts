@@ -55,6 +55,10 @@ class SocketManager {
   public removeAllListeners() {
     this.socket.removeAllListeners();
   }
+
+  public removeListener(event: string) {
+    this.socket.removeListener(event);
+  }
 }
 
 export default SocketManager;

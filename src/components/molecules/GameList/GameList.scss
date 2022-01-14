@@ -1,0 +1,11 @@
+@import "@styles/Variables.scss";
+
+.gameList {
+  $border: 1px solid $shade10;
+
+  display: flex;
+  flex-flow: column;
+
+  border-top: $border;
+  border-bottom: $border;
+}
