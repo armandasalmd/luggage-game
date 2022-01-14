@@ -1,0 +1,15 @@
+@import "@styles/Variables.scss";
+
+.flashScreen {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: $unit * 2;
+  background-image: radial-gradient(
+    circle farthest-corner at center,
+    $colorBackground 0%,
+    darken($colorBackground, 20%) 100%
+  );
+}

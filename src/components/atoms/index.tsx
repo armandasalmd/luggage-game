@@ -4,6 +4,7 @@ export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as DailyReward } from "./DailyReward/DailyReward";
 export { default as GameCard } from "./GameCard/GameCard";
 export { default as Input } from "./Input/Input";
+export { default as Loader} from "./Loader/Loader";
 export { default as Logo } from "./Logo/Logo";
 export { default as LobbyPlayer } from "./LobbyPlayer/LobbyPlayer";
 export { default as MiniGameCard } from "./MiniGameCard/MiniGameCard";
