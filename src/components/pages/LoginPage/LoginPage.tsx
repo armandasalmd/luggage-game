@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "@redux/actions";
 import AuthPage, { ActionButton, FormItem } from "../AuthPage/AuthPage";
 import RouteUtils from "@utils/Route";
+import AuthUtils from "@utils/Auth"
+import { FlashScreen } from "@components/templates";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -30,6 +32,10 @@ function LoginPage() {
     const email = formState[formItems[0].name];
     const password = formState[formItems[1].name];
     dispatch(loginUser(email, password));
+  }
+
+  if (AuthUtils.getJwtToken() !== undefined) {
+    return <FlashScreen />
   }
 
   return (
