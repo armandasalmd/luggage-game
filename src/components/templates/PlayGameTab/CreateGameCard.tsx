@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
-import { Button, Card, Checkbox, Select } from "@components/atoms";
-import * as DValues from "./dropdownValues";
+import { Button, Card, Checkbox } from "@components/atoms";
+import { GameRulesSelect, PriceSelect, PlayersSelect } from "@components/molecules";
 import { ID } from "@utils/Types";
 import PlayCircleOutline from "@material-ui/icons/PeopleAlt";
 
@@ -28,21 +28,15 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
     <Card padded title="Create game">
       <div className="playGame__container">
         <div className="playGame__flexRow">
-          <Select
+          <PlayersSelect
             title="Players count"
-            items={DValues.playersDropdown}
-            idKey="key"
-            textKey="value"
             placeholder="Select count"
             defaultSelectedId={playerCount}
             onChange={setPlayerCount}
             maxWidth="15rem"
           />
-          <Select
+          <PriceSelect
             title="Game price"
-            items={DValues.priceDropdown}
-            idKey="key"
-            textKey="value"
             placeholder="Select one value"
             defaultSelectedId={gamePrice}
             onChange={setGamePrice}
@@ -55,13 +49,11 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
           />
         </div>
         <div className="playGame__flexRow">
-          <Select
+          <GameRulesSelect 
             title="Game rules mode"
-            items={DValues.gameRulesDropdown}
-            idKey="key"
-            textKey="value"
             defaultSelectedId={gameRules}
             onChange={setGameRules}
+            canPlayOnly
           />
         </div>
         <div className="playGame__flexRow" style={{ marginTop: 16 }}>

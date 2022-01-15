@@ -2,7 +2,7 @@ import { FC, ReactElement, useState } from "react";
 import classNames from "classnames";
 import "./Select.scss";
 
-interface SelectProps {
+export interface SelectProps {
   title?: string;
   description?: string;
   placeholder?: string;

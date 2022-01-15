@@ -5,7 +5,7 @@ import "./GameListItem.scss";
 import TollIcon from "@material-ui/icons/Toll";
 import PersonIcon from "@material-ui/icons/Person";
 import GlobalUtils from "@utils/Global";
-import { priceDropdown } from "@components/templates/PlayGameTab/dropdownValues";
+import { priceDropdown } from "@components/molecules/PriceSelect/PriceSelect";
 import { getGameRulesTitle } from "@utils/game/Game";
 
 export interface IPublicGame {

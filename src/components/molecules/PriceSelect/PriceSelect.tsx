@@ -1,21 +1,7 @@
-export const playersDropdown = [
-  {
-    key: 2,
-    value: "2 players",
-  },
-  {
-    key: 3,
-    value: "3 players",
-  },
-  {
-    key: 4,
-    value: "4 players",
-  },
-  {
-    key: 5,
-    value: "5 players",
-  },
-];
+import { FC } from "react";
+import Select, { SelectProps } from "@components/atoms/Select/Select";
+
+type OmitedProps = "items" | "idKey" | "textKey";
 
 export const priceDropdown = [
   {
@@ -52,9 +38,10 @@ export const priceDropdown = [
   },
 ];
 
-export const gameRulesDropdown = [
-  {
-    key: "classic",
-    value: "Classical (2, 5, 10 powercards)",
-  }
-];
+interface PriceSelectProps extends Omit<SelectProps, OmitedProps> {}
+
+const PriceSelect: FC<PriceSelectProps> = (props) => {
+  return <Select {...props} idKey="key" textKey="value" items={priceDropdown} />;
+};
+
+export default PriceSelect;
