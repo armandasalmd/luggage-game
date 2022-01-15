@@ -12,7 +12,7 @@ import { CellRenderer } from "@components/atoms/Table/ITableData";
 import { tableData } from "./tableData";
 
 const GamesHistoryTab: FC = () => {
-  const [historyData] = useState([1]); // replace with useGameHistory();
+  const [historyData] = useState([]); // replace with useGameHistory();
 
   const renderers: CellRenderer[] = [
     {
