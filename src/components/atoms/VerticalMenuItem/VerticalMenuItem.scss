@@ -7,8 +7,8 @@
   height: $unit * 3;
   user-select: none;
   cursor: pointer;
-  display: grid;
-  align-content: center;
+  display: flex;
+  align-items: center;
   padding-left: $unit;
   width: 100%;
 
@@ -33,6 +33,16 @@
   }
 
   &--showLeftOutline#{$base}--selected {
-      border-left: 3px solid $colorPrimary;
+    $handleSize: 3px;
+
+    &::before {
+      position: absolute;
+      transform: translateX(-($unit + $handleSize));
+      content: "";
+      width: $handleSize * 2;
+      height: 65%;
+      border-radius: $defaultBorderRadius;
+      background-color: $colorPrimary;
+    }
   }
 }

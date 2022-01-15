@@ -9,9 +9,10 @@
   flex-flow: column;
 
   &__heading {
-    padding: 0 $paddingX;
+    padding: $unit * .4 $paddingX;
     border-bottom: $borderStyle;
     display: flex;
+    gap: $unit * .5;
   }
 
   &__content {
