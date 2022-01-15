@@ -3,12 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import "./PublicGames.scss";
-import { Card, Select, Pagination, message } from "@components/atoms";
-import { GameList } from "@components/molecules";
-import {
-  gameRulesDropdown,
-  priceDropdown,
-} from "@components/templates/PlayGameTab/dropdownValues";
+import { Card, Pagination, message } from "@components/atoms";
+import { GameList, GameRulesSelect, PriceSelect } from "@components/molecules";
 import usePublicLobbies from "@hooks/usePublicLobbies";
 import usePagination from "@hooks/usePagination";
 import { joinLobbyAsync } from "@socket/lobby";
@@ -20,9 +16,9 @@ interface PublicGamesProps {}
 const PublicGames: FC<PublicGamesProps> = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  
-  const [rules, setRules] = useState<ID>("classic"); 
-  const [price, setPrice] = useState<ID>("0");
+
+  const [rules, setRules] = useState<ID>("classic");
+  const [price, setPrice] = useState<ID>("250");
   const [lobbies] = usePublicLobbies(rules, price);
 
   const { jump, currentData, maxPage, setData } = usePagination(lobbies, 10);
@@ -44,28 +40,22 @@ const PublicGames: FC<PublicGamesProps> = () => {
 
   useEffect(() => {
     setData(lobbies);
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [lobbies]);
 
   return (
     <Card className="publicGames" title="Public games">
       <div className="publicGames__filter">
-        <Select
+        <PriceSelect
           title="Game price"
-          idKey="key"
-          textKey="value"
-          items={priceDropdown}
           defaultSelectedId={price}
           onChange={setPrice}
-          
         />
-        <Select
+        <GameRulesSelect
           title="Game mode"
-          idKey="key"
-          textKey="value"
-          items={gameRulesDropdown}
           defaultSelectedId={rules}
           onChange={setRules}
+          canPlayOnly
         />
       </div>
       <div className="publicGames__list">

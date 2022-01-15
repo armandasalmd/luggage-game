@@ -23,6 +23,16 @@
   &__list {
     margin: 0;
     margin-top: $unit * .25;
+    margin-bottom: $unit * .5;
     padding-left: $unit * 1.5;
+  }
+
+  a {
+    text-decoration: none;
+    color: $colorPrimary;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
