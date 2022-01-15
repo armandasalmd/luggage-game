@@ -18,8 +18,9 @@
     color: $shade30;
     box-sizing: border-box;
     cursor: pointer;
-    
-    &:active, &:hover {
+
+    &:active,
+    &:hover {
       border: 1px solid $colorPrimary;
       background: rgba($colorPrimary, 0.05);
       color: $colorPrimary;
@@ -28,12 +29,17 @@
     &--disabled {
       pointer-events: none;
       background: $shade10;
+      border: none;
     }
   }
 
   &__input {
     input::placeholder {
       color: $shade60;
+    }
+
+    input:hover {
+      border: 1px solid $colorPrimary;
     }
   }
 }

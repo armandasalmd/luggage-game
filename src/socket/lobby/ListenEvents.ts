@@ -1,3 +1,4 @@
+import { IPublicGame } from "@components/atoms/GameListItem/GameListItem";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
 import SocketManager from "@socket/SocketManager";
 
@@ -17,9 +18,16 @@ const playerReadyListener = (callback: (username: string) => void) => {
   SocketManager.getInstance().listenToEvent("lobby player ready", callback);
 };
 
+const publicLobbiesChangedListener = (
+  callback: (lobbiesState: IPublicGame[]) => void
+) => {
+  SocketManager.getInstance().listenToEvent("lobbies changed", callback);
+};
+
 export {
   playerJoinedListener,
   playerLeftListener,
   gameStartListener,
   playerReadyListener,
+  publicLobbiesChangedListener,
 };

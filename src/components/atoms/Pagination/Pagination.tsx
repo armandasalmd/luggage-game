@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import classNames from "classnames";
 
 import "./Pagination.scss";
@@ -51,6 +51,12 @@ const Pagination: FC<PaginationProps> = (props) => {
       setPage(parsed);
     }
   }
+
+  useEffect(() => {
+    if (page > props.pageCount) {
+      setPage(props.pageCount);
+    }
+  }, [props.pageCount, page])
 
   return (
     <div className={classes}>

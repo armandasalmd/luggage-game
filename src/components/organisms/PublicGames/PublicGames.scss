@@ -1,0 +1,31 @@
+@import "@styles/Variables.scss";
+
+.publicGames {
+  &__filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $unit;
+    margin-bottom: $unit * 1.5;
+  }
+
+  &__alignRight {
+    display: flex;
+    justify-content: flex-end;
+    gap: $unit;
+  }
+
+  &__list {
+    margin-bottom: $unit;
+    margin-left: -$unit;
+    margin-right: -$unit;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .publicGames {
+    &__filter {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+}

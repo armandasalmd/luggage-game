@@ -1,0 +1,47 @@
+@import "@styles/Variables.scss";
+
+.gameListItem {
+  $borderColor: $shade10;
+  $border: 1px solid $borderColor;
+
+  border-top: $border;
+  border-bottom: $border; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: $unit * .6 $unit;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+
+  &__text {
+    font-size: 1.05rem;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: $unit * 0.25;
+
+    svg {
+      color: $shade30;
+      font-size: 1.8rem;
+    }
+    
+    &--gold {
+      svg {
+        color: $colorGold;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: $unit;
+  }
+
+  &:hover {
+    background: rgba($colorPrimary, 0.1);
+  }
+}

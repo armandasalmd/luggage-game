@@ -11,8 +11,8 @@
 
   &__flexRow {
     display: flex;
-    gap: $unit;
     flex-wrap: wrap;
+    gap: $unit;
   }
 
   &__container {
@@ -32,5 +32,13 @@
   .playGame {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
+
+    &__cardsLeft {
+      grid-row: 2;
+    }
+
+    &__cardsRight {
+      grid-row: 1;
+    }
   }
 }

@@ -52,3 +52,9 @@ export function toSortedHandCardsModel(cards: ACard[]): IHandCards | undefined {
 
   return { items: Object.values(groupedCards) };
 }
+
+export function getGameRulesTitle(rules: string): string {
+  if (rules === "classic") return "Classic game mode";
+
+  return "No title";
+}
