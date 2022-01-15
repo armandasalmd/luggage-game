@@ -6,7 +6,7 @@ import { ID } from "@utils/Types";
 
 const Ripple = createRipples({
   during: 600,
-  color: "rgba(0, 0, 0, .2)",
+  color: "rgba(30, 136, 229, .2)",
   className: "fullWidth fullHeight"
 });
 

@@ -26,13 +26,13 @@ const TABS = [
   },
   {
     id: 2,
-    text: "Game rules",
-    component: GameRulesTab,
+    text: "Games history",
+    component: GamesHistoryTab,
   },
   {
     id: 3,
-    text: "Games history",
-    component: GamesHistoryTab,
+    text: "Rules",
+    component: GameRulesTab,
   },
 ];
 
