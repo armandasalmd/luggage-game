@@ -2,7 +2,7 @@ import { FC } from "react";
 import classNames from "classnames";
 import "./Table.scss";
 import { ColorType } from "@utils/Types";
-import { ITableData, ITableColumnDefinition } from "./ITableData";
+import { ITableData, ITableColumnDefinition, CellRenderer } from "./ITableData";
 
 interface TableProps {
   columnsSeparated?: boolean;
@@ -13,6 +13,7 @@ interface TableProps {
   scrollX?: boolean;
   colorType?: ColorType;
   data: ITableData<any>;
+  renderers?: CellRenderer[];
 }
 
 const Table: FC<TableProps> = (props) => {
@@ -27,7 +28,15 @@ const Table: FC<TableProps> = (props) => {
 
   function createRowCells(columnDefs: ITableColumnDefinition[], row: any) {
     return columnDefs.map(function (column, index) {
-      return <td className="table__cell" key={column.key + index.toString()}>{row[column.key]}</td>
+      let innerValue = row[column.key];
+
+      if (props.renderers) {
+        // transform text to custom component if renderer for column is defined
+        const renderer = props.renderers.find(item => item.key === column.key);
+        if (renderer) innerValue = renderer.renderer(innerValue);
+      }
+
+      return <td className="table__cell" key={column.key + index.toString()}>{innerValue}</td>
     });
   }
 
@@ -35,7 +44,7 @@ const Table: FC<TableProps> = (props) => {
     return <td className="table__cell" key={column.key}>{column.title}</td>
   });
 
-  const tableRows = props.data.rows.map(function (row, index) {
+  const tableRows = props.data.rows.map(function (row, index) {    
     return <tr className="table__row" key={index}>
       {createRowCells(props.data.columnDefinitions, row)}
     </tr>;

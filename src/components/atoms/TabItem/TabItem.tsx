@@ -6,8 +6,8 @@ import { ID } from "@utils/Types";
 
 const Ripple = createRipples({
   during: 600,
-  color: "rgba(0, 0, 0, .2)",
-  className: "fullWidth fullHeight"
+  color: "rgba(30, 136, 229, .2)",
+  className: "fullHeight",
 });
 
 export interface TabItemProps {
@@ -29,11 +29,11 @@ const TabItem: FC<TabItemProps> = (props) => {
   }
 
   return (
-    <div className={classes}>
-      <Ripple onClick={onClick}>
+    <Ripple onClick={onClick}>
+      <div className={classes}>
         <div className="tabItem__text">{props.text}</div>
-      </Ripple>
-    </div>
+      </div>
+    </Ripple>
   );
 };
 

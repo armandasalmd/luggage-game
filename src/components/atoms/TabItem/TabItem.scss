@@ -1,16 +1,19 @@
 @import "@styles/Variables.scss";
 
 .tabItem {
+  $root: &;
+
   color: $shade50;
   font-size: 1rem;
   user-select: none;
   cursor: pointer;
   position: relative;
+  padding: 0 $unit *0.25;
 
   &--active {
     color: $colorPrimary;
     
-    &::after {
+    #{$root}__text::after {
       content: "";
       background-color: $colorPrimary;
       position: absolute;
@@ -19,10 +22,20 @@
       right: 0;
       height: 2.5px;
       z-index: 3;
+      border-radius: 3px;
     }
   }
 
   &__text {
-    padding: $unit * 0.8  $unit * 0.6;
+    padding: $unit * 0.4  $unit * 0.2;
+
+    &:hover {
+      color: $colorPrimary;
+    }
+  }
+
+  &:hover:not(#{$root}--active) {
+    background: rgba($colorPrimary, 0.075);
+    border-radius: $defaultBorderRadius;
   }
 }

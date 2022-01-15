@@ -1,0 +1,15 @@
+@import "@styles/Variables.scss";
+
+.history {
+  display: flex;
+  flex-flow: column;
+
+  &__table {
+    margin-bottom: $unit;
+  }
+
+  &__pages {
+    float: right;
+    margin-right: $unit;
+  }
+}
