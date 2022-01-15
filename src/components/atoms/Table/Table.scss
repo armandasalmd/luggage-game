@@ -3,23 +3,21 @@
 
 .table {
   $base: &;
-  $borderColor: $shade0;
-  $headColor: rgba($colorPrimary, 0.3);
-  $oddRowColor: $shade0;
-  $evenRowColor: rgba($colorPrimary, 0.1);
+  $borderColor: $shade10;
+  $headColor: $shade10;
 
   table {
     border-collapse: collapse;
-    border: 1px solid $borderColor;
   }
 
   // <start> __ELEMENTS </start>
   &__body {
     #{$base}__row {
-      border: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
+      cursor: pointer;
 
-      &:nth-child(even) {
-        background: $evenRowColor;
+      &:hover {
+        background: $shade5;
       }
     }
   }
@@ -28,15 +26,20 @@
     padding: 4px 8px;
     text-align: left;
     @extend %ellipsis;
+
+    &:first-child {
+      padding-left: $unit;
+    }
   }
 
   &__head {
     #{$base}__row {
       background: $headColor;
-      height: 2.5rem;
-
+      height: $unit * 3.2;
+      
       #{$base}__cell {
         font-size: 0.95rem;
+        font-weight: 600;
       }
     }
   }
