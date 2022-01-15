@@ -31,7 +31,6 @@ export default function usePagination<T>(defaultItems: T[], itemsPerPage: number
 
     if (newItems.length > 0 && newItems.length <= (currentPage - 1) * itemsPerPage) {
       jump(Math.ceil(newItems.length / itemsPerPage));
-      console.log("push paage down");
     }
   }
 

@@ -47,7 +47,6 @@ const PublicGames: FC<PublicGamesProps> = () => {
   // eslint-disable-next-line
   }, [lobbies]);
 
-  console.log("Wooo");
   return (
     <Card className="publicGames" title="Public games">
       <div className="publicGames__filter">
