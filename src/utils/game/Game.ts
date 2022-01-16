@@ -13,6 +13,7 @@ export interface IPlayer {
   username: string;
   ready: boolean;
   seatId: number;
+  waving?: boolean;
 }
 
 export type HandItem = ACard | ACard[];

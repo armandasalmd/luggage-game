@@ -17,6 +17,7 @@ export enum ActionTypes {
   LobbyPlayerLeft,
   SetGameState,
   SetPickCardCountItems,
+  SetPlayerWaveState,
   UpdateGameDetails,
   UpdateMyPlayer,
   UpdatePublicPlayer,
@@ -25,7 +26,7 @@ export enum ActionTypes {
   ClearGameState,
   SetGameReward,
   SetCoinsAndRewards,
-  UpdateReward
+  UpdateReward,
 };
 
 export * from "./actionBarActions";

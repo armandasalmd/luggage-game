@@ -11,10 +11,18 @@ import {
   leaveLobbyAsync,
   joinLobbyAsync,
   gameStartListener,
-  playerReadyListener
+  playerReadyListener,
+  playerWavedListener,
+  waveAsync,
 } from "@socket/lobby";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
-import { playerJoined, playerLeft, setLobbyState, setPlayerReady } from "@redux/actions";
+import {
+  playerJoined,
+  playerLeft,
+  setLobbyState,
+  setPlayerReady,
+  setPlayerWaveState,
+} from "@redux/actions";
 import SocketManager from "@socket/SocketManager";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
@@ -35,13 +43,26 @@ const LobbyPage: FC = () => {
   function onPlayerLeft(username: string) {
     dispatch(playerLeft(username));
   }
-  
+
   function onGameStart() {
-    history.push(RouteUtils.routes.app.main.game.path + "/" + lobbyState.roomCode);
+    history.push(
+      RouteUtils.routes.app.main.game.path + "/" + lobbyState.roomCode
+    );
   }
-  
+
   function onPlayerReady(username: string) {
     dispatch(setPlayerReady(username));
+  }
+
+  function onWave(username: string) {
+    dispatch(setPlayerWaveState(username, true));
+    setTimeout(() => {
+      dispatch(setPlayerWaveState(username, false));
+    }, 4000);
+  }
+
+  function iWave() {
+    waveAsync(gameId);
   }
 
   function attemptRoomJoin(roomId: string) {
@@ -65,6 +86,7 @@ const LobbyPage: FC = () => {
     playerLeftListener(onPlayerLeft);
     playerReadyListener(onPlayerReady);
     gameStartListener(onGameStart);
+    playerWavedListener(onWave);
 
     setTimeout(fetchAndCacheCards);
 
@@ -76,15 +98,15 @@ const LobbyPage: FC = () => {
 
   return (
     <div>
-      <DashboardNavbar
-        onLogout={leaveLobbyAsync.bind(this, user.username)}
-      />
+      <DashboardNavbar onLogout={leaveLobbyAsync.bind(this, user.username)} />
       <div className="lobby">
         <LobbyDetails className="lobby__card" startGame={onGameStart} />
         <div className="lobby__divider"></div>
         <LobbyPlayers
+          onWave={iWave}
           players={lobbyState.players}
           playersCount={lobbyState.playerCount}
+          myUsername={user.username}
         />
       </div>
     </div>
