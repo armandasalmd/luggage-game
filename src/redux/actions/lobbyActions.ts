@@ -47,3 +47,15 @@ export const playerLeft = (username: string) => {
     });
   };
 };
+
+export const setPlayerWaveState = (username: string, value: boolean) => {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: ActionTypes.SetPlayerWaveState,
+      payload: {
+        username,
+        value
+      }
+    });
+  }
+}

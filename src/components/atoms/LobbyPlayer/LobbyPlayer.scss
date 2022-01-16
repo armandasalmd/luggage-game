@@ -8,7 +8,8 @@
   padding: $unit * 0.8;
   align-items: center;
 
-  &__avatar, img {
+  &__avatar,
+  img {
     $size: 40px;
     width: $size;
     height: $size;
@@ -19,9 +20,9 @@
     width: 100%;
     font-size: 1.05rem;
   }
-  
+
   &__avatar {
-    margin-right: $unit * .5;
+    margin-right: $unit * 0.5;
   }
 
   &__check {
@@ -34,6 +35,24 @@
     text-align: center;
   }
 
+  &__hand {
+    color: $shade20;
+    cursor: pointer;
+
+    &:hover {
+      color: $shade40;
+    }
+  }
+
+  &__wave {
+    animation-name: wave-animation;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    overflow: visible;
+    width: $unit * 2.5;
+    height: $unit * 2.5;
+  }
+
   &--ready {
     border: 1px solid $colorPrimary;
   }
@@ -43,5 +62,32 @@
     border: 2px dashed $shade30;
     background: none;
     box-shadow: none;
+  }
+
+  @keyframes wave-animation {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
 }

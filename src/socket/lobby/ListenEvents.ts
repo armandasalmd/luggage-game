@@ -24,10 +24,15 @@ const publicLobbiesChangedListener = (
   SocketManager.getInstance().listenToEvent("lobbies changed", callback);
 };
 
+const playerWavedListener = (callback: (username: string) => void) => {
+  SocketManager.getInstance().listenToEvent("lobby player waved", callback);
+};
+
 export {
   playerJoinedListener,
   playerLeftListener,
   gameStartListener,
   playerReadyListener,
+  playerWavedListener,
   publicLobbiesChangedListener,
 };

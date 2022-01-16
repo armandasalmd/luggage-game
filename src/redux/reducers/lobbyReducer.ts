@@ -5,6 +5,7 @@ export interface ILobbyPlayer {
   username: string;
   ready: boolean;
   seatId: number;
+  waving?: boolean;
 }
 
 export interface ILobbyState {
@@ -50,6 +51,11 @@ const reducer = (state = {...initialState}, { type, payload }: IAction) => {
         player.ready = false;
       }
       return {...state};
+    case ActionTypes.SetPlayerWaveState: {
+      const playerIdx = state.players.findIndex(item => item.username === payload.username);
+      if (playerIdx >= 0) state.players[playerIdx].waving = payload.value;
+      return {...state};
+    }
     default:
       return state;
   }

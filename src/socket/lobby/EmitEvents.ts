@@ -19,9 +19,14 @@ const subscribeToPublicLobbiesAsync = async (subscribeState: boolean) => {
   );
 };
 
+const waveAsync = async (roomId: string) => {
+  return SocketManager.getInstance().emitEventAsync("lobby wave", roomId);
+};
+
 export {
   joinLobbyAsync,
   leaveLobbyAsync,
   playerReadyAsync,
   subscribeToPublicLobbiesAsync,
+  waveAsync,
 };
