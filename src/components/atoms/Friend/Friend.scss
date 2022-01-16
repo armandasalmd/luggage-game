@@ -1,0 +1,61 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.friend {
+  $base: &;
+  $borderStyle: 1px solid $shade10;
+
+  display: flex;
+  padding: $unit * 0.6 $unit;
+  border-bottom: $borderStyle;
+  align-items: center;
+
+  &:first-child {
+    border-top: $borderStyle;
+  }
+
+  &__avatar {
+    height: $unit * 3;
+    width: $unit * 3;
+    margin-right: $unit;
+    border-radius: $defaultBorderRadius;
+  }
+
+  &__name {
+    width: 100%;
+    word-break: break-all;
+    margin-right: $unit * .5;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $unit * 0.5;
+
+    #{$base}__action {
+      color: $colorPrimary;
+      border-radius: $defaultBorderRadius;
+      white-space: nowrap;
+
+      &--button {
+        cursor: pointer;
+        user-select: none;
+        background: rgba($colorPrimary, 0.1);
+        padding: $unit * 0.3 $unit * 0.65;
+
+        &:hover {
+          transform: scale(1.08);
+        }
+      }
+
+      &--secondary {
+        color: $colorSecondary;
+        background: rgba($colorSecondary, 0.1);
+      }
+
+      &--label {
+        padding-right: $unit * 0.5;
+        background: none !important;
+      }
+    }
+  }
+}

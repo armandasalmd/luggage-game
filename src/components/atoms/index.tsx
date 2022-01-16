@@ -3,6 +3,7 @@ export { default as Card } from "./Card/Card";
 export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as DailyReward } from "./DailyReward/DailyReward";
 export { default as Empty } from "./Empty/Empty";
+export { default as Friend } from "./Friend/Friend";
 export { default as GameCard } from "./GameCard/GameCard";
 export { default as GameListItem } from "./GameListItem/GameListItem";
 export { default as Input } from "./Input/Input";

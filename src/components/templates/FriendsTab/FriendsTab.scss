@@ -1,0 +1,29 @@
+@import "@styles/Variables.scss";
+
+.friends {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $unit;
+
+  &__cardsLeft, &__cardsRight {
+    display: flex;
+    flex-flow: column;
+    gap: $unit;
+  }
+}
+
+
+@media (max-width: $sm) {
+  .friends {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+
+    &__cardsLeft {
+      grid-row: 2;
+    }
+
+    &__cardsRight {
+      grid-row: 1;
+    }
+  }
+}

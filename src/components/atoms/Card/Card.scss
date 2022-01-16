@@ -21,8 +21,25 @@ $separatorColor: #F7F7FA;
   color: $colorTextDark;
 
   // <start>__ELEMENTS</start>
+  &__actions {
+    display: flex;
+  }
+
   &__content {
     padding: $defaultMargin;
+  }
+
+  &__collapseButton {
+    cursor: pointer;
+    font-size: 1.9rem !important;
+    border-radius: $defaultBorderRadius;
+    color: $shade50;
+    transition: transform .4s ease-in-out !important;
+
+    &:hover {
+      background: $shade5;
+      color: $shade70;
+    }
   }
 
   &__footer {
@@ -73,35 +90,24 @@ $separatorColor: #F7F7FA;
   // <end>__ELEMENTS</end>
 
   // <start> --MODIFIERS </start>
-  &--error {
-    $color: $colorError;
-    border-color: $color;
 
+  &--collapsed {
     #{$base}__header {
-      border-color: $color;
-      &--separatorDashed {
-        border-bottom: none;
-        @include dashedBorder($color);
-      }
+      border-bottom: none;
+    }
+
+    #{$base}__content {
+      display: none;
+    }
+    
+    #{$base}__collapseButton {
+      transform: rotate(-180deg);
     }
   }
 
   &--hoverable:hover {
     border: 1px solid $shade20;
     box-shadow: $shadowCardHover;
-  }
-
-  &--information {
-    $color: $colorInformation;
-    border-color: $color;
-
-    #{$base}__header {
-      border-color: $color;
-      &--separatorDashed {
-        border-bottom: none;
-        @include dashedBorder($color);
-      }
-    }
   }
 
   &--noContentPaddingX {
@@ -118,34 +124,12 @@ $separatorColor: #F7F7FA;
     }
   }
 
+  &--noHeaderLine &__header {
+    border-bottom: none;
+  }
+
   &--padded > &__content {
     padding: $defaultMargin;
-  }
-
-  &--success {
-    $color: $colorSuccess;
-    border-color: $color;
-
-    #{$base}__header {
-      border-color: $color;
-      &--separatorDashed {
-        border-bottom: none;
-        @include dashedBorder($color);
-      }
-    }
-  }
-
-  &--warning {
-    $color: $colorWarning;
-    border-color: $color;
-
-    #{$base}__header {
-      border-color: $color;
-      &--separatorDashed {
-        border-bottom: none;
-        @include dashedBorder($color);
-      }
-    }
   }
 
   &--wrap {

@@ -1,0 +1,20 @@
+@import "@styles/Variables.scss";
+
+.friendsSearch {
+  &__input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $unit * 0.5;
+    margin: 0 $unit $unit $unit;
+  }
+
+  &__list {
+    margin-bottom: $unit;
+  }
+
+  &__pages {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 $unit;
+  }
+}
