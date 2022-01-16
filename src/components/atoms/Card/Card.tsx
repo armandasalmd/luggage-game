@@ -1,31 +1,35 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import classNames from "classnames";
-import "./Card.scss";
 
-type CardType = "error" | "information" | "success" | "warning";
+import "./Card.scss";
+import CollapseIcon from "@material-ui/icons/ExpandLess";
 
 interface CardProps {
+  className?: string;
+  collapsable?: boolean;
+  halfWidth?: boolean;
+  headerActions?: React.ReactElement | React.ReactHTMLElement<any>;
   hoverable?: boolean;
   padded?: boolean;
-  halfWidth?: boolean;
-  style?: object;
-  type?: CardType;
-  wrap?: boolean;
-  title?: string;
-  titleBig?: boolean;
   noContentPaddingX?: boolean;
   noContentPaddingY?: boolean;
-  smallHeaderY?: boolean;
+  noHeaderLine?: boolean;
   noShadow?: boolean;
-  className?: string;
-  headerActions?: React.ReactElement | React.ReactHTMLElement<any>;
+  smallHeaderY?: boolean;
+  style?: object;
+  title?: string;
+  titleBig?: boolean;
+  wrap?: boolean;
 }
 
 const Card: FC<CardProps> = (props) => {
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapse = () => setCollapsed(!collapsed);
+
   const classes = classNames(
     "card",
     {
-      [`card--${props.type}`]: props.type,
+      "card--collapsed": collapsed,
       "card--titleBig": props.titleBig,
       "card--hoverable": props.hoverable,
       "card--padded": props.padded,
@@ -33,8 +37,9 @@ const Card: FC<CardProps> = (props) => {
       "card--wrap": props.wrap,
       "card--noContentPaddingX": props.noContentPaddingX,
       "card--noContentPaddingY": props.noContentPaddingY,
+      "card--noHeaderLine": props.noHeaderLine,
       "card--noShadow": props.noShadow,
-      "card--smallHeaderY": props.smallHeaderY
+      "card--smallHeaderY": props.smallHeaderY || props.collapsable,
     },
     props.className
   );
@@ -44,8 +49,16 @@ const Card: FC<CardProps> = (props) => {
       {props.title && (
         <div className="card__header">
           <h1 className="card__title">{props.title}</h1>
-          {props.headerActions && (
-            <div className="card__actions">{props.headerActions}</div>
+          {(props.headerActions || props.collapsable) && (
+            <div className="card__actions">
+              {props.headerActions}
+              {props.collapsable && (
+                <CollapseIcon
+                  className="card__collapseButton"
+                  onClick={toggleCollapse}
+                />
+              )}
+            </div>
           )}
         </div>
       )}

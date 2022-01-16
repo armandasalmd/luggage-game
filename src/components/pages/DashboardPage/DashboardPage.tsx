@@ -5,6 +5,7 @@ import { Card, message, PillButton, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
 import { DashboardNavbar } from "@components/organisms";
 import {
+  FriendsTab,
   PlayGameTab,
   GameRulesTab,
   GamesHistoryTab,
@@ -26,11 +27,16 @@ const TABS = [
   },
   {
     id: 2,
+    text: "Friends",
+    component: FriendsTab,
+  },
+  {
+    id: 3,
     text: "Games history",
     component: GamesHistoryTab,
   },
   {
-    id: 3,
+    id: 4,
     text: "Rules",
     component: GameRulesTab,
   },

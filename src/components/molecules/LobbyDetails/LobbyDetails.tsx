@@ -33,11 +33,11 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   function onLeave() {
     leaveLobbyAsync().then(result => {
       if (result.success === true) {
-        history.push(RouteUtils.routes.app.main.dashboard.path);
         dispatch(clearLobbyState());
       } else {
-        message.warning("Warning. Cannot leave lobby");
+        message.warning("Something went as not expected");
       }
+      history.push(RouteUtils.routes.app.main.dashboard.path);
     }).catch(() => {
       message.error("Unexpected error");
     });
