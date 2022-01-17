@@ -61,6 +61,28 @@ const Variables: IRouteVariables = {
         path: "/api/game/findActive",
         method: "GET"
       }
+    },
+    friends: {
+      search: {
+        path: "/api/friends/search",
+        method: "POST"
+      },
+      add: {
+        path: "/api/friends/add",
+        method: "POST"
+      },
+      friendsAndInvites: {
+        path: "/api/friends/friendsAndInvites",
+        method: "GET"
+      },
+      remove: {
+        path: "/api/friends",
+        method: "DELETE"
+      },
+      respondInvite: {
+        path: "/api/friends/respondInvite",
+        method: "POST"
+      }
     }
   },
   app: {
