@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     gap: $unit * 0.5;
     margin: 0 $unit $unit $unit;
+    align-items: flex-end;
   }
 
   &__list {
