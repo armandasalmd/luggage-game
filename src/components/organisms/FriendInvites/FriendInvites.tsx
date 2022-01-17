@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { Card, Friend, Empty } from "@components/atoms";
+import { Card, Friend, Empty, Loader } from "@components/atoms";
 import { FriendAction } from "@components/atoms/Friend/Friend";
 import { IFriendUser } from "@utils/game/IFriendUser";
 
 interface FriendInvitesProps {
   invites: IFriendUser[];
   respondInvite(username: string, accept: boolean): void;
+  loading: boolean;
 }
 
 const FriendInvites: FC<FriendInvitesProps> = (props) => {
@@ -33,7 +34,8 @@ const FriendInvites: FC<FriendInvitesProps> = (props) => {
   return (
     <Card collapsable title="Friend invites" noHeaderLine noContentPaddingX noContentPaddingY>
       {invites}
-      {invites.length === 0 && <Empty text="No pending invites" /> }
+      {!props.loading && invites.length === 0 && <Empty text="No pending invites" /> }
+      {props.loading && <Loader marginY />}
     </Card>
   );
 };

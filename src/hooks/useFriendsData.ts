@@ -6,6 +6,7 @@ import { message } from "@components/atoms";
 export default function useFriendsData() {
   const [friends, setFriends] = useState<IFriendUser[]>([]);
   const [invites, setInvites] = useState<IFriendUser[]>([]);
+  const [loading, setLoading] = useState(true);
 
   function remove(username: string) {
     const route = RouteUtils.routes.api.friends.remove;
@@ -53,8 +54,9 @@ export default function useFriendsData() {
         setFriends(res.data.friends || []);
         setInvites(res.data.invites || []);
       }
+      setLoading(false);
     })
   }, []);
 
-  return { friends, invites, respondInvite, remove };
+  return { friends, invites, loading, respondInvite, remove };
 }

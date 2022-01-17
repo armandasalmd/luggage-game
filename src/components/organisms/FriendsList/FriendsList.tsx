@@ -1,12 +1,13 @@
 import { FC } from "react";
 
-import { Card, Friend, Empty } from "@components/atoms";
+import { Card, Friend, Empty, Loader } from "@components/atoms";
 import { FriendAction } from "@components/atoms/Friend/Friend";
 import { IFriendUser } from "@utils/game/IFriendUser";
 
 interface FriendsListProps {
   friends: IFriendUser[];
   remove(username: string): void;
+  loading: boolean;
 }
 
 const FriendsList: FC<FriendsListProps> = (props) => {
@@ -26,7 +27,8 @@ const FriendsList: FC<FriendsListProps> = (props) => {
   return (
     <Card collapsable noHeaderLine noContentPaddingY noContentPaddingX title="Your friends">
       {friends}
-      {friends.length === 0 && <Empty text="Friends list empty" />}
+      {!props.loading && friends.length === 0 && <Empty text="Friends list empty" />}
+      {props.loading && <Loader marginY />}
     </Card>
   );
 };

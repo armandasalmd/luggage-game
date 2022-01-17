@@ -7,11 +7,13 @@ import { ColorType } from "@utils/Types";
 interface LoaderProps {
   color?: ColorType;
   text?: string;
+  marginY?: boolean;
 }
 
 const Loader: FC<LoaderProps> = (props) => {
   const classes = classNames("loader", {
-    "loader--secondary": props.color === "secondary"
+    "loader--secondary": props.color === "secondary",
+    "loader--marginY": props.marginY
   });
 
   return (

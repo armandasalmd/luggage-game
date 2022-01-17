@@ -7,15 +7,15 @@ import {
 import useFriendsData from "@hooks/useFriendsData";
 
 const FriendsTab = () => {
-  const { friends, invites, respondInvite, remove } = useFriendsData();
+  const { friends, invites, loading, respondInvite, remove } = useFriendsData();
 
   return <div className="friends">
     <div className="friends__cardsLeft">
       <FriendsSearch />
     </div>
     <div className="friends__cardsRight">
-      <FriendInvites invites={invites} respondInvite={respondInvite} />
-      <FriendsList friends={friends} remove={remove} />
+      <FriendInvites loading={loading} invites={invites} respondInvite={respondInvite} />
+      <FriendsList loading={loading} friends={friends} remove={remove} />
     </div>
   </div>;
 };

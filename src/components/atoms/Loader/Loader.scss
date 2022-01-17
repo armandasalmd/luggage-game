@@ -72,6 +72,10 @@
   &--secondary {
     @include loader-blades($bladeBorderStyle2);
   }
+
+  &--marginY {
+    margin: $unit * 2 0;
+  }
   
   @include rotate-animation(rotate-one, 35deg, -45deg, 0deg, 35deg, -45deg, 360deg);
   @include rotate-animation(rotate-two, 50deg, 10deg, 0deg, 50deg, 10deg, 360deg);
