@@ -7,6 +7,7 @@ import CollapseIcon from "@material-ui/icons/ExpandLess";
 interface CardProps {
   className?: string;
   collapsable?: boolean;
+  error?: string;
   halfWidth?: boolean;
   headerActions?: React.ReactElement | React.ReactHTMLElement<any>;
   hoverable?: boolean;
@@ -54,12 +55,17 @@ const Card: FC<CardProps> = (props) => {
               {props.headerActions}
               {props.collapsable && (
                 <CollapseIcon
-                  className="card__collapseButton"
+                className="card__collapseButton"
                   onClick={toggleCollapse}
                 />
               )}
             </div>
           )}
+        </div>
+      )}
+      {props.error && (
+        <div className="card__error">
+          <p>{props.error}</p>
         </div>
       )}
       <div className="card__content">{props.children}</div>

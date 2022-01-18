@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import type { RootState } from "@redux/store";
 import { logoutUser } from "@redux/actions";
-import { Navbar } from "@components/molecules";
+import { Navbar, Notifications } from "@components/molecules";
 import { PillButton } from "@components/atoms";
 import GlobalUtils from "@utils/Global";
 import PersonIcon from "@material-ui/icons/Person";
@@ -23,7 +23,8 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
   }
 
   return (
-    <Navbar>
+    <Navbar sticky>
+      <Notifications />
       <PillButton
         onSuffixClick={onLogout}
         prefix={<PersonIcon />}

@@ -4,7 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 import { RootState } from "@redux/store";
 import "./LobbyPage.scss";
 import { DashboardNavbar } from "@components/organisms";
-import { LobbyDetails, LobbyPlayers } from "@components/molecules";
+import {
+  LobbyDetails,
+  LobbyPlayers,
+  LobbyInvites,
+} from "@components/molecules";
 import {
   playerJoinedListener,
   playerLeftListener,
@@ -100,7 +104,8 @@ const LobbyPage: FC = () => {
     <div>
       <DashboardNavbar onLogout={leaveLobbyAsync.bind(this, user.username)} />
       <div className="lobby">
-        <LobbyDetails className="lobby__card" startGame={onGameStart} />
+        <LobbyDetails className="lobby__details" startGame={onGameStart} />
+        <LobbyInvites className="lobby__invites" />
         <div className="lobby__divider"></div>
         <LobbyPlayers
           onWave={iWave}
