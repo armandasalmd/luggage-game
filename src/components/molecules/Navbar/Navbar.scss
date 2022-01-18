@@ -6,10 +6,15 @@
   padding: $unit * .35 $unit;
   background: white;
   box-shadow: $shadowDefault;
-  z-index: 3;
+  z-index: 12;
   
   &__actions {
     display: flex;
     gap: $unit * .5;
+  }
+
+  &--sticky {
+    position: sticky;
+    top: 0px;
   }
 }

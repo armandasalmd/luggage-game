@@ -19,15 +19,25 @@ const FriendsList: FC<FriendsListProps> = (props) => {
   };
 
   function toFriendComponent(user: IFriendUser) {
-    return <Friend name={user.username} avatar={user.avatar} actions={[remove]} />
+    return (
+      <Friend name={user.username} avatar={user.avatar} actions={[remove]} />
+    );
   }
 
   const friends = props.friends?.map(toFriendComponent) ?? [];
 
   return (
-    <Card collapsable noHeaderLine noContentPaddingY noContentPaddingX title="Your friends">
+    <Card
+      collapsable
+      noHeaderLine={friends.length !== 0}
+      noContentPaddingY
+      noContentPaddingX
+      title="Your friends"
+    >
       {friends}
-      {!props.loading && friends.length === 0 && <Empty text="Friends list empty" />}
+      {!props.loading && friends.length === 0 && (
+        <Empty text="Friends list empty" />
+      )}
       {props.loading && <Loader marginY />}
     </Card>
   );

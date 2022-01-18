@@ -1,0 +1,76 @@
+@import "@styles/Variables.scss";
+
+$separatorColor: #F7F7FA;
+
+.notif {
+  $base: &;
+
+  max-width: calc(100vw - $unit * 2);
+  width: $unit * 22;
+  position: fixed;
+  right: $unit;
+  top: $unit * 3.5;
+  background: white;
+  border-radius: $defaultBorderRadius;
+  box-shadow: $shadowDefaultDark;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0, 0.13);
+  z-index: 10;
+
+  &__header {
+    border-bottom: 3px solid $separatorColor;
+    padding: $unit * .5 $unit;
+    display: flex;
+    justify-content: space-between;
+    
+    #{$base}__headerTitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $colorTextDark;
+    }
+    
+    #{$base}__headerClose {
+      border-radius: $defaultBorderRadius;
+      color: $shade30;
+      cursor: pointer;
+      
+      &:hover {
+        color: rgba($colorSecondary, 0.6);
+        background: rgba($colorSecondary, 0.1);
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-flow: column;
+    padding-bottom: $unit * .5;
+    overflow-y: auto;
+    max-height: 75vh;
+
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding: $unit * .5 0;
+    background: $shade5;
+    color: $shade50;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba($colorSecondary, 0.2);
+      color: $colorSecondary;
+    }
+  }
+
+  &--hidden {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $xs) {
+  .notif {
+    width: calc(100vw - $unit * 2);
+  }
+}

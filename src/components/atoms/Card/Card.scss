@@ -42,6 +42,12 @@ $separatorColor: #F7F7FA;
     }
   }
 
+  &__error {
+    background: rgba($colorError, 0.2);
+    color: $colorError;
+    padding: $unit * 0.75 $unit * 1.5;
+  }
+
   &__footer {
     $spacing: $defaultMargin * .5;
 
@@ -96,10 +102,10 @@ $separatorColor: #F7F7FA;
       border-bottom: none;
     }
 
-    #{$base}__content {
+    #{$base}__content, #{$base}__error {
       display: none;
     }
-    
+
     #{$base}__collapseButton {
       transform: rotate(-180deg);
     }

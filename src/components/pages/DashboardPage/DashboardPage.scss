@@ -2,7 +2,6 @@
 
 .dashboard {
   margin-bottom: $unit;
-  overflow-x: hidden;
 
   &__nav {
     margin: $unit;
@@ -21,7 +20,6 @@
   .dashboard__mobileDivider {
     $color: $shade20;
 
-    width: 100%;
     height: 0;
     overflow: visible;
     display: flex;

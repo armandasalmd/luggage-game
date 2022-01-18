@@ -50,6 +50,10 @@ const Variables: IRouteVariables = {
       create: {
         path: "/api/lobby",
         method: "POST"
+      },
+      inviteFriend: {
+        path: "/api/lobby/inviteFriend",
+        method: "POST"
       }
     },
     game: {
@@ -82,7 +86,7 @@ const Variables: IRouteVariables = {
       respondInvite: {
         path: "/api/friends/respondInvite",
         method: "POST"
-      }
+      },
     }
   },
   app: {
