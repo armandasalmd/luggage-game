@@ -18,9 +18,9 @@ const FriendsList: FC<FriendsListProps> = (props) => {
     onClick: props.remove,
   };
 
-  function toFriendComponent(user: IFriendUser) {
+  function toFriendComponent(user: IFriendUser, idx: number) {
     return (
-      <Friend name={user.username} avatar={user.avatar} actions={[remove]} />
+      <Friend key={idx} name={user.username} avatar={user.avatar} actions={[remove]} />
     );
   }
 
