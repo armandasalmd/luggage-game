@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   z-index: 30;
+  pointer-events: none;
 
   &__container {
     @extend %cardBase;

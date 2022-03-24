@@ -53,16 +53,16 @@ const Notifications: FC = () => {
             dispatch(setLobbyState(data.lobbyState));
             history.push("/lobby/" + data.lobbyState.roomCode);
           } else {
-            message.warning("Room is full or game has started");
+            message.information("Room is full or game has started");
             history.push(RouteUtils.routes.app.main.dashboard.path);
           }
         });
       }
 
       const route = RouteUtils.routes.api.lobby.respondInvite;
-      RouteUtils.sendApiRequest(route, { roomCode: roomId, accept }).catch(
-        showGenericError
-      );
+      RouteUtils.sendApiRequest(route, { roomCode: roomId, accept }).catch(() => {
+        message.information("Room is full or game has started");
+      });
     }
     clearNotification(notif);
     setLobbyModalContent(null);
