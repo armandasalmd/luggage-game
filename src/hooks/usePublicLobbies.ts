@@ -30,7 +30,7 @@ export default function usePublicLobbies(rulesFilter: ID, priceFilter: ID) {
   useEffect(() => {
     setFiltered(lobbies.filter((item) => {
       const rulesMatch = !rulesFilter || item.modeTitle === rulesFilter;
-      const priceMatch = !priceFilter || item.price.toString() === priceFilter;
+      const priceMatch = !priceFilter || priceFilter === "-1" || item.price.toString() === priceFilter;
 
       return rulesMatch && priceMatch;
     }));
