@@ -64,6 +64,10 @@ const Variables: IRouteVariables = {
       getActiveGameId: {
         path: "/api/game/findActive",
         method: "GET"
+      },
+      getHistory: {
+        path: "/api/game/history",
+        method: "POST"
       }
     },
     friends: {
