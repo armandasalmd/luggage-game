@@ -1,24 +1,22 @@
 @import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
 
 .modal {
   $base: &;
 
-  position: absolute;
-  z-index: 6;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba($shade100, 0.3);
+  
+  @extend %overlay;
+  z-index: 12;
 
   &__window {
-    z-index: 7;
+    z-index: 13;
     width: 60%;
     background: white;
     border-radius: $defaultBorderRadius;
+    margin-top: -10%;
 
     @media screen and (max-width: $lg) {
       width: 80%;

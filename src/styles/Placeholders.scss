@@ -13,3 +13,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+%overlay {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background: rgba($shade100, 0.3);
+}

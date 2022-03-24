@@ -4,13 +4,18 @@ export interface LobbyMetaData {
   price: number;
   players: number;
   playersMax: number;
+  roomId: string;
+}
+
+export interface FriendMetaData {
+  username: string;
 }
 
 export interface INotification {
   date: Date;
   description: string;
   image?: string;
-  metaData?: LobbyMetaData;
+  metaData?: LobbyMetaData | FriendMetaData;
   title: string;
   type: NotificationType;
 }
