@@ -8,18 +8,37 @@ import {
   ProfitNumber,
   Table,
 } from "@components/atoms";
-import { CellRenderer } from "@components/atoms/Table/ITableData";
-import { tableData } from "./tableData";
+import { CellRenderer, ITableData, ITableColumnDefinition } from "@components/atoms/Table/ITableData";
+import { IHistoryItem } from "@utils/game/IHistoryItem";
+import useGameHistory from "@hooks/useGameHistory";
+import GlobalUtils from "@utils/Global";
+
+const columnDefinitions: ITableColumnDefinition[] = [
+  { key: "place", title: "Place" },
+  { key: "reward", title: "Reward"},
+  { key: "playerCount", title: "Players count"},
+  { key: "roomId", title: "Room code"},
+  { key: "date", title: "Date"}
+];
 
 const GamesHistoryTab: FC = () => {
-  const [historyData] = useState([]); // replace with useGameHistory();
+  const { historyData, jump, maxPage } = useGameHistory(5); // replace with useGameHistory();
 
   const renderers: CellRenderer[] = [
     {
-      key: "price",
+      key: "reward",
       renderer: (data: any) => <ProfitNumber value={parseInt(data)} />,
     },
+    {
+      key: "date",
+      renderer: (date: any) => <p>{GlobalUtils.toDisplayDate(date)}</p>
+    }
   ];
+
+  const tableData: ITableData<IHistoryItem> = {
+    columnDefinitions,
+    rows: historyData
+  };
 
   return (
     <Card className="history" title="Your games history" noContentPaddingX>
@@ -36,7 +55,7 @@ const GamesHistoryTab: FC = () => {
             />
           </div>
           <div className="history__pages">
-            <Pagination pageCount={1} />
+            <Pagination onChange={jump} pageCount={maxPage} />
           </div>
         </>
       )}

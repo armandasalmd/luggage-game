@@ -26,6 +26,17 @@ const GlobalUtils = {
   },
   pluralize: (text: string, n: number): string => {
     return n === 1 ? text : text + "s";
+  },
+  toDisplayDate: (date: string | Date): string => {
+    if (typeof date === "string") {
+      date = new Date(date);
+    }
+    if (date instanceof Date) {
+      const minutes = date.getMinutes();
+      return date.toLocaleDateString() + ", " + date.getHours() + ":" + (minutes < 10 ? "0" : "") + minutes;
+    } else {
+      return "No date";
+    }
   }
 };
 
