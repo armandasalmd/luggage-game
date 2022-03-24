@@ -93,12 +93,12 @@ const NotificationItem: FC<NotificationItemProps> = (props) => {
       <div className="notifItem__body">
         <div className="notifItem__title">
           <p>{props.data.title}</p>
-          <p>10 mins ago</p>
+          <p>{GlobalUtils.toDisplayDate(props.data.date)}</p>
         </div>
         <p className="notifItem__desc">{props.data.description}</p>
-        {props.data.metaData && (
+        {props.data.type === "lobbyInvite" && (
           <div className="notifItem__metaData">
-            <LobbyDetails {...props.data.metaData} />
+            <LobbyDetails {...props.data.metaData as LobbyMetaData} />
           </div>
         )}
         {actions.length !== 0 && (

@@ -20,6 +20,7 @@ function App() {
         <AuthSwitch />
       </Router>
       <div id="modal-container"></div>
+      <div id="screen-cover"></div>
     </Provider>
   );
 }

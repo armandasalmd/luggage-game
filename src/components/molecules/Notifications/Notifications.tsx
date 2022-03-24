@@ -1,70 +1,149 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect, useLayoutEffect } from "react";
 import classNames from "classnames";
 
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import "./Notifications.scss";
-import { PillButton, NotificationItem } from "@components/atoms";
+import {
+  PillButton,
+  NotificationItem,
+  Empty,
+  Modal,
+  Button,
+} from "@components/atoms";
 import NotifIcon from "@material-ui/icons/Notifications";
 import NotifActiveIcon from "@material-ui/icons/NotificationsActive";
 import CloseIcon from "@material-ui/icons/Close";
-import { INotification } from "@utils/game/INotification";
+import {
+  FriendMetaData,
+  INotification,
+  LobbyMetaData,
+} from "@utils/game/INotification";
 import { ActionButton } from "@components/atoms/NotificationItem/NotificationItem";
+import useNotifications from "@hooks/useNotifications";
+import { setLobbyState } from "@redux/actions";
+import { joinLobbyAsync } from "@socket/lobby";
+import { message } from "@components/atoms";
+import RouteUtils from "@utils/Route";
 
-interface NotificationsProps {}
+const Notifications: FC = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-const Notifications: FC<NotificationsProps> = (props) => {
-  const notifIcon = false ? <NotifIcon /> : <NotifActiveIcon />;
+  const {
+    notifications,
+    clearNotification,
+    lobbyModalContent,
+    setLobbyModalContent,
+  } = useNotifications();
   const [open, setOpen] = useState(false);
 
-  const item: INotification = {
-    description: "Klaidonsas has invited you to join lobby classic game lobby",
-    title: "Lobby invite",
-    type: "lobbyInvite",
-    metaData: {
-      players: 3,
-      playersMax: 5,
-      price: 10000,
-    },
-    date: new Date()
-  };
+  const showGenericError = () =>
+    message.warning("Cannot perform selected action");
 
-  const item2: INotification = {
-    image: "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2992003664389087&height=50&width=50&ext=1643306808&hash=AeQw1E_P2NOvdQUQhGY",
-    description: "Requested to add you as a friend",
-    title: "Tomas Sargautis",
-    type: "friendInvite",
-    date: new Date()
-  };
+  function respondToLobbyInvite(notif: INotification | null, accept: boolean) {
+    if (!notif) return;
+    const roomId = (notif.metaData as LobbyMetaData).roomId;
 
-  const item3: INotification = {
-    description: "Requested to add you as a friend",
-    title: "Jonas Petrovas",
-    type: "friendInvite",
-    date: new Date()
-  };
+    if (roomId) {
+      if (accept) {
+        joinLobbyAsync(roomId).then(function (data) {
+          if (data.success) {
+            dispatch(setLobbyState(data.lobbyState));
+            history.push("/lobby/" + data.lobbyState.roomCode);
+          } else {
+            message.warning("Room is full or game has started");
+            history.push(RouteUtils.routes.app.main.dashboard.path);
+          }
+        });
+      }
+
+      const route = RouteUtils.routes.api.lobby.respondInvite;
+      RouteUtils.sendApiRequest(route, { roomCode: roomId, accept }).catch(
+        showGenericError
+      );
+    }
+    clearNotification(notif);
+    setLobbyModalContent(null);
+  }
+
+  function respondToFriendInvite(notif: INotification | null, accept: boolean) {
+    if (!notif) return;
+    const username = (notif.metaData as FriendMetaData).username;
+
+    if (username) {
+      const route = RouteUtils.routes.api.friends.respondInvite;
+      RouteUtils.sendApiRequest(route, { username, accept }).catch(
+        showGenericError
+      );
+    }
+  }
 
   const accept: ActionButton = {
     text: "Accept",
     type: "primary",
-    onClick: (item: INotification) => console.log("Accept:", item)
+    onClick: (item: INotification) => {
+      if (item.type === "lobbyInvite") {
+        respondToLobbyInvite(item, true);
+      } else {
+        respondToFriendInvite(item, true);
+      }
+      clearNotification(item);
+    },
   };
 
   const reject: ActionButton = {
     text: "Reject",
     type: "secondary",
-    onClick: (item: INotification) => console.log("Reject:", item)
+    onClick: (item: INotification) => {
+      if (item.type === "lobbyInvite") {
+        respondToLobbyInvite(item, false);
+      } else {
+        respondToFriendInvite(item, false);
+      }
+      clearNotification(item);
+    },
   };
 
   const actions = [accept, reject];
   const classes = classNames("notif", {
-    "notif--hidden": !open
+    "notif--hidden": !open,
   });
 
   const toggle = () => setOpen(!open);
+  const itemComponents = notifications.map((item, index) => (
+    <NotificationItem data={item} actions={actions} key={index} />
+  ));
+
+  const notifIcon =
+    itemComponents.length === 0 ? (
+      <NotifIcon />
+    ) : (
+      <NotifActiveIcon className="waveAnimation" />
+    );
+
+  useEffect(() => {
+    if (lobbyModalContent === null) return;
+    // Small/big screens
+    if (window.innerWidth < 500) {
+      setOpen(false);
+    } else {
+      message.information(lobbyModalContent.title + ". Check notifications");
+    }
+  }, [lobbyModalContent]);
+
+  useLayoutEffect(() => {
+    const elem = document.getElementById("screen-cover");
+    if (elem) {
+      elem.style.display = open ? "block" : "none";
+    }
+  }, [open]);
 
   return (
     <>
       <PillButton onClick={toggle} prefix={notifIcon} colorType="secondary">
-        3
+        {" " + itemComponents.length}
       </PillButton>
       <div className={classes}>
         <div className="notif__header">
@@ -72,14 +151,37 @@ const Notifications: FC<NotificationsProps> = (props) => {
           <CloseIcon onClick={toggle} className="notif__headerClose" />
         </div>
         <div className="notif__items">
-          <NotificationItem data={item} actions={actions} />
-          <NotificationItem data={item2} actions={actions} />
-          <NotificationItem data={item3} actions={actions} />
+          {itemComponents.length === 0 ? (
+            <Empty text="No new notifications" />
+          ) : (
+            itemComponents
+          )}
         </div>
         <div className="notif__footer" onClick={toggle}>
           <span>Close panel</span>
         </div>
       </div>
+      <Modal
+        isOpen={!!lobbyModalContent}
+        onClose={() => setLobbyModalContent(null)}
+        flyInAnimation
+        title="Invite to a game"
+      >
+        <h4 style={{ marginBottom: 16 }}>{lobbyModalContent?.description}</h4>
+        <div style={{ display: "flex", gap: 8, justifyContent: "right" }}>
+          <Button
+            onClick={() => respondToLobbyInvite(lobbyModalContent, false)}
+          >
+            Reject
+          </Button>
+          <Button
+            onClick={() => respondToLobbyInvite(lobbyModalContent, true)}
+            type="accent"
+          >
+            Join lobby
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 };
