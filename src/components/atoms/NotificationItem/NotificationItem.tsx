@@ -8,6 +8,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import { priceDropdown } from "@components/molecules/PriceSelect/PriceSelect";
 import { ColorType } from "@utils/Types";
 import GlobalUtils from "@utils/Global";
+import Constants from "@utils/Constants";
 
 const PlaySvg = () => {
   return (
@@ -77,7 +78,14 @@ const NotificationItem: FC<NotificationItemProps> = (props) => {
     <div className="notifItem">
       <div className="notifItem__image">
         {image ? (
-          <img src={image} alt="avatar" className="notifItem__image" />
+          <img 
+            src={image}
+            alt="avatar"
+            className="notifItem__image"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src=Constants.defaultAvatar;
+            }} />
         ) : (
           <PlaySvg />
         )}

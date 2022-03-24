@@ -18,7 +18,7 @@ const PublicGames: FC<PublicGamesProps> = () => {
   const dispatch = useDispatch();
 
   const [rules, setRules] = useState<ID>("classic");
-  const [price, setPrice] = useState<ID>("250");
+  const [price, setPrice] = useState<ID>("-1");
   const [lobbies] = usePublicLobbies(rules, price);
 
   const { jump, currentData, maxPage, setData } = usePagination(lobbies, 10);
@@ -47,6 +47,7 @@ const PublicGames: FC<PublicGamesProps> = () => {
     <Card className="publicGames" title="Public games">
       <div className="publicGames__filter">
         <PriceSelect
+          enableAny
           title="Game price"
           defaultSelectedId={price}
           onChange={setPrice}

@@ -38,10 +38,20 @@ export const priceDropdown = [
   },
 ];
 
-interface PriceSelectProps extends Omit<SelectProps, OmitedProps> {}
+interface PriceSelectProps extends Omit<SelectProps, OmitedProps> {
+  enableAny?: boolean;
+}
 
 const PriceSelect: FC<PriceSelectProps> = (props) => {
-  return <Select {...props} idKey="key" textKey="value" items={priceDropdown} />;
+  const items = props.enableAny ? [
+    {
+      key: -1,
+      value: "Any price",
+    },
+    ...priceDropdown
+  ] : priceDropdown;
+
+  return <Select {...props} idKey="key" textKey="value" items={items} />;
 };
 
 export default PriceSelect;

@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import "./Friend.scss";
-import { ColorType } from "@utils/Types";
+import Constants from "@utils/Constants";
 import GlobalUtils from "@utils/Global";
+import { ColorType } from "@utils/Types";
 import { FC } from "react";
 
 type FriendActionType = "button" | "label";
@@ -48,7 +49,11 @@ const Friend: FC<FriendProps> = (props) => {
       <img
         className="friend__avatar"
         alt="avatar"
-        src={props.avatar || "/images/avatar.png"}
+        src={props.avatar || Constants.defaultAvatar}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src=Constants.defaultAvatar;
+        }}
       />
       <p className="friend__name">{props.name}</p>
       <div className="friend__actions">
