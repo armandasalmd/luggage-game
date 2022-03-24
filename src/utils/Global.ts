@@ -32,8 +32,9 @@ const GlobalUtils = {
       date = new Date(date);
     }
     if (date instanceof Date) {
-      const minutes = date.getMinutes();
-      return date.toLocaleDateString() + ", " + date.getHours() + ":" + (minutes < 10 ? "0" : "") + minutes;
+      const m = date.getMinutes();
+      const h = date.getHours();
+      return date.toLocaleDateString() + ", " + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
     } else {
       return "No date";
     }
