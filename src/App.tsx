@@ -9,8 +9,8 @@ import AuthUtils from "@utils/Auth";
 function App() {
   useEffect(() => {
     if (AuthUtils) {
-      AuthUtils.resetAuthTokenFromStorage();
       AuthUtils.applyUnauthorisedMiddleware();
+      AuthUtils.resetAuthTokenFromStorage();
     }
   }, []);
 
