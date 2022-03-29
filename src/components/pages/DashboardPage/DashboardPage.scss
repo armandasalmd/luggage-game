@@ -17,6 +17,14 @@
 }
 
 @media screen and (max-width: $sm) {
+  .dashboard__nav {
+    margin: $unit * 0.5;
+  }
+
+  .dashboard__main {
+    margin: $unit * 0.5;
+  }
+
   .dashboard__mobileDivider {
     $color: $shade20;
 
