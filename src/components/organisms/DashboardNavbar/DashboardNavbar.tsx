@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { RootState } from "@redux/store";
 import { logoutUser } from "@redux/actions";
-import { Navbar, Notifications } from "@components/molecules";
 import { PillButton } from "@components/atoms";
+import { Navbar, Notifications } from "@components/molecules";
+import { SettingsModal } from "@components/templates";
 import GlobalUtils from "@utils/Global";
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
@@ -16,16 +17,24 @@ interface DashboardNavbarProps {
 const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   function onLogout() {
     dispatch(logoutUser());
     GlobalUtils.callIfFunction(props.onLogout);
   }
 
+  function onOpenSettings() {
+    setNotificationsOpen(false);
+    setSettingsOpen(true);
+  }
+
   return (
     <Navbar sticky>
-      <Notifications />
+      <Notifications open={notificationsOpen} setOpen={setNotificationsOpen} />
       <PillButton
+        onClick={onOpenSettings}
         onSuffixClick={onLogout}
         prefix={<PersonIcon />}
         suffix={<LogoutIcon />}
@@ -34,6 +43,10 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
       >
         {user.username}
       </PillButton>
+      <SettingsModal
+        isOpen={settingsOpen}
+        onClose={setSettingsOpen.bind(null, false)}
+      />
     </Navbar>
   );
 };

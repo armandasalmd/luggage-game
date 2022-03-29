@@ -17,7 +17,6 @@ import { RootState } from "@redux/store";
 import "./DashboardPage.scss";
 
 const PAGE_TITLE = "Game dashboard";
-
 const DEFAULT_ACTIVE_TAB = 1;
 const TABS = [
   {
@@ -97,6 +96,7 @@ const DashboardPage: FC = () => {
           noDivider
           externalRender
           onTabChange={setTabId}
+          resetOnNavbarLogoClick
         >
           {tabs}
         </Tabs>

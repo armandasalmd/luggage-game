@@ -6,9 +6,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import GlobalUtils from "@utils/Global";
 
 interface ModalProps {
+  flyInAnimation?: boolean;
+  fullScreen?: boolean;
   isOpen: boolean;
   onClose?(state: boolean): void;
-  flyInAnimation?: boolean;
   title: string;
 }
 
@@ -28,6 +29,7 @@ const Modal: FC<ModalProps> = (props) => {
     }
 
     const classes = classNames("modal__window", {
+      "modal__window--fullScreen": props.fullScreen,
       "modal__window--flyInBottom": props.flyInAnimation,
     });
 

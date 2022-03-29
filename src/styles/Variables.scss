@@ -6,14 +6,6 @@ $defaultBorderRadius: $unit * .5;
 $defaultMargin: $unit;
 
 /**
- * ====== SHADOWS ======
- */
-$shadowDefault: 0 0 12px 0 rgba(0, 0, 0, 0.09);
-$shadowDefaultDark: 0 0 18px 0 rgba(0, 0, 0, 0.2);
-$shadowCard: $shadowDefault;
-$shadowCardHover: $shadowDefaultDark;
-
-/**
  * ====== FONTS ======
  */
 $defaultFont: 'Source Sans Pro', sans-serif;
@@ -47,6 +39,17 @@ $colorSuccess: #6daf4c;
 $colorTextLight: #f5f3ea;
 $colorTextDark: #302f2f;
 $colorBackground: #F4F5F9;
+
+/**
+ * ====== SHADOWS ======
+ */
+$shadowDefault: 0 0 12px 0 rgba(0, 0, 0, 0.09);
+$shadowDefaultDark: 0 0 18px 0 rgba(0, 0, 0, 0.2);
+$shadowCard: $shadowDefault;
+$shadowCardHover: $shadowDefaultDark;
+$shadowInput: 0 0 0 2px rgba($colorPrimary, 0.3);
+$shadowInputError: 0 0 0 2px rgba($colorError, 0.3);
+$shadowInputWarning: 0 0 0 2px rgba($colorWarning, 0.3);
 
 /**
  * ====== MEDIA QUERIES ======

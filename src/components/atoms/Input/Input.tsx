@@ -25,7 +25,8 @@ interface InputProps {
 const Input: FC<InputProps> = (props) => {
   const classes = classNames("input", {
     [`input--${props.type}`]: props.type,
-    "input--tall": props.tall
+    "input--tall": props.tall,
+    "input--error": props.error
   }, props.className);
 
   function setValue(value: string) {

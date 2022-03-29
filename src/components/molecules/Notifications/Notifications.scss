@@ -31,7 +31,7 @@ $separatorColor: #F7F7FA;
     
     #{$base}__headerClose {
       border-radius: $defaultBorderRadius;
-      color: $shade30;
+      color: $shade40;
       cursor: pointer;
       
       &:hover {
@@ -50,19 +50,19 @@ $separatorColor: #F7F7FA;
 
   }
 
-  &__footer {
-    display: flex;
-    justify-content: center;
-    padding: $unit * .5 0;
-    background: $shade5;
-    color: $shade50;
-    cursor: pointer;
+  // &__footer {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: $unit * .5 0;
+  //   background: $shade5;
+  //   color: $shade50;
+  //   cursor: pointer;
 
-    &:hover {
-      background: rgba($colorSecondary, 0.2);
-      color: $colorSecondary;
-    }
-  }
+  //   &:hover {
+  //     background: rgba($colorSecondary, 0.2);
+  //     color: $colorSecondary;
+  //   }
+  // }
 
   &--hidden {
     display: none;

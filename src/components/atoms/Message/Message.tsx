@@ -1,6 +1,7 @@
 import { FC } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
+import Constants from "@utils/Constants";
 import "./Message.scss";
 import { CheckCircle, Info, Warning, Error } from "@material-ui/icons";
 
@@ -63,7 +64,7 @@ function messageImpl(message: string, type: MessageType, align?: AlignType) {
 const items = {
   message: messageImpl,
   success: (message: string) => messageImpl(message, "success"),
-  error: (message: string) => messageImpl(message, "error"),
+  error: (message?: string) => messageImpl(message || Constants.defaultErrorMessage, "error"),
   warning: (message: string) => messageImpl(message, "warning"),
   information: (message: string) => messageImpl(message, "information"),
 };

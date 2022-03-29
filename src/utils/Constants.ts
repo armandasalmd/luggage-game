@@ -1,13 +1,14 @@
 const constants = {
   authTokenType: "Bearer",
   defaultAvatar: "/images/avatar.png",
+  defaultErrorMessage: "Unexpected error",
   env: process.env.NODE_ENV,
   servers: {
     devApi: "http://localhost:3001",
     prodApi: "https://luggage-api.herokuapp.com",
     assets: "https://luggage-cards.s3.eu-central-1.amazonaws.com"
   },
-  preferDevApi: false,
+  preferDevApi: true,
   cardRotation: {
     from: -6,
     to: 6
