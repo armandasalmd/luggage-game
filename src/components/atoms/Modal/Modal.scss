@@ -30,25 +30,6 @@
       animation-name: flyInBottom, fadeIn;
       animation-timing-function: ease, ease-in;
       animation-duration: 350ms, 200ms;
-
-      @keyframes flyInBottom {
-        from {
-          transform: translateY(50px);
-        }
-        to {
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
     }
   }
 

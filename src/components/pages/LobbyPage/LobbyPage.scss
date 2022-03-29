@@ -41,7 +41,7 @@
   .lobby {
     display: flex;
     flex-flow: column;
-    margin: $unit;
+    margin: $unit * 0.5;
 
     &__divider {
       display: block;
