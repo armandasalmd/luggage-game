@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from "react";
+import React, { FC, ReactElement, useState, useEffect } from "react";
 import classNames from "classnames";
 import "./Tabs.scss";
 import { TabItemProps } from "@components/atoms/TabItem/TabItem";
@@ -18,11 +18,12 @@ interface ReactTabItemProps extends TabItemProps {
 interface TabsProps {
   children: ReactElement<TabItemProps>[];
   defaultActiveTab: ID;
+  externalRender?: boolean;
   mobileFriendlyMenu?: boolean;
   mobileMenuItems?: any[];
   noDivider?: boolean;
-  externalRender?: boolean;
   onTabChange?(id: ID): void;
+  resetOnNavbarLogoClick?: boolean;
 }
 
 const Tabs: FC<TabsProps> = (props) => {
@@ -68,6 +69,14 @@ const Tabs: FC<TabsProps> = (props) => {
       return tab.id === activeTabId;
     })?.container;
   }
+
+  useEffect(() => {
+    if (props.resetOnNavbarLogoClick === true) {
+      const toDefaultTab = () => onTabItemClick(props.defaultActiveTab);
+      document.addEventListener("navbarLogoClick", toDefaultTab);
+      return () => document.removeEventListener("navbarLogoClick", toDefaultTab);
+    }
+  });
 
   return (
     <div className={classes}>

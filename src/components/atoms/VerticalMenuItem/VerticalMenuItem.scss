@@ -1,34 +1,43 @@
 @import "@styles/Variables.scss";
 
+.verticalMenuRipple {
+  width: calc(100% - $unit);
+  user-select: none;
+  margin-left: $unit * 0.5;
+  margin-right: $unit * 0.5;
+  border-radius: $defaultBorderRadius;
+  margin-bottom: $unit * 0.25;
+}
+
 .verticalMenuItem {
   $base: &;
 
   background: white;
-  height: $unit * 3;
+  height: $unit * 2.6;
   user-select: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding-left: $unit;
+  padding-left: $unit * 1.5;
   width: 100%;
 
   &:hover {
-    background: rgba($colorPrimary, .1);
+    background: rgba($colorPrimary, 0.05);
   }
 
   &--selected {
     color: $colorPrimary;
-    background: rgba($colorPrimary, .1);
-    
+    background: rgba($colorPrimary, 0.05);
+
     &#{$base}--secondary {
       color: $colorSecondary;
-      background: rgba($colorSecondary, .1);
+      background: rgba($colorSecondary, 0.05);
     }
   }
 
   &--secondary {
     &:hover {
-      background: rgba($colorSecondary, .1);
+      background: rgba($colorSecondary, 0.05);
     }
   }
 
@@ -37,10 +46,10 @@
 
     &::before {
       position: absolute;
-      transform: translateX(-($unit + $handleSize));
+      transform: translateX(-($unit * 0.5 + $handleSize));
       content: "";
-      width: $handleSize * 2;
-      height: 65%;
+      width: $handleSize;
+      height: 45%;
       border-radius: $defaultBorderRadius;
       background-color: $colorPrimary;
     }

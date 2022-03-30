@@ -21,4 +21,21 @@
   top: 0;
   left: 0;
   background: rgba($shade100, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+%inputBase {
+  outline: none;
+  padding: 0.3em 0.7em;
+  border: 1px solid #c7c7c9;
+  border-radius: $defaultBorderRadius;
+  height: 36px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+%inputFocus {
+  border: 1px solid $colorPrimary;
+  box-shadow: $shadowInput;
+  background-color: white;
 }

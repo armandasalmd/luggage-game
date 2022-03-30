@@ -26,7 +26,8 @@ const Select: FC<SelectProps> = (props) => {
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedItemId(e.target.value);
-      
+    e.target.blur(); // remove focus
+
     if (typeof props.onChange === "function") {
       props.onChange(e.target.value, props.items.find(function (item) {
         return item[props.idKey].toString() === e.target.value;

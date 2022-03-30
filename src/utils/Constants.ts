@@ -1,6 +1,7 @@
 const constants = {
   authTokenType: "Bearer",
   defaultAvatar: "/images/avatar.png",
+  defaultErrorMessage: "Unexpected error",
   env: process.env.NODE_ENV,
   messageDuration: 5000,
   servers: {

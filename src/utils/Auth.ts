@@ -7,7 +7,7 @@ import { setToken, logoutUser } from "@redux/actions";
 
 function applyUnauthorisedMiddleware() {
   axios.interceptors.response.use((response: any) => response, (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401 ?? false) {
       removeJwtToken();
       window.location.reload();
     }

@@ -10,12 +10,13 @@
   
   @extend %overlay;
   z-index: 12;
-
+  
   &__window {
     z-index: 13;
     width: 60%;
     background: white;
     border-radius: $defaultBorderRadius;
+    box-shadow: $shadowDefaultDark;
     margin-top: -10%;
 
     @media screen and (max-width: $lg) {
@@ -23,13 +24,22 @@
     }
 
     @media screen and (max-width: $md) {
-      width: 90%;
+      width: 92%;
     }
 
     &--flyInBottom {
       animation-name: flyInBottom, fadeIn;
       animation-timing-function: ease, ease-in;
       animation-duration: 350ms, 200ms;
+    }
+
+    &--fullScreen {
+      margin-top: 0;
+      height: calc(100% - $unit * 2);
+    }
+
+    &--paddless > #{$base}__body {
+      padding: 0;
     }
   }
 
@@ -51,10 +61,11 @@
     }
 
     #{$base}__close {
-      height: $unit * 1.8;
-      width: $unit * 1.8;
+      height: $unit * 1.5;
+      width: $unit * 1.5;
       cursor: pointer;
       border-radius: $defaultBorderRadius;
+      color: $shade40;
 
       &:hover {
         background: rgba($colorSecondary, 0.1);

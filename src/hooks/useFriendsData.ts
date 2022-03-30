@@ -12,25 +12,25 @@ export default function useFriendsData() {
     const route = RouteUtils.routes.api.friends.remove;
 
     RouteUtils.sendApiRequest(route, {
-      username
+      username,
     }).then((res) => {
       if (res.data && res.data.errorMessage) {
         message.error(res.data.errorMessage);
       } else {
-        setFriends(friends.filter(item => item.username !== username));
+        setFriends(friends.filter((item) => item.username !== username));
       }
-    })
+    });
   }
-  
+
   function respondInvite(username: string, accept: boolean) {
     const route = RouteUtils.routes.api.friends.respondInvite;
 
     RouteUtils.sendApiRequest(route, {
       accept,
-      username
+      username,
     }).then((res) => {
       if (res.status === 200) {
-        const user = invites.find(item => item.username === username);
+        const user = invites.find((item) => item.username === username);
 
         if (user) {
           if (accept === true) {
@@ -38,7 +38,7 @@ export default function useFriendsData() {
             setFriends([user, ...friends]);
           }
 
-          setInvites(invites.filter(item => item.username !== username));
+          setInvites(invites.filter((item) => item.username !== username));
         }
       } else {
         message.error("Unexpected error");
@@ -55,7 +55,9 @@ export default function useFriendsData() {
         setInvites(res.data.invites || []);
       }
       setLoading(false);
-    })
+    });
+
+    return RouteUtils.axiosAbort;
   }, []);
 
   return { friends, invites, loading, respondInvite, remove };

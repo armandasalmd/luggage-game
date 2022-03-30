@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-// import usePagination from "./usePagination";
 import { IHistoryItem } from "@utils/game/IHistoryItem";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
@@ -14,16 +13,20 @@ export default function useGameHistory(itemsPerPage: number) {
     RouteUtils.sendApiRequest(route, {
       pageSize: itemsPerPage,
       pageNumber: pageNumber
-    }).then((res) => {
+    })
+    .then((res) => {
       if (Array.isArray(res.data.items)) {
         setHistoryData(res.data.items);
         setMaxPage(res.data.pagesCount);
-      } else message.error("Unexpected error")
-    }).catch(() => message.error("Unexpected error"));
+      } else message.error("Unexpected error");
+    })
+    .catch(message.error);
   }, [itemsPerPage]);
 
   useEffect(() => {
-    loadPage(1)
+    loadPage(1);
+
+    return RouteUtils.axiosAbort;
   }, [loadPage]);
 
   return { historyData, jump: loadPage, maxPage };

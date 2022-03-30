@@ -21,21 +21,20 @@
       left: 0;
       right: 0;
       height: 2.5px;
-      z-index: 3;
       border-radius: 3px;
     }
   }
 
   &__text {
     padding: $unit * 0.4  $unit * 0.2;
-
-    &:hover {
-      color: $colorPrimary;
-    }
   }
 
   &:hover:not(#{$root}--active) {
     background: rgba($colorPrimary, 0.075);
     border-radius: $defaultBorderRadius;
+
+    #{$root}__text {
+      color: $colorPrimary;
+    }
   }
 }

@@ -22,7 +22,7 @@ const columnDefinitions: ITableColumnDefinition[] = [
 ];
 
 const GamesHistoryTab: FC = () => {
-  const { historyData, jump, maxPage } = useGameHistory(5); // replace with useGameHistory();
+  const { historyData, jump, maxPage } = useGameHistory(5);
 
   const renderers: CellRenderer[] = [
     {

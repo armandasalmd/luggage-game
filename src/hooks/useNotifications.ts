@@ -15,10 +15,12 @@ export default function useNotifications() {
   function onPush(newNotifs: INotification[]) {
     setNotifs([...newNotifs, ...notifs]);
 
-    const lobbyNotif = newNotifs.find((item) => item.type === "lobbyInvite");
-
-    if (lobbyNotif) {
-      setLobbyModalContent(lobbyNotif);
+    if (lobbyModalContent === null) {
+      const lobbyNotif = newNotifs.find((item) => item.type === "lobbyInvite");
+      
+      if (lobbyNotif) {
+        setLobbyModalContent(lobbyNotif);
+      }
     }
   }
 

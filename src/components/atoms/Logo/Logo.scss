@@ -3,17 +3,27 @@
 .logo {
   display: flex;
   align-items: center;
+  padding: 0 $unit * 0.5;
 
   &__text {
-    margin-left: $unit * .5;
+    margin-left: $unit * 0.5;
     font-weight: 600;
     color: $colorTextDark;
+    user-select: none;
   }
 
   &--noText > p {
     display: none;
   }
 
+  &--selectable {
+    cursor: pointer;
+
+    &:hover {
+      background: $shade5;
+      border-radius: $defaultBorderRadius;
+    }
+  }
 }
 
 @media (max-width: $sm) {
