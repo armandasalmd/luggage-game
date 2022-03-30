@@ -37,6 +37,10 @@
       margin-top: 0;
       height: calc(100% - $unit * 2);
     }
+
+    &--paddless > #{$base}__body {
+      padding: 0;
+    }
   }
 
   &__body {

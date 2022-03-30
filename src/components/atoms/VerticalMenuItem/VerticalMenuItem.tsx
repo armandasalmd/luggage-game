@@ -25,7 +25,7 @@ const VerticalMenuItem: FC<VerticalMenuItemProps> = (props) => {
     primaryColor + "30" : secondaryColor + "30";
 
   let Ripple = createRipples({
-    className: "fullWidth noSelect",
+    className: "verticalMenuRipple",
     during: 600,
     color: color
   });

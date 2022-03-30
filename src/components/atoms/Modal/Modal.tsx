@@ -10,6 +10,7 @@ interface ModalProps {
   fullScreen?: boolean;
   isOpen: boolean;
   onClose?(state: boolean): void;
+  noPadding?: boolean;
   title: string;
 }
 
@@ -31,6 +32,7 @@ const Modal: FC<ModalProps> = (props) => {
     const classes = classNames("modal__window", {
       "modal__window--fullScreen": props.fullScreen,
       "modal__window--flyInBottom": props.flyInAnimation,
+      "modal__window--paddless": props.noPadding,
     });
 
     function preventBubble(e: SyntheticEvent) {
@@ -58,7 +60,7 @@ const Modal: FC<ModalProps> = (props) => {
     }
   }, [props]);
 
-  return <div></div>;
+  return null;
 };
 
 export default Modal;

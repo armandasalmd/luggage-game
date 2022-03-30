@@ -1,5 +1,14 @@
 @import "@styles/Variables.scss";
 
+.verticalMenuRipple {
+  width: calc(100% - $unit);
+  user-select: none;
+  margin-left: $unit * 0.5;
+  margin-right: $unit * 0.5;
+  border-radius: $defaultBorderRadius;
+  margin-bottom: $unit * 0.25;
+}
+
 .verticalMenuItem {
   $base: &;
 
@@ -40,7 +49,7 @@
       transform: translateX(-($unit * 0.5 + $handleSize));
       content: "";
       width: $handleSize;
-      height: 55%;
+      height: 45%;
       border-radius: $defaultBorderRadius;
       background-color: $colorPrimary;
     }

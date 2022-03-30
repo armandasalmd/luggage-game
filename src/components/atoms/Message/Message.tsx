@@ -14,10 +14,7 @@ const items = {
   success: (message: string) => toast.success(message, DEFAULT_OPTIONS),
   error: (message: string) => toast.error(message, DEFAULT_OPTIONS),
   warning: (message: string) => toast.warning(message, DEFAULT_OPTIONS),
-  information: (message: string) => {
-    console.log(DEFAULT_OPTIONS);
-    toast.info(message, DEFAULT_OPTIONS)
-  },
+  information: (message: string) => toast.info(message, DEFAULT_OPTIONS),
 };
 
 export default items;

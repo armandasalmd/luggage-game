@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useLayoutEffect } from "react";
+import { FC, useEffect, useLayoutEffect } from "react";
 import classNames from "classnames";
 
 import { useHistory } from "react-router-dom";
