@@ -16,6 +16,9 @@ $separatorColor: #F7F7FA;
   overflow: hidden;
   border: 1px solid rgba(0,0,0, 0.13);
   z-index: 10;
+  animation-name: flyInRight, fadeIn;
+  animation-timing-function: ease, ease-in;
+  animation-duration: 350ms, 200ms;
 
   &__header {
     border-bottom: 3px solid $separatorColor;

@@ -3,6 +3,7 @@ const constants = {
   defaultAvatar: "/images/avatar.png",
   defaultErrorMessage: "Unexpected error",
   env: process.env.NODE_ENV,
+  messageDuration: 5000,
   servers: {
     devApi: "http://localhost:3001",
     prodApi: "https://luggage-api.herokuapp.com",
@@ -12,7 +13,7 @@ const constants = {
   cardRotation: {
     from: -6,
     to: 6
-  }
+  },
 };
 
 export default constants;
