@@ -1,4 +1,18 @@
+import { SyntheticEvent } from "react";
+import Constants from "./Constants";
+
 const GlobalUtils = {
+  avatarImageProps: (avatar?: string) => {
+    return {
+      src: avatar || Constants.defaultAvatar,
+      onError: errorHandler
+    };
+
+    function errorHandler ({ currentTarget }: SyntheticEvent<HTMLImageElement>) {
+      currentTarget.onerror = null;
+      currentTarget.src=Constants.defaultAvatar;
+    }
+  },
   capitalise: (value: string): string => {
     return value.charAt(0).toUpperCase() + value.slice(1);
   },
@@ -56,7 +70,7 @@ const GlobalUtils = {
         }
     }
     return "unknown";
-  }
+  },
 };
 
 export default GlobalUtils;

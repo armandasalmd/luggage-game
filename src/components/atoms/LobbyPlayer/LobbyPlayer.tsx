@@ -43,8 +43,8 @@ const LobbyPlayer: FC<LobbyPlayerProps> = (props) => {
       <div className={classes}>
         <div className="lobbyPlayer__avatar">
           <img
-            alt={props.player.username}
-            src={props.player.avatar || "/images/avatar.png"}
+            alt="avatar"
+            {...GlobalUtils.avatarImageProps(props.player.avatar)}
           />
         </div>
         <p className="lobbyPlayer__name">{props.player.username}</p>

@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import "./Friend.scss";
-import Constants from "@utils/Constants";
 import GlobalUtils from "@utils/Global";
 import { ColorType } from "@utils/Types";
 import { FC } from "react";
@@ -47,13 +46,9 @@ const Friend: FC<FriendProps> = (props) => {
   return (
     <div className="friend">
       <img
-        className="friend__avatar"
         alt="avatar"
-        src={props.avatar || Constants.defaultAvatar}
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null;
-          currentTarget.src=Constants.defaultAvatar;
-        }}
+        className="friend__avatar"
+        {...GlobalUtils.avatarImageProps(props.avatar)}
       />
       <p className="friend__name">{props.name}</p>
       <div className="friend__actions">
