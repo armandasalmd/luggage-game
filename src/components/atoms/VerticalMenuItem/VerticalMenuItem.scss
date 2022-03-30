@@ -43,15 +43,27 @@
 
   &--showLeftOutline#{$base}--selected {
     $handleSize: 3px;
+    $handlePositionX: -($unit * 0.5 + $handleSize);
 
     &::before {
+      content: "";
+      animation-name: flyInLeft;
+      animation-duration: 0.4s;
       position: absolute;
       transform: translateX(-($unit * 0.5 + $handleSize));
-      content: "";
       width: $handleSize;
       height: 45%;
       border-radius: $defaultBorderRadius;
       background-color: $colorPrimary;
+    }
+
+    @keyframes flyInLeft {
+      from {
+        transform: translateX($handlePositionX - 25px);
+      }
+      to {
+        transform: translateX($handlePositionX);
+      }
     }
   }
 }
