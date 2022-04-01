@@ -3,7 +3,7 @@
 .tabs {
   $base: &;
   $paddingX: $unit;
-  $borderStyle: 3px solid $shade5;
+  $borderStyle: 2px solid $shade10;
 
   display: flex;
   flex-flow: column;
@@ -22,10 +22,11 @@
   &__headingMobile {
     display: none;
     padding: $unit * 0.5 0;
+    border-bottom: $borderStyle;
   }
 
   &--noDivider {
-    #{$base}__heading {
+    #{$base}__heading, #{$base}__headingMobile {
       border-bottom: none;
     }
   }

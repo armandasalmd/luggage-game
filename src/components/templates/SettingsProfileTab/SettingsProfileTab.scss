@@ -1,0 +1,53 @@
+@import "@styles/Variables.scss";
+
+.settingsProfile {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto auto;
+  grid-gap: $unit 15%;
+
+  &__form {
+    grid-row: 1;
+    grid-column: 1;
+
+    & > *:not(:last-child) {
+      margin-bottom: $unit * 0.5;
+    }
+  }
+
+  &__submit {
+    float: right;
+  }
+
+  &__avatar {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  &__footer {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: flex-end;
+    color: $shade30;
+  }
+
+  &__social {
+    margin-top: $unit;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $unit;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .settingsProfile {
+    display: flex;
+    flex-flow: column;
+    gap: $unit;
+  }
+
+  .settingsProfile__avatar {
+    display: flex;
+    justify-content: center;
+  }
+}

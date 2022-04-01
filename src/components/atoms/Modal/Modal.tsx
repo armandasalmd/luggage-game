@@ -1,5 +1,7 @@
 import { FC, SyntheticEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "@redux/store";
 import classNames from "classnames";
 import "./Modal.scss";
 import CloseIcon from "@material-ui/icons/Close";
@@ -46,7 +48,9 @@ const Modal: FC<ModalProps> = (props) => {
             <h1 className="modal__title">{props.title}</h1>
             <CloseIcon className="modal__close" onClick={onClose} />
           </div>
-          <div className="modal__body">{props.children}</div>
+          <Provider store={store}>
+            <div className="modal__body">{props.children}</div>
+          </Provider>
         </div>
       </div>
     );
