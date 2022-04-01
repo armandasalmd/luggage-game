@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { RootState } from "@redux/store";
@@ -25,16 +25,32 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
     GlobalUtils.callIfFunction(props.onLogout);
   }
 
-  function onOpenSettings() {
+  function openSettings() {
     setNotificationsOpen(false);
     setSettingsOpen(true);
+
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState(null, "", "/settings");
   }
+  
+  function closeSettings() {
+    setSettingsOpen(false);
+
+    // eslint-disable-next-line no-restricted-globals
+    history.back();
+  }
+
+  useEffect(() => {
+    const onPopState = () => setSettingsOpen(false);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   return (
     <Navbar sticky>
       <Notifications open={notificationsOpen} setOpen={setNotificationsOpen} />
       <PillButton
-        onClick={onOpenSettings}
+        onClick={openSettings}
         onSuffixClick={onLogout}
         prefix={<PersonIcon />}
         suffix={<LogoutIcon />}
@@ -45,7 +61,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
       </PillButton>
       <SettingsModal
         isOpen={settingsOpen}
-        onClose={setSettingsOpen.bind(null, false)}
+        onClose={closeSettings}
       />
     </Navbar>
   );

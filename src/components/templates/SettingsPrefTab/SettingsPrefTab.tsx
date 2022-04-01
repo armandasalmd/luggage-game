@@ -1,12 +1,9 @@
 import { FC } from "react";
 
 const SettingsPrefTab: FC = () => {
-
   return (
-    <div>
-      <div className="settings__pref"> 
-        Settings pref tab
-      </div>
+    <div className="settings__pref" style={{color: "#123123 "}}> 
+      This section is under construction
     </div>
   );
 };

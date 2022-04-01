@@ -18,6 +18,8 @@
     border-radius: $defaultBorderRadius;
     box-shadow: $shadowDefaultDark;
     margin-top: -10%;
+    max-height: 100%;
+    overflow: auto;
 
     @media screen and (max-width: $lg) {
       width: 80%;
@@ -52,7 +54,11 @@
     justify-content: space-between;
     align-items: center;
     padding: $unit * 0.5 $unit;
-    border-bottom: 1px solid $shade10;
+    border-bottom: 2px solid $shade10;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
 
     #{$base}__title {
       font-size: 1.2rem;

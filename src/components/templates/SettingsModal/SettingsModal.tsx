@@ -17,13 +17,13 @@ const TABS = [
   },
   {
     id: 2,
-    text: "Preferences",
-    component: SettingsPrefTab
+    text: "Security settings",
+    component: SettingsSecurityTab
   },
   {
     id: 3,
-    text: "Security settings",
-    component: SettingsSecurityTab
+    text: "Preferences",
+    component: SettingsPrefTab
   },
 ];
 
@@ -48,8 +48,8 @@ const SettingsModal: FC<SettingsModalProps> = (props) => {
       isOpen={props.isOpen}
       onClose={props.onClose}
       title="Account settings"
-      fullScreen
       noPadding
+      fullScreen
     >
       <div className="settings">
         <Tabs

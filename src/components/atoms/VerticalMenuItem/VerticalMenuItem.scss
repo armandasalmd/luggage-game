@@ -6,7 +6,10 @@
   margin-left: $unit * 0.5;
   margin-right: $unit * 0.5;
   border-radius: $defaultBorderRadius;
-  margin-bottom: $unit * 0.25;
+
+  &:not(:last-child) {
+    margin-bottom: $unit * 0.25;
+  }
 }
 
 .verticalMenuItem {

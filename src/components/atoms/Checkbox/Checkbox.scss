@@ -1,6 +1,8 @@
 @import "@styles/Variables.scss";
 
 .checkbox {
+  $base: &;
+
   display: inline-flex;
   flex-flow: column;
   margin: 0;
@@ -24,5 +26,15 @@
     margin-left: 3px;
     cursor: text;
     white-space: nowrap;
+  }
+
+  &--horizontal {
+    flex-flow: row;
+    align-items: center;
+    gap: $unit * 0.25;
+
+    #{$base}__text {
+      margin-bottom: 0;
+    }
   }
 }

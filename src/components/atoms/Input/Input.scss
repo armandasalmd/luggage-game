@@ -23,17 +23,11 @@
   }
   // <start> __ELEMENTS </start>
   &__error {
-    margin-bottom: 4px;
-    font-size: 0.9rem;
-    color: $colorError !important;
+    @extend %inputError;
   }
 
   &__icon {
-    color: $shade60;
-    position: absolute;
-    left: $iconPaddingX;
-    // top: 50%;
-    margin-top: 3px;
+    @extend %inputIcon;
   }
 
   &__icon + input,
@@ -52,8 +46,7 @@
   }
 
   &__title {
-    margin-bottom: $unit * 0.4;
-    color: black;
+    @extend %inputTitle;
   }
   // <end> __ELEMENTS </end>
   // <start>--modifiers</start>
@@ -84,6 +77,29 @@
 
     i {
       color: $colorError;
+    }
+  }
+
+  &--disabled {
+    input {
+      cursor: not-allowed;
+      background-color: $colorDisabled;
+      pointer-events: none;
+    }
+
+    i {
+      color: $colorDisabled;
+    }
+  }
+
+  &--required {
+    #{$base}__title::after {
+      content: "*";
+      font-size: 1.5rem;
+      line-height: 0;
+      vertical-align: middle;
+      color: $colorSecondary;
+      margin-left: $unit * 0.125;
     }
   }
 

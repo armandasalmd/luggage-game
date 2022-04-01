@@ -89,3 +89,14 @@ code {
 .Toastify__toast-container {
   top: 3.5em !important;
 }
+
+.space {
+  display: inline-flex;
+  gap: $unit;
+  flex-direction: column;
+  width: 100%;
+
+  &--horizontal {
+    flex-flow: row wrap;
+  }
+}
