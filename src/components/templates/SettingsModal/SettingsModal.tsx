@@ -1,10 +1,9 @@
 import React, { FC, useState } from "react";
-import "./SettingsModal.scss";
 
 import { Modal, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
 import { ID } from "@utils/Types";
-import SettingsPrefTab from "../SettingsPrefTab/SettingsPrefTab";
+import SettingsInGameTab from "../SettingsInGameTab/SettingsInGameTab";
 import SettingsProfileTab from "../SettingsProfileTab/SettingsProfileTab";
 import SettingsSecurityTab from "../SettingsSecurityTab/SettingsSecurityTab";
 
@@ -22,8 +21,8 @@ const TABS = [
   },
   {
     id: 3,
-    text: "Preferences",
-    component: SettingsPrefTab
+    text: "In-game settings",
+    component: SettingsInGameTab
   },
 ];
 

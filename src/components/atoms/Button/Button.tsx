@@ -18,6 +18,7 @@ interface ButtonProps {
   tall?: boolean;
   style?: object;
   className?: string;
+  floatRight?: boolean;
   onClick?(): void;
   tightX?: boolean;
   bigText?: boolean;
@@ -35,7 +36,7 @@ const Button: FC<ButtonProps> = (props) => {
   const Ripple = createRipples({
     during: 600,
     color: "rgba(0, 0, 0, .15)",
-    className: "defaultBorderRadius"
+    className: "defaultBorderRadius" + (props.floatRight === true ? " floatRight" : ""),
   });
 
   function onClick() {

@@ -20,6 +20,7 @@ const SettingsProfileTab: FC = () => {
         <AvatarInput setValue={uploadNewAvatar} />
       </div>
       <div className="settingsProfile__form">
+        <h3>Personal details</h3>
         <Input 
           placeholder="Your legal name"
           title="First and last name"
