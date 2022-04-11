@@ -11,6 +11,10 @@
   &__changePwd {
     width: 60%;
   }
+  
+  h3 {
+    margin-bottom: $unit * 0.5;
+  }
 }
 
 @media screen and (max-width: $sm) {

@@ -1,0 +1,20 @@
+@import "@styles/Variables.scss";
+
+.settings__inGame {
+  h3 {
+    margin-bottom: $unit * 0.5;
+  }
+  
+  .settings__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $unit * 1.5;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .settings__options {
+    flex-flow: column;
+    width: 100%;
+  }
+}
