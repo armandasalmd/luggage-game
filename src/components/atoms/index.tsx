@@ -2,6 +2,7 @@ export { default as Button } from "./Button/Button";
 export { default as Card } from "./Card/Card";
 export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as DailyReward } from "./DailyReward/DailyReward";
+export { default as DisplayItem } from "./DisplayItem/DisplayItem";
 export { default as Empty } from "./Empty/Empty";
 export { default as Friend } from "./Friend/Friend";
 export { default as GameCard } from "./GameCard/GameCard";

@@ -1,19 +1,24 @@
 @import "@styles/Variables.scss";
 
 .button {
+  cursor: pointer;
   border-radius: $defaultBorderRadius;
+  border: 1px solid rgba(0,0,0, 0.13);
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
   white-space: nowrap;
   user-select: none;
   background: $shade5;
-  cursor: pointer;
   width: 100%;
   box-sizing: border-box;
 
   height: 36px;
   padding: 0 1rem;
+
+  &:hover {
+    background: $shade10 !important;
+  }
 
   svg {
     margin-right: 0.5rem;

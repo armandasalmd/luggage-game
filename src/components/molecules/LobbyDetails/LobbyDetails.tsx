@@ -5,13 +5,18 @@ import { RootState } from "@redux/store";
 import classNames from "classnames";
 import copy from "copy-to-clipboard";
 import "./LobbyDetails.scss";
-import { Button, Card, message } from "@components/atoms";
+import { Button, Card, DisplayItem, message } from "@components/atoms";
 import CheckIcon from "@material-ui/icons/Check";
 import RouteUtils from "@utils/Route";
 import { clearLobbyState, setPlayerReady } from "@redux/actions";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
 import { leaveLobbyAsync, playerReadyAsync } from "@socket/lobby";
 import GlobalUtils from "@utils/Global";
+
+import LockIcon from "@material-ui/icons/LockOpenOutlined";
+import CoinIcon from "@material-ui/icons/TollOutlined";
+import PeopleIcon from "@material-ui/icons/PeopleAltOutlined";
+import GamepadIcon from "@material-ui/icons/GamepadOutlined";
 
 interface LobbyDetailsProps {
   className: string;
@@ -31,16 +36,18 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   }
 
   function onLeave() {
-    leaveLobbyAsync().then(result => {
-      if (result.success === true) {
-        dispatch(clearLobbyState());
-      } else {
-        message.warning("Something went as not expected");
-      }
-      history.push(RouteUtils.routes.app.main.dashboard.path);
-    }).catch(() => {
-      message.error("Unexpected error");
-    });
+    leaveLobbyAsync()
+      .then((result) => {
+        if (result.success === true) {
+          dispatch(clearLobbyState());
+        } else {
+          message.warning("Something went as not expected");
+        }
+        history.push(RouteUtils.routes.app.main.dashboard.path);
+      })
+      .catch(() => {
+        message.error("Unexpected error");
+      });
   }
 
   function onReady() {
@@ -54,29 +61,54 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
       } else {
         message.error("Unexpected error");
       }
-    })
+    });
   }
 
-  const youReady = lobbyState.players.find(function (player: ILobbyPlayer) {
-    return player.username === user.username;
-  })?.ready ?? false;
-  const readyDisabled = youReady || lobbyState.players.length !== lobbyState.playerCount;
+  const youReady =
+    lobbyState.players.find(function (player: ILobbyPlayer) {
+      return player.username === user.username;
+    })?.ready ?? false;
+  const readyDisabled =
+    youReady || lobbyState.players.length !== lobbyState.playerCount;
 
   return (
-    <Card
-      className={classes}
-      title={`Lobby for room ${lobbyState.roomCode}`}
-    >
-      <ul className="lobbyDetails__list">
-        <li>{`Game is ${lobbyState.isPrivate ? "private" : "public"}`}</li>
-        <li>Game reward - {lobbyState.gamePrice} coins</li>
-        <li>Lobby size - {lobbyState.playerCount} players</li>
-        <li>Game rules - {lobbyState.gameRules}</li>
-      </ul>
+    <Card className={classes} title={`Lobby for room ${lobbyState.roomCode}`}>
+      <div className="lobbyDetails__list">
+        <DisplayItem
+          icon={<LockIcon />}
+          title={`Game is ${lobbyState.isPrivate ? "private" : "public"}`}
+          description={
+            lobbyState.isPrivate
+              ? "Only invited people can join"
+              : "Everyone can join"
+          }
+        />
+        <DisplayItem
+          icon={<CoinIcon />}
+          title={`Game price ${lobbyState.gamePrice}`}
+          description={`Looser pays ${lobbyState.gamePrice}, others share`}
+        />
+        <DisplayItem
+          icon={<PeopleIcon />}
+          title={`Lobby size ${lobbyState.playerCount}`}
+          description={`${lobbyState.playerCount} can play in game`}
+        />
+        <DisplayItem
+          icon={<GamepadIcon />}
+          title={`Game rules ${lobbyState.gameRules}`}
+          description="2, 5, 10 powercards"
+        />
+      </div>
       <div className="lobbyDetails__actions">
-        <Button onClick={onCopyRoomCode} type="ghost">Copy room code</Button>
-        <Button onClick={onLeave} type="ghost">Leave</Button>
-        <Button icon={<CheckIcon />} onClick={onReady} type={readyDisabled ? "disabled" : "accent"}>Ready</Button>
+        <Button onClick={onCopyRoomCode}>Copy room code</Button>
+        <Button onClick={onLeave}>Leave</Button>
+        <Button
+          icon={<CheckIcon />}
+          onClick={onReady}
+          type={readyDisabled ? "disabled" : "accent"}
+        >
+          Ready
+        </Button>
       </div>
     </Card>
   );
