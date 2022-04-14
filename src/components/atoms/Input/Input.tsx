@@ -7,6 +7,7 @@ type InputType = "warning" | "error";
 
 interface InputProps {
   className?: string;
+  disabled?: boolean;
   error?: string;
   icon?: any;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface InputProps {
   maxWidth?: string | number;
   name?: string;
   onSubmit?(): void;
+  required?: boolean;
   password?: boolean;
   tall?: boolean;
   title?: string;
@@ -25,7 +27,10 @@ interface InputProps {
 const Input: FC<InputProps> = (props) => {
   const classes = classNames("input", {
     [`input--${props.type}`]: props.type,
-    "input--tall": props.tall
+    "input--disabled": props.disabled,
+    "input--tall": props.tall,
+    "input--error": props.error,
+    "input--required": props.required,
   }, props.className);
 
   function setValue(value: string) {

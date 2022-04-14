@@ -1,14 +1,18 @@
 import { FC, SyntheticEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "@redux/store";
 import classNames from "classnames";
 import "./Modal.scss";
 import CloseIcon from "@material-ui/icons/Close";
 import GlobalUtils from "@utils/Global";
 
 interface ModalProps {
+  flyInAnimation?: boolean;
+  fullScreen?: boolean;
   isOpen: boolean;
   onClose?(state: boolean): void;
-  flyInAnimation?: boolean;
+  noPadding?: boolean;
   title: string;
 }
 
@@ -28,7 +32,9 @@ const Modal: FC<ModalProps> = (props) => {
     }
 
     const classes = classNames("modal__window", {
+      "modal__window--fullScreen": props.fullScreen,
       "modal__window--flyInBottom": props.flyInAnimation,
+      "modal__window--paddless": props.noPadding,
     });
 
     function preventBubble(e: SyntheticEvent) {
@@ -42,7 +48,9 @@ const Modal: FC<ModalProps> = (props) => {
             <h1 className="modal__title">{props.title}</h1>
             <CloseIcon className="modal__close" onClick={onClose} />
           </div>
-          <div className="modal__body">{props.children}</div>
+          <Provider store={store}>
+            <div className="modal__body">{props.children}</div>
+          </Provider>
         </div>
       </div>
     );
@@ -56,7 +64,7 @@ const Modal: FC<ModalProps> = (props) => {
     }
   }, [props]);
 
-  return <div></div>;
+  return null;
 };
 
 export default Modal;

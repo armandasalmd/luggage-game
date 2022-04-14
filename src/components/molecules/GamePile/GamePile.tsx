@@ -47,7 +47,6 @@ const GamePile: FC<GamePileProps> = (props) => {
       const card = payload.isStack
         ? EngineBase.getCardsByValue(gameState.myState.handCards, cardValue)[0]
         : payload.cardId;
-
       playCardAsync(gameId, [card])
         .then((result) => {
           if (!result.success && result.message) {

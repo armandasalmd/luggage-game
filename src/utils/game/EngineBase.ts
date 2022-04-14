@@ -29,6 +29,7 @@ export default abstract class EngineBase {
 
   public static pickCardsByValue(cards: string[], value: string, count: number) {
     cards = this.getCardsByValue(cards, value);
+
     return this.pick(cards, count);
   }
 }

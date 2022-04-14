@@ -1,10 +1,13 @@
 import { FC } from "react";
+import classNames from "classnames";
+
 import "./Checkbox.scss";
 import CheckBoxTrueIcon from "@material-ui/icons/CheckBox";
 import CheckBoxFalseIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 interface CheckboxProps {
   onCheck?(newValue: boolean): void;
+  horizontal?: boolean;
   title?: string;
   value: boolean;
 }
@@ -18,8 +21,12 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     }
   }
 
+  const classes = classNames("checkbox", {
+    "checkbox--horizontal": props.horizontal,
+  });
+
   return (
-    <div className="checkbox">
+    <div className={classes}>
       <label htmlFor={checkboxId} className="checkbox__text">
         {props.title}
       </label>

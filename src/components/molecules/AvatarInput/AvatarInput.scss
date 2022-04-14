@@ -1,0 +1,46 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+.avatarInput {
+  display: flex;
+  flex-flow: column;
+
+  &__icon {
+    margin-right: $unit * 0.5;
+    display: flex;
+    color: $shade60;
+  }
+
+  &__title {
+    @extend %inputTitle;
+    display: flex;
+    align-items: center;
+  }
+
+  &__error {
+    @extend %inputError;
+  }
+
+  &__title + &__error {
+    margin-top: -$unit * 0.4;
+  }
+
+  &__image {
+    margin-top: $unit * 0.5;
+    width: $unit * 10;
+    height: $unit * 10;
+    border-radius: 50%;
+    border: 1px solid $shade20;
+    background-color: $shade10;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  &__input {
+    transform: translateX($unit * 0.5) translateY(-$unit * 2.5);
+
+    input[type="file"] {
+      display: none;
+    }
+  }
+}

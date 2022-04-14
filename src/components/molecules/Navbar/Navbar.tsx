@@ -9,13 +9,16 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = (props) => {
   const classes = classNames("navbar", {
-    "navbar--sticky": props.sticky
+    "navbar--sticky": props.sticky,
   });
 
   return (
     <div className={classes}>
       <span className="navbar__logo">
-        <Logo noTextSmallScreen />
+        <Logo
+          noTextSmallScreen
+          onClick={() => document.dispatchEvent(new CustomEvent("navbarLogoClick"))}
+        />
       </span>
       <span className="navbar__actions">{props.children}</span>
     </div>

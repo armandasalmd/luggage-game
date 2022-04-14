@@ -43,7 +43,7 @@ const TimedAvatar: FC<TimedAvatarProps> = (props) => {
 
   return (
     <div className={classes}>
-      <img alt="avatar" src={props.avatarUrl || "/images/avatar.png"} />
+      <img alt="avatar" {...GlobalUtils.avatarImageProps(props.avatarUrl)} />
       {props.running && svg}
     </div>
   );

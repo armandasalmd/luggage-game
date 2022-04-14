@@ -1,0 +1,28 @@
+@import "@styles/Variables.scss";
+
+.settingsSecurity {
+  display: flex;
+  gap: $unit * 1.5;
+
+  &__deleteAcc {
+    width: 40%;
+  }
+  
+  &__changePwd {
+    width: 60%;
+  }
+  
+  h3 {
+    margin-bottom: $unit * 0.5;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .settingsSecurity {
+    flex-flow: column;
+
+    &__deleteAcc, &__changePwd {
+      width: unset;
+    }
+  }
+}

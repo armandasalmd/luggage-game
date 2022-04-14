@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useLayoutEffect } from "react";
+import { FC, useEffect, useLayoutEffect } from "react";
 import classNames from "classnames";
 
 import { useHistory } from "react-router-dom";
@@ -27,7 +27,12 @@ import { joinLobbyAsync } from "@socket/lobby";
 import { message } from "@components/atoms";
 import RouteUtils from "@utils/Route";
 
-const Notifications: FC = () => {
+interface NotificationsProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const Notifications: FC<NotificationsProps> = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -37,7 +42,7 @@ const Notifications: FC = () => {
     lobbyModalContent,
     setLobbyModalContent,
   } = useNotifications();
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = props;
 
   const showGenericError = () =>
     message.warning("Cannot perform selected action");
@@ -128,17 +133,24 @@ const Notifications: FC = () => {
     // Small/big screens
     if (window.innerWidth < 500) {
       setOpen(false);
-    } else {
-      message.information(lobbyModalContent.title + ". Check notifications");
     }
-  }, [lobbyModalContent]);
+  }, [lobbyModalContent, setOpen]);
 
   useLayoutEffect(() => {
+    const closeFunc = () => setOpen(false);
     const elem = document.getElementById("screen-cover");
+
     if (elem) {
       elem.style.display = open ? "block" : "none";
+      elem.addEventListener("click", closeFunc);
     }
-  }, [open]);
+
+    return () => {
+      if (elem) {
+        elem.removeEventListener("click", closeFunc);
+      }
+    }
+  }, [open, setOpen]);
 
   return (
     <>
@@ -156,9 +168,6 @@ const Notifications: FC = () => {
           ) : (
             itemComponents
           )}
-        </div>
-        <div className="notif__footer" onClick={toggle}>
-          <span>Close panel</span>
         </div>
       </div>
       <Modal

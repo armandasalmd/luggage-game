@@ -40,10 +40,6 @@ code {
   height: 100%;
 }
 
-.noSelect {
-  user-select: none;
-}
-
 .defaultBorderRadius {
   border-radius: $defaultBorderRadius;
 }
@@ -88,11 +84,23 @@ code {
 #screen-cover {
   @extend %overlay;
   display: none;
-  animation-name: fadeIn;
-  animation-timing-function: ease-in;
-  animation-duration: 250ms;
 }
 
 .Toastify__toast-container {
   top: 3.5em !important;
+}
+
+.space {
+  display: inline-flex;
+  gap: $unit;
+  flex-direction: column;
+  width: 100%;
+
+  &--horizontal {
+    flex-flow: row wrap;
+  }
+}
+
+.floatRight {
+  float: right;
 }

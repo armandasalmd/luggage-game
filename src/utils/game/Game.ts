@@ -1,6 +1,11 @@
 import Confetti from "canvas-confetti";
 import { ACard, sortCards } from "./Card";
 
+export enum GameTheme {
+  Light = "light",
+  DarkBlue = "dark-blue",
+};
+
 export interface IGameDetails {
   isPrivate: boolean;
   reward: number;

@@ -10,26 +10,38 @@
   
   @extend %overlay;
   z-index: 12;
-
+  
   &__window {
     z-index: 13;
     width: 60%;
     background: white;
     border-radius: $defaultBorderRadius;
+    box-shadow: $shadowDefaultDark;
     margin-top: -10%;
+    max-height: 100%;
+    overflow: auto;
 
     @media screen and (max-width: $lg) {
       width: 80%;
     }
 
     @media screen and (max-width: $md) {
-      width: 90%;
+      width: 92%;
     }
 
     &--flyInBottom {
       animation-name: flyInBottom, fadeIn;
       animation-timing-function: ease, ease-in;
       animation-duration: 350ms, 200ms;
+    }
+
+    &--fullScreen {
+      margin-top: 0;
+      height: calc(100% - $unit * 2);
+    }
+
+    &--paddless > #{$base}__body {
+      padding: 0;
     }
   }
 
@@ -42,7 +54,11 @@
     justify-content: space-between;
     align-items: center;
     padding: $unit * 0.5 $unit;
-    border-bottom: 1px solid $shade10;
+    border-bottom: 2px solid $shade10;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
 
     #{$base}__title {
       font-size: 1.2rem;
@@ -51,10 +67,11 @@
     }
 
     #{$base}__close {
-      height: $unit * 1.8;
-      width: $unit * 1.8;
+      height: $unit * 1.5;
+      width: $unit * 1.5;
       cursor: pointer;
       border-radius: $defaultBorderRadius;
+      color: $shade40;
 
       &:hover {
         background: rgba($colorSecondary, 0.1);

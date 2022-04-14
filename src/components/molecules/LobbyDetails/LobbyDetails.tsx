@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@redux/store";
@@ -34,6 +34,11 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
     copy(lobbyState.roomCode);
     message.success("Copied to clipboard");
   }
+
+  useEffect(() => {
+    document.addEventListener("navbarLogoClick", onLeave);
+    return () => document.removeEventListener("navbarLogoClick", onLeave);
+  });
 
   function onLeave() {
     leaveLobbyAsync()

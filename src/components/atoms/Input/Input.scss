@@ -1,4 +1,5 @@
 @import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
 
 .input {
   $base: &;
@@ -10,13 +11,7 @@
   position: relative;
 
   input {
-    outline: none;
-    padding: 0.3em 0.7em;
-    border: 1px solid #e0e1e4;
-    border-radius: $defaultBorderRadius;
-    height: 36px;
-    box-sizing: border-box;
-    font-size: 0.9rem;
+    @extend %inputBase;
   }
 
   input::placeholder {
@@ -24,25 +19,15 @@
   }
 
   input:focus {
-    border: 1px solid $colorPrimary;
+    @extend %inputFocus;
   }
   // <start> __ELEMENTS </start>
   &__error {
-    margin-bottom: 4px;
-    font-size: 0.9rem;
-    color: $colorError !important;
-  }
-
-  &__error + input {
-    border: 1px solid $colorError !important;
+    @extend %inputError;
   }
 
   &__icon {
-    color: $shade60;
-    position: absolute;
-    left: $iconPaddingX;
-    // top: 50%;
-    margin-top: 3px;
+    @extend %inputIcon;
   }
 
   &__icon + input,
@@ -61,8 +46,7 @@
   }
 
   &__title {
-    margin-bottom: $unit * 0.4;
-    color: black;
+    @extend %inputTitle;
   }
   // <end> __ELEMENTS </end>
   // <start>--modifiers</start>
@@ -72,10 +56,10 @@
 
       &:focus {
         border-color: darken($colorWarning, 15%);
+        box-shadow: $shadowInputWarning;
       }
     }
 
-    #{$base}__title,
     i {
       color: $colorWarning;
     }
@@ -87,12 +71,35 @@
 
       &:focus {
         border-color: darken($colorError, 15%);
+        box-shadow: $shadowInputError;
       }
     }
 
-    #{$base}__title,
     i {
       color: $colorError;
+    }
+  }
+
+  &--disabled {
+    input {
+      cursor: not-allowed;
+      background-color: $colorDisabled;
+      pointer-events: none;
+    }
+
+    i {
+      color: $colorDisabled;
+    }
+  }
+
+  &--required {
+    #{$base}__title::after {
+      content: "*";
+      font-size: 1.5rem;
+      line-height: 0;
+      vertical-align: middle;
+      color: $colorSecondary;
+      margin-left: $unit * 0.125;
     }
   }
 
