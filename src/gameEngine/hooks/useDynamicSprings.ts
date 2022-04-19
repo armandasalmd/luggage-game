@@ -10,7 +10,7 @@ export interface SpringIndex {
   styles: ISpringTransform;
 }
 
-const MAX_SPRINGS = 13 * 2;
+const MAX_SPRINGS = 50;
 type UsedSpringState = string | null; // String represents a card id that uses this spring
 type MyControllerUpdate = ControllerUpdate<ISpringTransform> | undefined;
 

@@ -1,9 +1,11 @@
 @import "@styles/Variables.scss";
 
 .gameRoot {
+  $crossImage: "game-x.svg";
+
   &--dark-blue {
     color: $colorTextLight;
-    background-image: url("http://localhost:3000/images/game-x.svg");
+    background-image: url($crossImage);
     background-repeat: repeat;
 
     --action-bar-background: #3B556B;
@@ -28,7 +30,7 @@
   
   &--dark-green {
     color: $colorTextLight;
-    background-image: url("http://localhost:3000/images/game-x.svg");
+    background-image: url($crossImage);
     background-repeat: repeat;
     
     --action-bar-background: #3B6B68;
