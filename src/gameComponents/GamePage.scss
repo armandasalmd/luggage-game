@@ -71,4 +71,5 @@
   background-color: var(--main-background);
   height: 100vh;
   overflow: hidden;
+  touch-action: none; // without - cards wont be draggable
 }
