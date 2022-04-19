@@ -6,10 +6,9 @@
 
   border-radius: $defaultBorderRadius;
   height: $unit * 2;
-  background: rgba($colorPrimary, 0.1);
+  background: rgba($colorPrimary, var(--pill-button-background-strength));
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
   padding: $unit * 0.2;
   user-select: none;
 
@@ -18,7 +17,7 @@
   }
 
   p {
-    color: $colorTextDark;
+    color: var(--pill-button-text);
     font-size: 1rem;
     margin: 0 $unit * 0.3;
     white-space: nowrap;
@@ -41,6 +40,7 @@
   }
 
   &__main {
+    cursor: pointer;
     display: flex;
     align-items: center;
     height: auto;
@@ -53,7 +53,7 @@
   }
 
   &--secondary {
-    background: rgba($colorSecondary, 0.1);
+    background: rgba($colorSecondary, var(--pill-button-background-strength));
 
     svg {
       color: $colorSecondary;

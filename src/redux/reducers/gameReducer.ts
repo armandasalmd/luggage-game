@@ -1,5 +1,5 @@
 import { IAction, ActionTypes } from "@redux/actions";
-import IGameState from "@utils/game/IGameState";
+import { IGameState } from "@engine/index";
 
 const initialState: IGameState = {
   gameDetails: {

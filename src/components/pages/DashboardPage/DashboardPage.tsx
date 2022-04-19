@@ -16,7 +16,7 @@ import { ID } from "@utils/Types";
 import { RootState } from "@redux/store";
 import "./DashboardPage.scss";
 
-const PAGE_TITLE = "Game dashboard";
+const PAGE_TITLE = "Game menu";
 const DEFAULT_ACTIVE_TAB = 1;
 const TABS = [
   {
@@ -87,7 +87,6 @@ const DashboardPage: FC = () => {
         title={PAGE_TITLE}
         headerActions={headerActions}
         smallHeaderY
-        titleBig
       >
         <Tabs
           defaultActiveTab={DEFAULT_ACTIVE_TAB}

@@ -1,0 +1,72 @@
+@import "@styles/Variables.scss";
+
+.gameRoot {
+  &--dark-blue {
+    color: $colorTextLight;
+    background-image: url("http://localhost:3000/images/game-x.svg");
+    background-repeat: repeat;
+
+    --action-bar-background: #3B556B;
+    --card-background: #4a6d8d;
+    --empty-stack-background: #8EAAC3BF;
+    --empty-stack-border: rgba(255, 255, 255, 0.5);
+    --extra-label-background: rgba(255, 80, 70, 0.4);
+    --logo-text-color: #d0dfec;
+    --main-background: #5E82A1;
+    --main-background-x: #1D35574D;
+    --mini-card-color: #538AB2;
+    --mini-card-border-color: #97AAC3;
+    --navbar-background: #314C64E9;
+    --navbar-expander-color: #f0f8fa;
+    --navbar-expander-background: #8fb0cc;
+    --pill-button-background-strength: 0.4;
+    --pill-button-text: white;
+    --player-background: #3B556B;
+    --player-label-color: #94B7E4;
+    --text-color: #{$colorTextLight};
+  }
+  
+  &--dark-green {
+    color: $colorTextLight;
+    background-image: url("http://localhost:3000/images/game-x.svg");
+    background-repeat: repeat;
+    
+    --action-bar-background: #3B6B68;
+    --card-background: #3B6B68;
+    --empty-stack-background: #8EC3B0BF;
+    --empty-stack-border: rgba(255, 255, 255, 0.5);
+    --extra-label-background: #88a371;
+    --logo-text-color: #d0ecdc;
+    --main-background: #5D9992;
+    --main-background-x: #1d573e4D;
+    --mini-card-color: #60B596;
+    --mini-card-border-color: #A7DACB;
+    --navbar-background: #31644CB3;
+    --navbar-expander-color: #dbf1cd;
+    --navbar-expander-background: #88a371;
+    --pill-button-background-strength: 0.4;
+    --pill-button-text: white;
+    --player-background: #3B666B;
+    --player-label-color: #83D79F;
+    --text-color: #{$colorTextLight};
+  }
+  
+  &--light {
+    color: $colorTextDark;
+    
+    --action-bar-background: #FFFFFF;
+    --empty-stack-background: #C3BE8E33;
+    --empty-stack-border: rgb(0, 0, 0, 0.15);
+    --extra-label-background: rgba(102, 115, 172, 0.2);
+    --main-background: #FFFBF4;
+    --main-background-x: rgba(var(--main-background));
+    --mini-card-color: #F8F7F2;
+    --mini-card-border-color: #BAB3AE;
+    --player-background: white;
+  }
+
+  cursor: url("http://localhost:3000/assets/cursor.png") 32 32, auto;
+  background-color: var(--main-background);
+  height: 100vh;
+  overflow: hidden;
+}

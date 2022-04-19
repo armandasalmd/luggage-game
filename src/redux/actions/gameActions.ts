@@ -6,7 +6,7 @@ import {
   IGameDetails,
   IMyPlayerState,
   IPublicPlayerState,
-} from "@utils/game/IGameState";
+} from "@engine/index";
 
 export const initialiazeGameState = (roomId: string) => {
   return async function (dispatch: Dispatch) {

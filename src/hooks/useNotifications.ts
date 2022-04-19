@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { message } from "@components/atoms";
-import { INotification } from "@utils/game/INotification";
+import { INotification } from "@utils/interfaces";
 import RouteUtils from "@utils/Route";
 import {
   listenerCleanup,

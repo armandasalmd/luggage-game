@@ -9,7 +9,7 @@ import {
   Table,
 } from "@components/atoms";
 import { CellRenderer, ITableData, ITableColumnDefinition } from "@components/atoms/Table/ITableData";
-import { IHistoryItem } from "@utils/game/IHistoryItem";
+import { IHistoryItem } from "@utils/interfaces";
 import useGameHistory from "@hooks/useGameHistory";
 import GlobalUtils from "@utils/Global";
 

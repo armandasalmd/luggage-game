@@ -13,7 +13,7 @@ const ActiveGameCard: FC<ActiveGameCardProps> = (props) => {
   return (
     <div className="playGame">
       <div className="playGame__cardsRight">
-        <Card padded title={`Game ${props.activeGameId} is in progress`}>
+        <Card title={`Game ${props.activeGameId} is in progress`}>
           <div className="playGame__flexRow">
             <Button icon={<FlagIcon />} type="danger" onClick={props.onSurrender}>
               Surrender

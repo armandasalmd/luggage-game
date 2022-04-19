@@ -19,7 +19,7 @@ import {
   FriendMetaData,
   INotification,
   LobbyMetaData,
-} from "@utils/game/INotification";
+} from "@utils/interfaces";
 import { ActionButton } from "@components/atoms/NotificationItem/NotificationItem";
 import useNotifications from "@hooks/useNotifications";
 import { setLobbyState } from "@redux/actions";

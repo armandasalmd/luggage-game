@@ -1,7 +1,6 @@
 import SocketManager from "@socket/SocketManager";
-import { IGameDetails, IMyPlayerState, IPublicPlayerState } from "@utils/game/IGameState";
-import { ILooser } from "@utils/game/ILooser";
-import { IPlayerReward } from "@utils/game/IPlayerReward";
+import { IGameDetails, IMyPlayerState, IPublicPlayerState, ILooser } from "@engine/index";
+import { IPlayerReward } from "@engine/interfaces/IPlayerReward";
 
 const gameDetailsListener = (callback: (gameDetails: IGameDetails) => void) => {
   SocketManager.getInstance().listenToEvent("game details change", callback);

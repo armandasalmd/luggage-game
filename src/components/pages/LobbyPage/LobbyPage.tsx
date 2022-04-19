@@ -30,7 +30,7 @@ import {
 import SocketManager from "@socket/SocketManager";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
-import { fetchAndCacheCards } from "@utils/game/Card";
+import { fetchAndCacheCards } from "@engine/index";
 
 const LobbyPage: FC = () => {
   const { gameId }: any = useParams();

@@ -1,5 +1,5 @@
 import { IAction, ActionTypes } from "@redux/actions";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
 
 export interface IUserState {
   isAuthenticated: boolean;

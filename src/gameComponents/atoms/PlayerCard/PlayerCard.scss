@@ -1,0 +1,106 @@
+@import "@styles/Variables.scss";
+@import "@styles/Placeholders.scss";
+
+$imgSize: 64px;
+
+.playerCard {
+  $base: &;
+
+  @extend %cardBase;
+  
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+
+  border: none;
+  background: var(--player-background);
+  width: 100%;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1);
+  transition: transform 200ms ease-in-out;
+
+  &__avatar {
+    margin: $unit * 0.25;
+  }
+
+  &__extraLabel {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    background-color: var(--extra-label-background);
+    padding: $unit * 0.1 $unit * 0.4;
+    border-bottom-left-radius: $defaultBorderRadius;
+    border-bottom-right-radius: $defaultBorderRadius;
+    text-align: center;
+  }
+
+  &__textGroup {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: $unit * 0.15;
+
+    @extend %ellipsis;
+
+    #{$base}__name {
+      margin-top: $unit * 0.25;
+      @extend %ellipsis;
+    }
+
+    #{$base}__label {
+      font-size: 17px;
+      color: var(--player-label-color);
+      margin-bottom: 2px;
+    }
+  }
+
+  &__luggage {
+    margin-top: $unit * 0.5;
+    border-radius: $defaultBorderRadius;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $shade40;
+    cursor: pointer;
+    padding: $unit * 0.5;
+    color: $shade40;
+    display: none !important;
+  }
+
+  &--active {
+    box-shadow: 0 0 12px 0 rgba($colorPrimary, 0.4);
+  }
+
+  &--elevated {
+    transform: scale(1.1);
+    z-index: 50;
+  }
+}
+
+@media screen and (max-width: $md) {
+  .playerCard {
+    display: flex;
+    flex-flow: column;
+    padding: $unit * 0.25;
+    width: $imgSize;
+    cursor: pointer;
+    position: relative;
+
+    &__avatar {
+      margin: 0;
+    }
+
+    &__extraLabel {
+      font-size: 0.8rem;
+      margin: -$unit * 0.25;
+      margin-top: $unit * 0.25;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &__name, &__label {
+      font-size: 0.9rem !important;
+    }
+  }
+}

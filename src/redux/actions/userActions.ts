@@ -11,7 +11,7 @@ import {
 import RouteUtils from "@utils/Route";
 import AuthUtils from "@utils/Auth";
 import Constants from "@utils/Constants";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
 
 export const setUser = (user: any) => {
   return function (dispatch: Dispatch) {

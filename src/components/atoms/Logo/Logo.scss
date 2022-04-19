@@ -7,9 +7,9 @@
 
   &__text {
     margin-left: $unit * 0.5;
-    font-weight: 600;
-    color: $colorTextDark;
+    color: var(--logo-text-color);
     user-select: none;
+    font-family: $specialFont;
   }
 
   &--noText > p {
@@ -20,7 +20,7 @@
     cursor: pointer;
 
     &:hover {
-      background: $shade5;
+      background: rgba(0, 0, 0, 0.1);
       border-radius: $defaultBorderRadius;
     }
   }

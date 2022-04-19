@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { IHistoryItem } from "@utils/game/IHistoryItem";
+import { IHistoryItem } from "@utils/interfaces";
 import RouteUtils from "@utils/Route";
 import { message } from "@components/atoms";
 

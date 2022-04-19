@@ -45,16 +45,18 @@ const DashboardCreateJoinTab = () => {
   }
 
   function onJoinGame(joinId: string, setJoinError: (msg: string) => void) {
-    if (joinId) {
-      joinLobbyAsync(joinId.toLowerCase()).then((data) => {
-        if (data.success) {
-          dispatch(setLobbyState(data.lobbyState));
-          history.push("/lobby/" + data.lobbyState.roomCode);
-        } else {
-          setJoinError(data.errorMessage.message);
-        }
-      });
-    }
+    // TODO: reset before push
+    history.push("/game/" + joinId);
+    // if (joinId) {
+    //   joinLobbyAsync(joinId.toLowerCase()).then((data) => {
+    //     if (data.success) {
+    //       dispatch(setLobbyState(data.lobbyState));
+    //       history.push("/lobby/" + data.lobbyState.roomCode);
+    //     } else {
+    //       setJoinError(data.errorMessage.message);
+    //     }
+    //   });
+    // }
   }
 
   function onReconnect() {

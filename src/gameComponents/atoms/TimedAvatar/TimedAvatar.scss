@@ -1,0 +1,45 @@
+@import "@styles/Variables.scss";
+
+$imgSize: 64px;
+
+.timedAvatar {
+  border-radius: $defaultBorderRadius;
+  overflow: hidden;
+  width: $imgSize;
+  height: $imgSize;
+  position: relative;
+
+  img {
+    width: $imgSize;
+    height: $imgSize;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    rect {
+      stroke-dasharray: 240px;
+      stroke-dashoffset: 0px;
+      stroke-linecap: round;
+      stroke-width: 4px;
+      stroke: $colorWarning;
+      fill: transparent;
+      animation: countdown 30s linear 1 none;
+    }
+  }
+
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0;
+      stroke: $colorPrimary;
+    }
+    to {
+      stroke-dashoffset: 240px;
+      stroke: $colorPrimary;
+    }
+  }
+}

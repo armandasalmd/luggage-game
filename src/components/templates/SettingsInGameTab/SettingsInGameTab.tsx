@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import "./SettingsInGameTab.scss";
 
 import { Checkbox, Select } from "@components/atoms";
-import { GameTheme } from "@utils/game/Game";
 import { ID } from "@utils/Types";
+import { Settings, GameTheme } from "@engine/index";
 
 const gameThemeSelect = [
   {
@@ -14,12 +14,17 @@ const gameThemeSelect = [
     key: GameTheme.DarkBlue,
     value: "Dark blue theme",
   },
+  {
+    key: GameTheme.DarkGreen,
+    value: "Dark green theme",
+  },
 ];
 
 const SettingsInGameTab: FC = () => {
-  const [gameTheme, setGameTheme] = useState<ID>(GameTheme.DarkBlue);
-  const [sound, setSound] = useState(true);
-  const [autoCompl, setAutoCompl] = useState(true);
+  const s = Settings.getSettings();
+  const [gameTheme, setGameTheme] = useState<ID>(s.gameTheme);
+  const [sound, setSound] = useState(s.cardSound);
+  const [autoCompl, setAutoCompl] = useState(s.autoComplete);
 
   return (
     <div className="settings__inGame" style={{ color: "#123123 " }}>
@@ -30,13 +35,13 @@ const SettingsInGameTab: FC = () => {
           textKey="value"
           items={gameThemeSelect}
           defaultSelectedId={gameTheme}
-          onChange={setGameTheme}
+          onChange={(id: ID) => { setGameTheme(id); Settings.setGameTheme(id as GameTheme); }}
           title="Game color theme"
         />
-        <Checkbox value={sound} onCheck={setSound} title="Enable card sound" />
+        <Checkbox value={sound} onCheck={(val) => { setSound(val); Settings.setCardSound(val); }} title="Enable card sound" />
         <Checkbox
           value={autoCompl}
-          onCheck={setAutoCompl}
+          onCheck={(val) => { setAutoCompl(val); Settings.setAutoComplete(val); }}
           title="Enable turn auto complete"
         />
       </div>

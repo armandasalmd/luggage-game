@@ -1,20 +1,53 @@
 @import "@styles/Variables.scss";
 
 .navbar {
+  $base: &;
+
   display: flex;
   justify-content: space-between;
-  padding: $unit * .35 $unit;
-  background: white;
-  box-shadow: $shadowDefault;
+  padding: 5px $unit;
+  background: var(--navbar-background);
+  box-shadow: $shadowDefaultDark;
+  position: relative;
   z-index: 12;
+  transform: translateY(0px);
+  transition: transform 1s;
   
   &__actions {
     display: flex;
     gap: $unit * .5;
   }
 
+  &__lock {
+    position: absolute;
+    right: $unit;
+    padding: $unit * 0.7;
+    border-bottom-left-radius: $defaultBorderRadius;
+    border-bottom-right-radius: $defaultBorderRadius;
+    background-color: var(--navbar-expander-background);
+    box-shadow: $shadowCard;
+    color: var(--navbar-expander-color);
+    cursor: pointer;
+    transform: translateY(calc(100% - 5px));
+
+    svg {
+      transition: transform 1s;
+      transform: rotate(90deg);
+    }
+  }
+  
   &--sticky {
     position: sticky;
     top: 0px;
+  }
+  
+  &--collapsed {
+    transform: translateY(-51px);
+
+    #{$base}__lock {
+      svg {
+        transform: rotate(-45deg);
+      }
+    }
   }
 }

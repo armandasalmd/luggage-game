@@ -25,7 +25,7 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
   }
 
   return (
-    <Card padded title="Create game">
+    <Card title="Create game">
       <div className="playGame__container">
         <div className="playGame__flexRow">
           <PlayersSelect
