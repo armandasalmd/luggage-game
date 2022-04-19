@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import { GameLayout } from "./templates";
@@ -15,6 +15,13 @@ export const GamePage: FC = () => {
   function onSurrenderClick() {
     history.replace("/")
   }
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto"
+    };
+  });
 
   return (
     <div id="gameRoot" className={classes}>

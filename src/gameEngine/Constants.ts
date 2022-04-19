@@ -1,7 +1,7 @@
 const Constants = {
   config: function (down: boolean, gone: boolean) {
     return {
-      friction: 30,
+      friction: 40,
       clamp: true,
       tension: down ? 800 : gone ? 200 : 500,
     };
