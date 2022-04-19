@@ -2,8 +2,10 @@
 
 .lobbyDetails {
   &__list {
-    margin: 0;
-    padding: 0 $unit * 1.5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: $unit * 0.5;
   }
 
   &__actions {
@@ -12,5 +14,14 @@
     gap: $unit * .5;
     justify-content: flex-end;
     flex-wrap: wrap;
+  }
+
+}
+
+@media screen and (max-width: $sm) {
+  .lobbyDetails__list {
+    display: flex;
+    flex-flow: column;
+    gap: $unit * 0.5;
   }
 }
