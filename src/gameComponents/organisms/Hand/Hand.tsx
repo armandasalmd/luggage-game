@@ -48,7 +48,11 @@ export const Hand: FC<HandProps> = (props) => {
     Card.fromString("5C"),
     Card.fromString("6C"),
     Card.fromString("7C"),
-    Card.fromString("8C"),
+    Card.fromString("4H"),
+    Card.fromString("5H"),
+    Card.fromString("6H"),
+    Card.fromString("7H"),
+    Card.fromString("8H"),
     Card.fromString("10C"),
   ]);
 

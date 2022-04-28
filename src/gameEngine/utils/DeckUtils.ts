@@ -2,16 +2,23 @@ import CONSTANTS from "../Constants";
 import { ISpringTransform } from "../interfaces";
 
 export function cardInitRot(i: number, total: number): number {
-  const { from, to } = CONSTANTS.handRotation
+  const { from, to } = CONSTANTS.handRotation;
 
-  if (!total || total < 2) return 0
-  return ((to - from) / (total - 1)) * i + from
+  if (!total || total < 2) return 0;
+  return ((to - from) / (total - 1)) * i + from;
 }
 
+
 export function cardInitX(i: number, total: number): number {
-  const spacing = CONSTANTS.handSpacing / total
-  const smallScreen = total > 9 ? 10 : 0
-  return (total / 2) * -spacing + spacing * i + spacing * 0.5 + smallScreen
+  const CARD_WIDTH = 125;
+  const isOffboundaries = (total: number, spacing: number) => (window.innerWidth - CARD_WIDTH - (total - 1) * spacing) <= 0;
+  
+  let spacing = CONSTANTS.handSpacing / total * (total > 5 ? 1 : 0.75);
+
+  if (isOffboundaries(total, spacing))
+    return (window.innerWidth - CARD_WIDTH) / -2 +  spacing * i + 8;
+  else
+    return (total / 2) * -spacing + spacing * i + spacing * 0.5;
 }
 
 export function to(i: number, total: number): ISpringTransform {

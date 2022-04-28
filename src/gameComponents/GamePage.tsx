@@ -18,8 +18,10 @@ export const GamePage: FC = () => {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.oncontextmenu = e => false; // disable right click, and long press to save image
     return () => {
-      document.body.style.overflow = "auto"
+      document.body.style.overflow = "auto";
+      document.oncontextmenu = null;
     };
   });
 

@@ -5,7 +5,7 @@
 
   display: flex;
   justify-content: space-between;
-  padding: 5px $unit;
+  padding: 4px $unit;
   background: var(--navbar-background);
   box-shadow: $shadowDefaultDark;
   position: relative;
@@ -28,7 +28,7 @@
     box-shadow: $shadowCard;
     color: var(--navbar-expander-color);
     cursor: pointer;
-    transform: translateY(calc(100% - 5px));
+    transform: translateY(calc(100% - 6.5px));
 
     svg {
       transition: transform 1s;

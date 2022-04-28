@@ -10,6 +10,10 @@
   cursor: pointer;
   user-select: none;
   
+  &:hover {
+    background: var(--mini-card-hover-color);
+  }
+
   div {
     display: flex;
     justify-content: center;

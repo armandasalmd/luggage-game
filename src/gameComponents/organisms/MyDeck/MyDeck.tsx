@@ -75,7 +75,7 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
           .querySelector(".playground__target")!
           .getBoundingClientRect();
         const isSmall = GlobalUtils.isSmallScreen();
-        x = isSmall ? 0 : coords.width / 2 + 12;
+        x = isSmall ? 0 : coords.width / 2 + 3;
         y = -(window.innerHeight - coords.y - coords.height) + 24;
       } else if (o.down) {
         y = my - 28;

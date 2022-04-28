@@ -15,15 +15,13 @@ const to = (target: Element, finished: Element) => {
   if (GlobalUtils.isSmallScreen()) {
     return {
       x: (window.innerWidth + target.clientWidth) * 0.5,
-      rotateZ: randRot,
-      rotateY: 180
+      rotateZ: randRot
     };
   } else {
     return { 
       x: finished.clientWidth / -2 - 16, 
       y: -(target.getBoundingClientRect().top + (0.5 * finished.clientHeight)),
-      rotateZ: 90 + randRot, 
-      rotateY: 180 
+      rotateZ: 90 + randRot
     };
   }
 };
@@ -65,7 +63,10 @@ export const GamePile: FC<GamePileProps> = (props) => {
   }, [props.destroying]);
 
   return <div className={props.className}>
-    <img className="playground__source" src="/assets/default_back.svg" alt="source"  />
+    <div className="playground__source">
+      <p className="playground__sourceText">12 <span>cards</span></p>
+      <img className="playground__sourceImg" src="/assets/default_back.svg" alt="source"  />
+    </div>
     <div className="playground__target">
       <p className="playground__targetText">Empty</p>
       <animated.div className="playground__targetDropzone" style={styles}></animated.div>

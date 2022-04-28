@@ -9,7 +9,7 @@
 
   &__finished {
     position: fixed;
-    top: -$cardWidth * 0.2;
+    top: -$cardWidth * 0.3;
     left: 50%;
     transform: translateX(-50%) rotateZ(90deg) scale($cardScale);
     width: $cardWidth;
@@ -36,26 +36,37 @@
     right: 0;
     bottom: $actionBarHeight;
     display: flex;
-    gap: $unit;
+    // gap: $unit;
     justify-content: center;
     align-items: center;
     transform: translateY(-8%);
 
     #{$base}__source, #{$base}__target {
-      border-radius: $defaultBorderRadius;
       width: $cardWidth;
       height: $cardHeight;
       transform: scale(0.9);
     }
-
+    
     #{$base}__source {
-      box-shadow: $shadowDefaultDark;
+      position: relative;
     }
 
+    #{$base}__sourceText {
+      position: absolute;
+      top: -$unit * 1.75;
+      font-family: $specialFont;
+    }
+
+    #{$base}__sourceImg {
+      border-radius: $defaultBorderRadius;
+      box-shadow: $shadowDefaultDark;
+    }
+    
     #{$base}__target {
       // box-sizing: border-box;
       background: var(--empty-stack-background);
       border: 3px dashed var(--empty-stack-border);
+      border-radius: $defaultBorderRadius;
       display: grid;
       justify-content: center;
       align-items: center;
@@ -93,7 +104,7 @@
       left: auto;
       top: auto;
       right: -$cardWidthMob * 0.65;
-      transform: rotate(-4deg) scale(0.9);
+      transform: rotate(-4deg) scale($cardScale * 0.85);
       width: $cardWidthMob;
       height: $cardHeightMob;
     }
@@ -107,7 +118,20 @@
         left: -$cardWidthMob * 0.5;
         width: $cardWidthMob;
         height: $cardHeightMob;
-        transform: rotate(8deg) scale($cardScale);
+      }
+      
+      #{$base}__sourceImg {
+        transform: rotate(8deg) scale($cardScale * 0.85);
+      }
+
+      #{$base}__sourceText {
+        right: $unit;
+        top: $unit * -0.5;
+        font-size: 1.25rem;
+
+        span {
+          display: none;
+        }
       }
 
       #{$base}__target {

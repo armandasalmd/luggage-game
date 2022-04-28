@@ -17,6 +17,7 @@
     --main-background: #5E82A1;
     --main-background-x: #1D35574D;
     --mini-card-color: #538AB2;
+    --mini-card-hover-color: #4b7b9c;
     --mini-card-border-color: #97AAC3;
     --navbar-background: #314C64E9;
     --navbar-expander-color: #f0f8fa;
@@ -42,6 +43,7 @@
     --main-background: #5D9992;
     --main-background-x: #1d573e4D;
     --mini-card-color: #60B596;
+    --mini-card-hover-color: #56a085;
     --mini-card-border-color: #A7DACB;
     --navbar-background: #31644CB3;
     --navbar-expander-color: #dbf1cd;
@@ -63,11 +65,12 @@
     --main-background: #FFFBF4;
     --main-background-x: rgba(var(--main-background));
     --mini-card-color: #F8F7F2;
+    --mini-card-hover-color: #eeece4;
     --mini-card-border-color: #BAB3AE;
     --player-background: white;
   }
 
-  cursor: url("http://localhost:3000/assets/cursor.png") 32 32, auto;
+  cursor: url("cursor.png") 32 32, auto;
   background-color: var(--main-background);
   height: 100vh;
   overflow: hidden;

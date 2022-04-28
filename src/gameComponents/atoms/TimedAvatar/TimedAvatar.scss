@@ -12,6 +12,8 @@ $imgSize: 64px;
   img {
     width: $imgSize;
     height: $imgSize;
+    user-select: none;
+    touch-action: none;
   }
 
   svg {
