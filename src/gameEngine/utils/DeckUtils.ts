@@ -8,7 +8,6 @@ export function cardInitRot(i: number, total: number): number {
   return ((to - from) / (total - 1)) * i + from;
 }
 
-
 export function cardInitX(i: number, total: number): number {
   const CARD_WIDTH = 125;
   const isOffboundaries = (total: number, spacing: number) => (window.innerWidth - CARD_WIDTH - (total - 1) * spacing) <= 0;
@@ -19,6 +18,10 @@ export function cardInitX(i: number, total: number): number {
     return (window.innerWidth - CARD_WIDTH) / -2 +  spacing * i + 8;
   else
     return (total / 2) * -spacing + spacing * i + spacing * 0.5;
+}
+
+export function randRotation(): number {
+  return (Math.random() - 0.5) * CONSTANTS.targetRotationStrength;
 }
 
 export function to(i: number, total: number): ISpringTransform {
@@ -40,7 +43,7 @@ export function from(i: number): ISpringTransform {
 }
 
 export function trans(r: any, s: any): string {
-  return `perspective(600px) rotateY(${r / 5}deg) rotateZ(${r}deg) scale(${s})`;
+  return `rotateZ(${r}deg) scale(${s})`;
 }
 
 export function parseTranslate(value: string) {

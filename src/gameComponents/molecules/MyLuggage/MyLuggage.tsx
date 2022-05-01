@@ -5,8 +5,6 @@ import { Card, ILuggage } from "@engine/index";
 import { MiniLuggage } from "..";
 import { ActionButton } from "../../atoms";
 import { MiniLuggageModal } from "..";
-
-// import EmojiIcon from "./EmojiIcon";
 import LuggageIcon from "./LuggageIcon";
 
 function getLuggage(): ILuggage {
@@ -55,7 +53,6 @@ export const MyLuggage: FC = () => {
     </div>
     <div className="myLuggage__mobile">
       <ActionButton icon={<LuggageIcon />} onDown={onDown} onUp={onUp} />
-      {/* <ActionButton icon={<EmojiIcon />} /> */}
       {mobileLuggageOpen && <MiniLuggageModal luggage={myLuggage} username="Armandas (You)" />}
     </div>
   </div>

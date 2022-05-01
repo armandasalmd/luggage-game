@@ -104,7 +104,7 @@ const LobbyPage: FC = () => {
     <div>
       <DashboardNavbar onLogout={leaveLobbyAsync.bind(this, user.username)} />
       <div className="lobby">
-        <LobbyDetails className="lobby__details" startGame={onGameStart} />
+        <LobbyDetails className="lobby__details" startGame={onGameStart} roomId={gameId} />
         <LobbyPlayers
           onWave={iWave}
           players={lobbyState.players}

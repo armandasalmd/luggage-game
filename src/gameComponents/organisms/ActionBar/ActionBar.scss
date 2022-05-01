@@ -27,6 +27,15 @@
 
   &__luggage {
     z-index: 6;
+    display: flex;
+    gap: $unit * 0.75;
+    align-items: center;
+  }
+
+  &__separator {
+    width: $unit * 0.15;
+    height: $unit * 2;
+    background-color: var(--navbar-expander-background);
   }
   
   &--active {
@@ -54,15 +63,28 @@
     }
   }
 }
-@media (max-width: $md) {
-  .actionBar__action {
-    position: unset;
-    justify-content: flex-end;
-  }
 
+@media (max-width: $lg) {
+  .actionBar {
+    &__luggage {
+      gap: $unit * 0.5;
+    }
+  }
+}
+
+@media (max-width: $md) {
   .actionBar {
     justify-content: space-between;
     margin: 0;
     padding: 0 $unit * 0.5;
+
+    &__action {
+      position: unset;
+      justify-content: flex-end;
+    }
+
+    &__separator {
+      display: none;
+    }
   }
 }

@@ -84,10 +84,19 @@
           bottom: 0;
         }
       }
-
+      
       #{$base}__targetText {
         opacity: 0.7;
       }
+    }
+  }
+
+  #{$base}__targetHelper {
+    position: absolute;
+    
+    .animatedCard {
+      left: 0;
+      bottom: 0;
     }
   }
 

@@ -1,9 +1,10 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 import "./MiniLuggageModal.scss";
 import GlobalUtils from "@utils/Global";
 import { ILuggage } from "@engine/index";
 import { MiniLuggage } from "..";
+import { useDarkScreenCover } from "@engine/hooks/useDarkScreenCover";
 
 interface MiniLuggageModalProps {
   avatar?: string;
@@ -12,21 +13,7 @@ interface MiniLuggageModalProps {
 }
 
 export const MiniLuggageModal: FC<MiniLuggageModalProps> = (props) => {
-
-  useEffect(() => {
-    const coverElem: any = document.querySelector("#screen-cover");
-
-    if (coverElem) {
-      coverElem.style.display = "block";
-      coverElem.classList.add("screenCoverDarkMode");
-    }
-    return () => {
-      if (coverElem) {
-        coverElem.style.display = "none";
-        coverElem.classList.remove("screenCoverDarkMode");
-      }
-    }
-  }, []);
+  useDarkScreenCover();
 
   if (!props.luggage) return null;
 

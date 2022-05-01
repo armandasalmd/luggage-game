@@ -7,6 +7,7 @@ import {
   CONSTANTS,
   ISpringTransform,
   useDynamicSprings,
+  randRotation,
 } from "@engine/index";
 import { AnimatedCard } from "../../atoms";
 import GlobalUtils from "@utils/Global";
@@ -81,21 +82,18 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         y = my - 28;
       }
 
-      const scale = isDropped ? 0.9 : o.down ? 1.1 : 1;
       const throwDir = (cards.length - 1) / 2 > cardInHandIndex ? -1 : 1;
-      let rot =
-        my / (throwDir * 100) +
-        (isDropped
-          ? Math.random() * throwDir * CONSTANTS.targetRotationStrength
-          : 0);
-      if (!isDropped && o.last)
-        rot = cardInitRot(cardInHandIndex, cards.length);
+      const rot = isDropped
+        ? randRotation()
+        : o.last
+        ? cardInitRot(cardInHandIndex, cards.length)
+        : my / (throwDir * 100);
 
       return {
-        x: x as any,
+        x,
         y,
         rot,
-        scale,
+        scale: isDropped ? 0.9 : o.down ? 1.1 : 1,
         config: CONSTANTS.config(o.down, isDropped),
       };
     }

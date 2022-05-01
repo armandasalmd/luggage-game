@@ -20,6 +20,7 @@ import GamepadIcon from "@material-ui/icons/GamepadOutlined";
 
 interface LobbyDetailsProps {
   className: string;
+  roomId: string;
   startGame?(): void;
 }
 
@@ -32,11 +33,12 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   function onCopyRoomCode() {
     copy(lobbyState.roomCode);
-    message.success("Copied to clipboard");
+    message.success("Room code copied to clipboard");
   }
 
   useEffect(() => {
     document.addEventListener("navbarLogoClick", onLeave);
+    window.scrollTo({ top: 0 });
     return () => document.removeEventListener("navbarLogoClick", onLeave);
   });
 
@@ -105,7 +107,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
         />
       </div>
       <div className="lobbyDetails__actions">
-        <Button onClick={onCopyRoomCode}>Copy room code</Button>
+        <Button onClick={onCopyRoomCode}>Copy ({props.roomId})</Button>
         <Button onClick={onLeave}>Leave</Button>
         <Button
           icon={<CheckIcon />}

@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import classNames from "classnames";
 
-import { Card, sortCards, getFullDeckSet } from "@engine/index";
+import { Card, sortCards, getFullDeckSet, moveCardElementsToPile } from "@engine/index";
 import { MyDeck } from "..";
 import GlobalUtils from "@utils/Global";
 
@@ -11,10 +11,10 @@ interface HandProps {
 }
 
 // TODO: remove this
-const deckSet = getFullDeckSet();
-deckSet.delete("2C");
-deckSet.delete("3C");
-deckSet.delete("10C");
+// const deckSet = getFullDeckSet();
+// deckSet.delete("2C");
+// deckSet.delete("3C");
+// deckSet.delete("10C");
 
 // Select random value from deckSet
 // const getRandomCard = () => {
@@ -26,19 +26,6 @@ deckSet.delete("10C");
 // };
 let topCards: Card[] = []; // TODO: remove this
 
-function _cloneAndPrepareElement(cardElement: HTMLElement): HTMLElement {
-  const cloned: HTMLElement = cardElement.cloneNode(true) as HTMLElement;
-  const inner: HTMLElement = cloned.childNodes[0] as HTMLElement;
-  inner.style.transform = inner.style.transform.replace(/scale\(.*\)/, "");
-  
-  const cardBack = document.createElement("div") as HTMLElement;
-  cardBack.classList.add("animatedCard__back");
-  cardBack.style.backgroundImage = "url(/assets/default_back.svg)";
-  cloned.appendChild(cardBack);
-  
-  return cloned;
-}
-
 export const Hand: FC<HandProps> = (props) => {
   const classes = classNames("hand", props.className);
   const [cards, setCards] = useState<Card[]>([
@@ -47,7 +34,6 @@ export const Hand: FC<HandProps> = (props) => {
     Card.fromString("4C"),
     Card.fromString("5C"),
     Card.fromString("6C"),
-    Card.fromString("7C"),
     Card.fromString("4H"),
     Card.fromString("5H"),
     Card.fromString("6H"),
@@ -57,24 +43,18 @@ export const Hand: FC<HandProps> = (props) => {
   ]);
 
   function onDrop(cardsDropped: Card[]): boolean {
-    const targetElem = document.querySelector(".playground__targetDropzone")!;
-    if (targetElem) {
-      cardsDropped.forEach(_cardDrop);
-
+    if (moveCardElementsToPile(cardsDropped)) {
       const ids = cardsDropped.map((c) => c.id);
       const sorted = sortCards([...cards.filter((c) => !ids.includes(c.id))]);
       setCards(sorted);
       topCards.push(...cardsDropped); // TODO: remove this
       GlobalUtils.callIfFunction(props.postDrop, cardsDropped); // post drop callback
+      topCards = []; // TODO: remove this
 
       return true;
     }
 
     return false;
-
-    function _cardDrop(card: Card) {
-      targetElem.appendChild(_cloneAndPrepareElement(document.getElementById(card.id)!));
-    }
   }
 
   function canDropFn(card: Card, animatingCards: Card[] = []): boolean {
@@ -98,6 +78,6 @@ export const Hand: FC<HandProps> = (props) => {
 
   return <div className={classes}>
     <MyDeck cards={cards} canDropFn={canDropFn} onDrop={onDrop} />
-    <button onClick={takeHome}>Click</button>
+    <button onClick={takeHome}>Take home</button>
   </div>;
 };
