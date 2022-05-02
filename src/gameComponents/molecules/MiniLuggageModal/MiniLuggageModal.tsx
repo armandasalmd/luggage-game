@@ -4,7 +4,7 @@ import "./MiniLuggageModal.scss";
 import GlobalUtils from "@utils/Global";
 import { ILuggage } from "@engine/index";
 import { MiniLuggage } from "..";
-import { useDarkScreenCover } from "@engine/hooks/useDarkScreenCover";
+import { useLightScreenCover } from "@engine/hooks/useLightScreenCover";
 
 interface MiniLuggageModalProps {
   avatar?: string;
@@ -13,7 +13,7 @@ interface MiniLuggageModalProps {
 }
 
 export const MiniLuggageModal: FC<MiniLuggageModalProps> = (props) => {
-  useDarkScreenCover();
+  useLightScreenCover();
 
   if (!props.luggage) return null;
 

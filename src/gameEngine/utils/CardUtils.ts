@@ -34,6 +34,7 @@ export function fetchAndCacheCards() {
   }
 }
 
+// TODO: remove if unused
 export function getFullDeckSet(): Set<string> {
   const deck = new Set<string>();
 

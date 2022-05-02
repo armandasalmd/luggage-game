@@ -9,6 +9,7 @@
   width: $unit * 3;
   cursor: pointer;
   user-select: none;
+  position: relative;
   
   &:hover {
     background: var(--mini-card-hover-color);

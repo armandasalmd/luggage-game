@@ -4,4 +4,5 @@ export interface ISettings {
     gameTheme: GameTheme;
     cardSound: boolean;
     autoComplete: boolean;
+    premiumEmojis: boolean;
 }

@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import classNames from "classnames";
 
-import { Card, sortCards, getFullDeckSet, moveCardElementsToPile } from "@engine/index";
+import { Card, sortCards, moveCardElementsToPile } from "@engine/index";
 import { MyDeck } from "..";
 import GlobalUtils from "@utils/Global";
 
@@ -10,37 +10,23 @@ interface HandProps {
   postDrop?: (cards: Card[]) => void;
 }
 
-// TODO: remove this
-// const deckSet = getFullDeckSet();
-// deckSet.delete("2C");
-// deckSet.delete("3C");
-// deckSet.delete("10C");
-
-// Select random value from deckSet
-// const getRandomCard = () => {
-//   const randomIndex = Math.floor(Math.random() * deckSet.size);
-//   const card = Array.from(deckSet.values())[randomIndex];
-//   deckSet.delete(card);
-
-//   return card;
-// };
 let topCards: Card[] = []; // TODO: remove this
 
 export const Hand: FC<HandProps> = (props) => {
   const classes = classNames("hand", props.className);
-  const [cards, setCards] = useState<Card[]>([
+  const [cards, setCards] = useState<Card[]>(sortCards([
     Card.fromString("2C"),
     Card.fromString("3C"),
     Card.fromString("4C"),
     Card.fromString("5C"),
     Card.fromString("6C"),
     Card.fromString("4H"),
-    Card.fromString("5H"),
+    Card.fromString("6S"),
     Card.fromString("6H"),
     Card.fromString("7H"),
     Card.fromString("8H"),
     Card.fromString("10C"),
-  ]);
+  ]));
 
   function onDrop(cardsDropped: Card[]): boolean {
     if (moveCardElementsToPile(cardsDropped)) {

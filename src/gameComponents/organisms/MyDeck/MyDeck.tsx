@@ -8,6 +8,7 @@ import {
   ISpringTransform,
   useDynamicSprings,
   randRotation,
+  cardRowInStack,
 } from "@engine/index";
 import { AnimatedCard } from "../../atoms";
 import GlobalUtils from "@utils/Global";
@@ -80,6 +81,8 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         y = -(window.innerHeight - coords.y - coords.height) + 24;
       } else if (o.down) {
         y = my - 28;
+      } else { // Released - back to initial
+        y = CONSTANTS.stackedSpacing * cardRowInStack(cards, card);
       }
 
       const throwDir = (cards.length - 1) / 2 > cardInHandIndex ? -1 : 1;

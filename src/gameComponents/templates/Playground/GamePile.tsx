@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 import { AnimatedCard } from "../../atoms";
 import {
@@ -18,10 +18,9 @@ interface GamePileProps {
 
 export const GamePile: FC<GamePileProps> = (props) => {
   const [styles, api] = useSpring(destroyFrom);
-
+  const [throwStyle, throwApi] = useSpring<ISpringTransform>(throwTo);
   const [throwQueue, setThrowQueue] = useState<IThrow[]>([]);
   const [throwCard, setThrowCard] = useState<Card>();
-  const [throwStyle, throwApi] = useSpring<ISpringTransform>(throwTo);
 
   function destroyDeck() {
     const target = document.querySelector(
@@ -62,7 +61,7 @@ export const GamePile: FC<GamePileProps> = (props) => {
     }
   }
 
-  function startPlayerThrow(playerIndex: number, card: Card): Promise<void> {
+  const startPlayerThrow = useCallback((playerIndex: number, card: Card): Promise<void> => {
     return new Promise((resolve) => {
       setThrowCard(card);
       
@@ -76,7 +75,7 @@ export const GamePile: FC<GamePileProps> = (props) => {
         },
       });
     });
-  }
+  }, [throwApi]);
 
   async function _tempAsync() {
     // TODO: To start throw, all you need to do is to set throwQueue like below
@@ -106,7 +105,7 @@ export const GamePile: FC<GamePileProps> = (props) => {
     }
 
     if (throwQueue.length > 0) animate();
-  }, [throwQueue]);
+  }, [throwQueue, startPlayerThrow]);
 
   return (
     <div className={props.className}>
@@ -115,7 +114,7 @@ export const GamePile: FC<GamePileProps> = (props) => {
         onClick={_tempAsync}
       >
         <p className="playground__sourceText">
-          12 <span>cards</span>
+          12<span> cards</span>
         </p>
         <img
           className="playground__sourceImg"

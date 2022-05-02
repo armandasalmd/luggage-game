@@ -23,6 +23,7 @@ export const ActionButton: FC<ActionButtonProps> = (props) => {
         {props.icon && props.icon}
         {props.text && <p className="actionButton__text">{props.text}</p>}
       </div>
+      {props.children}
     </div>
   );
 };

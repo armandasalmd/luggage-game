@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSprings, ControllerUpdate } from "react-spring";
 import { ISpringTransform } from "../interfaces/ISpringTransform";
-import Card from "../Card";
 import { from, to, parseTranslate } from "@engine/index";
+import Card from "../Card";
+import ReducedDeck from "../ReducedDeck";
 
 export interface SpringIndex {
   card: Card;
@@ -102,18 +103,20 @@ export function useDynamicSprings(cards: Card[]) {
 
   function resetHandPosition(delay: number = 25, excludeCards: Card[] | null = null) {
     const excludedIds = excludeCards ? excludeCards.map(o => o.id) : [];
+    const cardsB = excludeCards === null ? cards : cards.filter(o => !excludedIds.includes(o.id));
+    const reducedDeck = new ReducedDeck(cardsB);
+
     api.start(_calcInitialStyle);
     
     function _calcInitialStyle(springIndex: number): MyControllerUpdate {
       const isExcluded = excludeCards !== null && excludedIds.includes(usedSprings[springIndex] || "");
 
       if (usedSprings[springIndex] !== null && !isExcluded) {
-        const cardsB = excludeCards === null ? cards : cards.filter(o => !excludedIds.includes(o.id));
-        const cardInHandIndex = cardsB.findIndex(o => o.id === usedSprings[springIndex]);
+        const pos = reducedDeck.getCardPosition(Card.fromId(usedSprings[springIndex] || ""));
 
         return {
-          to: to(cardInHandIndex, cardsB.length),
-          delay: cardInHandIndex * delay
+          to: to(pos.column, pos.row, reducedDeck.length),
+          delay: pos.column * delay
         };
       }
     }

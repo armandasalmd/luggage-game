@@ -1,5 +1,6 @@
 import CONSTANTS from "../Constants";
 import { ISpringTransform } from "../interfaces";
+import Card from "../Card";
 
 export function cardInitRot(i: number, total: number): number {
   const { from, to } = CONSTANTS.handRotation;
@@ -20,17 +21,18 @@ export function cardInitX(i: number, total: number): number {
     return (total / 2) * -spacing + spacing * i + spacing * 0.5;
 }
 
-export function randRotation(): number {
-  return (Math.random() - 0.5) * CONSTANTS.targetRotationStrength;
-}
-
-export function to(i: number, total: number): ISpringTransform {
-  return {
-    y: 0,
-    x: cardInitX(i, total),
-    scale: 1,
-    rot: cardInitRot(i, total)
-  };
+export function cardRowInStack(deck: Card[], card: Card): number {
+  let row = 0;
+  for (let i = 0; i < deck.length; i++) {
+    if (deck[i].value === card.value) {
+      if (deck[i].kind === card.kind) {
+        break;
+      } else {
+        row++;
+      }
+    }
+  }
+  return row;
 }
 
 export function from(i: number): ISpringTransform {
@@ -42,10 +44,24 @@ export function from(i: number): ISpringTransform {
   };
 }
 
-export function trans(r: any, s: any): string {
-  return `rotateZ(${r}deg) scale(${s})`;
-}
-
 export function parseTranslate(value: string) {
   return value.replaceAll(" ", "").replaceAll("px", "").replaceAll(/translate3d\(|\)/g, "").split(",").map(o => parseFloat(o));
+}
+
+export function randRotation(): number {
+  return (Math.random() - 0.5) * CONSTANTS.targetRotationStrength;
+}
+
+
+export function to(column: number, row: number, totalColumns: number): ISpringTransform {
+  return {
+    x: cardInitX(column, totalColumns),
+    y: CONSTANTS.stackedSpacing * row,
+    rot: cardInitRot(column, totalColumns),
+    scale: 1,
+  };
+}
+
+export function trans(r: any, s: any): string {
+  return `rotateZ(${r}deg) scale(${s})`;
 }

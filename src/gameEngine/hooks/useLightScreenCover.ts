@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useDarkScreenCover() {
+export function useLightScreenCover() {
   useEffect(() => {
     const coverElem: any = document.querySelector("#screen-cover");
 

@@ -24,6 +24,7 @@ const SettingsInGameTab: FC = () => {
   const s = Settings.getSettings();
   const [gameTheme, setGameTheme] = useState<ID>(s.gameTheme);
   const [sound, setSound] = useState(s.cardSound);
+  const [premiumEmojis, setPremiumEmojis] = useState(s.premiumEmojis);
   const [autoCompl, setAutoCompl] = useState(s.autoComplete);
 
   return (
@@ -38,11 +39,12 @@ const SettingsInGameTab: FC = () => {
           onChange={(id: ID) => { setGameTheme(id); Settings.setGameTheme(id as GameTheme); }}
           title="Game color theme"
         />
-        <Checkbox value={sound} onCheck={(val) => { setSound(val); Settings.setCardSound(val); }} title="Enable card sound" />
+        <Checkbox value={sound} onCheck={(val) => { setSound(val); Settings.setCardSound(val); }} title="Card sound" />
+        <Checkbox value={premiumEmojis} onCheck={(val) => { setPremiumEmojis(val); Settings.setPremiumEmojis(val); }} title="Premium emojis" />
         <Checkbox
           value={autoCompl}
           onCheck={(val) => { setAutoCompl(val); Settings.setAutoComplete(val); }}
-          title="Enable turn auto complete"
+          title="Auto complete turn"
         />
       </div>
     </div>

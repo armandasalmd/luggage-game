@@ -80,6 +80,12 @@ img {
   border-radius: $defaultBorderRadius;
 }
 
+.emoji--animating {
+  opacity: 0;
+  animation-name: emojiItem;
+  animation-duration: 3s;
+}
+
 .floatRight {
   float: right;
 }

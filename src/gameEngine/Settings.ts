@@ -4,6 +4,7 @@ import { ISettings } from "./interfaces";
 const DEFAULT_SETTINGS: ISettings = {
   autoComplete: true,
   cardSound: true,
+  premiumEmojis: false,
   gameTheme: GameTheme.DarkBlue,
 };
 const SETTINGS_KEY = "settings";
@@ -32,6 +33,10 @@ export function setCardSound(enabled: boolean) {
 
 export function setAutoComplete(enabled: boolean) {
   setSetting("autoComplete", enabled);
+}
+
+export function setPremiumEmojis(enabled: boolean) {
+  setSetting("premiumEmojis", enabled);
 }
 
 function setSetting(key: SettingKeys, value: any) {
