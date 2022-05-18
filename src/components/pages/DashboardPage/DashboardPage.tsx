@@ -80,7 +80,7 @@ const DashboardPage: FC = () => {
   }
 
   useEffect(() => {
-    if (coins < 0) {
+    if (!coins || coins < 0) {
       dispatch(fetchCoinsAndRewards());
     }
   }, [dispatch, coins]);

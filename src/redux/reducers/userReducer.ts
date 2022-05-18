@@ -25,7 +25,6 @@ const reducer = (state = { ...initialState }, { type, payload }: IAction) => {
         ...state,
         isAuthenticated: true,
         user: payload.user,
-        coins: payload.coins,
       };
     case ActionTypes.Logout:
       return { 
