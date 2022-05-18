@@ -25,7 +25,7 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
   }
 
   return (
-    <Card padded title="Create game">
+    <Card title="Create game">
       <div className="playGame__container">
         <div className="playGame__flexRow">
           <PlayersSelect
@@ -56,7 +56,7 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
             canPlayOnly
           />
         </div>
-        <div className="playGame__flexRow" style={{ marginTop: 16 }}>
+        <div className="playGame__flexRow" style={{ marginTop: 8 }}>
           <Button
             onClick={onCreateGame}
             icon={<PlayCircleOutline />}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import usePagination from "./usePagination";
 import RouteUtils from "@utils/Route";
-import { FriendState, IFriendUser } from "@utils/game/IFriendUser";
+import { FriendState, IFriendUser } from "@utils/interfaces/IFriendUser";
 
 export default function useUserSearch(itemsPerPage: number) {
   const [error, setError] = useState("");

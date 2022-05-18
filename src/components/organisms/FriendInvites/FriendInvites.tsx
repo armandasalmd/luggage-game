@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Card, Friend, Empty, Loader } from "@components/atoms";
 import { FriendAction } from "@components/atoms/Friend/Friend";
-import { IFriendUser } from "@utils/game/IFriendUser";
+import { IFriendUser } from "@utils/interfaces/IFriendUser";
 
 interface FriendInvitesProps {
   invites: IFriendUser[];

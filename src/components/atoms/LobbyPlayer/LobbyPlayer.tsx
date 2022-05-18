@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import classNames from "classnames";
 
 import "./LobbyPlayer.scss";
-import { IPlayer } from "@utils/game/Game";
+import { IPlayer } from "@utils/interfaces";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import HelloIcon from "@material-ui/icons/PanTool";
 import GlobalUtils from "@utils/Global";

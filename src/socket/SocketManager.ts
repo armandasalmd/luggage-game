@@ -2,6 +2,8 @@ import { io, Socket } from "socket.io-client";
 import AuthUtils from "@utils/Auth";
 import RouteUtils from "@utils/Route";
 import Constants from "@utils/Constants";
+import { ISuccessResult } from "@engine/interfaces/server";
+import message from "@components/atoms/Message/Message";
 
 class SocketManager {
   private static instance: SocketManager;
@@ -31,8 +33,8 @@ class SocketManager {
     this.socket.emit(eventName, payload, callback);
   }
 
-  public emitEventAsync(eventName: string, payload: any): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public emitEventAsync<T>(eventName: string, payload: any): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
       let timer: any;
 
       if (Constants.env === "production") {
@@ -48,8 +50,20 @@ class SocketManager {
     });
   }
 
+  public async emitEventHandleErrorAsync(eventName: string, payload: any): Promise<ISuccessResult> {
+    const result = await this.emitEventAsync<ISuccessResult>(eventName, payload);
+
+    if (result.success !== true && result.message) {
+      message.error(result.message);
+    }
+
+    return result;
+  }
+
   public listenToEvent(eventName: string, callback: (dataFromServer: any) => void) {
     this.socket.on(eventName, callback);
+
+    return () => this.socket.removeListener(eventName);
   }
 
   public removeAllListeners() {

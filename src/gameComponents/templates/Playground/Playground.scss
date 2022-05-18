@@ -1,0 +1,152 @@
+@import "@styles/Variables.scss";
+
+.playground {
+  $base: &;
+
+  display: flex;
+  align-items: center;
+  user-select: none;
+
+  &__finished {
+    position: fixed;
+    top: -$cardWidth * 0.3;
+    left: 50%;
+    transform: translateX(-50%) rotateZ(90deg) scale($cardScale);
+    width: $cardWidth;
+    height: $cardHeight;
+
+    #{$base}__finishedDropzone {
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      > * {
+        transform: rotateY(180deg) !important;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+  &__gamePile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: $actionBarHeight;
+    display: flex;
+    // gap: $unit;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-8%);
+
+    #{$base}__source, #{$base}__target {
+      width: $cardWidth;
+      height: $cardHeight;
+      transform: scale(0.9);
+    }
+    
+    #{$base}__source {
+      position: relative;
+    }
+
+    #{$base}__sourceText {
+      position: absolute;
+      top: -$unit * 1.75;
+      font-family: $specialFont;
+    }
+
+    #{$base}__sourceImg {
+      border-radius: $defaultBorderRadius;
+      box-shadow: $shadowDefaultDark;
+    }
+    
+    #{$base}__target {
+      // box-sizing: border-box;
+      background: var(--empty-stack-background);
+      border: 3px dashed var(--empty-stack-border);
+      border-radius: $defaultBorderRadius;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      #{$base}__targetDropzone {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        .animatedCard {
+          position: absolute;
+          transform: none !important;
+          left: 0;
+          bottom: 0;
+        }
+      }
+      
+      #{$base}__targetText {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  #{$base}__targetHelper {
+    position: absolute;
+    
+    .animatedCard {
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+  &__hand {
+    position: fixed;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: $md) {
+    align-items: flex-start;
+    
+    &__finished {
+      position: absolute;
+      left: auto;
+      top: auto;
+      right: -$cardWidthMob * 0.65;
+      transform: rotate(-4deg) scale($cardScale * 0.85);
+      width: $cardWidthMob;
+      height: $cardHeightMob;
+    }
+    
+    &__gamePile {
+      overflow: hidden;
+      transform: translateY(0);
+
+      #{$base}__source {
+        position: absolute;
+        left: -$cardWidthMob * 0.5;
+        width: $cardWidthMob;
+        height: $cardHeightMob;
+      }
+      
+      #{$base}__sourceImg {
+        transform: rotate(8deg) scale($cardScale * 0.85);
+      }
+
+      #{$base}__sourceText {
+        right: $unit;
+        top: $unit * -0.5;
+        font-size: 1.25rem;
+
+        span {
+          display: none;
+        }
+      }
+
+      #{$base}__target {
+        width: $cardWidthMob;
+        height: $cardHeightMob;
+      }
+    }
+  }
+}  

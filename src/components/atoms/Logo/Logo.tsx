@@ -18,7 +18,7 @@ const Logo:FC<LogoProps> = (props) => {
   });
 
   let imgSize = 40;
-  let fontSize = 18;
+  let fontSize = 20;
   
   if (props.size === "S") {
     imgSize = 32;

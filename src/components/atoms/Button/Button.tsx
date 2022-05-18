@@ -34,7 +34,7 @@ const Button: FC<ButtonProps> = (props) => {
   }, props.className);
 
   const Ripple = createRipples({
-    during: 600,
+    during: 400,
     color: "rgba(0, 0, 0, .15)",
     className: "defaultBorderRadius" + (props.floatRight === true ? " floatRight" : ""),
   });

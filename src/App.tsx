@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     if (AuthUtils) {
       AuthUtils.applyUnauthorisedMiddleware();
-      AuthUtils.resetAuthTokenFromStorage();
     }
   }, []);
 

@@ -9,11 +9,11 @@ $defaultMargin: $unit;
  * ====== FONTS ======
  */
 $defaultFont: 'Source Sans Pro', sans-serif;
+$specialFont: 'Sriracha', cursive;
 
 /**
  * ====== COLORS ======
  */
-
 $shade100: #000;
 $shade80: #333;
 $shade70: #444;
@@ -44,7 +44,7 @@ $colorDisabled: $shade5;
 /**
  * ====== SHADOWS ======
  */
-$shadowDefault: 0 0 12px 0 rgba(0, 0, 0, 0.09);
+$shadowDefault: 0 0 12px 0 rgba(0, 0, 0, 0.1);
 $shadowDefaultDark: 0 0 18px 0 rgba(0, 0, 0, 0.2);
 $shadowCard: $shadowDefault;
 $shadowCardHover: $shadowDefaultDark;
@@ -63,19 +63,15 @@ $lg: 75em;
 /**
  * ====== GAME ======
  */
-$cardSmallWidth: 0;
-$cardSmallHeight: 0;
-$cardMediumWidth: 146px;
-$cardMediumHeight: 220px;
-$cardLargeWidth: 0;
-$cardLargeHeight: 0;
-
-$cardSmallWidthMob: 0px;
-$cardSmallHeightMob: 0px;
-$cardMediumWidthMob: 117px;
-$cardMediumHeightMob: 179px;
-$cardLargeWidthMob: 0;
-$cardLargeHeightMob: 0;
+ 
+$cardWidth: 132px;
+$cardHeight: 208px;
+$cardScale: 0.95;
+$cardWidthMob: $cardWidth * $cardScale;
+$cardHeightMob: $cardHeight * $cardScale;
+$cardLeft: calc(50vw - #{$cardWidth} * 0.5);
+$cardLeftMob: calc(50vw - #{$cardWidthMob} * 0.5);
 
 $actionBarHeight: 70px;
 $gamePlayerWidth: 235px;
+$emojiSize: $unit * 3;

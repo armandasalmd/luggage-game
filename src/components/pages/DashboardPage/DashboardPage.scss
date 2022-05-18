@@ -3,49 +3,59 @@
 .dashboard {
   margin-bottom: $unit;
 
-  &__nav {
-    margin: $unit;
+  &__main, &__nav {
+    margin: $unit 14%;
   }
-
-  &__main {
-    margin: $unit;
-  }
-
+  
   &__mobileDivider {
     display: none;
   }
 }
 
+@media screen and (max-width: $lg) {
+  .dashboard {
+    &__main, &__nav {
+      margin: $unit 6%;
+    }
+  }
+}
+
+@media screen and (max-width: $md) {
+  .dashboard {
+    &__main, &__nav {
+      margin: $unit;
+    }
+  }
+}
+
 @media screen and (max-width: $sm) {
-  .dashboard__nav {
-    margin: $unit * 0.5;
-  }
-
-  .dashboard__main {
-    margin: $unit * 0.5;
-  }
-
-  .dashboard__mobileDivider {
-    $color: $shade20;
-
-    height: 0;
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    padding: $unit * 0.25;
-
-    .line {
-      height: 2px;
-      width: 50%;
-      background: $color;
+  .dashboard {
+    &__main, &__nav {
+      margin: $unit * 0.5;
     }
 
-    .ball {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: $color;
-      transform: translate(-25vw, -4px);
+    &__mobileDivider {
+      $color: $shade20;
+
+      height: 0;
+      overflow: visible;
+      display: flex;
+      justify-content: center;
+      padding: $unit * 0.25;
+  
+      .line {
+        height: 2px;
+        width: 50%;
+        background: $color;
+      }
+  
+      .ball {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: $color;
+        transform: translate(-25vw, -5px);
+      }
     }
   }
 }

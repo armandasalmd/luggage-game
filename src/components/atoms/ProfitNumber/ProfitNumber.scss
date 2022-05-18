@@ -1,0 +1,21 @@
+@import "@styles/Variables.scss";
+
+.profit {
+  display: inline-flex;
+  border-radius: 4px;
+  background: mix($colorPrimary, white, 15%);
+
+  p {
+    color: $colorPrimary !important;
+    align-self: center;
+    padding-right: $unit * 0.5;
+  }
+
+  &--negative {
+    background: mix($colorSecondary, white, 15%);
+
+    p {
+      color: $colorSecondary !important;
+    }
+  }
+}

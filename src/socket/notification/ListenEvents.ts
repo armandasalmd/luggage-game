@@ -1,5 +1,5 @@
 import SocketManager from "@socket/SocketManager";
-import { INotification } from "@utils/game/INotification";
+import { INotification } from "@utils/interfaces";
 
 const notificationsPushListener = (callback: (notifs: INotification[]) => void) => {
   SocketManager.getInstance().listenToEvent("notifications push", callback);

@@ -14,7 +14,7 @@ export default function usePublicLobbies(rulesFilter: ID, priceFilter: ID) {
 
   useEffect(() => {
     subscribeToPublicLobbiesAsync(true)
-      .then((lobbyItems) => setLobbies(lobbyItems))
+      .then((lobbyItems: any) => setLobbies(lobbyItems))
       .catch(() => console.warn("Cannot fetch public lobbies"));
 
     publicLobbiesChangedListener((lobbyItems) => {

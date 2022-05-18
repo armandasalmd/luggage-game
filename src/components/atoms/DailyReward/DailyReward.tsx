@@ -4,7 +4,7 @@ import { create } from "canvas-confetti";
 
 import "./DailyReward.scss";
 import TollIcon from "@material-ui/icons/Toll";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
 
 interface DailyRewardProps extends RewardItem {
   onClick?(): void;

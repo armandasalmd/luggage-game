@@ -1,5 +1,6 @@
 import { IAction, ActionTypes } from "@redux/actions";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
+import AuthUtils from "@utils/Auth";
 
 export interface IUserState {
   isAuthenticated: boolean;
@@ -8,10 +9,12 @@ export interface IUserState {
   rewards: RewardItem[];
 }
 
+const user = AuthUtils.restoreAuthToken();
+
 const initialState: IUserState = {
-  isAuthenticated: false,
-  user: {},
-  coins: 0,
+  isAuthenticated: !!user,
+  user: user || {},
+  coins: -1,
   rewards: [],
 };
 
@@ -25,7 +28,11 @@ const reducer = (state = { ...initialState }, { type, payload }: IAction) => {
         coins: payload.coins,
       };
     case ActionTypes.Logout:
-      return { ...initialState };
+      return { 
+        ...initialState,
+        user: {},
+        isAuthenticated: false,
+    };
     case ActionTypes.AddCoins:
       return {
         ...state,

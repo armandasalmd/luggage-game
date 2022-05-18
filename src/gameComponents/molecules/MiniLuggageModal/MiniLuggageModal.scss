@@ -1,0 +1,41 @@
+@import "@styles/Variables.scss";
+@import "@styles/Animations.scss";
+
+.screenCoverDarkMode {
+  background: rgba($shade30, 0.1) !important;
+}
+
+.luggageModal {
+  position: fixed;
+  bottom: $actionBarHeight + $unit * 2;
+  left: $unit;
+  right: $unit;
+  display: flex;
+  justify-content: center;
+  animation-name: flyInBottom, fadeIn;
+  animation-timing-function: ease, ease-in;
+  animation-duration: 250ms, 250ms;
+  z-index: 9;
+  
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: $unit * 0.75;
+    padding: $unit * 0.75;
+    background: var(--player-background);
+    border-radius: $defaultBorderRadius;
+    box-shadow: $shadowDefaultDark;
+  }
+
+  &__person {
+    display: flex;
+    gap: $unit * 0.75;
+    align-items: center;
+    
+    img {
+      border-radius: $defaultBorderRadius;
+      width: $unit * 2.5;
+      height: $unit * 2.5;
+    }
+  }
+}

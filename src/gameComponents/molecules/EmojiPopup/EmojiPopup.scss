@@ -1,0 +1,38 @@
+@import "@styles/Variables.scss";
+
+.emojiPopup {
+  position: fixed;
+  bottom: $actionBarHeight + $unit * 0.5;
+  border-radius: $defaultBorderRadius;
+  background-color: var(--emoji-popup-background);
+  backdrop-filter: blur(2px);
+  display: none;
+  
+  &__collection {
+    margin: $unit * 0.5;
+    gap: $unit * 0.25;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $unit * 0.5;
+    padding-left: $unit * 0.5;
+    padding-right: $unit * 0.5;
+  }
+
+  &--visible {
+    display: initial;
+  }
+
+  .emojiItem {
+    background-color: rgba(0, 0, 0, 0.08);
+    
+    &:hover, &:active {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}

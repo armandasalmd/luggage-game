@@ -7,6 +7,8 @@
   position: absolute;
   top: $unit * 3;
   right: $unit;
+  margin-left: $unit;
   padding: $unit * .5 0;
   border: none;
+  z-index: 1;
 }
