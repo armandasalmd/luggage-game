@@ -17,7 +17,9 @@ import { setHandCards, appendToSubmitQueue, appendToPlayDeck, updateMyState } fr
 
 interface HandProps {
   className?: string;
-  postDrop?: (shouldDestroy: boolean) => void;
+  successDrop: (shouldDestroy: boolean) => void;
+  postDrop: () => void;
+  preDrop: () => void;
 }
 
 export const Hand: FC<HandProps> = (props) => {
@@ -55,7 +57,7 @@ export const Hand: FC<HandProps> = (props) => {
         }
       });
 
-      GlobalUtils.callIfFunction(props.postDrop, shouldDestroy);
+      GlobalUtils.callIfFunction(props.successDrop, shouldDestroy);
       
       return true;
     }
@@ -69,6 +71,8 @@ export const Hand: FC<HandProps> = (props) => {
         cards={convertCards(handCards)}
         canDropFn={() => true}
         onDropAsync={onDropAsync}
+        preDrop={props.preDrop}
+        postDrop={props.postDrop}
       />
     </div>
   );

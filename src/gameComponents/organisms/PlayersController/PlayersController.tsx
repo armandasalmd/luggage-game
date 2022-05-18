@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import "./PlayersController.scss";
 
-import { IPublicPlayerState, toLuggageModel } from "@engine/index";
+import { IPublicPlayerState, toLuggageModel, GameStatus } from "@engine/index";
 import { clearEmoji, receiveEmoji } from "@redux/actions";
 import { RootState } from "@redux/store";
 import { emojiListener } from "@socket/game";
@@ -12,17 +12,7 @@ import { PlayerCardProps } from "../../atoms";
 import { Player } from "../../molecules";
 
 function getPlayerLabel(player: IPublicPlayerState) {
-  if (player.status === "playing") {
-    return (
-      player.handCardCount +
-      " " +
-      GlobalUtils.pluralize("card", player.handCardCount) +
-      " left"
-    );
-  } else if (player.status) {
-    return player.status + " place";
-  }
-  return "";
+  return `${player.handCardCount} ${GlobalUtils.pluralize("card", player.handCardCount)} left`;
 }
 
 interface PlayersControllerProps {
@@ -33,7 +23,10 @@ export const PlayersController: FC<PlayersControllerProps> = (props) => {
   const classes = classNames("playersController", props.className);
   const dispatch = useDispatch();
   const players = useSelector((state: RootState) => state.game.playersState);
-  const { activeSeatId } = useSelector((state: RootState) => state.game.gameDetails);
+  const { activeSeatId, status } = useSelector((state: RootState) => ({
+    activeSeatId: state.game.gameDetails.activeSeatId,
+    status: state.game.status,
+  }));
 
   useEffect(() => {
     const emojiCleanup = emojiListener(function (emoji) {
@@ -55,6 +48,7 @@ export const PlayersController: FC<PlayersControllerProps> = (props) => {
   const playerComponents = players.map(function (player, index) {
     const pProps: PlayerCardProps = {
       label: getPlayerLabel(player),
+      extraLabel: status === GameStatus.Ended ? player.status + " place" : undefined,
       username: player.username,
       active: activeSeatId === player.seatId,
     };

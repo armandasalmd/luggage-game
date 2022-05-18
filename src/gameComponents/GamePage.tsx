@@ -27,7 +27,10 @@ export const GamePage: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const settings = Settings.getSettings();
-  const gameStatus = useSelector((state: RootState) => state.game.status);
+  const { gameStatus, username } = useSelector((state: RootState) => ({ 
+    gameStatus: state.game.status,
+    username: state.user.user.username
+  }));
   const loading = gameStatus === GameStatus.Loading;
   const classes = classNames("gameRoot", "gameRoot--" + settings.gameTheme);
 
@@ -63,7 +66,7 @@ export const GamePage: FC = () => {
     const detailsCancel = gameDetailsListener((details) =>
       dispatch(updateGameDetails(details))
     );
-    const endCancel = theEndListener((details) => dispatch(gameEnded(details)));
+    const endCancel = theEndListener((details) => dispatch(gameEnded(details, username)));
     const luggageCancel = luggageTakenListener((details) =>
       dispatch(luggageUpdate(details))
     );
