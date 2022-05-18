@@ -1,9 +1,7 @@
 import axios from "axios";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import store from "@redux/store";
 import Constants from "@utils/Constants";
 import RouteUtils from "@utils/Route";
-import { logoutUser } from "@redux/actions";
 
 function applyUnauthorisedMiddleware() {
   axios.interceptors.response.use((response: any) => response, (error) => {
@@ -47,7 +45,7 @@ function restoreAuthToken() {
       }
     }
 
-    logoutUser()(store.dispatch);
+    removeJwtToken();
     window.location.href = RouteUtils.routes.app.auth.login.path;
   }
 }
