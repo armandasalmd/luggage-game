@@ -43,11 +43,12 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         ac.length !== 0 && ac[ac.length - 1].id === card.id;
 
       if (isDropped && isLastAnimatingCard) {
-
         onDropAsync(ac).then((success) => {
           animatingCards.current = [];
 
           if (!success) resetHandPosition();
+        }).catch(() => {
+          resetHandPosition();
         });
       }
     });
