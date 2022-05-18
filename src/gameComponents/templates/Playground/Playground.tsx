@@ -5,10 +5,22 @@ import { PlayersController } from "../../organisms";
 import { Hand } from "../../organisms/Hand/Hand";
 import { GamePile } from "./GamePile";
 
-export const Playground: FC = () => {
+interface PlaygroundProps {
+  setAnimating: (animating: boolean) => void;
+}
+
+export const Playground: FC<PlaygroundProps> = (props) => {
   const [destroying, setDestroying] = useState(false);
 
-  function postDrop(shouldDestroy: boolean) {
+  function preDrop() {
+    props.setAnimating(true);
+  }
+
+  function postDrop() {
+    props.setAnimating(false);
+  }
+
+  function successDrop(shouldDestroy: boolean) {
     if (shouldDestroy) setDestroying(true);
   }
 
@@ -19,7 +31,12 @@ export const Playground: FC = () => {
         destroying={destroying}
         setDestroying={setDestroying}
       />
-      <Hand className="playground__hand" postDrop={postDrop} />
+      <Hand
+        className="playground__hand"
+        successDrop={successDrop}
+        postDrop={postDrop}
+        preDrop={preDrop}
+      />
       <PlayersController />
     </div>
   );

@@ -7,6 +7,7 @@ const Constants = {
     };
   },
   dragThrowVelocity: 0.3,
+  dragPxThreshold: 200,
   handRotation: {
     from: -5,
     to: 5

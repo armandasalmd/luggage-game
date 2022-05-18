@@ -48,12 +48,25 @@ export const Player: FC<PlayerProps> = (props) => {
         onDown={onDown}
         onUp={onUp}
         {...props.playerProps}
-        extraLabel={
-          props.playerProps.username === "player1" ? "1st place" : undefined
-        }>
-        {props.animatingEmoji && <div style={{position: "absolute", top: 8, left: 4, width: 64, height: 64}}>
-          <EmojiSvg name={props.animatingEmoji} animating onAnimationEnd={props.postEmojiAnimation} />
-        </div>}
+        extraLabel={props.playerProps.extraLabel}
+      >
+        {props.animatingEmoji && (
+          <div
+            style={{
+              position: "absolute",
+              top: 8,
+              left: 4,
+              width: 64,
+              height: 64,
+            }}
+          >
+            <EmojiSvg
+              name={props.animatingEmoji}
+              animating
+              onAnimationEnd={props.postEmojiAnimation}
+            />
+          </div>
+        )}
       </PlayerCard>
       {props.luggageProps && (
         <MiniLuggage

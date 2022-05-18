@@ -12,17 +12,21 @@ import { RootState } from "@redux/store";
 import { luggageTime } from "@engine/index";
 
 interface ActionBarProps {
+  handAnimating: boolean;
   onSubmitTurn(): void;
 }
 
 export const ActionBar: FC<ActionBarProps> = (props) => {
-  const { isActive, isTakeHome, isLuggageTime } = useSelector((state: RootState) => ({
-    isActive: state.game.myState.seatId === state.game.gameDetails.activeSeatId,
-    isTakeHome:
-      state.game.myState.submitQueue.length === 0 &&
-      state.game.gameDetails.playDeck.length > 0,
-    isLuggageTime: luggageTime(state.game),
-  }));
+  const { isActive, isTakeHome, isLuggageTime } = useSelector(
+    (state: RootState) => ({
+      isActive:
+        state.game.myState.seatId === state.game.gameDetails.activeSeatId,
+      isTakeHome:
+        state.game.myState.submitQueue.length === 0 &&
+        state.game.gameDetails.playDeck.length > 0,
+      isLuggageTime: luggageTime(state.game),
+    })
+  );
   const [showEmojiPopup, setShowEmojiPopup] = useState(false);
   const [animMyEmoji, setAnimMyEmoji] = useState("");
   const classes = classNames("actionBar", {
@@ -59,17 +63,19 @@ export const ActionBar: FC<ActionBarProps> = (props) => {
         <MyLuggage onOpenning={() => setShowEmojiPopup(false)} />
       </div>
       <div className="actionBar__overlay"></div>
-      <div className="actionBar__action">
-        {(isActive && !isLuggageTime) && (
-          <ActionButton
-            freeWidth
-            text={isTakeHome ? "Take home" : "Finish turn"}
-            onClick={props.onSubmitTurn}
-          />
-        )}
-        {isLuggageTime && <p>Pick a card...</p>}
-        {!isActive && <p>Please wait...</p>}
-      </div>
+      {!props.handAnimating && (
+        <div className="actionBar__action">
+          {isActive && !isLuggageTime && (
+            <ActionButton
+              freeWidth
+              text={isTakeHome ? "Take home" : "Finish turn"}
+              onClick={props.onSubmitTurn}
+            />
+          )}
+          {isLuggageTime && <p>Pick a card...</p>}
+          {!isActive && <p>Please wait...</p>}
+        </div>
+      )}
       <EmojiPopup
         visible={showEmojiPopup}
         onClose={onEmojiActionClick}

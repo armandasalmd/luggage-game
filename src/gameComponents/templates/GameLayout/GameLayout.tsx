@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./GameLayout.scss";
 
@@ -15,17 +15,20 @@ interface GameLayoutProps {
 }
 
 export const GameLayout: FC<GameLayoutProps> = (props) => {
+  const [handAnimating, setHandAnimating] = useState(false);
   const dispatch = useDispatch();
-  const { username, price, rules, coins, status } = useSelector((state: RootState) => ({
-    coins: state.user.coins,
-    username: state.user.user.username,
-    price: state.game.gameDetails.price,
-    rules: state.game.gameDetails.rules,
-    status: state.game.status
-  }));
+  const { username, price, rules, coins, status } = useSelector(
+    (state: RootState) => ({
+      coins: state.user.coins,
+      username: state.user.user.username,
+      price: state.game.gameDetails.price,
+      rules: state.game.gameDetails.rules,
+      status: state.game.status,
+    })
+  );
 
   function onSubmitTurn() {
-    finishTurnAsync().then(result => {
+    finishTurnAsync().then((result) => {
       if (result.success) {
         dispatch(updateMyState(result.myPlayerState));
       } else if (result.message) {
@@ -33,7 +36,7 @@ export const GameLayout: FC<GameLayoutProps> = (props) => {
       }
     });
   }
-  
+
   return (
     <div className="layout">
       <GameNavbar
@@ -44,9 +47,11 @@ export const GameLayout: FC<GameLayoutProps> = (props) => {
         onSurrender={props.onSurrender}
         canSurrender={status === GameStatus.Running}
       />
-      <Playground />
+      <Playground setAnimating={setHandAnimating} />
       {status === GameStatus.Ended && <PostGameActionBar />}
-      {status === GameStatus.Running && <ActionBar onSubmitTurn={onSubmitTurn} />}
+      {status === GameStatus.Running && (
+        <ActionBar handAnimating={handAnimating} onSubmitTurn={onSubmitTurn} />
+      )}
     </div>
   );
 };

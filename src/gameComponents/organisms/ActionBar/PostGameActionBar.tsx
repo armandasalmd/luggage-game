@@ -23,14 +23,14 @@ export const PostGameActionBar: FC = () => {
     history.replace(RouteUtils.routes.app.main.dashboard.path);
   }
 
-  function playAgain() {
-    message.information("This feature is coming soon!");
-  }
+  // function playAgain() {
+  //   message.information("This feature is coming soon!");
+  // }
 
   return <div className="actionBar">
     <div className="actionBar__luggage">
       <ActionButton icon={<ExitIcon />} onClick={exit} />
-      <ActionButton text="Play again" freeWidth onClick={playAgain} />
+      {/* <ActionButton text="Play again" freeWidth onClick={playAgain} /> */}
     </div>
     <div className="actionBar__action">
       <div className="actionBar__postGame">

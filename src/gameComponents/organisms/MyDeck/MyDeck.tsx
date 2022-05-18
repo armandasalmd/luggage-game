@@ -16,17 +16,21 @@ interface MyDeckProps {
   cards: Card[];
   canDropFn(): boolean;
   onDropAsync(cardsDropped: Card[]): Promise<boolean>;
+  preDrop: () => void;
+  postDrop: () => void;
 }
 
 export const MyDeck: FC<MyDeckProps> = (props) => {
+  const targetRef = useRef<Element | null>();
   const animatingCards = useRef<Card[]>([]);
   const { cards, canDropFn, onDropAsync } = props;
   const { api, springIndexes, resetHandPosition, reducedDeck } = useDynamicSprings(cards);
 
   const bind = useDrag((o) => {
+    const my = o.movement[1];
     const card: Card = o.args[0];
     const isDragUp = o.direction[1] < 0;
-    const isDropped = !o.down && o.velocity > CONSTANTS.dragThrowVelocity && isDragUp && canDropFn();
+    const isDropped = !o.down && ((o.velocity > CONSTANTS.dragThrowVelocity && isDragUp) || my < -CONSTANTS.dragPxThreshold) && canDropFn();
     const currentRow = springIndexes.find((o) => o.card === card)?.row ?? 0; // Row of the card
     const dragSpringIndexes = springIndexes.filter(o => o.card.value === card.value && (o.row <= currentRow));
 
@@ -43,6 +47,8 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         ac.length !== 0 && ac[ac.length - 1].id === card.id;
 
       if (isDropped && isLastAnimatingCard) {
+        props.postDrop();
+
         onDropAsync(ac).then((success) => {
           animatingCards.current = [];
 
@@ -54,6 +60,7 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
     });
 
     if (isDropped && !animatingCards.current.includes(card)) {
+      props.preDrop();
       animatingCards.current.push(...dragSpringIndexes.map(o => o.card));
       // If the last card is dropped, then no need to animate hand
       if (cards.length > 1) resetHandPosition(25, animatingCards.current);
@@ -68,14 +75,15 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
 
       let x = undefined;
       let y = 0;
-      const my = o.movement[1];
 
       if (isDropped) {
-        const coords = document
-          .querySelector(".playground__target")!
-          .getBoundingClientRect();
+        if (!targetRef.current) { // Caching target element
+          targetRef.current = document.querySelector(".playground__target");
+        }
+
+        const coords = targetRef.current!.getBoundingClientRect();
         const isSmall = GlobalUtils.isSmallScreen();
-        x = isSmall ? 0 : coords.width / 2 + 3;
+        x = isSmall ? 0 : coords.x - (window.innerWidth - coords.width) / 2; // coords.width / 2 + 3
         y = -(window.innerHeight - coords.y - coords.height) + 24;
       } else if (o.down) {
         y = my - (1 - current.row) * CONSTANTS.stackedSpacing;

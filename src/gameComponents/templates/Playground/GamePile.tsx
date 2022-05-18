@@ -166,12 +166,13 @@ export const GamePile: FC<GamePileProps> = (props) => {
   useEffect(() => {
     const cancel = playerPushedCardsListener((data) => {
       dispatch(playerPushedCards(data));
-      setThrowQueue(
-        data.cards.map((o) => ({
+      setThrowQueue([
+        ...throwQueue,
+        ...data.cards.map((o) => ({
           card: Card.fromString(o),
           seatId: data.seatId,
-        }))
-      );
+        })),
+      ]);
 
       if (getEngine(GameRulesType.Classic).shouldDestroy([], data.cards)) {
         props.setDestroying(true);
