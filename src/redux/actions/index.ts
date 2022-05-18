@@ -5,31 +5,37 @@ export interface IAction extends AnyAction {
 }
 
 export enum ActionTypes {
-  Login,
-  Logout,
-  SetErrorMessage,
-  SetErrorFields,
-  ResetErrors,
-  SetLobbyState,
+  AddCoins,
+  AppendToPlayDeck,
+  AppendToSubmitQueue,
+  PickLuggageCard,
+  ClearPlayDeck,
+  ClearGameState,
   ClearLobbyState,
-  LobbyPlayerReady,
+  GameEnded,
+  LoadInitialGameState,
   LobbyPlayerJoined,
   LobbyPlayerLeft,
+  LobbyPlayerReady,
+  Login,
+  Logout,
+  LuggageUpdate,
+  PatchPublicPlayer,
+  PlayerPushedCards,
+  ResetErrors,
+  SetAnimatingEmoji,
+  SetCoinsAndRewards,
+  SetErrorFields,
+  SetErrorMessage,
   SetGameState,
-  SetPickCardCountItems,
+  SetHandCards,
+  SetLobbyState,
   SetPlayerWaveState,
   UpdateGameDetails,
-  UpdateMyPlayer,
-  UpdatePublicPlayer,
-  AddCoins,
-  SetLuggageUsed,
-  ClearGameState,
-  SetGameReward,
-  SetCoinsAndRewards,
+  UpdateMyState,
   UpdateReward,
 };
 
-export * from "./actionBarActions";
 export * from "./errorActions";
 export * from "./gameActions";
 export * from "./lobbyActions";

@@ -7,6 +7,8 @@ import ReducedDeck from "../ReducedDeck";
 
 export interface SpringIndex {
   card: Card;
+  column: number;
+  row: number;
   springIndex: number;
   styles: ISpringTransform;
 }
@@ -16,6 +18,7 @@ type UsedSpringState = string | null; // String represents a card id that uses t
 type MyControllerUpdate = ControllerUpdate<ISpringTransform> | undefined;
 
 export function useDynamicSprings(cards: Card[]) {
+  const reducedDeck = new ReducedDeck(cards);
   const [previousCardIds, setPreviousCardIds] = useState<string[]>(cards.map(o => o.id));
   const [usedSprings, setUsedSprings] = useState<UsedSpringState[]>(Array(MAX_SPRINGS).fill(null));
   const [springs, api] = useSprings(MAX_SPRINGS, index => {
@@ -51,42 +54,50 @@ export function useDynamicSprings(cards: Card[]) {
 
   function _allocateUnusedSpring(card: Card): number {
     const index = usedSprings.indexOf(null);
-    const usedSpringsCopy = [...usedSprings];
-    usedSpringsCopy[index] = card.id;
-    setUsedSprings([...usedSpringsCopy]);
+    usedSprings[index] = card.id;
+    setUsedSprings([...usedSprings]);
 
     return index;
   }
 
   function _createSpringIndex(card: Card): SpringIndex {
     const index = _allocateUnusedSpring(card);
+    const pos = reducedDeck.getCardPosition(card);
 
     return {
       card: card.duplicate(),
       springIndex: index,
-      styles: springs[index]
+      styles: springs[index],
+      row: pos.row,
+      column: pos.column
     };
   }
 
   function _getSpringIndex(card: Card): SpringIndex {
     const index = usedSprings.indexOf(card.id);
-
+    
     if (index === -1) {
       return _createSpringIndex(card);
     }
 
+    const pos = reducedDeck.getCardPosition(card);
+
     return {
       card: card.duplicate(),
       springIndex: index,
-      styles: springs[index]
+      styles: springs[index],
+      row: pos.row,
+      column: pos.column
     };
   }
 
-  function _releaseAndResetSpring(springIndex: number): void {
-    const usedSpringsCopy = [...usedSprings];
-    usedSpringsCopy[springIndex] = null;
-    setUsedSprings([...usedSpringsCopy]);
+  function _initIndexes(): SpringIndex[] {
+    return cards.map(_getSpringIndex);
+  }
 
+  function _releaseAndResetSpring(springIndex: number): void {
+    usedSprings[springIndex] = null;
+    setUsedSprings([...usedSprings]);
     _setImmediate(springIndex, from(springIndex));
   }
 
@@ -103,8 +114,8 @@ export function useDynamicSprings(cards: Card[]) {
 
   function resetHandPosition(delay: number = 25, excludeCards: Card[] | null = null) {
     const excludedIds = excludeCards ? excludeCards.map(o => o.id) : [];
-    const cardsB = excludeCards === null ? cards : cards.filter(o => !excludedIds.includes(o.id));
-    const reducedDeck = new ReducedDeck(cardsB);
+    const cards2 = excludeCards === null ? cards : cards.filter(o => !excludedIds.includes(o.id));
+    const reducedDeck2 = new ReducedDeck(cards2);
 
     api.start(_calcInitialStyle);
     
@@ -112,10 +123,10 @@ export function useDynamicSprings(cards: Card[]) {
       const isExcluded = excludeCards !== null && excludedIds.includes(usedSprings[springIndex] || "");
 
       if (usedSprings[springIndex] !== null && !isExcluded) {
-        const pos = reducedDeck.getCardPosition(Card.fromId(usedSprings[springIndex] || ""));
+        const pos = reducedDeck2.getCardPosition(Card.fromId(usedSprings[springIndex] || ""));
 
         return {
-          to: to(pos.column, pos.row, reducedDeck.length),
+          to: to(pos.column, pos.row, reducedDeck2.length),
           delay: pos.column * delay
         };
       }
@@ -138,7 +149,7 @@ export function useDynamicSprings(cards: Card[]) {
   useEffect(() => {
     resetHandPosition(250);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
-  return { api, springIndexes: cards.map(_getSpringIndex), resetHandPosition };
+  return { api, springIndexes: _initIndexes(), resetHandPosition, reducedDeck };
 }

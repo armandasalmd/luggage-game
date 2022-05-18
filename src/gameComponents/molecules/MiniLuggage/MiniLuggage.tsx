@@ -17,10 +17,8 @@ export const MiniLuggage: FC<MiniLuggageProps> = (props) => {
   const canPlayDown = luggage.cardsUp.every((o) => o.disabled);
   const classes = classNames("miniLuggage", className);
 
-  for (let i = 0; i < luggage.cardsDown.length; i++) {
-    luggage.cardsDown[i].isFaceUp = false;
-    luggage.cardsUp[i].isFaceUp = true;
-  }
+  luggage.cardsDown.forEach((o) => (o.isFaceUp = false));
+  luggage.cardsUp.forEach((o) => (o.isFaceUp = true));
 
   function onClickImpl(card: Card) {
     if (card.isFaceUp || canPlayDown) {
@@ -28,15 +26,15 @@ export const MiniLuggage: FC<MiniLuggageProps> = (props) => {
     }
   }
 
-  const downElements = luggage.cardsDown.map((o) => (
+  const downElements = luggage.cardsDown.map((o, index) => (
     <MiniCard
-      key={o.toString()}
+      key={index}
       card={o}
       onClick={canPlayDown ? onClickImpl : undefined}
     />
   ));
-  const upElements = luggage.cardsUp.map((o) => (
-    <MiniCard key={o.toString()} card={o} onClick={onClickImpl} />
+  const upElements = luggage.cardsUp.map((o, index) => (
+    <MiniCard key={index} card={o} />
   ));
 
   return (

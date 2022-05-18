@@ -7,8 +7,9 @@ interface IEmojiConfig {
 // Emoji source: https://iconscout.com/icon-pack/free-and-cute-emoji
 export const emojiConfig: IEmojiConfig = {
   defaultEmojis: [
-    "happy-450464",
     "laugh-450473",
+    "rolling-450487",
+    "happy-450464",
     "attitude-450436",
     "wink-450406",
     "kiss-450472",
@@ -19,7 +20,6 @@ export const emojiConfig: IEmojiConfig = {
     "disappoint-450452",
     "pinocchio-450480",
     "sad-450493",
-    "rolling-450486",
     "wow-450424",
     "scream-450404",
   ],

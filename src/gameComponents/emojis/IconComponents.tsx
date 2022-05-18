@@ -1,4 +1,9 @@
 import { FC } from "react";
+// Kinds
+import { ReactComponent as diamond } from "./diamond-450450.svg";
+import { ReactComponent as spade } from "./spead-450401.svg";
+import { ReactComponent as club } from "./club-450439.svg";
+import { ReactComponent as heart } from "./heart-450467.svg";
 // Default
 import { ReactComponent as happy } from "./happy-450464.svg";
 import { ReactComponent as kiss } from "./kiss-450472.svg";
@@ -10,7 +15,7 @@ import { ReactComponent as disappoint } from "./disappoint-450452.svg";
 import { ReactComponent as laugh } from "./laugh-450473.svg";
 import { ReactComponent as pinocchio } from "./pinocchio-450480.svg";
 import { ReactComponent as sad } from "./sad-450493.svg";
-import { ReactComponent as rolling } from "./rolling-450486.svg";
+import { ReactComponent as rolling } from "./rolling-450487.svg";
 import { ReactComponent as scream } from "./scream-450404.svg";
 import { ReactComponent as wink } from "./wink-450406.svg";
 import { ReactComponent as wink2 } from "./wink-450419.svg";
@@ -32,6 +37,10 @@ interface IIcons {
 }
 
 export const icons: IIcons = {
+  "diamond-450450": diamond,
+  "spead-450401": spade,
+  "club-450439": club,
+  "heart-450467": heart,
   "happy-450464": happy,
   "kiss-450472": kiss,
   "angry-450433": angry,
@@ -42,7 +51,7 @@ export const icons: IIcons = {
   "laugh-450473": laugh,
   "pinocchio-450480": pinocchio,
   "sad-450493": sad,
-  "rolling-450486": rolling,
+  "rolling-450487": rolling,
   "scream-450404": scream,
   "wink-450406": wink,
   "wink-450419": wink2,

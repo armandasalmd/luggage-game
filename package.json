@@ -1,6 +1,6 @@
 {
   "name": "luggage-game",
-  "version": "2.2.0",
+  "version": "2.3.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",

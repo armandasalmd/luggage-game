@@ -9,7 +9,10 @@ import PersonIcon from "@material-ui/icons/Person";
 import TollIcon from "@material-ui/icons/Toll";
 
 export interface GameNavbarProps {
+  canSurrender: boolean;
+  coins: number;
   gamePrice: number;
+  gameRules: string;
   name: string;
   onSurrender?(): void;
 }
@@ -19,29 +22,45 @@ export const GameNavbar: FC<GameNavbarProps> = (props) => {
   const toggleMore = () => setMoreOpen(!moreOpen);
   const menuItems = [
     {
-      id: 0, text: `Player ${props.name}`
+      id: 0,
+      text: `Player ${props.name}`,
     },
     {
-      id: 1, text: `Looser loose ${props.gamePrice} coins`
-    }
+      id: 1,
+      text: `Your balance ${props.coins > 0 ? props.coins : "unknown"}`,
+    },
+    {
+      id: 2,
+      text: `Looser pays ${props.gamePrice}`,
+    },
+    {
+      id: 3,
+      text: `Game rules ${props.gameRules}`,
+    },
+    {
+      id: 4,
+      text: `Reconnect (refresh)`,
+    },
   ];
 
   return (
     <Navbar withLock onCollapse={() => setMoreOpen(false)}>
-      <PillButton
-        prefix={<FlagIcon />}
-        colorType="secondary"
-        onClick={props.onSurrender}
-      >
-        Surrender
-      </PillButton>
+      {props.canSurrender && (
+        <PillButton
+          prefix={<FlagIcon />}
+          colorType="secondary"
+          onClick={props.onSurrender}
+        >
+          Surrender
+        </PillButton>
+      )}
       <PillButton
         prefix={<TollIcon />}
         colorType="secondary"
         clickable={false}
         hideOnSmall
       >
-        {`Price ${props.gamePrice}`}
+        {`Bet ${props.gamePrice}`}
       </PillButton>
       <PillButton
         prefix={<PersonIcon />}
@@ -59,12 +78,16 @@ export const GameNavbar: FC<GameNavbarProps> = (props) => {
         onClick={toggleMore}
       />
       <PopMenu
+        width={266}
         isOpen={moreOpen}
         items={menuItems}
         idKey="id"
         textKey="text"
         colorType="secondary"
         disabled
+        onSelectChange={(id: number) => {
+          if (id === 4) window.location.reload();
+        }}
         onOutsideClick={() => setMoreOpen(false)}
       />
     </Navbar>

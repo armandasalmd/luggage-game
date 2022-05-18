@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Card, message, PillButton, TabItem } from "@components/atoms";
 import { Tabs } from "@components/molecules";
@@ -15,6 +15,7 @@ import TollIcon from "@material-ui/icons/Toll";
 import { ID } from "@utils/Types";
 import { RootState } from "@redux/store";
 import "./DashboardPage.scss";
+import { fetchCoinsAndRewards } from "@redux/actions";
 
 const PAGE_TITLE = "Game menu";
 const DEFAULT_ACTIVE_TAB = 1;
@@ -44,6 +45,7 @@ const TABS = [
 const DashboardPage: FC = () => {
   const [tabId, setTabId] = useState<ID>(DEFAULT_ACTIVE_TAB);
   const { coins } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   function onAddCoins() {
     message.information("Cannot purchase coins yet");
@@ -62,7 +64,7 @@ const DashboardPage: FC = () => {
         onSuffixClick={onAddCoins}
         suffix={<AddIcon />}
       >
-        {coins || "loading"}
+        {coins >= 0 ? coins : "loading"}
       </PillButton>
     </div>
   );
@@ -76,6 +78,12 @@ const DashboardPage: FC = () => {
   if (activeTab) {
     tabContainer = React.createElement(activeTab.component);
   }
+
+  useEffect(() => {
+    if (coins < 0) {
+      dispatch(fetchCoinsAndRewards());
+    }
+  }, [dispatch, coins]);
 
   return (
     <div className="dashboard">

@@ -38,6 +38,31 @@
     background-color: var(--navbar-expander-background);
   }
   
+  &__postGame {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 2px;
+    
+    & > div {
+      display: flex;
+      justify-content: flex-end;
+      gap: $unit * 0.5;
+    }
+    
+    h1 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    
+    p {
+      font-size: 0.95rem;
+      color: var(--text-color);
+      text-align: center;
+    }
+  }
+
   &--active {
     #{$base}__overlay {
       position: absolute;
@@ -85,6 +110,10 @@
 
     &__separator {
       display: none;
+    }
+
+    &__postGame p {
+      text-align: right;
     }
   }
 }

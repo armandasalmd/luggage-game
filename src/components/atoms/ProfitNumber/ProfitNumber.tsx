@@ -1,4 +1,6 @@
 import { FC } from "react";
+import classNames from "classnames";
+import "./ProfitNumber.scss";
 
 import UpIcon from "@material-ui/icons/ArrowDropUp";
 import DownIcon from "@material-ui/icons/ArrowDropDown";
@@ -8,6 +10,10 @@ interface ProfitNumberProps {
 }
 
 const ProfitNumber: FC<ProfitNumberProps> = (props) => {
+  const classes = classNames("profit", {
+    "profit--negative": props.value < 0,
+  });
+
   const text = props.value < 0 ? -props.value : props.value;
   const icon =
     props.value < 0 ? (
@@ -15,12 +21,11 @@ const ProfitNumber: FC<ProfitNumberProps> = (props) => {
     ) : (
       <UpIcon htmlColor="var(--primary-color)" />
     );
-  const color = props.value < 0 ? "var(--secondary-color)" : "var(--primary-color)";
 
   return (
-    <div style={{display: "flex"}}>
+    <div className={classes}>
       {icon}
-      <p style={{color, alignSelf: "center"}}>{text.toString()}</p>
+      <p>{text}</p>
     </div>
   );
 };

@@ -1,69 +1,75 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { batch, useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
-import { Card, sortCards, moveCardElementsToPile } from "@engine/index";
+import {
+  Card,
+  convertCards,
+  GameRulesType,
+  moveCardElementsToPile,
+} from "@engine/index";
 import { MyDeck } from "..";
 import GlobalUtils from "@utils/Global";
+import { RootState } from "@redux/store";
+import { getEngine } from "@engine/index";
+import { playCardsAsync } from "@socket/game";
+import { setHandCards, appendToSubmitQueue, appendToPlayDeck, updateMyState } from "@redux/actions"
 
 interface HandProps {
   className?: string;
-  postDrop?: (cards: Card[]) => void;
+  postDrop?: (shouldDestroy: boolean) => void;
 }
 
-let topCards: Card[] = []; // TODO: remove this
-
 export const Hand: FC<HandProps> = (props) => {
+  const dispatch = useDispatch();
   const classes = classNames("hand", props.className);
-  const [cards, setCards] = useState<Card[]>(sortCards([
-    Card.fromString("2C"),
-    Card.fromString("3C"),
-    Card.fromString("4C"),
-    Card.fromString("5C"),
-    Card.fromString("6C"),
-    Card.fromString("4H"),
-    Card.fromString("6S"),
-    Card.fromString("6H"),
-    Card.fromString("7H"),
-    Card.fromString("8H"),
-    Card.fromString("10C"),
-  ]));
+  const { handCards, submitQueue, playDeck } = useSelector(
+    (state: RootState) => ({
+      handCards: state.game.myState.handCards,
+      submitQueue: state.game.myState.submitQueue,
+      playDeck: state.game.gameDetails.playDeck,
+    })
+  );
+  const engine = getEngine(GameRulesType.Classic);
+  
+  async function onDropAsync(cardsDropped: Card[]): Promise<boolean> {
+    if (!engine.canPlayCards(playDeck, submitQueue, cardsDropped.map(o => o.toString()))) {
+      return false; // returns back to hand
+    }
 
-  function onDrop(cardsDropped: Card[]): boolean {
-    if (moveCardElementsToPile(cardsDropped)) {
-      const ids = cardsDropped.map((c) => c.id);
-      const sorted = sortCards([...cards.filter((c) => !ids.includes(c.id))]);
-      setCards(sorted);
-      topCards.push(...cardsDropped); // TODO: remove this
-      GlobalUtils.callIfFunction(props.postDrop, cardsDropped); // post drop callback
-      topCards = []; // TODO: remove this
+    const result = await playCardsAsync(cardsDropped.map(c => c.toString()));
 
+    if (result.success) {
+      if (!moveCardElementsToPile(cardsDropped)) return false;
+
+      const stringCards = cardsDropped.map((c) => c.toString());
+      const shouldDestroy = engine.shouldDestroy(submitQueue, stringCards); // must be before batch
+      // Remove submitted cards, no sorting needed
+      batch(() => {
+        dispatch(setHandCards(handCards.filter(c => !stringCards.includes(c.toString()))));
+        dispatch(appendToPlayDeck(stringCards));
+        dispatch(appendToSubmitQueue(stringCards));
+
+        if (result.myPlayerState) { // When top luggage is taken
+          dispatch(updateMyState(result.myPlayerState));
+        }
+      });
+
+      GlobalUtils.callIfFunction(props.postDrop, shouldDestroy);
+      
       return true;
     }
 
     return false;
   }
 
-  function canDropFn(card: Card, animatingCards: Card[] = []): boolean {
-    const v = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    const stack = [...topCards, ...animatingCards];
-
-    if (stack.length === 0) {
-      return true;
-    }
-
-    return v.indexOf(card.value) >= v.indexOf(stack[stack.length - 1].value);
-  }
-
-  function takeHome() {
-    const elements = Array.from(document.querySelectorAll(".playground__targetDropzone > .animatedCard"));
-    const cardsToHome = elements.map(o => Card.fromId(o.id));
-    const sorted = sortCards([...cards, ...cardsToHome]);
-    setCards(sorted);
-    topCards = []; // TODO: remove this
-  }
-
-  return <div className={classes}>
-    <MyDeck cards={cards} canDropFn={canDropFn} onDrop={onDrop} />
-    <button onClick={takeHome}>Take home</button>
-  </div>;
+  return (
+    <div className={classes}>
+      <MyDeck
+        cards={convertCards(handCards)}
+        canDropFn={() => true}
+        onDropAsync={onDropAsync}
+      />
+    </div>
+  );
 };

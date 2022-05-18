@@ -12,7 +12,7 @@ const Constants = {
     to: 5
   },
   handSpacing: 312,
-  stackedSpacing: 38,
+  stackedSpacing: 40,
   targetRotationStrength: 10
 };
 

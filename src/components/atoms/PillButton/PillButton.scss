@@ -29,6 +29,7 @@
     height: 100%;
     padding: 0 $unit * 0.5;
     border-radius: $defaultBorderRadius;
+    cursor: pointer;
 
     &:hover {
       background: rgba($colorPrimary, 0.15);

@@ -5,11 +5,14 @@ import "./Player.scss";
 import { PlayerCard, PlayerCardProps } from "../../atoms/PlayerCard/PlayerCard";
 import { MiniLuggage, MiniLuggageModal } from "..";
 import { ILuggage } from "@engine/index";
+import { EmojiSvg } from "../../emojis";
 
 interface PlayerProps {
-  playerProps: PlayerCardProps;
-  luggageProps: ILuggage;
+  animatingEmoji?: string;
   className: string | string[];
+  luggageProps: ILuggage;
+  playerProps: PlayerCardProps;
+  postEmojiAnimation: () => void;
 }
 
 export const Player: FC<PlayerProps> = (props) => {
@@ -46,9 +49,12 @@ export const Player: FC<PlayerProps> = (props) => {
         onUp={onUp}
         {...props.playerProps}
         extraLabel={
-          props.playerProps.username === "Armandas" ? "1st place" : undefined
-        }
-      />
+          props.playerProps.username === "player1" ? "1st place" : undefined
+        }>
+        {props.animatingEmoji && <div style={{position: "absolute", top: 8, left: 4, width: 64, height: 64}}>
+          <EmojiSvg name={props.animatingEmoji} animating onAnimationEnd={props.postEmojiAnimation} />
+        </div>}
+      </PlayerCard>
       {props.luggageProps && (
         <MiniLuggage
           className="gamePlayer__luggage"

@@ -56,7 +56,7 @@ const CreateGameCard: FC<CreateGameCardProps> = (props) => {
             canPlayOnly
           />
         </div>
-        <div className="playGame__flexRow" style={{ marginTop: 16 }}>
+        <div className="playGame__flexRow" style={{ marginTop: 8 }}>
           <Button
             onClick={onCreateGame}
             icon={<PlayCircleOutline />}

@@ -23,10 +23,10 @@ export const AnimatedCard: FC<AnimatedCardProps> = (props) => {
   return (
     <animated.div className="animatedCard" id={props.card.id} style={{ x, y }}>
       <animated.div
-        className="animatedCard__inner"
-        style={innerStyle}
-        {...props.events}
-      />
+      className="animatedCard__inner"
+      style={innerStyle}
+      {...props.events}
+    />
     </animated.div>
   );
 };

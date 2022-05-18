@@ -7,6 +7,12 @@ export default class Card {
   constructor(public kind: CardKind, public value: string, public isFaceUp: boolean = true) {}
 
   public static fromString(card: string, isFaceUp?: boolean): Card {
+    if (!card) {
+      const c = new Card(CardKind.Spades, "3");
+      c.disabled = true;
+      return c;
+    }
+
     const kind = card.length === 3 ? card.substring(2, 4) : card.substring(1, 2);
     const value = card.length === 3 ? card.substring(0, 2) : card.substring(0, 1);
     
@@ -27,9 +33,9 @@ export default class Card {
 
   get cardPath(): string {
     const path = this.isFaceUp
-      ? "/" + this.toString() + ".png"
-      : "/default_back.svg";
-    return Constants.servers.assets + path;
+      ? Constants.servers.assets + "/" + this.toString() + ".png"
+      : "/assets/default_back.svg";
+    return path;
   }
 
   get id(): string {

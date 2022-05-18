@@ -6,39 +6,36 @@ import {
   cardInitRot,
   CONSTANTS,
   ISpringTransform,
-  useDynamicSprings,
   randRotation,
-  cardRowInStack,
+  useDynamicSprings,
 } from "@engine/index";
 import { AnimatedCard } from "../../atoms";
 import GlobalUtils from "@utils/Global";
 
 interface MyDeckProps {
   cards: Card[];
-  canDropFn(card: Card, animatingCards?: Card[]): boolean;
-  onDrop(cardsDropped: Card[]): boolean;
+  canDropFn(): boolean;
+  onDropAsync(cardsDropped: Card[]): Promise<boolean>;
 }
 
 export const MyDeck: FC<MyDeckProps> = (props) => {
   const animatingCards = useRef<Card[]>([]);
-  const { cards, canDropFn, onDrop } = props;
-  const { api, springIndexes, resetHandPosition } = useDynamicSprings(cards);
+  const { cards, canDropFn, onDropAsync } = props;
+  const { api, springIndexes, resetHandPosition, reducedDeck } = useDynamicSprings(cards);
 
   const bind = useDrag((o) => {
     const card: Card = o.args[0];
+    const isDragUp = o.direction[1] < 0;
+    const isDropped = !o.down && o.velocity > CONSTANTS.dragThrowVelocity && isDragUp && canDropFn();
+    const currentRow = springIndexes.find((o) => o.card === card)?.row ?? 0; // Row of the card
+    const dragSpringIndexes = springIndexes.filter(o => o.card.value === card.value && (o.row <= currentRow));
 
     if (o.first || o.last) {
-      document.getElementById(card.id)!.style.zIndex = o.first ? "1" : "0";
+      const value = o.first ? "1" : "0";
+      dragSpringIndexes.forEach((s) => {
+        document.getElementById(s.card.id)!.style.zIndex = value;
+      });
     }
-
-    const isDragUp = o.direction[1] < 0;
-    const isDropped =
-      !o.down &&
-      o.velocity > CONSTANTS.dragThrowVelocity &&
-      isDragUp &&
-      canDropFn(card, animatingCards.current);
-    const dragSpringIndex =
-      springIndexes.find((o) => o.card.id === card.id)?.springIndex ?? -1;
 
     api.start(_calcDragStyle)[0]?.then(() => {
       const ac = animatingCards.current;
@@ -46,16 +43,17 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         ac.length !== 0 && ac[ac.length - 1].id === card.id;
 
       if (isDropped && isLastAnimatingCard) {
-        if (onDrop(ac)) {
+
+        onDropAsync(ac).then((success) => {
           animatingCards.current = [];
-        } else {
-          resetHandPosition();
-        }
+
+          if (!success) resetHandPosition();
+        });
       }
     });
 
     if (isDropped && !animatingCards.current.includes(card)) {
-      animatingCards.current.push(card);
+      animatingCards.current.push(...dragSpringIndexes.map(o => o.card));
       // If the last card is dropped, then no need to animate hand
       if (cards.length > 1) resetHandPosition(25, animatingCards.current);
     }
@@ -63,11 +61,10 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
     function _calcDragStyle(
       i: number
     ): ControllerUpdate<ISpringTransform> | undefined {
-      if (i !== dragSpringIndex || animatingCards.current.includes(card)) {
-        return;
-      }
+      const current = dragSpringIndexes.find(o => o.springIndex === i);
 
-      const cardInHandIndex = cards.findIndex((c) => c.id === card.id);
+      if (!current || animatingCards.current.includes(card)) return;
+
       let x = undefined;
       let y = 0;
       const my = o.movement[1];
@@ -80,16 +77,16 @@ export const MyDeck: FC<MyDeckProps> = (props) => {
         x = isSmall ? 0 : coords.width / 2 + 3;
         y = -(window.innerHeight - coords.y - coords.height) + 24;
       } else if (o.down) {
-        y = my - 28;
-      } else { // Released - back to initial
-        y = CONSTANTS.stackedSpacing * cardRowInStack(cards, card);
+        y = my - (1 - current.row) * CONSTANTS.stackedSpacing;
+      } else {
+        y = CONSTANTS.stackedSpacing *  current.row; // Released - back to initial
       }
 
-      const throwDir = (cards.length - 1) / 2 > cardInHandIndex ? -1 : 1;
+      const throwDir = (reducedDeck.length - 1) / 2 > current.column ? -1 : 1;
       const rot = isDropped
         ? randRotation()
         : o.last
-        ? cardInitRot(cardInHandIndex, cards.length)
+        ? cardInitRot(current.column, reducedDeck.length)
         : my / (throwDir * 100);
 
       return {

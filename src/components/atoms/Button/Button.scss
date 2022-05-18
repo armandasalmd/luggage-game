@@ -18,7 +18,7 @@
   padding: 0 1rem;
 
   &:hover {
-    background: $shade10 !important;
+    background: $shade10;
   }
 
   svg {
@@ -29,13 +29,8 @@
     outline: none;
   }
 
-  &:hover:not(&--ghost) {
-    background: $shade5;
-    cursor: pointer;
-  }
-
-  &:active:not(&--disabled):not(&--accent):not(&--danger):not(&--ghost):not(&--link) {
-    background-color: $shade20;
+  &--ghost:hover {
+    background: rgba($colorPrimary, 0.08);
   }
 
   // <start> --MODIFIERS </start>

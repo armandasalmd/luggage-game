@@ -24,16 +24,24 @@ export function destroyTo(target: Element, finished: Element) {
   }
 }
 
-export function throwFrom(playerIndex: number): ISpringTransform {
+export function throwFrom(seatId?: number): ISpringTransform {
+  if (seatId === undefined) {
+    return {
+      x: 60,
+      y: 0,
+      scale: 0.9,
+    };
+  }
+
   const playerRect = document
-    .querySelector(".player" + playerIndex)!
+    .querySelector(".seat" + seatId)!
     .getBoundingClientRect();
   const dropzoneRect = document
     .querySelector(".playground__targetDropzone")!
     .getBoundingClientRect();
   // Exception to desktop variant
   const xOffset =
-    playerIndex % 2 === 1 && !GlobalUtils.isSmallScreen()
+    seatId % 2 === 1 && !GlobalUtils.isSmallScreen()
       ? playerRect.width
       : 0;
 

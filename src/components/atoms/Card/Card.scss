@@ -15,7 +15,7 @@ $separatorColor: #F7F7FA;
   }
 
   &__content {
-    padding: $defaultMargin;
+    padding:  $defaultMargin * 0.5 $defaultMargin $defaultMargin * 0.75 $defaultMargin;
   }
 
   &__collapseButton {

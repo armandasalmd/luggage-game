@@ -1,6 +1,8 @@
 @import "@styles/Variables.scss";
 
 .actionButton {
+  $base: &;
+
   border-radius: $defaultBorderRadius;
   height: 100%;
   background: var(--mini-card-color);
@@ -30,5 +32,15 @@
 
   &__text {
     font-size: 1.2rem;
+  }
+
+  &--freeWidth {
+    width: auto;
+    padding: 0 $unit * 0.5;
+    font-size: 0.9rem;
+    
+    #{$base}__text {
+      font-size: 1.1rem;
+    }
   }
 }

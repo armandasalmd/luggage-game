@@ -1,6 +1,5 @@
 import CONSTANTS from "../Constants";
 import { ISpringTransform } from "../interfaces";
-import Card from "../Card";
 
 export function cardInitRot(i: number, total: number): number {
   const { from, to } = CONSTANTS.handRotation;
@@ -21,20 +20,6 @@ export function cardInitX(i: number, total: number): number {
     return (total / 2) * -spacing + spacing * i + spacing * 0.5;
 }
 
-export function cardRowInStack(deck: Card[], card: Card): number {
-  let row = 0;
-  for (let i = 0; i < deck.length; i++) {
-    if (deck[i].value === card.value) {
-      if (deck[i].kind === card.kind) {
-        break;
-      } else {
-        row++;
-      }
-    }
-  }
-  return row;
-}
-
 export function from(i: number): ISpringTransform {
   return {
     y: 500,
@@ -51,7 +36,6 @@ export function parseTranslate(value: string) {
 export function randRotation(): number {
   return (Math.random() - 0.5) * CONSTANTS.targetRotationStrength;
 }
-
 
 export function to(column: number, row: number, totalColumns: number): ISpringTransform {
   return {

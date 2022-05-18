@@ -7,7 +7,7 @@ const AppPrivate = () => {
     <Switch>
       <Route exact path="/" component={DashboardPage} />
       <Route exact path="/lobby/:gameId" component={LobbyPage} />
-      <Route exact path="/game/:gameId" component={GamePage} />
+      <Route exact path="/game" component={GamePage} />
       <Route render={() => <Redirect to="/" />} />
     </Switch>
   );

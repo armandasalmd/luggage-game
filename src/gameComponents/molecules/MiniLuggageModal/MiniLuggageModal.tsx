@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import "./MiniLuggageModal.scss";
 import GlobalUtils from "@utils/Global";
-import { ILuggage } from "@engine/index";
+import { Card, ILuggage } from "@engine/index";
 import { MiniLuggage } from "..";
 import { useLightScreenCover } from "@engine/hooks/useLightScreenCover";
 
@@ -10,6 +10,7 @@ interface MiniLuggageModalProps {
   avatar?: string;
   username?: string;
   luggage?: ILuggage;
+  onClick?(card: Card): void;
 }
 
 export const MiniLuggageModal: FC<MiniLuggageModalProps> = (props) => {
@@ -23,7 +24,7 @@ export const MiniLuggageModal: FC<MiniLuggageModalProps> = (props) => {
         <img alt="avatar" {...GlobalUtils.avatarImageProps(props.avatar)} />
         <p>{props.username}</p>
       </div>
-      <MiniLuggage luggage={props.luggage} />
+      <MiniLuggage luggage={props.luggage} onClick={props.onClick} />
     </div>
   </div>
 };

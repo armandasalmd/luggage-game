@@ -1,23 +1,10 @@
 import Card from "../Card";
 import { CardKind } from "../Enums";
 import { ILuggage } from "../interfaces/ILuggage";
+import { BaseEngine } from "@engine/engine/BaseEngine";
 
 const CARD_KINDS = ["C", "D", "H", "S"];
-const CARD_VALUES = [
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K",
-  "A",
-];
+const CARD_VALUES = BaseEngine.availableCards;
 
 export function fetchAndCacheCards() {
   for (const value of CARD_VALUES) {
@@ -34,19 +21,6 @@ export function fetchAndCacheCards() {
   }
 }
 
-// TODO: remove if unused
-export function getFullDeckSet(): Set<string> {
-  const deck = new Set<string>();
-
-  for (const value of CARD_VALUES) {
-    for (const kind of CARD_KINDS) {
-      deck.add(new Card(kind as CardKind, value).toString());
-    }
-  }
-
-  return deck;
-}
-
 export function sortCards(cards: Card[]): Card[] {
   return cards.sort((a, b) => {
     if (a.value === b.value) {
@@ -57,6 +31,10 @@ export function sortCards(cards: Card[]): Card[] {
   });
 }
 
+export function sortStringCards(cards: string[]): string[] {
+  return sortCards(convertCards(cards)).map((o) => o.toString());
+}
+
 export function toLuggageModel(luggageCards: string): ILuggage {
   const luggage: ILuggage = {
     cardsDown: [],
@@ -64,22 +42,18 @@ export function toLuggageModel(luggageCards: string): ILuggage {
   };
 
   if (luggageCards) {
-    luggage.cardsDown = luggageCards
-      .split(",")
-      .slice(0, 3)
-      .map((o) => Card.fromString(o));
-    luggage.cardsDown = luggageCards
-      .split(",")
-      .slice(3, 3)
-      .map((o) => Card.fromString(o));
+    const cards = luggageCards.split(",");
+    luggage.cardsDown = cards.slice(0, 3).map((o) => Card.fromString(o));
+    luggage.cardsUp = cards.slice(3).map((o) => Card.fromString(o));
   }
 
   return luggage;
 }
 
-export function randomCard(): Card {
-  return new Card(
-    CARD_KINDS[Math.floor(Math.random() * CARD_KINDS.length)] as CardKind,
-    CARD_VALUES[Math.floor(Math.random() * CARD_VALUES.length)]
-  );
+export function convertCards(cards: string[]): Card[] {
+  if (Array.isArray(cards)) {
+    return cards.map((o) => Card.fromString(o));
+  }
+
+  return [];
 }

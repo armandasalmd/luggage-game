@@ -41,9 +41,10 @@ export const PlayerCard: FC<PlayerCardProps> = (props) => {
       <TimedAvatar className="playerCard__avatar" running={!!props.active} avatarUrl={props.avatarUrl} />
       <div className="playerCard__textGroup">
         <p className="playerCard__name">{props.username}</p>
-        <span className="playerCard__label">{props.label}</span>
+        {props.label && <span className="playerCard__label">{props.label}</span>}
       </div>
       {props.extraLabel && <span className="playerCard__extraLabel">{props.extraLabel}</span>}
+      {props.children}
     </div>
   );
 };

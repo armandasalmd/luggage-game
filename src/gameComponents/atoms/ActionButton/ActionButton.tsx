@@ -1,7 +1,9 @@
 import { FC } from "react";
+import classNames from "classnames";
 import "./ActionButton.scss";
 
 interface ActionButtonProps {
+  freeWidth?: boolean;
   icon?: any;
   text?: string;
   onClick?(): void;
@@ -10,9 +12,13 @@ interface ActionButtonProps {
 }
 
 export const ActionButton: FC<ActionButtonProps> = (props) => {
+  const classes = classNames("actionButton", {
+    "actionButton--freeWidth": props.freeWidth,
+  });
+
   return (
     <div
-      className="actionButton"
+      className={classes}
       onClick={props.onClick}
       onMouseDown={props.onDown}
       onMouseUp={props.onUp}

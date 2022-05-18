@@ -1,6 +1,6 @@
 import Card from "../Card";
 
 export interface IThrow {
-  playerIndex: number;
+  seatId?: number;
   card: Card;
 }

@@ -49,9 +49,7 @@ const LobbyPage: FC = () => {
   }
 
   function onGameStart() {
-    history.push(
-      RouteUtils.routes.app.main.game.path + "/" + lobbyState.roomCode
-    );
+    history.push(RouteUtils.routes.app.main.game.path);
   }
 
   function onPlayerReady(username: string) {
@@ -70,7 +68,7 @@ const LobbyPage: FC = () => {
   }
 
   function attemptRoomJoin(roomId: string) {
-    joinLobbyAsync(roomId).then(function (data) {
+    joinLobbyAsync(roomId).then(function (data: any) {
       if (data.success) {
         dispatch(setLobbyState(data.lobbyState));
       } else {
@@ -104,7 +102,10 @@ const LobbyPage: FC = () => {
     <div>
       <DashboardNavbar onLogout={leaveLobbyAsync.bind(this, user.username)} />
       <div className="lobby">
-        <LobbyDetails className="lobby__details" startGame={onGameStart} roomId={gameId} />
+        <LobbyDetails
+          className="lobby__details"
+          roomId={gameId}
+        />
         <LobbyPlayers
           onWave={iWave}
           players={lobbyState.players}

@@ -3,16 +3,13 @@ import "./Playground.scss";
 
 import { PlayersController } from "../../organisms";
 import { Hand } from "../../organisms/Hand/Hand";
-import { Card } from "@engine/index";
 import { GamePile } from "./GamePile";
 
 export const Playground: FC = () => {
   const [destroying, setDestroying] = useState(false);
 
-  function postDrop(cards: Card[]) {
-    if (cards.map((o) => o.value).includes("10")) {
-      setDestroying(true);
-    }
+  function postDrop(shouldDestroy: boolean) {
+    if (shouldDestroy) setDestroying(true);
   }
 
   return (

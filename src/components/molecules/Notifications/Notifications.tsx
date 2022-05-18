@@ -53,7 +53,7 @@ const Notifications: FC<NotificationsProps> = (props) => {
 
     if (roomId) {
       if (accept) {
-        joinLobbyAsync(roomId).then(function (data) {
+        joinLobbyAsync(roomId).then(function (data: any) {
           if (data.success) {
             dispatch(setLobbyState(data.lobbyState));
             history.push("/lobby/" + data.lobbyState.roomCode);

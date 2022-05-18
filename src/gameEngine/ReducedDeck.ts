@@ -7,9 +7,13 @@ interface ICardPosition {
 }
 
 export default class ReducedDeck {
-  public reducedDeck: IReducedDeck;
+  public reducedDeck: IReducedDeck = {};
 
   constructor(deck: Card[]) {
+    this.update(deck);
+  }
+
+  public update(deck: Card[]) {
     let column = 0;
 
     this.reducedDeck = deck.reduce<IReducedDeck>((acc, card) => {

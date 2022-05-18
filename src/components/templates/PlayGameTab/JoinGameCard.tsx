@@ -23,7 +23,7 @@ const JoinGameCard: FC<JoinGameCardProps> = (props) => {
           maxWidth="15rem"
           onSubmit={onJoin}
         />
-        <div className="playGame__flexRow" style={{ marginTop: 16 }}>
+        <div className="playGame__flexRow" style={{ marginTop: 8 }}>
           <Button
             icon={<PlayCircleOutline />}
             type="ghost"

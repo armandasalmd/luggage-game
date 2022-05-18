@@ -4,15 +4,15 @@ import { VerticalMenuItem } from "@components/atoms";
 
 export interface VerticalMenuProps {
   colorType?: ColorType;
-  onSelectChange?(id: number | string, item: object): void;
-  idKey: string;
-  textKey: string;
-  items: any[];
   defaultSelectedId?: string | number;
-  showLeftOutline?: boolean;
+  disabled?: boolean;
   forceSelectedId?: string | number;
   forceUpdateSelectedId?: boolean;
-  disabled?: boolean;
+  idKey: string;
+  items: any[];
+  onSelectChange?(id: number | string, item: object): void;
+  showLeftOutline?: boolean;
+  textKey: string;
 }
 
 const VerticalMenu: FC<VerticalMenuProps> = (props) => {
@@ -22,12 +22,12 @@ const VerticalMenu: FC<VerticalMenuProps> = (props) => {
   function onItemClick(id: number) {
     if (selectedItemId !== id && !props.disabled) {
       setSelectedItemId(id);
-      
-      if (typeof props.onSelectChange === "function") {
-        props.onSelectChange(id, props.items.find(function (item) {
-          return item[props.idKey] === id;
-        }));
-      }
+    }
+    
+    if (typeof props.onSelectChange === "function") {
+      props.onSelectChange(id, props.items.find(function (item) {
+        return item[props.idKey] === id;
+      }));
     }
   }
 

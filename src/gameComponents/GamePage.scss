@@ -4,9 +4,15 @@
   $crossImage: "game-x.svg";
 
   &--dark-blue {
-    color: $colorTextLight;
+    $textColor: rgb(236, 239, 241);
+
+    color: $textColor;
     background-image: url($crossImage);
     background-repeat: repeat;
+
+    p {
+      color: $textColor;
+    }
 
     --action-bar-background: #3B556B;
     --card-background: #4a6d8d;
@@ -27,13 +33,17 @@
     --pill-button-text: white;
     --player-background: #3B556B;
     --player-label-color: #94B7E4;
-    --text-color: #{$colorTextLight};
+    --text-color: $textColor;
   }
   
   &--dark-green {
     color: $colorTextLight;
     background-image: url($crossImage);
     background-repeat: repeat;
+
+    p {
+      color: $colorTextLight;
+    }
     
     --action-bar-background: #3B6B68;
     --card-background: #3B6B68;
@@ -78,4 +88,12 @@
   height: 100vh;
   overflow: hidden;
   touch-action: none; // without - cards wont be draggable
+
+  &__loader {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1.1);
+  }
 }
