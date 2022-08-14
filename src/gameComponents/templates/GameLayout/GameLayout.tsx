@@ -1,14 +1,12 @@
 import { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./GameLayout.scss";
 
 import { RootState } from "@redux/store";
 import { ActionBar, PostGameActionBar, GameNavbar } from "../../organisms";
 import { Playground } from "../Playground/Playground";
-import { finishTurnAsync } from "@socket/game";
-import { message } from "@components/atoms";
-import { updateMyState } from "@redux/actions";
 import { GameStatus } from "@engine/index";
+import { useFinishTurn } from "@engine/hooks/useFinishTurn";
 
 interface GameLayoutProps {
   onSurrender(): void;
@@ -16,7 +14,7 @@ interface GameLayoutProps {
 
 export const GameLayout: FC<GameLayoutProps> = (props) => {
   const [handAnimating, setHandAnimating] = useState(false);
-  const dispatch = useDispatch();
+  const finishTurn = useFinishTurn();
   const { username, price, rules, coins, status } = useSelector(
     (state: RootState) => ({
       coins: state.user.coins,
@@ -26,16 +24,6 @@ export const GameLayout: FC<GameLayoutProps> = (props) => {
       status: state.game.status,
     })
   );
-
-  function onSubmitTurn() {
-    finishTurnAsync().then((result) => {
-      if (result.success) {
-        dispatch(updateMyState(result.myPlayerState));
-      } else if (result.message) {
-        message.error(result.message);
-      }
-    });
-  }
 
   return (
     <div className="layout">
@@ -50,7 +38,7 @@ export const GameLayout: FC<GameLayoutProps> = (props) => {
       <Playground setAnimating={setHandAnimating} />
       {status === GameStatus.Ended && <PostGameActionBar />}
       {status === GameStatus.Running && (
-        <ActionBar handAnimating={handAnimating} onSubmitTurn={onSubmitTurn} />
+        <ActionBar handAnimating={handAnimating} onSubmitTurn={finishTurn} />
       )}
     </div>
   );

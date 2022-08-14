@@ -12,6 +12,8 @@ export abstract class BaseEngine
 
   public abstract shouldDestroy(submitQueue: string[], newCards: string[]): boolean;
 
+  public abstract shouldAutoComplete(submitQueue: string[], newCards: string[]): boolean;
+
   protected static valueStatic(card: string): string {
     if (!card) return "";
     if (card.length === 2) return card.substring(0, 1);

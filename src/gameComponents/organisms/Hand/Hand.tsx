@@ -11,7 +11,8 @@ import {
 import { MyDeck } from "..";
 import GlobalUtils from "@utils/Global";
 import { RootState } from "@redux/store";
-import { getEngine } from "@engine/index";
+import { getEngine, Settings } from "@engine/index";
+import { useFinishTurn } from "@engine/hooks/useFinishTurn";
 import { playCardsAsync } from "@socket/game";
 import { setHandCards, appendToSubmitQueue, appendToPlayDeck, updateMyState } from "@redux/actions"
 
@@ -23,7 +24,9 @@ interface HandProps {
 }
 
 export const Hand: FC<HandProps> = (props) => {
+  const { autoComplete } = Settings.getSettings();
   const dispatch = useDispatch();
+  const finishTurn = useFinishTurn();
   const classes = classNames("hand", props.className);
   const { handCards, submitQueue, playDeck } = useSelector(
     (state: RootState) => ({
@@ -46,6 +49,11 @@ export const Hand: FC<HandProps> = (props) => {
 
       const stringCards = cardsDropped.map((c) => c.toString());
       const shouldDestroy = engine.shouldDestroy(submitQueue, stringCards); // must be before batch
+      
+      if (autoComplete && engine.shouldAutoComplete(submitQueue, stringCards)) {
+        finishTurn();
+      }
+      
       // Remove submitted cards, no sorting needed
       batch(() => {
         dispatch(setHandCards(handCards.filter(c => !stringCards.includes(c.toString()))));

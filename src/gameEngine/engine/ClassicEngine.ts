@@ -10,13 +10,14 @@ export class ClassicEngine extends BaseEngine {
 
   public canPlayCards(playDeck: string[], submitQueue: string[], newCards: string[]): boolean {
     if (newCards.length <= 0) return false;
-    if (playDeck.length <= 0 && submitQueue.length <= 0 && newCards.length <= 2) {
+    const newSubmit = [...submitQueue, ...newCards];
+    
+    if (playDeck.length <= 0 && newSubmit.length <= 2) {
       // If 2 cards, then value must be the same
-      return newCards.length !== 2 || this.value(newCards[0]) === this.value(newCards[1]);
+      return newSubmit.length !== 2 || this.value(newSubmit[0]) === this.value(newSubmit[1]);
     }
 
     const topCard: string = playDeck[playDeck.length - 1];
-    const newSubmit = [...submitQueue, ...newCards];
 
     // RULE 1: Can put over
     // At this point, newSubmit has at least 1 card, and placeDeck is not empty
@@ -34,8 +35,10 @@ export class ClassicEngine extends BaseEngine {
       
       // cards.length at least 2 here
       // From here we will remove "continuation blocks" and recursivelly call this function
-      // Continuation blocks are 5, three-four in a row
-      if (this.value(cards[0]) === "5") {
+      // Continuation blocks are 5, 10, three-four in a row
+      const first = this.value(cards[0]);
+
+      if (first === "5" || first === "10") {
         return putCountCorrect(cards.slice(1));
       }
 
@@ -73,6 +76,27 @@ export class ClassicEngine extends BaseEngine {
     if (isPowerCard) return true;
 
     return this.indexOf(card1) <= this.indexOf(card2);
+  }
+
+  public shouldAutoComplete(submitQueue: string[], newCards: string[]): boolean {
+    const cards = submitQueue.concat(newCards);
+
+    if (cards.length === 0) return false;
+
+    const lastValue = this.value(cards[cards.length - 1]);
+    
+    if (lastValue === "5" || lastValue === "10") return false;
+
+    let sameCount = 1;
+    for (let i = cards.length - 2; i >= 0; i--) {
+      if (this.value(cards[i]) === lastValue) {
+        sameCount++;
+      } else {
+        break;
+      }
+    }
+
+    return sameCount < 3;
   }
 
   public shouldDestroy(submitQueue: string[], newCards: string[]): boolean {

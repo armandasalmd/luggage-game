@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ProfitNumber, message } from "@components/atoms";
+import { ProfitNumber } from "@components/atoms";
 import { getPlayerStatusLabel } from "@engine/index";
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import { clearGameState } from "@redux/actions";
