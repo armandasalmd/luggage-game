@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import * as serviceWorker from './service-worker';
+import registerServiceWorker from "./serviceWorkerRegistration";
 import "@styles/Global.scss";
 import App from "./App";
 
@@ -11,4 +11,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorker.register();
+registerServiceWorker();
