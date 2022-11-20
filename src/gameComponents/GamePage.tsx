@@ -14,11 +14,14 @@ import {
   gameDetailsListener,
   theEndListener,
   luggageTakenListener,
+  gameStartListener,
+  playerClickedPlayAgain
 } from "@socket/game";
 import {
   gameEnded,
   loadInitialGameState,
   luggageUpdate,
+  playerPlayAgain,
   updateGameDetails,
 } from "@redux/actions";
 import { surrenderAsync } from "@socket/game";
@@ -27,7 +30,7 @@ export const GamePage: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const settings = Settings.getSettings();
-  const { gameStatus, username } = useSelector((state: RootState) => ({ 
+  const { gameStatus, username } = useSelector((state: RootState) => ({
     gameStatus: state.game.status,
     username: state.user.user.username
   }));
@@ -55,7 +58,6 @@ export const GamePage: FC = () => {
       if (success) {
         dispatch(loadInitialGameState(gameState));
       } else {
-        message.error("Cannot retrieve game state");
         history.replace(RouteUtils.routes.app.main.dashboard.path);
       }
     });
@@ -70,11 +72,16 @@ export const GamePage: FC = () => {
     const luggageCancel = luggageTakenListener((details) =>
       dispatch(luggageUpdate(details))
     );
+    const gameRestartCancel = gameStartListener(window.location.reload);
+    const playerReadyCancel = playerClickedPlayAgain((username) => 
+      dispatch(playerPlayAgain(username)));
 
     return () => {
       detailsCancel();
       endCancel();
       luggageCancel();
+      gameRestartCancel();
+      playerReadyCancel();
     };
     // eslint-disable-next-line
   }, []);

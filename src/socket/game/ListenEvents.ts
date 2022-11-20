@@ -20,6 +20,9 @@ export const luggageTakenListener = (
   callback: (result: TakeLuggageResult) => void
 ) => SocketManager.getInstance().listenToEvent("game luggage taken", callback);
 
+export const playerClickedPlayAgain = (callback: (username: string) => void) =>
+  SocketManager.getInstance().listenToEvent("game player clicked play again", callback);
+
 export const playerPushedCardsListener = (
   callback: (result: IPlayerPushedCards) => void
 ) =>
@@ -38,3 +41,5 @@ export const publicPlayerPatchListener = (
 
 export const theEndListener = (callback: (rewards: IGameRewards) => void) =>
   SocketManager.getInstance().listenToEvent("game ended", callback);
+
+export { gameStartListener } from "../lobby";
