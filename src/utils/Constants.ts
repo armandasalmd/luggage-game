@@ -10,7 +10,7 @@ const constants = {
   messageDuration: 5000,
   servers: {
     devApi: "http://localhost:3001",
-    prodApi: "https://luggage-api.herokuapp.com",
+    prodApi: "https://luggage-game-api.onrender.com",
     assets: "https://luggage-cards.s3.eu-central-1.amazonaws.com"
   },
   preferDevApi: true,
