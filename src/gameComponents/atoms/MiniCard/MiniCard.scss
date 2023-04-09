@@ -1,0 +1,38 @@
+@import "@styles/Variables.scss";
+
+.miniCard {
+  width: 3.85rem;
+  height: 2.75rem;
+  border-radius: $defaultBorderRadius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  
+  box-sizing: border-box;
+  border: 3px solid var(--mini-card-border-color);
+  background: var(--mini-card-color);
+  user-select: none;
+  box-shadow: $shadowDefaultDark;
+
+  &__value {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-left: $unit * .4;
+  }
+  
+  &--click {
+    cursor: pointer;
+  }
+  
+  &--disabled {
+    visibility: hidden;
+    z-index: -1;
+  }
+
+  &--faceDown {
+    background: linear-gradient(135deg, #FD7562 0%, rgba(87, 146, 198, 0.4) 99.98%), #DA6767;
+    border: 3px solid #d8b0b4;
+    box-shadow: none;
+  }
+}

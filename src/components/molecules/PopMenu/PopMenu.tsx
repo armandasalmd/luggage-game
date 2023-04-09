@@ -5,6 +5,7 @@ import VerticalMenu, { VerticalMenuProps } from "../VerticalMenu/VerticalMenu";
 interface PopMenuProps extends VerticalMenuProps {
   isOpen?: boolean;
   onOutsideClick?(): void;
+  width?: number;
 }
 
 const PopMenu: FC<PopMenuProps> = ({ isOpen, onOutsideClick, ...rest }) => {
@@ -25,7 +26,7 @@ const PopMenu: FC<PopMenuProps> = ({ isOpen, onOutsideClick, ...rest }) => {
   }
 
   return (
-    <div ref={wrapperRef} className="popMenu">
+    <div ref={wrapperRef} className="popMenu" style={{width: rest.width}}>
       <VerticalMenu {...rest} />
     </div>
   );

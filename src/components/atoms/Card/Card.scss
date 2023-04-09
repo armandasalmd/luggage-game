@@ -3,17 +3,6 @@
 
 $separatorColor: #F7F7FA;
 
-@mixin dashedBorder($color: $separatorColor) {
-  background-image: linear-gradient(
-    to right,
-    $color 50%,
-    rgba(255, 255, 255, 0) 0%
-  );
-  background-position: bottom;
-  background-size: 18px 1px;
-  background-repeat: repeat-x;
-}
-
 .card {
   $base: &;
 
@@ -26,7 +15,7 @@ $separatorColor: #F7F7FA;
   }
 
   &__content {
-    padding: $defaultMargin;
+    padding:  $defaultMargin * 0.5 $defaultMargin $defaultMargin * 0.75 $defaultMargin;
   }
 
   &__collapseButton {
@@ -48,39 +37,12 @@ $separatorColor: #F7F7FA;
     padding: $unit * 0.75 $unit * 1.5;
   }
 
-  &__footer {
-    $spacing: $defaultMargin * .5;
-
-    padding: $defaultMargin;
-    border-top: 1px solid $separatorColor;
-    display: flex;
-    justify-content: flex-end;
-    gap: $spacing;
-
-    &--actionButtons {
-      padding: $spacing;
-    }
-
-    &--borderless {
-      border-top: none;
-    }
-  }
-
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 3px solid $separatorColor;
-    padding: ($defaultMargin * 0.666) $defaultMargin;
-
-    &--separatorNone {
-      border-bottom: none;
-    }
-
-    &--separatorDashed {
-      border-bottom: none;
-      @include dashedBorder();
-    }
+    padding: ($defaultMargin * 0.5) $defaultMargin;
   }
 
   &__title,
@@ -134,10 +96,6 @@ $separatorColor: #F7F7FA;
     border-bottom: none;
   }
 
-  &--padded > &__content {
-    padding: $defaultMargin;
-  }
-
   &--wrap {
     display: inline-block;
   }
@@ -161,4 +119,10 @@ $separatorColor: #F7F7FA;
     }
   }
   // <end> --MODIFIERS </end>
+
+  @media screen and (max-width: $sm) {
+    &__content, &__header {
+      padding: $unit * 0.5 $unit * 0.75;
+    }
+  }
 }

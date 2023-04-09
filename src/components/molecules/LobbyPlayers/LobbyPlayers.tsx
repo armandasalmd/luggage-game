@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IPlayer } from "@utils/game/Game";
+import { IPlayer } from "@utils/interfaces";
 import { LobbyPlayer } from "@components/atoms";
 
 interface LobbyPlayersProps {

@@ -1,9 +1,7 @@
 import axios from "axios";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import store from "@redux/store";
 import Constants from "@utils/Constants";
 import RouteUtils from "@utils/Route";
-import { setToken, logoutUser } from "@redux/actions";
 
 function applyUnauthorisedMiddleware() {
   axios.interceptors.response.use((response: any) => response, (error) => {
@@ -24,7 +22,7 @@ function setAuthHeaderToken(token: string) {
   }
 }
 
-function resetAuthTokenFromStorage() {
+function restoreAuthToken() {
   const token = getJwtToken();
 
   if (token) {
@@ -42,13 +40,12 @@ function resetAuthTokenFromStorage() {
 
       if (decoded && (decoded.exp || 0) > currentTime) {
         setAuthHeaderToken(token);
-        setToken(token)(store.dispatch);
         
-        return;
+        return decoded;
       }
     }
 
-    logoutUser()(store.dispatch);
+    removeJwtToken();
     window.location.href = RouteUtils.routes.app.auth.login.path;
   }
 }
@@ -75,7 +72,7 @@ const items = {
   getPlainJwtToken,
   setJwtToken,
   removeJwtToken,
-  resetAuthTokenFromStorage,
+  restoreAuthToken,
   setAuthHeaderToken,
 };
 

@@ -19,7 +19,7 @@ import {
   FriendMetaData,
   INotification,
   LobbyMetaData,
-} from "@utils/game/INotification";
+} from "@utils/interfaces";
 import { ActionButton } from "@components/atoms/NotificationItem/NotificationItem";
 import useNotifications from "@hooks/useNotifications";
 import { setLobbyState } from "@redux/actions";
@@ -53,7 +53,7 @@ const Notifications: FC<NotificationsProps> = (props) => {
 
     if (roomId) {
       if (accept) {
-        joinLobbyAsync(roomId).then(function (data) {
+        joinLobbyAsync(roomId).then(function (data: any) {
           if (data.success) {
             dispatch(setLobbyState(data.lobbyState));
             history.push("/lobby/" + data.lobbyState.roomCode);

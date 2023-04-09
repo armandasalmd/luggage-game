@@ -1,0 +1,19 @@
+@import "@styles/Variables.scss";
+
+.myLuggage {
+  
+  &__mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: $sm) {
+    &__main {
+      display: none;
+    }
+
+    &__mobile {
+      display: flex;
+      gap: $unit * 0.5;
+    }
+  }
+}

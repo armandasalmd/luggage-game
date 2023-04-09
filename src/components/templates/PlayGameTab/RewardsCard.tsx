@@ -14,7 +14,9 @@ const RewardsCard = () => {
   const cardAction = (
     <div style={{ display: "flex", alignItems: "center", color: "#1E88E5" }}>
       <TollIcon />
-      <p style={{ color: "#302f2f", marginLeft: 4 }}>{coins}</p>
+      <p style={{ color: "#302f2f", marginLeft: 4 }}>
+        {coins >= 0 ? coins : "loading"}
+      </p>
     </div>
   );
 

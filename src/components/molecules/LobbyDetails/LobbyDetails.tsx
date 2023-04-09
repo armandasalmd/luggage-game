@@ -11,7 +11,6 @@ import RouteUtils from "@utils/Route";
 import { clearLobbyState, setPlayerReady } from "@redux/actions";
 import { ILobbyPlayer } from "@redux/reducers/lobbyReducer";
 import { leaveLobbyAsync, playerReadyAsync } from "@socket/lobby";
-import GlobalUtils from "@utils/Global";
 
 import LockIcon from "@material-ui/icons/LockOpenOutlined";
 import CoinIcon from "@material-ui/icons/TollOutlined";
@@ -20,7 +19,7 @@ import GamepadIcon from "@material-ui/icons/GamepadOutlined";
 
 interface LobbyDetailsProps {
   className: string;
-  startGame?(): void;
+  roomId: string;
 }
 
 const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
@@ -32,17 +31,18 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
 
   function onCopyRoomCode() {
     copy(lobbyState.roomCode);
-    message.success("Copied to clipboard");
+    message.success("Room code copied to clipboard");
   }
 
   useEffect(() => {
     document.addEventListener("navbarLogoClick", onLeave);
+    window.scrollTo({ top: 0 });
     return () => document.removeEventListener("navbarLogoClick", onLeave);
   });
 
   function onLeave() {
     leaveLobbyAsync()
-      .then((result) => {
+      .then((result: any) => {
         if (result.success === true) {
           dispatch(clearLobbyState());
         } else {
@@ -56,13 +56,9 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
   }
 
   function onReady() {
-    playerReadyAsync().then(function (result) {
+    playerReadyAsync().then(function (result: any) {
       if (result.success === true) {
         dispatch(setPlayerReady(user.username));
-
-        if (result.gameCanStart === true) {
-          GlobalUtils.callIfFunction(props.startGame);
-        }
       } else {
         message.error("Unexpected error");
       }
@@ -105,7 +101,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
         />
       </div>
       <div className="lobbyDetails__actions">
-        <Button onClick={onCopyRoomCode}>Copy room code</Button>
+        <Button onClick={onCopyRoomCode}>Copy ({props.roomId})</Button>
         <Button onClick={onLeave}>Leave</Button>
         <Button
           icon={<CheckIcon />}

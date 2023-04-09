@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IFriendUser } from "@utils/game/IFriendUser";
+import { IFriendUser } from "@utils/interfaces/IFriendUser";
 import RouteUtils from "@utils/Route";
 
 export interface IMyFriend extends IFriendUser {

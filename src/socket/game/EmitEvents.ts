@@ -1,27 +1,31 @@
 import SocketManager from "../SocketManager";
+import {
+  FinishTurnResponse,
+  SubscribeResponse,
+  PlayCardsResponse
+} from "@engine/interfaces/server";
 
-const playCardAsync = async (roomId: string, cards: string[]) => {
-  return SocketManager.getInstance().emitEventAsync("game play card", {
-    roomId,
+export const finishTurnAsync = () =>
+  SocketManager.getInstance().emitEventAsync<FinishTurnResponse>(
+    "game finish turn",
+    null
+  );
+
+export const playCardsAsync = (cards: string[]) =>
+  SocketManager.getInstance().emitEventAsync<PlayCardsResponse>("game play cards", {
     cards,
   });
-};
 
-const finishTurnAsync = async (roomId: string) => {
-  return SocketManager.getInstance().emitEventAsync("game finish turn", {
-    roomId,
+export const sendEmojiAsync = (emojiId: string) =>
+  SocketManager.getInstance().emitEventHandleErrorAsync("game push emoji", {
+    emojiId,
   });
-};
 
-const surrenderAsync = async () => {
-  return SocketManager.getInstance().emitEventAsync("game surrender", {});
-};
+export const subscribeAsync = () => SocketManager.getInstance().emitEventAsync<SubscribeResponse>("game subscribe", null);
 
-const takeLuggageAsync = async (roomId: string, luggageCard: string) => {
-  return SocketManager.getInstance().emitEventAsync("game take luggage", {
-    roomId,
+export const surrenderAsync = () => SocketManager.getInstance().emitEventHandleErrorAsync("game surrender", null);
+
+export const takeLuggageAsync = (luggageCard: string) =>
+  SocketManager.getInstance().emitEventHandleErrorAsync("game take luggage", {
     luggageCard,
   });
-};
-
-export { playCardAsync, finishTurnAsync, surrenderAsync, takeLuggageAsync };

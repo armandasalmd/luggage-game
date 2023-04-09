@@ -1,0 +1,16 @@
+@import "@styles/Variables.scss";
+
+.player {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  user-select: none;
+  max-width: $gamePlayerWidth;
+  gap: $unit;
+}
+
+@media screen and (max-width: $md) {
+  .gamePlayer__luggage {
+    display: none !important;
+  }
+}

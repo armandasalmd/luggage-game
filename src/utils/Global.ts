@@ -1,3 +1,4 @@
+import Confetti from "canvas-confetti";
 import { SyntheticEvent } from "react";
 import Constants from "./Constants";
 
@@ -13,13 +14,18 @@ const GlobalUtils = {
       currentTarget.src=Constants.defaultAvatar;
     }
   },
-  capitalise: (value: string): string => {
-    return value.charAt(0).toUpperCase() + value.slice(1);
-  },
+  capitalise: (value: string) => value.charAt(0).toUpperCase() + value.slice(1),
   callIfFunction: (...args: any[]): void => {
     if (typeof args[0] === "function") {
       args[0](...args.splice(1));
     }
+  },
+  fireConfetti: () => {
+    Confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
   },
   getValue: (
     target: any,
@@ -35,6 +41,7 @@ const GlobalUtils = {
         .reduce((p, c) => (p && p[c]) || defaultValue, target);
     }
   },
+  isSmallScreen: () => window.innerWidth <= 992,
   randomInt: (from: number, to: number): number => {
     return Math.round(from + Math.random() * (to - from));
   },

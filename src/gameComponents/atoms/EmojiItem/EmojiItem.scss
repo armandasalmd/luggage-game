@@ -1,0 +1,11 @@
+@import "@styles/Variables.scss";
+
+.emojiItem {
+  font-size: 1.8rem;
+  user-select: none;
+  padding: $unit * 0.25;
+  border-radius: $defaultBorderRadius;
+  background: var(--emoji-item-background);
+  width: $emojiSize;
+  height: $emojiSize;
+}

@@ -1,7 +1,7 @@
 @import "./Variables.scss";
 
 %cardBase {
-  background: #fff;
+  background: var(--card-background);
   border: 1px solid rgba(0,0,0, 0.13);
   border-radius: $defaultBorderRadius;
   box-shadow: $shadowCard;
@@ -14,16 +14,6 @@
   text-overflow: ellipsis;
 }
 
-%overlay {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background: rgba($shade100, 0.3);
-  backdrop-filter: blur(2px);
-}
-
 %inputBase {
   outline: none;
   padding: 0.3em 0.7em;
@@ -32,6 +22,12 @@
   height: 36px;
   box-sizing: border-box;
   font-size: 0.9rem;
+}
+
+%inputError {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: $colorError !important;  
 }
 
 %inputFocus {
@@ -47,13 +43,17 @@
   margin-top: 3px;
 }
 
-%inputError {
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  color: $colorError !important;  
-}
-
 %inputTitle {
   margin-bottom: $unit * 0.4;
   color: black;
+}
+
+%overlay {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
 }

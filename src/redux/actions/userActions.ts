@@ -11,7 +11,7 @@ import {
 import RouteUtils from "@utils/Route";
 import AuthUtils from "@utils/Auth";
 import Constants from "@utils/Constants";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
 
 export const setUser = (user: any) => {
   return function (dispatch: Dispatch) {
@@ -28,11 +28,10 @@ export const setUser = (user: any) => {
 
 export const logoutUser = () => {
   return function (dispatch: Dispatch) {
-    const action: IAction = {
-      type: ActionTypes.Logout,
-    };
     AuthUtils.removeJwtToken();
-    dispatch(action);
+    dispatch({
+      type: ActionTypes.Logout,
+    });
   };
 };
 
@@ -62,10 +61,19 @@ export const loginUser = (username: string, password: string) => {
   };
 };
 
-export const setCoinsAndRewards = (data: {
-  coins?: number;
-  rewards?: any[];
-}) => {
+export const fetchCoinsAndRewards = () => {
+  return function (dispatch: Dispatch) {
+    const route = RouteUtils.routes.api.user.coinsAndRewards;
+
+    RouteUtils.sendApiRequest(route)
+      .then((res) => {
+        if (res.data) setCoinsAndRewards(res.data)(dispatch);
+      })
+      .catch(() => {});
+  };
+};
+
+export const setCoinsAndRewards = (data: any) => {
   return function (dispatch: Dispatch) {
     dispatch({
       type: ActionTypes.SetCoinsAndRewards,
@@ -106,19 +114,7 @@ export const setToken = (token: string) => {
   return function (dispatch: Dispatch) {
     AuthUtils.setJwtToken(token);
     AuthUtils.setAuthHeaderToken(token);
-
-    const route = RouteUtils.routes.api.user.coinsAndRewards;
-
-    RouteUtils.sendApiRequest(route)
-      .then((res) => {
-        if (res.data) {
-          batch(() => {
-            setUser(jwtDecode(token))(dispatch);
-            setCoinsAndRewards(res.data)(dispatch);
-          });
-        }
-      })
-      .catch(() => {});
+    setUser(jwtDecode(token))(dispatch);
   };
 };
 

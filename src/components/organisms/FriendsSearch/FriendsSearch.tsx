@@ -11,7 +11,7 @@ import {
 } from "@components/atoms";
 import { FriendAction } from "@components/atoms/Friend/Friend";
 import useUserSearch from "@hooks/useUserSearch";
-import { FriendState, IFriendUser } from "@utils/game/IFriendUser";
+import { FriendState, IFriendUser } from "@utils/interfaces/IFriendUser";
 
 const FriendsSearch = () => {
   const [term, setTerm] = useState("");

@@ -26,7 +26,7 @@ const PublicGames: FC<PublicGamesProps> = () => {
   function joinLobby(roomId: string) {
     if (roomId) {
       joinLobbyAsync(roomId.toLowerCase())
-        .then((data) => {
+        .then((data: any) => {
           if (data.success) {
             dispatch(setLobbyState(data.lobbyState));
             history.push("/lobby/" + data.lobbyState.roomCode);

@@ -5,8 +5,8 @@ import "./GameListItem.scss";
 import TollIcon from "@material-ui/icons/Toll";
 import PersonIcon from "@material-ui/icons/Person";
 import GlobalUtils from "@utils/Global";
+import Constants from "@utils/Constants";
 import { priceDropdown } from "@components/molecules/PriceSelect/PriceSelect";
-import { getGameRulesTitle } from "@utils/game/Game";
 
 export interface IPublicGame {
   modeTitle: string;
@@ -34,7 +34,11 @@ const GameListItem: FC<GameListItemProps> = (props) => {
     priceDropdown.find((item) => item.key === props.game.price)?.value ??
     "Unknown";
 
-  const title = getGameRulesTitle(game.modeTitle) + " (" + game.roomId + ")";
+  const title =
+    ((Constants.gameModeTitles as any)[game.modeTitle] || "Unknown") +
+    " (" +
+    game.roomId +
+    ")";
 
   return (
     <Ripple onClick={() => GlobalUtils.callIfFunction(props.onClick, game)}>

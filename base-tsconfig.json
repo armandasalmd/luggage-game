@@ -3,10 +3,11 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["/*"],
-      "@redux/*": ["redux/*"],
       "@components/*": ["components/*"],
-      "@socket/*": ["socket/*"],
+      "@engine/*": ["gameEngine/*"],
       "@hooks/*": ["hooks/*"],
+      "@redux/*": ["redux/*"],
+      "@socket/*": ["socket/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     }

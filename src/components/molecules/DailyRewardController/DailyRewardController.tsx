@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import "./DailyRewardController.scss";
 import { Button, DailyReward } from "@components/atoms";
-import { RewardItem } from "@utils/game/Reward";
+import { RewardItem } from "@utils/interfaces";
 import TollIcon from "@material-ui/icons/Toll";
 import GlobalUtils from "@utils/Global";
 

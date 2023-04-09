@@ -2,7 +2,7 @@ import { FC } from "react";
 import classNames from "classnames";
 
 import "./NotificationItem.scss";
-import { INotification, LobbyMetaData } from "@utils/game/INotification";
+import { INotification, LobbyMetaData } from "@utils/interfaces";
 import CoinIcon from "@material-ui/icons/Toll";
 import PersonIcon from "@material-ui/icons/Person";
 import { priceDropdown } from "@components/molecules/PriceSelect/PriceSelect";

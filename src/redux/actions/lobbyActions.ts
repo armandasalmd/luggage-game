@@ -54,8 +54,8 @@ export const setPlayerWaveState = (username: string, value: boolean) => {
       type: ActionTypes.SetPlayerWaveState,
       payload: {
         username,
-        value
-      }
+        value,
+      },
     });
-  }
-}
+  };
+};

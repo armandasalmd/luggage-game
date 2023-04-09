@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import RouteUtils from "@utils/Route";
-import { FriendState, IFriendUser } from "@utils/game/IFriendUser";
+import { FriendState, IFriendUser } from "@utils/interfaces/IFriendUser";
 import { message } from "@components/atoms";
 
 export default function useFriendsData() {

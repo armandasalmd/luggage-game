@@ -9,9 +9,10 @@ interface JoinGameCardProps {
 const JoinGameCard: FC<JoinGameCardProps> = (props) => {
   const [joinIdError, setJoinIdError] = useState("");
   const [joinId, setJoinId] = useState("");
+  const onJoin = () => props.onJoinGame(joinId, setJoinIdError);
 
   return (
-    <Card padded title="Join existing game">
+    <Card title="Join existing game">
       <div className="playGame__container">
         <Input
           placeholder="Room code"
@@ -20,12 +21,13 @@ const JoinGameCard: FC<JoinGameCardProps> = (props) => {
           setValue={setJoinId}
           error={joinIdError}
           maxWidth="15rem"
+          onSubmit={onJoin}
         />
-        <div className="playGame__flexRow" style={{ marginTop: 16 }}>
+        <div className="playGame__flexRow" style={{ marginTop: 8 }}>
           <Button
             icon={<PlayCircleOutline />}
             type="ghost"
-            onClick={() => props.onJoinGame(joinId, setJoinIdError)}
+            onClick={onJoin}
           >
             Join game
           </Button>

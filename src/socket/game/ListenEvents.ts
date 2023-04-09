@@ -1,37 +1,40 @@
 import SocketManager from "@socket/SocketManager";
-import { IGameDetails, IMyPlayerState, IPublicPlayerState } from "@utils/game/IGameState";
-import { ILooser } from "@utils/game/ILooser";
-import { IPlayerReward } from "@utils/game/IPlayerReward";
+import {
+  IGameDetails,
+  IGameRewards,
+  IServerEmoji,
+  IPlayerPushedCards,
+  IPublicPlayerState,
+  TakeLuggageResult,
+} from "@engine/interfaces/server";
 
-const gameDetailsListener = (callback: (gameDetails: IGameDetails) => void) => {
-  SocketManager.getInstance().listenToEvent("game details change", callback);
-};
+export const emojiListener = (callback: (emoji: IServerEmoji) => void) =>
+  SocketManager.getInstance().listenToEvent("game emoji", callback);
 
-const myPlayerListener = (callback: (myPlayer: IMyPlayerState) => void) => {
-  SocketManager.getInstance().listenToEvent("game my state change", callback);
-};
+export const gameDetailsListener = (
+  callback: (gameDetails: IGameDetails) => void
+) =>
+  SocketManager.getInstance().listenToEvent("game details changed", callback);
 
-const publicPlayerListener = (callback: (myPlayer: IPublicPlayerState) => void) => {
-  SocketManager.getInstance().listenToEvent("game player state change", callback);
-};
+export const luggageTakenListener = (
+  callback: (result: TakeLuggageResult) => void
+) => SocketManager.getInstance().listenToEvent("game luggage taken", callback);
 
-const gameFinishedListener = (callback: (rewards: IPlayerReward[]) => void) => {
-  SocketManager.getInstance().listenToEvent("game finished", callback);
-};
+export const playerPushedCardsListener = (
+  callback: (result: IPlayerPushedCards) => void
+) =>
+  SocketManager.getInstance().listenToEvent(
+    "game player pushed cards",
+    callback
+  );
 
-const gameRewardListener = (callback: (reward: number) => void) => {
-  SocketManager.getInstance().listenToEvent("game reward", callback);
-};
+export const publicPlayerPatchListener = (
+  callback: (state: Partial<IPublicPlayerState>) => void
+) =>
+  SocketManager.getInstance().listenToEvent(
+    "game public player changed",
+    callback
+  );
 
-const looserListener = (callback: (looser: ILooser) => void) => {
-  SocketManager.getInstance().listenToEvent("game looser", callback);
-};
-
-export {
-  gameDetailsListener,
-  myPlayerListener,
-  publicPlayerListener,
-  gameFinishedListener,
-  gameRewardListener,
-  looserListener
-};
+export const theEndListener = (callback: (rewards: IGameRewards) => void) =>
+  SocketManager.getInstance().listenToEvent("game ended", callback);
