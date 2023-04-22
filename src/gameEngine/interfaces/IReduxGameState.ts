@@ -9,6 +9,8 @@ export interface IPublicPlayerState {
   animatingEmoji?: string;
   reward?: number;
   didTakeHome?: boolean;
+  connected?: boolean;
+  clickedPlayAgain?: boolean;
 }
 
 export interface IMyPlayerState {

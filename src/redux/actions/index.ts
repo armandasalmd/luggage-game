@@ -21,6 +21,7 @@ export enum ActionTypes {
   Logout,
   LuggageUpdate,
   PatchPublicPlayer,
+  PlayerClickedPlayAgain,
   PlayerPushedCards,
   ResetErrors,
   SetAnimatingEmoji,

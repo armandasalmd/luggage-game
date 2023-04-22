@@ -43,3 +43,4 @@ export const playerPushedCards = (data: IPlayerPushedCards) => instantDispatch(A
 export const clearPlayDeck = () => instantDispatch(ActionTypes.ClearPlayDeck, null);
 export const patchPublicPlayer = (data: Partial<IPublicPlayerState>) => instantDispatch(ActionTypes.PatchPublicPlayer, data);
 export const luggageUpdate = (data: TakeLuggageResult) => instantDispatch(ActionTypes.LuggageUpdate, data);
+export const playerPlayAgain = (username: string) => instantDispatch(ActionTypes.PlayerClickedPlayAgain, username);

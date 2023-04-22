@@ -11,7 +11,7 @@ const playerLeftListener = (callback: (username: string) => void) => {
 };
 
 const gameStartListener = (callback: () => void) => {
-  SocketManager.getInstance().listenToEvent("game can start", callback);
+  return SocketManager.getInstance().listenToEvent("game can start", callback);
 };
 
 const playerReadyListener = (callback: (username: string) => void) => {
