@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Card, message, PillButton, TabItem } from "@components/atoms";
-import { Tabs } from "@components/molecules";
+import { InstallBanner, Tabs } from "@components/molecules";
 import { DashboardNavbar } from "@components/organisms";
 import {
   FriendsTab,
@@ -115,6 +115,7 @@ const DashboardPage: FC = () => {
       <div className="dashboard__main">
         {tabContainer}
       </div>
+      <InstallBanner />
     </div>
   );
 };

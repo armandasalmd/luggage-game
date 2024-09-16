@@ -1,0 +1,52 @@
+@import "@styles/Variables.scss";
+
+.installBanner {
+  $base: &;
+
+  background: $colorPrimary;
+  padding: $unit * 0.75;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &__text {
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-bottom: $unit;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    cursor: pointer;
+    color: $colorPrimary;
+    padding: $unit * 0.6 $unit * 2;
+    background: white;
+    border-radius: $defaultBorderRadius * 0.5;
+    font-weight: 600;
+    font-size: 0.9rem;
+    user-select: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &--ghost {
+      background: transparent;
+      color: white;
+      opacity: 0.8;
+      
+      &:hover {
+        opacity: 0.9;
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}

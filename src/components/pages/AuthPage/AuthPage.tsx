@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import usePWA from "react-pwa-install-prompt";
 
 import "./AuthPage.scss";
 import { Button, Input, Logo, SocialButton } from "@components/atoms";
@@ -34,6 +35,7 @@ const AuthPage: FC<AuthPageProps> = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const errorState = useSelector((state: RootState) => state.error);
+  const { isStandalone, isInstallPromptSupported } = usePWA();
 
   const defaultState = props.formItems.reduce(function (acc, item: FormItem) {
     return {
@@ -80,6 +82,13 @@ const AuthPage: FC<AuthPageProps> = (props) => {
       />
     );
   });
+
+  useEffect(() => {
+    if (isStandalone && isInstallPromptSupported) {
+      history.push("/install");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(resetErrors());

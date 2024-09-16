@@ -13,7 +13,7 @@ const constants = {
     prodApi: "https://luggage-game-api.onrender.com",
     assets: "https://luggage-cards.s3.eu-central-1.amazonaws.com"
   },
-  preferDevApi: true,
+  preferDevApi: false,
 };
 
 export default constants;

@@ -2,6 +2,7 @@ export { default as AvatarInput } from "../molecules/AvatarInput/AvatarInput";
 export { default as DailyRewardController } from "./DailyRewardController/DailyRewardController";
 export { default as GameList } from "./GameList/GameList";
 export { default as GameRulesSelect } from "./GameRulesSelect/GameRulesSelect";
+export { default as InstallBanner } from "./InstallBanner/InstallBanner";
 export { default as LobbyDetails } from "./LobbyDetails/LobbyDetails";
 export { default as LobbyInvites } from "./LobbyInvites/LobbyInvites";
 export { default as LobbyPlayers } from "./LobbyPlayers/LobbyPlayers";
