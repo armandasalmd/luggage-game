@@ -15,6 +15,7 @@
     }
 
     --action-bar-background: #3B556B;
+    --action-bar-overlay: #839cb3;
     --card-background: #4a6d8d;
     --empty-stack-background: #8EAAC3BF;
     --empty-stack-border: rgba(255, 255, 255, 0.5);
@@ -46,6 +47,7 @@
     }
     
     --action-bar-background: #3B6B68;
+    --action-bar-overlay: #6fb3ae;
     --card-background: #3B6B68;
     --empty-stack-background: #8EC3B0BF;
     --empty-stack-border: rgba(255, 255, 255, 0.5);
@@ -71,6 +73,7 @@
     color: $colorTextDark;
     
     --action-bar-background: #FFFFFF;
+    --action-bar-overlay: rgba($colorPrimary, 0.25);
     --empty-stack-background: #C3BE8E33;
     --empty-stack-border: rgb(0, 0, 0, 0.15);
     --emoji-popup-background: rgba(255, 255, 255, 0.8);

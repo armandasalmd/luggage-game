@@ -2,7 +2,8 @@ import SocketManager from "../SocketManager";
 import {
   FinishTurnResponse,
   SubscribeResponse,
-  PlayCardsResponse
+  PlayCardsResponse,
+  ISuccessResult
 } from "@engine/interfaces/server";
 
 export const finishTurnAsync = () =>
@@ -10,6 +11,9 @@ export const finishTurnAsync = () =>
     "game finish turn",
     null
   );
+
+export const playAgainAsync = () =>
+  SocketManager.getInstance().emitEventAsync<ISuccessResult>("game play again", null);
 
 export const playCardsAsync = (cards: string[]) =>
   SocketManager.getInstance().emitEventAsync<PlayCardsResponse>("game play cards", {

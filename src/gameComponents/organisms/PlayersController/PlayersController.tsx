@@ -52,13 +52,20 @@ export const PlayersController: FC<PlayersControllerProps> = (props) => {
       username: player.username,
       active: activeSeatId === player.seatId,
     };
+    const classes = classNames(`player${index + 1} seat${player.seatId}`, {
+      "disconnected": player.connected === false
+    });
+
+    if (player.connected === false) {
+      pProps.extraLabel = "Disconnected";
+    }
 
     return (
       <Player
         animatingEmoji={player.animatingEmoji}
         postEmojiAnimation={postEmojiAnimation.bind(null, player.username)}
         key={player.username}
-        className={`player${index + 1} seat${player.seatId}`}
+        className={classes}
         playerProps={pProps}
         luggageProps={toLuggageModel(player.luggageCards)}
       />

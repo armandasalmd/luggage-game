@@ -110,6 +110,11 @@ const reducer = (
       }
       return { ...state };
     }
+    case ActionTypes.PlayerClickedPlayAgain: {
+      const p = state.playersState.find(o => o.username === payload);
+      if (p) p.clickedPlayAgain = true;
+      return { ...state };
+    }
     case ActionTypes.PlayerPushedCards: {
       const p = payload as IPlayerPushedCards;
       state.gameDetails.playDeck.push(...p.cards);

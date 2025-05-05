@@ -3,6 +3,7 @@ import classNames from "classnames";
 import "./ActionButton.scss";
 
 interface ActionButtonProps {
+  disabled?: boolean;
   freeWidth?: boolean;
   icon?: any;
   text?: string;
@@ -13,13 +14,17 @@ interface ActionButtonProps {
 
 export const ActionButton: FC<ActionButtonProps> = (props) => {
   const classes = classNames("actionButton", {
-    "actionButton--freeWidth": props.freeWidth,
+    "actionButton--freeWidth": props.freeWidth
   });
 
   return (
     <div
       className={classes}
-      onClick={props.onClick}
+      onClick={() => {
+        if (props.disabled !== true) {
+          props.onClick && props.onClick();
+        }
+      }}
       onMouseDown={props.onDown}
       onMouseUp={props.onUp}
       onTouchStart={props.onDown}

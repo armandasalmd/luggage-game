@@ -46,7 +46,7 @@ const LobbyDetails: FC<LobbyDetailsProps> = (props) => {
         if (result.success === true) {
           dispatch(clearLobbyState());
         } else {
-          message.warning("Something went as not expected");
+          message.warning(result.message);
         }
         history.push(RouteUtils.routes.app.main.dashboard.path);
       })
